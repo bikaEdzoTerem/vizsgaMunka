@@ -20,7 +20,7 @@ main {
 
 header{
     grid-area: h;
-    height: 1000px;
+    height: 1280px;
     background-image: url("../kepek/hh1.jpg");
 }
 
@@ -47,7 +47,8 @@ header{
 nav{
     grid-area: n;
     height: 60px;
-    background-color: rgba(235, 80, 69, 0.842);;
+    background-color: rgba(235, 80, 69, 0.842);
+    padding-top: 13px;
 }
 
 #ki-be_jel {
@@ -91,12 +92,11 @@ article{
     grid-template-columns: 1fr 1fr;
 }
 
-article div {margin: 15px;}
+article div {margin-left: 15px;}
 
 article img {
-    width: 660px;
+    width: 780px;
     height: auto;
-    
 }
 
 aside{

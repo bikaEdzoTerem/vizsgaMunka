@@ -19,7 +19,7 @@ main {
 
 header{
     grid-area: h;
-    height: 1000px;
+    height: 1280px;
     background-image: url("../kepek/hh1.jpg");
 }
 
@@ -32,7 +32,8 @@ header{
 nav{
     grid-area: n;
     height: 60px;
-    background-color: rgba(235, 80, 69, 0.842);;
+    background-color: rgba(235, 80, 69, 0.842);
+    padding-top: 13px;
 }
 
 #ki-be_jel {
@@ -85,21 +86,10 @@ aside{
     background-color: lightcoral;
 }
 
-aside div {
+#leiras {
     margin-top: 40px;
     margin-bottom: 35px;
     margin-left: 400px;
-}
-
-td, tr ,th{
-    /*border: 1px solid black;*/
-    width: 150px;
-}
-
-table {
-    background-color: rgba(184, 67, 67, 0.842);
-    border-radius: 8%;
-    border: 1px solid rgba(172, 34, 34, 0.842);
 }
 
 footer{

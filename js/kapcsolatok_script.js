@@ -1,5 +1,5 @@
 $(function(){
-
-    //kód
-
+    /*
+    menű felcsúszás csak
+    */
 });
