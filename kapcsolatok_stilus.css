@@ -1,0 +1,109 @@
+@charset "utf-8";
+
+body {
+    width: 100%;
+    margin: auto;
+    /*background-color: lightgray;*/
+}
+
+main {
+    display: grid;
+    grid-template-areas: 
+    "h h h h h h"
+    "n n n n n n"
+    "a a a a a a"
+    "s s s s s s"
+    "f f f f f f";
+    font-size: 19px;
+}
+
+header{
+    grid-area: h;
+    height: 1000px;
+    background-image: url("../kepek/hh1.jpg");
+}
+
+#logo {
+    position: absolute;
+    left: 100px;
+    top: 120px;
+}
+
+nav{
+    grid-area: n;
+    height: 60px;
+    background-color: rgba(235, 80, 69, 0.842);;
+}
+
+#ki-be_jel {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    font-size: 23px;
+    color: rgba(241, 50, 36, 0.842);
+}
+
+#bejelentkezes {
+    position: absolute;
+    right: 220px;
+    top: 20px;
+}
+
+#regisztracio {
+    position: absolute;
+    right: 80px;
+    top: 20px;
+}
+
+#k_mezo{
+    position: absolute;
+    right: 40px;
+    top: 40px;
+}
+
+nav ul{
+    display: grid;
+    grid-template-columns: 300px 300px 300px 200px;
+    margin-left: 400px;
+}
+
+nav ul li {
+    list-style: none;
+}
+
+article{
+    grid-area: a;
+    background-color: khaki;
+    text-align: center;
+}
+
+article ul li {list-style: none;}
+
+article p {margin: 40px;}
+
+aside{
+    grid-area: s;
+    background-color: lightcoral;
+}
+
+aside div {
+    margin-top: 40px;
+    margin-bottom: 35px;
+    margin-left: 400px;
+}
+
+td, tr ,th{
+    /*border: 1px solid black;*/
+    width: 150px;
+}
+
+table {
+    background-color: rgba(184, 67, 67, 0.842);
+    border-radius: 8%;
+    border: 1px solid rgba(172, 34, 34, 0.842);
+}
+
+footer{
+    grid-area: f;
+    text-align: center;
+    background-color: lightgray;
+}
