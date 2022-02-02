@@ -12,7 +12,7 @@ class MyAjax {
             url: faljnev,
             type: "GET",
             success: function (result) {
-                result./*konyvek.*/forEach((value) => {
+                result./*api vegpont nélkül a tömb belseje.*/forEach((value) => {
                     tomb.push(value);
                 });
                 myCallback(tomb);
