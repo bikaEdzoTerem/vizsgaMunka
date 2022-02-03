@@ -2,9 +2,6 @@
 
 body {
     width: 100%;
-    /*width: 80%;
-    max-width: 1000px;
-    background-color: lightgray;*/
     margin: auto;
 }
 
@@ -51,13 +48,6 @@ main {
     top: 80px;
 }
 
-nav{
-    grid-area: n;
-    height: 60px;
-    background-color: rgba(235, 80, 69, 0.842);
-    padding-top: 13px;
-}
-
 #ki-be_jel {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -85,9 +75,16 @@ nav{
     top: 80px;
 }
 
+nav {
+    grid-area: n;
+    height: 60px;
+    background-color: rgba(235, 80, 69, 0.842);
+    padding-top: 13px;
+}
+
 nav ul{
     display: grid;
-    grid-template-columns: 300px 200px 300px 300px;
+    grid-template-columns: 300px 300px 300px 300px;
     margin-left: 400px;
 }
 
@@ -95,29 +92,39 @@ nav ul li {
     list-style: none;
 }
 
-article{
+article {
     grid-area: a;
-    background-color: khaki;
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    margin: auto;
 }
 
-article div {margin-left: 15px;}
-
-article img {
-    width: 780px;
-    height: auto;
+.klonja{
+    border: 1px solid black;
+    border-radius: 25px;
+    width: 250px;
+    height: 350px;
+    margin: 20px;
+    background-color: brown;
+    box-shadow: 5px 10px gray;
 }
 
-aside{
-    grid-area: s;
-    width: 300px;
-    background-color: lightcoral;
+.klonja h3{
+    text-align: center;
 }
 
-aside div {margin: 15px;}
+.klonja img{
+    margin-left: 35px;
+    border: 1px solid black;
+    width: 180px;
+    height: 160px;
+}
 
-footer{
+.klonja p{
+    margin: 20px;
+}
+
+footer {
     grid-area: f;
     text-align: center;
     background-color: lightgray;

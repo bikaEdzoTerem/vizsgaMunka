@@ -9,24 +9,30 @@ body {
 main {
     display: grid;
     grid-template-areas: 
+    "c c c c c c"
     "h h h h h h"
     "n n n n n n"
-    "a a a a a a"
-    "s s s s s s"
+    "s a a a a a"
     "f f f f f f";
     font-size: 19px;
 }
 
-header{
+.kepvaltas{
     grid-area: h;
     height: 1280px;
     background-image: url("../kepek/hh1.jpg");
 }
 
+.felulet{
+    grid-area: c;
+    border: 1px solid blanchedalmond;
+}
+
 #logo {
-    position: absolute;
+    position: fixed;
+    z-index: 6000;
     left: 100px;
-    top: 120px;
+    top: 80px;
 }
 
 nav{
@@ -44,21 +50,23 @@ nav{
 }
 
 #bejelentkezes {
-    position: absolute;
+    position: fixed;
+    z-index: 6000;
     right: 220px;
     top: 20px;
+    
 }
-
 #regisztracio {
-    position: absolute;
+    position: fixed;
+    z-index: 6000;
     right: 80px;
     top: 20px;
 }
-
 #k_mezo{
-    position: absolute;
-    right: 40px;
-    top: 40px;
+    position: fixed;
+    z-index: 6000;
+    right: 80px;
+    top: 80px;
 }
 
 nav ul{

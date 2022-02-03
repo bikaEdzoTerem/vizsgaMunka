@@ -2,13 +2,13 @@ $(function(){
     
     const myAjax = new MyAjax();
     const eszkozokTomb = [];
-    let apiVegpont = "";
+    let apiVegpont = "http://localhost:3000/adatok";
 
     myAjax.adatbeolvas(apiVegpont, eszkozokTomb, adatokMegjelenitese);
 
     function adatokMegjelenitese() {
         const szuloElem = $("#allomany");
-        const sablon = $(".sablon");
+        const sablon = $(".klonja");
         szuloElem.empty();
         sablon.show();
         eszkozokTomb.forEach(function(elem, index) {

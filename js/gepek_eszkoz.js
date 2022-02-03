@@ -1,14 +1,18 @@
 class Gep{
     constructor(node, adat, index){
         this.node = node;
+        this.cim = this.node.children(".cim");
+        this.kep = this.node.children(".kep");
+        this.leiras = this.node.children(".leiras");
         this.adat = adat;
+        this.adat.index = index;
+        this.setGepAdatok(this.adat);
     };
 
-    sajatGepAdatok(ertek){
+    setGepAdatok(ertek){
         this.cim.html(ertek.cim);
         this.kep.attr("src", ertek.kep);
-        this.leiras.html(leiras.cim);
-        this.link.html(leiras.cim);
+        this.leiras.html(ertek.leiras);
     };
 
 }
