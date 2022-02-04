@@ -4,12 +4,12 @@ $(function () {
   const termek = [];
   let tomb = [];
   let apivegpont = "http://localhost:3000/adat";
-
+const adat="gepek";
 
   const xhttp = new XMLHttpRequest();
   xhttp.onload = function () {
     
-    tomb = JSON.parse(this.responseText).emberek;
+    tomb = JSON.parse(this.responseText)[adat];
     
   };
   xhttp.open("GET", "../json/alapnevek.json",false);
@@ -28,7 +28,7 @@ $(function () {
 
 
 function termekLista(termekek) {
-  
+  Alap(tomb);
  
   const szuloElem = $(".elemek");
   const sablonElem = $(".elem");
@@ -52,3 +52,25 @@ function termekLista(termekek) {
   //})
 }
 });
+function Alap(tomb){
+  $(".elemek").empty();
+  $(".elemek").append('<div class="elem"></div>');
+  let txt="";
+  let index=0;
+  tomb.forEach(element => {
+    if(index==0){
+      txt+="<h3 class="+element+">Lorem ipsum dolor</h3>";
+    }else if (element==="kep") {
+      txt+='<img id="'+element+'" src="" alt="" class="kep" />'
+      
+    } else {
+      txt+="  <h4 >"+element+":</h4>";
+      txt+="  <p class="+element+"></p>";
+    }
+    index++;
+  });
+  txt+='<button class="torol">torol</button> <button class="modosit">modosit</button>';
+   $(".elem").append(txt);
+
+
+}
