@@ -20,6 +20,22 @@ class MyAjax {
             }
         });
     }
+    getjson(apivegpont, tomb) {
+      
+        tomb.splice(0, tomb.length);
+        $.ajax({
+          url: apivegpont,
+          type: "GET",
+          success: function (result) {
+          
+          result.emberek.forEach(element => {
+            tomb.push(element.neve);
+            
+          });
+       
+          },
+        });
+      }
 
     adatkuldes(faljnev, adat) {
         $.ajax({

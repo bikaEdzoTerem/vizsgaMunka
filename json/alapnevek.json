@@ -1,0 +1,4 @@
+{
+  "emberek": ["szemely_id","email_cim","nev","jogosultsag_id","szul_datum","Neme","igazolvany_szam","igazolvany_tipusa"
+  ]
+}
