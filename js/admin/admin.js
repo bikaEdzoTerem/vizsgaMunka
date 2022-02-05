@@ -4,7 +4,7 @@ $(function () {
   const termek = [];
   let tomb = [];
   let apivegpont = "http://localhost:3000/adat";
-const adat="gepek";
+let adat="gepek";
 
   const xhttp = new XMLHttpRequest();
   xhttp.onload = function () {
@@ -14,17 +14,50 @@ const adat="gepek";
   };
   xhttp.open("GET", "../json/alapnevek.json",false);
   xhttp.send();
-  //let rendezes = "?_sort=ar&_order=desc";
+  let rendezes = "?_sort=ar&_order=desc";
   myAjax.adatbeolvas(apivegpont, termek, termekLista);
 
-  /*$("#keresSzoveg").on("keyup", () => {
+  $("#keresSzoveg").on("keyup", () => {
 
     let apivegpont = "http://localhost:3000/adat";
     apivegpont += "?q=" + $("#keresSzoveg").val();
     console.log(apivegpont);
-*/
-  // myAjax.getAdat(apivegpont,termek,termekekMegjelintese);
-  //  });
+
+    myAjax.adatbeolvas(apivegpont, termek, termekLista);
+  });
+   $("#rendezes").on("change", () => {
+    switch ($("#rendezes").val()) {
+      case "NameListAsc":
+        console.log("bent vagoka rendezésben");
+          rendezes = "?_sort=eszkoz_neve&_order=asc";
+          apivegpont = "http://localhost:3000/adat";
+          apivegpont += rendezes;
+          myAjax.adatbeolvas(apivegpont, termek, termekLista);
+        break;
+        case "CostListDesc":
+          rendezes = "?_sort=ar&_order=desc";
+          apivegpont = "http://localhost:3000/adat";
+          apivegpont += rendezes;
+          myAjax.adatbeolvas(apivegpont, termek, termekLista);
+          break;
+          case "NameListDesc":
+            rendezes = "?_sort=eszkoz_neve&_order=desc";
+            apivegpont = "http://localhost:3000/adat";
+            apivegpont += rendezes;
+            myAjax.adatbeolvas(apivegpont, termek, termekLista);
+          break;
+          case "CostListAsc":
+            rendezes = "?_sort=ar&_order=asc";
+            apivegpont = "http://localhost:3000/adat";
+            apivegpont += rendezes;
+            myAjax.apivegpont(apivegpont, termek, termekLista);
+
+            break;
+      default:
+        break;
+    };
+    });
+  
 
 
 function termekLista(termekek) {
@@ -37,7 +70,7 @@ function termekLista(termekek) {
   
  
 
-  sablonElem.show();
+  
   szuloElem.empty();
   termekek.forEach(function (elem) {
     let node = sablonElem.clone().appendTo(szuloElem);
