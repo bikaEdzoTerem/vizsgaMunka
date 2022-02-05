@@ -1,6 +1,6 @@
 $(function () {
   const myAjax = new MyAjax();
-
+const rend=new AdminRend();
   const termek = [];
   let tomb = [];
   let apivegpont = "http://localhost:3000/adat";
@@ -15,6 +15,7 @@ let adat="gepek";
   xhttp.open("GET", "../json/alapnevek.json",false);
   xhttp.send();
   let rendezes = "?_sort=ar&_order=desc";
+  rend.rendezoMezoLetreHozas(tomb);
   myAjax.adatbeolvas(apivegpont, termek, termekLista);
 
   $("#keresSzoveg").on("keyup", () => {
@@ -26,36 +27,15 @@ let adat="gepek";
     myAjax.adatbeolvas(apivegpont, termek, termekLista);
   });
    $("#rendezes").on("change", () => {
-    switch ($("#rendezes").val()) {
-      case "NameListAsc":
-        console.log("bent vagoka rendezésben");
-          rendezes = "?_sort=eszkoz_neve&_order=asc";
+    
+     let darabolas= $("#rendezes").val();
+    let vegtemek= darabolas.split("!");
+        console.log(vegtemek);
+          rendezes = "?_sort="+vegtemek[0]+"&_order="+vegtemek[1]+"";
           apivegpont = "http://localhost:3000/adat";
           apivegpont += rendezes;
           myAjax.adatbeolvas(apivegpont, termek, termekLista);
-        break;
-        case "CostListDesc":
-          rendezes = "?_sort=ar&_order=desc";
-          apivegpont = "http://localhost:3000/adat";
-          apivegpont += rendezes;
-          myAjax.adatbeolvas(apivegpont, termek, termekLista);
-          break;
-          case "NameListDesc":
-            rendezes = "?_sort=eszkoz_neve&_order=desc";
-            apivegpont = "http://localhost:3000/adat";
-            apivegpont += rendezes;
-            myAjax.adatbeolvas(apivegpont, termek, termekLista);
-          break;
-          case "CostListAsc":
-            rendezes = "?_sort=ar&_order=asc";
-            apivegpont = "http://localhost:3000/adat";
-            apivegpont += rendezes;
-            myAjax.apivegpont(apivegpont, termek, termekLista);
-
-            break;
-      default:
-        break;
-    };
+       
     });
   
 
@@ -86,6 +66,7 @@ function termekLista(termekek) {
 }
 });
 function Alap(tomb){
+
   $(".elemek").empty();
   $(".elemek").append('<div class="elem"></div>');
   let txt="";
@@ -107,3 +88,4 @@ function Alap(tomb){
 
 
 }
+

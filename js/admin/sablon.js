@@ -6,7 +6,7 @@ class Kartya {
         
 
         this[element] = this.elem.children("."+element);
-       console.log( this[element] );
+      // console.log( this[element] );
       });
     
      
