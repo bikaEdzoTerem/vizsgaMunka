@@ -1,70 +1,63 @@
 $(function () {
   const myAjax = new MyAjax();
-const rend=new AdminRend();
+  const rend = new AdminRend();
   const termek = [];
   let tomb = [];
-  let megjelenit=1;
+  let megjelenit = 0;
   let apivegpont = "http://localhost:3000/adat";
- // let mutat="?_start="+megjelenit+"&_end="+megjelenit+$("#listaz").val;
-let adat="gepek";
+  let mutat =
+    "?_start=" + megjelenit + "&_end=" + megjelenit + $("#listaz").val();
+  let adat = "gepek";
 
   const xhttp = new XMLHttpRequest();
   xhttp.onload = function () {
-    
     tomb = JSON.parse(this.responseText)[adat];
-    
   };
-  xhttp.open("GET", "../json/alapnevek.json",false);
+  xhttp.open("GET", "../json/alapnevek.json", false);
   xhttp.send();
-  let rendezes = "?_sort=ar&_order=desc";
+  let rendezes = "";
   rend.rendezoMezoLetreHozas(tomb);
   //rend.keresoMezo(tomb,myAjax);
-  ;
-  console.log($("#listaz").val);
-  myAjax.adatbeolvas(apivegpont, termek, termekLista,tomb);
-/*$().on("change", () => {
+  console.log($("#listaz").val());
+  Osszealitas();
 
-  "?_start="+megjelenit+"&_end="+megjelenit
-});*/
-  $("#keresSzoveg").on("keyup", () => {
-
-    let apivegpont = "http://localhost:3000/adat";
-    apivegpont += "?q=" + $("#keresSzoveg").val();
-    console.log(apivegpont);
-
-    myAjax.adatbeolvas(apivegpont, termek, termekLista,tomb);
+  $("#listaz").on("change", () => {
+    console.log($("#listaz").val());
+    mutat = "?_start=" + megjelenit + "&_end=" + (megjelenit + $("#listaz").val());
+    Osszealitas();
   });
-   $("#rendezes").on("change", () => {
+  $("#keresSzoveg").on("keyup", () => {
+    rendezes = "?q=" + $("#keresSzoveg").val();
     
-     let darabolas= $("#rendezes").val();
-    let vegtemek= darabolas.split("!");
-        console.log(vegtemek);
-          rendezes = "?_sort="+vegtemek[0]+"&_order="+vegtemek[1]+"";
-          console.log("?_sort="+vegtemek[0]+"&_order="+vegtemek[1]+"");
-          apivegpont = "http://localhost:3000/adat";
-          apivegpont += rendezes;
-          console.log(apivegpont);
-          myAjax.adatbeolvas(apivegpont, termek, termekLista,tomb);
-       
-    });
-  
+    Osszealitas();
+  });
+  $("#rendezes").on("change", () => {
+    let darabolas = $("#rendezes").val();
+    let vegtemek = darabolas.split("!");
+    console.log(vegtemek);
+    rendezes = "?_sort=" + vegtemek[0] + "&_order=" + vegtemek[1] + "";
+    console.log("?_sort=" + vegtemek[0] + "&_order=" + vegtemek[1] + "");
+    Osszealitas();
+  });
 
-
-
+  function Osszealitas() {
+    apivegpont = "http://localhost:3000/adat";
+    apivegpont += rendezes + mutat;
+    console.log(apivegpont);
+    myAjax.adatbeolvas(apivegpont, termek, termekLista, tomb);
+  }
+ 
 });
 
+function apiOsszealitas() {}
 
-function termekLista(termekek,tomb) {
+function termekLista(termekek, tomb) {
   Alap(tomb);
- 
+
   const szuloElem = $(".elemek");
   const sablonElem = $(".elem");
   //  myAjax.getjson("alapnevek.json", tomb);
- 
-  
- 
 
-  
   szuloElem.empty();
   termekek.forEach(function (elem) {
     let node = sablonElem.clone().appendTo(szuloElem);
@@ -78,27 +71,23 @@ function termekLista(termekek,tomb) {
   // kosar.setKosar(event.detail)
   //})
 }
-function Alap(tomb){
-
+function Alap(tomb) {
   $(".elemek").empty();
   $(".elemek").append('<div class="elem"></div>');
-  let txt="";
-  let index=0;
-  tomb.forEach(element => {
-    if(index==0){
-      txt+="<h3 class="+element+">Lorem ipsum dolor</h3>";
-    }else if (element==="kep") {
-      txt+='<img id="'+element+'" src="" alt="" class="kep" />'
-      
+  let txt = "";
+  let index = 0;
+  tomb.forEach((element) => {
+    if (index == 0) {
+      txt += "<h3 class=" + element + ">Lorem ipsum dolor</h3>";
+    } else if (element === "kep") {
+      txt += '<img id="' + element + '" src="" alt="" class="kep" />';
     } else {
-      txt+="  <h4 >"+element+":</h4>";
-      txt+="  <p class="+element+"></p>";
+      txt += "  <h4 >" + element + ":</h4>";
+      txt += "  <p class=" + element + "></p>";
     }
     index++;
   });
-  txt+='<button class="torol">torol</button> <button class="modosit">modosit</button>';
-   $(".elem").append(txt);
-
-
+  txt +=
+    '<button class="torol">torol</button> <button class="modosit">modosit</button>';
+  $(".elem").append(txt);
 }
-
