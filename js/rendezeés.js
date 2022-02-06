@@ -1,22 +1,25 @@
 class AdminRend{
     constructor(){
-        
+      const termek=[];
+      let megjelenit=1;
     };
-   keresoMezo() {
+    
+   keresoMezo(tomb,myAjax) {
+    
     $("#keresSzoveg").on("keyup", () => {
 
         let apivegpont = "http://localhost:3000/adat";
         apivegpont += "?q=" + $("#keresSzoveg").val();
         console.log(apivegpont);
     
-        myAjax.adatbeolvas(apivegpont, termek, termekLista);
+        myAjax.adatbeolvas(apivegpont, termek, termekLista,tomb);
       });
        
    };
 
     rendezesTabla(apivegpont){
         let rendezes;
-        const myAjax = new MyAjax();
+        
         $("#rendezes").on("change", () => {
             switch ($("#rendezes").val()) {
               case "NameListAsc":
@@ -56,11 +59,15 @@ class AdminRend{
         $("#rendezes").empty();
         
         tomb.forEach(element => {
-            txt+='<option id="'+element+'Asc" value="'+element+'!Asc">'+element+' szerint csökkenő</option>';
-            txt+='<option id="'+element+'Desc" value="'+element+'!Desc">'+element+' szerint emelkedő</option>';
+            txt+='<option id="'+element+'Asc" value="'+element+'!asc">'+element+' szerint csökkenő</option>';
+            txt+='<option id="'+element+'Desc" value="'+element+'!desc">'+element+' szerint emelkedő</option>';
         });
         $("#rendezes").append(txt);
 
     
     };
+    dbElem(ertek){
+      "?_start="+megjelenit+"&_end="+megjelenit+ertek
+    }
+
 }

@@ -3,7 +3,9 @@ $(function () {
 const rend=new AdminRend();
   const termek = [];
   let tomb = [];
+  let megjelenit=1;
   let apivegpont = "http://localhost:3000/adat";
+ // let mutat="?_start="+megjelenit+"&_end="+megjelenit+$("#listaz").val;
 let adat="gepek";
 
   const xhttp = new XMLHttpRequest();
@@ -16,15 +18,21 @@ let adat="gepek";
   xhttp.send();
   let rendezes = "?_sort=ar&_order=desc";
   rend.rendezoMezoLetreHozas(tomb);
-  myAjax.adatbeolvas(apivegpont, termek, termekLista);
+  //rend.keresoMezo(tomb,myAjax);
+  ;
+  console.log($("#listaz").val);
+  myAjax.adatbeolvas(apivegpont, termek, termekLista,tomb);
+/*$().on("change", () => {
 
+  "?_start="+megjelenit+"&_end="+megjelenit
+});*/
   $("#keresSzoveg").on("keyup", () => {
 
     let apivegpont = "http://localhost:3000/adat";
     apivegpont += "?q=" + $("#keresSzoveg").val();
     console.log(apivegpont);
 
-    myAjax.adatbeolvas(apivegpont, termek, termekLista);
+    myAjax.adatbeolvas(apivegpont, termek, termekLista,tomb);
   });
    $("#rendezes").on("change", () => {
     
@@ -32,15 +40,21 @@ let adat="gepek";
     let vegtemek= darabolas.split("!");
         console.log(vegtemek);
           rendezes = "?_sort="+vegtemek[0]+"&_order="+vegtemek[1]+"";
+          console.log("?_sort="+vegtemek[0]+"&_order="+vegtemek[1]+"");
           apivegpont = "http://localhost:3000/adat";
           apivegpont += rendezes;
-          myAjax.adatbeolvas(apivegpont, termek, termekLista);
+          console.log(apivegpont);
+          myAjax.adatbeolvas(apivegpont, termek, termekLista,tomb);
        
     });
   
 
 
-function termekLista(termekek) {
+
+});
+
+
+function termekLista(termekek,tomb) {
   Alap(tomb);
  
   const szuloElem = $(".elemek");
@@ -64,7 +78,6 @@ function termekLista(termekek) {
   // kosar.setKosar(event.detail)
   //})
 }
-});
 function Alap(tomb){
 
   $(".elemek").empty();
