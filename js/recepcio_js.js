@@ -7,7 +7,7 @@ $(function () {
   
  
   const myAjax = new MyAjax();
-  let apiVegpont = "http://localhost:8001/szekrenies";
+  let apiVegpont = "http://localhost:3000/szekrenies";
   myAjax.adatbeolvas(apiVegpont, szekrenyTomb, letrehoz);
 
     function letrehoz(tomb){
