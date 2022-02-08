@@ -4,6 +4,8 @@ $(function(){
     const eszkozokTomb = [];
     let apiVegpont = "http://localhost:3000/adatok";
 
+    
+
     myAjax.adatbeolvas(apiVegpont, eszkozokTomb, adatokMegjelenitese);
 
     function adatokMegjelenitese() {

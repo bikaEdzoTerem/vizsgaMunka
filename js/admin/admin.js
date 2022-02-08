@@ -26,12 +26,11 @@ $(function () {
     mutat = "?_start=" + megjelenit + "&_end=" + (megjelenit + $("#listaz").val());
     Osszealitas();
   });
- /* $("#keresSzoveg").on("keyup", () => {
+  $("#keresSzoveg").on("keyup", () => {
     rendezes = "?q=" + $("#keresSzoveg").val();
     
     Osszealitas();
-  });*/
-  rend.keresoMezo(tomb,myAjax);
+  });
   $("#rendezes").on("change", () => {
     let darabolas = $("#rendezes").val();
     let vegtemek = darabolas.split("!");
