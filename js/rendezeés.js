@@ -1,7 +1,7 @@
 class AdminRend{
     constructor(){
-      const termek=[];
-      let megjelenit=1;
+      this.termek=[];
+      this.megjelenit=1;
     };
     
    keresoMezo(tomb,myAjax) {
@@ -12,7 +12,7 @@ class AdminRend{
         apivegpont += "?q=" + $("#keresSzoveg").val();
         console.log(apivegpont);
     
-        myAjax.adatbeolvas(apivegpont, termek, termekLista,tomb);
+        myAjax.adatbeolvas(apivegpont, this.termek, termekLista,tomb);
       });
        
    };
