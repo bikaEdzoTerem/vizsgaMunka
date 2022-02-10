@@ -1,61 +1,37 @@
-<<<<<<< HEAD
+
 class AdminRend{
     constructor(){
-      this.termek=[];
-      this.megjelenit=1;
+      
+     
     };
     
-   keresoMezo(tomb,myAjax) {
+   keresoMezo() {
     
     $("#keresSzoveg").on("keyup", () => {
 
-        let apivegpont = "http://localhost:3000/adat";
+        apivegpont = "http://localhost:3000/adat";
         apivegpont += "?q=" + $("#keresSzoveg").val();
         console.log(apivegpont);
     
-        myAjax.adatbeolvas(apivegpont, this.termek, termekLista,tomb);
+        apiOsszealitas();
       });
        
    };
 
-    rendezesTabla(apivegpont){
-        let rendezes;
+    rendezesTabla(){
         
-        $("#rendezes").on("change", () => {
-            switch ($("#rendezes").val()) {
-              case "NameListAsc":
-                
-                  rendezes = "?_sort=eszkoz_neve&_order=asc";
-                  apivegpont = "http://localhost:3000/adat";
-                  apivegpont += rendezes;
-                  myAjax.adatbeolvas(apivegpont, termek, termekLista);
-                break;
-                case "CostListDesc":
-                  rendezes = "?_sort=ar&_order=desc";
-                  apivegpont = "http://localhost:3000/adat";
-                  apivegpont += rendezes;
-                  myAjax.adatbeolvas(apivegpont, termek, admin.termekLista);
-                  break;
-                  case "NameListDesc":
-                    rendezes = "?_sort=eszkoz_neve&_order=desc";
-                    apivegpont = "http://localhost:3000/adat";
-                    apivegpont += rendezes;
-                    myAjax.adatbeolvas(apivegpont, termek, termekLista);
-                  break;
-                  case "CostListAsc":
-                    rendezes = "?_sort=ar&_order=asc";
-                    apivegpont = "http://localhost:3000/adat";
-                    apivegpont += rendezes;
-                    myAjax.apivegpont(apivegpont, termek, termekLista);
         
-                    break;
-              default:
-                break;
-            };
-            });
+        
+          let darabolas = $("#rendezes").val();
+          let vegtemek = darabolas.split("!");
+          console.log(vegtemek);
+          rendezes = "?_sort=" + vegtemek[0] + "&_order=" + vegtemek[1] + "";
+          console.log("?_sort=" + vegtemek[0] + "&_order=" + vegtemek[1] + "");
+          apiOsszealitas();
+           
     }
 
-    rendezoMezoLetreHozas(tomb){
+    rendezoMezoLetreHozas(){
         let txt="";
         $("#rendezes").empty();
         
@@ -67,83 +43,19 @@ class AdminRend{
 
     
     };
-    dbElem(ertek){
-      "?_start="+megjelenit+"&_end="+megjelenit+ertek
+    oldalakSzama(mindenadat){
+      let txt="";
+      console.log(mindenadat);
+      let adathoszz=mindenadat.length ;
+        $("article ul").empty();
+        txt+='<li class="page-item"><a class="page-link" href="#">Previous</a></li>';
+    for (let index = 0; index <adathoszz / $("#listaz").val(); index++) {
+        txt+='<li class="page-item"><a class="page-link" >'+index+'</a></li>';
+      
     }
+    txt+='<li class="page-item"><a class="page-link" href="#">Next</a></li>';
+    $("article ul").append(txt);
+    }
+    
 
 }
-=======
-class AdminRend{
-    constructor(){
-      const termek=[];
-      let megjelenit=1;
-    };
-    
-   keresoMezo(tomb,myAjax) {
-    
-    $("#keresSzoveg").on("keyup", () => {
-
-        let apivegpont = "http://localhost:3000/adat";
-        apivegpont += "?q=" + $("#keresSzoveg").val();
-        console.log(apivegpont);
-    
-        myAjax.adatbeolvas(apivegpont, termek, termekLista,tomb);
-      });
-       
-   };
-
-    rendezesTabla(apivegpont){
-        let rendezes;
-        
-        $("#rendezes").on("change", () => {
-            switch ($("#rendezes").val()) {
-              case "NameListAsc":
-                
-                  rendezes = "?_sort=eszkoz_neve&_order=asc";
-                  apivegpont = "http://localhost:3000/adat";
-                  apivegpont += rendezes;
-                  myAjax.adatbeolvas(apivegpont, termek, termekLista);
-                break;
-                case "CostListDesc":
-                  rendezes = "?_sort=ar&_order=desc";
-                  apivegpont = "http://localhost:3000/adat";
-                  apivegpont += rendezes;
-                  myAjax.adatbeolvas(apivegpont, termek, admin.termekLista);
-                  break;
-                  case "NameListDesc":
-                    rendezes = "?_sort=eszkoz_neve&_order=desc";
-                    apivegpont = "http://localhost:3000/adat";
-                    apivegpont += rendezes;
-                    myAjax.adatbeolvas(apivegpont, termek, termekLista);
-                  break;
-                  case "CostListAsc":
-                    rendezes = "?_sort=ar&_order=asc";
-                    apivegpont = "http://localhost:3000/adat";
-                    apivegpont += rendezes;
-                    myAjax.apivegpont(apivegpont, termek, termekLista);
-        
-                    break;
-              default:
-                break;
-            };
-            });
-    }
-
-    rendezoMezoLetreHozas(tomb){
-        let txt="";
-        $("#rendezes").empty();
-        
-        tomb.forEach(element => {
-            txt+='<option id="'+element+'Asc" value="'+element+'!asc">'+element+' szerint csökkenő</option>';
-            txt+='<option id="'+element+'Desc" value="'+element+'!desc">'+element+' szerint emelkedő</option>';
-        });
-        $("#rendezes").append(txt);
-
-    
-    };
-    dbElem(ertek){
-      "?_start="+megjelenit+"&_end="+megjelenit+ertek
-    }
-
-}
->>>>>>> f5b97f8b0bc8a69c7bfbd7b70116b89dd89f7ddf

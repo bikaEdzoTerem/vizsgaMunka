@@ -1,12 +1,22 @@
+let rendezes;
+let superapivegponto="http://localhost:3000/adat";
+let tomb = []
+let megjelenit = 0;
+const termek = [];
+let mutat;
+let myAjax ;
+let rend ;
+
 $(function () {
-  const myAjax = new MyAjax();
-  const rend = new AdminRend();
-  const termek = [];
-  let tomb = [];
-  let megjelenit = 0;
+  var mindenadat=[];
+  myAjax = new MyAjax();
+   rend = new AdminRend();
+  
+   myAjax.adatbeolvas(superapivegponto, mindenadat, rend.oldalakSzama);
   let apivegpont = "http://localhost:3000/adat";
-  let mutat =
-    "?_start=" + megjelenit + "&_end=" + megjelenit + $("#listaz").val();
+   mutat =
+    "?_start=" + megjelenit/*+ ($("#listaz").val()*(aktualisgomberteke-1))*/+ "&_limit=" + megjelenit + $("#listaz").val()
+    /*+($("#listaz").val()*(aktualisgomberteke-1))*/;
   let adat = "gepek";
 
   const xhttp = new XMLHttpRequest();
@@ -15,41 +25,36 @@ $(function () {
   };
   xhttp.open("GET", "../json/alapnevek.json", false);
   xhttp.send();
-  let rendezes = "";
+  rendezes = "";
   rend.rendezoMezoLetreHozas(tomb);
   //rend.keresoMezo(tomb,myAjax);
   console.log($("#listaz").val());
-  Osszealitas();
-
+  apiOsszealitas();
+  
   $("#listaz").on("change", () => {
     console.log($("#listaz").val());
     mutat = "?_start=" + megjelenit + "&_end=" + (megjelenit + $("#listaz").val());
-    Osszealitas();
+    rend.oldalakSzama(mindenadat);
+    apiOsszealitas();
   });
   $("#keresSzoveg").on("keyup", () => {
     rendezes = "?q=" + $("#keresSzoveg").val();
     
-    Osszealitas();
+    apiOsszealitas();
   });
   $("#rendezes").on("change", () => {
-    let darabolas = $("#rendezes").val();
-    let vegtemek = darabolas.split("!");
-    console.log(vegtemek);
-    rendezes = "?_sort=" + vegtemek[0] + "&_order=" + vegtemek[1] + "";
-    console.log("?_sort=" + vegtemek[0] + "&_order=" + vegtemek[1] + "");
-    Osszealitas();
+    rend.rendezesTabla();
   });
 
-  function Osszealitas() {
-    apivegpont = "http://localhost:3000/adat";
-    apivegpont += rendezes + mutat;
-    console.log(apivegpont);
-    myAjax.adatbeolvas(apivegpont, termek, termekLista, tomb);
-  }
+  
  
 });
 
-function apiOsszealitas() {}
+function apiOsszealitas() {
+  
+vegApi=superapivegponto + rendezes + mutat;
+;
+myAjax.adatbeolvas(vegApi, termek, termekLista, tomb);}
 
 function termekLista(termekek, tomb) {
   Alap(tomb);
@@ -65,11 +70,7 @@ function termekLista(termekek, tomb) {
   });
   sablonElem.hide(); //sablonelem eltávolítása
 
-  //$(window).on('termekKosarba', (event) => {
-  //itt hívjuk meg a kosarat és belepakoljuk a kosár tömbbe az
-  //aktuális termék adatait
-  // kosar.setKosar(event.detail)
-  //})
+  
 }
 function Alap(tomb) {
   $(".elemek").empty();
