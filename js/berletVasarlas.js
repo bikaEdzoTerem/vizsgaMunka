@@ -2,13 +2,14 @@ $(function () {
 
     const myajax = new MyAjax();
     const berletek = [];
+    const kisKosar = new Kosar();
     let apiVegpont = "http://localhost:3000/berletek";
 
     myajax.adatbeolvas(apiVegpont, berletek, berletekMegjelenitese);
 
     function berletekMegjelenitese(){
         const szuloElem = $("#taroloSzulo");
-        const sablon = $(".taroloGyerek");
+        const sablon = $("footer .taroloGyerek");
         szuloElem.empty();
         sablon.show();
         berletek.forEach(function(elem, index) {
@@ -17,5 +18,10 @@ $(function () {
         });
         sablon.hide();
     }
+
+    $(window).on("kosarhozad", (esemeny) => {
+        let aktTermek = esemeny.detail;
+        kisKosar.setKoarhozAdd(aktTermek);
+    });
 
 });

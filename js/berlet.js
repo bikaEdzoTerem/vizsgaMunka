@@ -7,11 +7,18 @@ class Berlet {
         this.elem = elem;
         this.elem.index = index;
         this.setBerletAdatok(this.elem);
+        this.node.children(".hozzaAd").on("click", () => {
+            this.KattintasTrigger();
+        });
+    };
+    KattintasTrigger() {
+        let esemeny = new CustomEvent("kosarhozad", { detail: this.elem });
+        window.dispatchEvent(esemeny);
     }
 
     setBerletAdatok(ertek){
         this.cim.html(ertek.cim);
         this.leiras.html(ertek.leiras);
-        this.ar.html(ertek.ar);
+        this.ar.html(ertek.ar+"ft");
     }
 }
