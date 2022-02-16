@@ -17,8 +17,9 @@
     <!-- Piktogramm libary -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="../js/berlet.js"></script>
     <script src="../js/ajax.js"></script>
+    <script src="../js/kosar.js"></script>
+    <script src="../js/berlet.js"></script>
     <script src="../js/berletVasarlas.js"></script>
     <link rel="stylesheet" href="../css/berletVasarlas_stilus.css">
     <title>Bérlet</title>
@@ -27,25 +28,27 @@
 <body>
     <main>
         <header>
-            <h1>Bérlet</h1>
+            <h1>Bérletek</h1>
             <div id="logo">
                 <a href="index.html"><img src="" alt="szia, máj ném isz logo"></a>
             </div>
         </header>
         <article id="taroloSzulo">
-            <div class="taroloGyerek">
-                <h4 class="cim">Bérlet neve</h4>
-                <p class="leiras">Bérlet leírása</p>
-                <span class="ar">Bérlet ára</span><br>
-                <input type="button" class="hozzaAd" name="hozzaAd" value="Kiválaszt">
-            </div>
+            
         </article>
-        <aside id="kosarSzulo">
-            <div class="kosarGyerek">
+        <aside>
+            <h1 style="text-align: center; margin-top: 40px; margin-bottom: 20px;">Kosár</h1>
+            <div id="kosar">    
 
             </div>
         </aside>
         <footer>
+            <div class="taroloGyerek">
+                <h4 class="cim">Bérlet neve</h4>
+                <p class="leiras">Bérlet leírása</p>
+                <span class="ar">Bérlet ára</span><br>
+                <input type="button" class="hozzaAd" name="hozzaAd" value="Kosárba">
+            </div>
             <br>
             <a href="#"><i class="fa fa-instagram instakep"></i></a><span>Instagram elérhetőség</span><br>
             <a href="#"><i class="fa fa-facebook facekep"></i></a><span>Facebook elérhetőség</span><br><br>Mindkét

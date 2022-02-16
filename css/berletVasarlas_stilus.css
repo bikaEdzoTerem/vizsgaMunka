@@ -1,13 +1,10 @@
 @charset "utf-8";
 
-/**{
-    border: 1px solid gray;
-}*/
-
 body {
     width: 100%;
     margin: auto;
-    background-color: bisque;
+    background-image: url("../kepek/hatter3.jpg");
+    color: white;
 }
 
 main {
@@ -42,24 +39,38 @@ article {
     grid-area: a;
     display: grid;
     grid-template-columns: 1fr;
-    grid-gap:10px
+    grid-gap:10px;
+    /*margin: auto; /*ettől meg középre*/
 }
 
 article div {
     border: 1px solid black;
-    width: 80%;
-    margin-left: 20px;
+    width: 65%; /*100, 2x akkora lesz jobbra ha 200%ot írok*/
+    margin-left: 40px; /*nem kell*/
     margin-top: 20px;
     margin-bottom: 20px;
-    /*background-image: linear-gradient(to right, red,orange,yellow,green,blue,indigo,violet);*/
-    background-color: aliceblue;
+    background-image: linear-gradient(to right, red,orange,yellow,green,blue,indigo,violet);
+    text-align: center;
     
 }
 
 aside {
     grid-area: s;
-    background-color: red;
-    /*background-image: radial-gradient(circle, red, yellow, green);*/
+    background-color: rgba(95, 85, 81, 0.842);
+    opacity: 80%;
+}
+
+aside div {
+    background-image: radial-gradient(circle, red, yellow, green);
+    width: 70%;
+    margin: auto;
+    padding: 10px;
+    text-align: center;
+
+}
+
+td,tr,th{
+    padding-left: 30px;
 }
 
 footer{
