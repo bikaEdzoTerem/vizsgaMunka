@@ -1,6 +1,8 @@
 class Kartya {
-  constructor(elem, adat, elemnev) {
+  constructor(elem, adat, elemnev,id) {
     this.elem = elem;
+    
+    this.sorszam=this.elem.attr("id",id);
     elemnev.forEach((element) => {
       this[element] = this.elem.children("." + element);
       // console.log( this[element] );
@@ -23,6 +25,7 @@ class Kartya {
   }
 
   setAdatok(ertekek, elemnev) {
+    
     elemnev.forEach((element) => {
       this[element].html(ertekek[element]);
     });

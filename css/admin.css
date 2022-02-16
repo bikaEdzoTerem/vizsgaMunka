@@ -31,10 +31,16 @@ article{
 }
 .elemek{
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr ;
+    grid-template-columns: auto auto auto auto auto ;
     border:2px solid palegoldenrod ;
 }
 .elem{
     border:2px solid palegoldenrod ;
     padding: 5px;
+}
+#javitas{
+    display: grid;
+    grid-template-columns: auto auto auto;
+    width: 100%;
+    grid-column:1/5;
 }
