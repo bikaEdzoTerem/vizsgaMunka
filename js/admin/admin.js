@@ -45,8 +45,8 @@ $(function () {
   $("#rendezes").on("change", () => {
     rend.rendezesTabla();
   }); $(window).on("modosit", function(eseny) {
-    console.log(eseny)
-    beviteliMezoGeneralas(eseny.detail[tomb[0]]);
+    console.log(eseny.detail.id/5);
+    beviteliMezoGeneralas(eseny.detail.id);
     
   });
 
@@ -62,9 +62,9 @@ $(function () {
     tomb.forEach(element => {
       txt+='<label for="'+element+'">'+element+':</label>';
       if (tomb[0]==element){
-        txt+='<input type="text" id="'+element+'" name="'+element+'" autofocus placeholder="'+element+'" disabled><br>'
+        txt+='<input type="text" id="'+element+'" name="'+element+'" autofocus placeholder="'+element+'" disabled>'
       }else{
-      txt+='<input type="text" id="'+element+'" name="'+element+'" autofocus placeholder="'+element+'" required><br>'
+      txt+='<input type="text" id="'+element+'" name="'+element+'" autofocus placeholder="'+element+'" required>'
     }});
     $("#javitas").append(txt);
    
