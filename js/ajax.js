@@ -5,7 +5,15 @@ class MyAjax {
     let esemeny = new CustomEvent("sorszam", { detail: this.id });
     window.dispatchEvent(esemeny);
   }
-
+adatBeolvasasElore(api,tombe,adat){
+  const xhttp = new XMLHttpRequest();
+  xhttp.onload = function () {
+    tombe = JSON.parse(this.responseText)[adat];
+  };
+  xhttp.open("GET", api, false);
+  xhttp.send();
+  return tombe
+}
   adatbeolvas(faljnev, tomb, myCallback) {
     this.adatbeolvas(faljnev, tomb, myCallback, false);
   }

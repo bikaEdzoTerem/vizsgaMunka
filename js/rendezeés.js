@@ -7,16 +7,20 @@ class AdminRend{
     
    keresoMezo() {
     
-    $("#keresSzoveg").on("keyup", () => {
 
-        apivegpont = "http://localhost:3000/adat";
-        apivegpont += "?q=" + $("#keresSzoveg").val();
-        console.log(apivegpont);
+        mutat="";
+        rendezes= "?q=" + $("#keresSzoveg").val();
+        if($("#keresSzoveg").val()==""){
+            rendezes="";
+            mutat =
+            "?_start=" +  0+ "&_limit=" +  ($("#listaz").val());
+        }
+        
     
         apiOsszealitas();
-      });
-       
    };
+       
+   
 
     rendezesTabla(){
         
@@ -44,18 +48,30 @@ class AdminRend{
     
     };
     oldalakSzama(mindenadat){
-      let txt="";
-      console.log(mindenadat);
-      let adathoszz=mindenadat.length ;
-        $("article ul").empty();
-        txt+='<li class="page-item"><a class="page-link" href="#">Previous</a></li>';
-    for (let index = 0; index <adathoszz / $("#listaz").val(); index++) {
-        txt+='<li class="page-item"><a class="page-link" >'+index+'</a></li>';
-      
+        let txt="";
+        console.log(mindenadat);
+        let adathoszz=mindenadat.length ;
+          $("#navig").empty();
+          
+      for (let index = 0; index <adathoszz / $("#listaz").val(); index++) {
+          $("#navig").append(' <button class="oldal"  id='+index+'>'+index+'</button>');
+          $('#'+index+'').on("click", function() {
+            oldalValt(index);
+              console.log(index);
+             });
+      }
     }
-    txt+='<li class="page-item"><a class="page-link" href="#">Next</a></li>';
-    $("article ul").append(txt);
-    }
+   
+
+     
     
 
-}
+} 
+function oldalValt(ertek){
+    mutat =
+    "?_start=" +  ($("#listaz").val()*ertek)+ "&_limit=" +  ($("#listaz").val());
+    console.log($(".oldal").val());
+    console.log(mutat)
+    apiOsszealitas();
+  
+  }

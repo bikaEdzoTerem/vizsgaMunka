@@ -1,15 +1,15 @@
 class Kartya {
-  constructor(elem, adat, elemnev,id) {
+  constructor(elem, adat, elemnev) {
     this.elem = elem;
    
-    this.sorszam=this.elem.attr("id",id);
+   
     elemnev.forEach((element) => {
       this[element] = this.elem.children("." + element);
       // console.log( this[element] );
     });
 
     this.adat = adat;
-    this.adat.id=id+1;
+    
     this.termekTorles = this.elem.children(".torol");
     this.termekModosit = this.elem.children(".modosit");
     this.setAdatok(adat, elemnev);
