@@ -21,7 +21,7 @@ kezdes(adat);
   
 $("#emberek").on("click",()=>{
   adat="emberek"
-superapivegponto= "http://localhost:3003/adat";
+superapivegponto= "api/szemely";
 kezdes(adat);
 })
   
