@@ -19,8 +19,8 @@ return new class extends Migration
         $table->string('terem_neve');
         $table->integer('ferfi_ferohely');
         $table->integer('noi_ferohely');
-        $table->datetime('nyitas');
-        $table->datetime('zaras');
+        $table->time('nyitas');
+        $table->time('zaras');
         $table->timestamps();
         });
     }
