@@ -1,5 +1,5 @@
 let rendezes;
-let superapivegponto = "api/eszkoz";
+let superapivegponto = "api/proba";
 let tomb = [];
 let megjelenit = 0;
 const termek = [];

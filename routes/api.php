@@ -27,3 +27,4 @@ Route::apiResource('gepek', GepekController::class);
 Route::apiResource('berletVasarlas', BerletVasarlasController::class);
 Route::apiResource('szemely', SzemelyController::class);
 Route::apiResource('eszkoz', EszkozController::class);
+Route::get("proba",[BerletVasarlasController::class,"getAr"]);

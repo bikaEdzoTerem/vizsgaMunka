@@ -14,6 +14,6 @@ class BerletVasarlasController extends Controller
     }
     public function getAr()
     {
-        dd(Berlet_tipus::all());
+        dd(Berlet_tipus::find(5)->ara);
     }
 }

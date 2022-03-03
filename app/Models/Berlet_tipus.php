@@ -8,9 +8,10 @@ use Illuminate\Support\Facades\DB;
 
 class Berlet_tipus extends Model
 {
+    protected $primaryKey='berlet_tipus_id';
     protected $berlet_tipus = ['berlet_tipus_id', 'megnevezes', 'idotartam_nap', 'ar'];
 
-    public function getArAttribute($value)
+    public function getAraAttribute()
     {
         $arvalt= Arvaltozas::where("berlet_tipus_id",$this->attributes["berlet_tipus_id"])
         ->where("mettol","<=",DB::raw("CURRENT_DATE()"))

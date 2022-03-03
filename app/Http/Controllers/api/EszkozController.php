@@ -11,9 +11,8 @@ use App\Models\EszkozView;
 class EszkozController extends Controller
 {
     public function index(){
-        $result=DB::table("viewEszkoz")->select(
-            all()
-        )->get();
+       $result=EszkozView::all();
+       
         return $result;
                             
                             
