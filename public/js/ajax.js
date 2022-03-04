@@ -3,9 +3,9 @@ class MyAjax {
 
   KattintasTrigger() {
     let esemeny = new CustomEvent("sorszam", { detail: this.id });
-    window.dispatchEvent(esemeny);
+    window.dispatchEv
+    ent(esemeny);
   }
-
   adatBeolvasasElore(api,tombe,adat){
     const xhttp = new XMLHttpRequest();
     xhttp.onload = function () {
@@ -15,9 +15,11 @@ class MyAjax {
     xhttp.send();
     return tombe
   }
+
   adatbeolvas(faljnev, tomb, myCallback) {
     this.adatbeolvas(faljnev, tomb, myCallback, false);
   }
+  
   adatbeolvas(faljnev, tomb, myCallback, seged) {
    tomb.splice(0, tomb.length);
     $.ajax({
