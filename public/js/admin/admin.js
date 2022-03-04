@@ -16,14 +16,49 @@ let adat="gepek";
 
   
  
-  
+  gombok();
 kezdes(adat);
   
-$("#emberek").on("click",()=>{
+/*$("#emberek").on("click",()=>{
   adat="emberek"
 superapivegponto= "api/szemely";
 kezdes(adat);
 })
+$("#gepek").on("click",()=>{
+  adat="gepek"
+superapivegponto= "api/gepek";
+kezdes(adat);
+})
+$("#munkaido").on("click",()=>{
+  adat="munkaido"
+superapivegponto= "api/munkaido";
+kezdes(adat);
+})
+$("#edzések").on("click",()=>{
+  adat="edzések"
+superapivegponto= "api/edzések";
+kezdes(adat);
+})
+$("#szekrenyek").on("click",()=>{
+  adat="szekrenyek"
+superapivegponto= "api/szekrenyek";
+kezdes(adat);
+})
+$("#gyakorlatok").on("click",()=>{
+  adat="gyakorlatok"
+superapivegponto= "api/gyakorlatok";
+kezdes(adat);
+})
+$("#termek").on("click",()=>{
+  adat="termek"
+superapivegponto= "api/termek";
+kezdes(adat);
+})
+$("#berletek").on("click",()=>{
+  adat="berletek"
+superapivegponto= "api/berletek";
+kezdes(adat);
+})*/
   
   $("#listaz").on("change", () => {
     console.log($("#listaz").val());
@@ -73,6 +108,18 @@ kezdes(adat);
     tomb,
     adat+"Kicsik"
   );}}
+  function gombok(){
+
+    let id=["szemely","eszkoz","munkaido","edzések","szekrenyek","gyakorlatok","termek","berletek"]
+    id.forEach(element => {
+      $("#"+element+"").on("click",()=>{
+        adat=element
+      superapivegponto= "api/"+element;
+      kezdes(adat);
+      })
+    });
+    
+  }
   function adatbeilleszt(adatok, seged) {
     tomb.forEach((element) => {
       if (element == "eszkoz_neve") {
