@@ -1,0 +1,7 @@
+@if(ha be vagy jelentkezve)
+    @include('includes.bejelentkezettheader')
+@endif
+
+@if(ha nem be vagy jelentkezve)
+    @include('includes.feluletheader')
+@endif

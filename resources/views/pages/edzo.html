@@ -4,11 +4,12 @@
     <meta name="description" content="Edzo oldal" />
     <meta name="author" content="Bogdán Gábor" />
     <link rel="icon" href="bika.png">
+    <link href="../css/EdzoCss/header.css" rel="stylesheet" type="text/css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="ajax.js"></script>
-    <link href="EdzoCss/header.css" rel="stylesheet" type="text/css" />
-    <script src="edzo.js"></script>
-    <script src="edzoIdopontok.js"></script>
+    <script src="../js/ajax.js"></script>
+    <script src="../js/edzoIdopont.js"></script>
+    <script src="../js/edzoIdopontok.js"></script>
+    <script src="../js/edzo.js"></script>
     <title>Edzo felulet</title>
   </head>
   <body>
@@ -23,21 +24,37 @@
         </nav>
       </header>
     <article>
+      <p>Bogdán Gábor</p>
       <form>
         <!-- <div class="form-group" style="display: inline-flex;"> -->
           <input placeholder="személy neve" type="txt"  class="szemelyKereso" required/>
-          <input class="datumLefoglal"  type="datetime-local"  required/> <!-- step="3600" beállítaná hogy csak óra végződésúü legyen-->
-          <button type="button" class="lefoglal">Lefoglal</button>
+          <input type="date" class="datum"  list="datumValasztasok" required/>
+            <datalist id="datumValasztasok"></datalist>
+            
+            <input class="orara"type="text" list="oraraValasztasok" placeholder="órára" maxlength="4" required>
+            <datalist id="oraraValasztasok"> </datalist>
+
+          <input class="ora"type="text" list="oraValasztasok" placeholder="edzés hossza(1:00)" maxlength="4" required>
+            <datalist id="oraValasztasok"> </datalist>
+          <button type="button" class="lefoglal" style="display: inline-flex;">Lefoglal</button>
           <!-- <input type="submit" class="lefoglal" value="Lefoglal" > -->
         </div>
       </form>
-      <div class="idopontok"></div>
+      
     </article>
     <section>
-      
-      
+      <div class="idopontok"></div>
   </section>
-  <footer>© Minden jog fenntartva ©<br /></footer>
+  <div class="tablazat"></div>
+  <footer>
+    <div class="idopont">
+      <h3 class="szemelyNeve">a</h3>
+      <p class="datumtol">10</p>
+      <!-- <p class="datumig">10</p> -->
+      <p class="ora">1</p>
+      <button class="feloldasGomb">Felold</button>
+  </div>
+    © Minden jog fenntartva ©<br /></footer>
 
 </main>
 </body>
