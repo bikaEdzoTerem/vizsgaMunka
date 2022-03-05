@@ -2,7 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\api\GepekController;
-use App\Http\Controllers\CostumAuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,23 +24,19 @@ Route::get('/bejelentkezes', function () { return view('pages.bejelentkezes'); }
 Route::get('/regisztracio', function () { return view('pages.regisztracio'); });
 Route::get('/elfelejtettjelszo', function () { return view('pages.elfelejtettjelszo'); });
 Route::get('/berletVasarlas', function () { return view('pages.berletVasarlas'); });
-Route::get('/admin', function () { return view('pages.admin'); });
+Route::get('/admin', function () { return view('admin'); });
 
 
+//Route::get('/cikkek', function () { return view('cikkek_etrend'); });
+/*  Route::get('/bejelentkezes', function () { return view('bejelentkezes'); });
+    Route::get('/berletvasarlas', function () { return view('berletvasarlas'); });
+    Route::get('/elfjelszo', function () { return view('elfjelszo'); });
+    Route::get('/regisztracio', function () { return view('regisztracio'); });      */
 
-/*Login, regist*/
-
-//Route::get('/login', function(){ return view("Login"); });
-
-Route::get('/login', [CostumAuthController::class, 'login'])->middleware('alreadyLoggedIn');
-Route::get('/registration', [CostumAuthController::class, 'registration'])->middleware('alreadyLoggedIn');
-Route::post('/register-user', [CostumAuthController::class, 'registerUser'])->name('register-user');
-Route::post('/login-user',[CostumAuthController::class, 'loginUser'])->name('login-user');
-Route::get('/dashboard', [CostumAuthController::class, 'dashboard'])/*->middleware('isLoggedIn')*/;
-Route::get('/logout', [CostumAuthController::class, 'logout']);
-
-
-/*Gépek keresőpontjai*/
-//Route::get('/api/gepek/search', [GepekController::class, 'search']);
-//Route::get('/api/gepek/sort', [GepekController::class, 'sortBy']);
-Route::get('/api/gepek/{id}', [GepekController::class, 'show']);
+/*apik
+Route::get('/api/task/search', [TaskController::class, 'keres']);
+Route::get('/api/task/sort', [TaskController::class, 'rendez']);
+Route::delete('/api/task/{id}', [TaskController::class, 'adatTroles']);
+Route::put('/api/task/{id}', [TaskController::class, 'adatFrissites']);
+Route::get('/api/task/{id}', [TaskController::class, 'egyAdat']);
+Route::post('/api/task', [TaskController::class, 'adatFelvetel']);*/

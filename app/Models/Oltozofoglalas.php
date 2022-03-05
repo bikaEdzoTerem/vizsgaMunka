@@ -8,4 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class Oltozofoglalas extends Model
 {
     protected $oltozofoglalas = ['oltozofog_id', 'szekreny_id', 'ugyfel', 'datum'];
+   
 }

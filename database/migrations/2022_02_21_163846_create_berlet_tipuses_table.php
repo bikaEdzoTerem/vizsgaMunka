@@ -18,7 +18,7 @@ return new class extends Migration
          $table->increments('berlet_tipus_id');
          $table->string('megnevezes');
          $table->string('idotartam_nap');
-         $table->integer('eredeti_ár');
+         $table->integer('ar');
          $table->timestamps();
     
         });

@@ -38,14 +38,14 @@ header h1 {
 article {
     grid-area: a;
     display: grid;
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
     grid-gap:10px;
     /*margin: auto; /*ettől meg középre*/
 }
 
 article div {
     border: 1px solid black;
-    width: 65%; /*100, 2x akkora lesz jobbra ha 200%ot írok*/
+    width: 70%; /*100, 2x akkora lesz jobbra ha 200%ot írok*/
     margin-left: 40px; /*nem kell*/
     margin-top: 20px;
     margin-bottom: 20px;
