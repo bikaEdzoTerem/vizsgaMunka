@@ -20,7 +20,5 @@ $(function(){
         sablon.hide();
     };
 
-    $(".k_mezo");
-
 });
 
