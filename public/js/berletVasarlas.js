@@ -3,7 +3,7 @@ $(function () {
     const myajax = new MyAjax();
     const berletek = [];
     const kisKosar = new Kosar();
-    let apiVegpont = "api/berletVasarlas";
+    let apiVegpont = "/api/berletVasarlas";
 
     myajax.adatbeolvas(apiVegpont, berletek, berletekMegjelenitese);
 

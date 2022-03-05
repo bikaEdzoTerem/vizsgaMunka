@@ -29,10 +29,12 @@ class Kosar {
         //console.log(this.kosar);
         $("#kosar").empty();
         $("#kosar").append("<table>");
-        let elem = "<tr id='fejlec'><th>Név:</th><th>Leírás:</th><th>Ár:</th></tr>";
+        let elem = "<tr id='fejlec'><th>Név:</th><th>Ídőtaram:</th><th>Ár:</th></tr>";
         this.kosar.forEach((value, index) => {
+            console.log(value);
             for (let item in value) {
-                elem += "<td>" + value[item] + "</td>";
+                if (item === "megnevezes" || item === "idotartam_nap" || item === "eredeti_ár")
+                    elem += "<td>" + value[item] + "</td>";
                 tartalom++;
             }
             elem += "<td>" + "<button class='torol' data-id='" + index + "'>Töröl</button>" + "</td>";
@@ -45,10 +47,11 @@ class Kosar {
             localStorage.setItem("kosarban", JSON.stringify(this.kosar));
             this.megjelenit();
             tartalom--;
-            if (tartalom == 0/*1*/) {
+            if (this.kosar.length == 0/*1*/) {
                 //elem.hide();
                 //$("#kosar").remove(elem);
-                $("#kosar").hide();
+                $("#kosar").empty();
+                localStorage.removeItem("kosarban");
                 //$(".fejlec").remove()/hide();
                 //$("table").remove();
             }

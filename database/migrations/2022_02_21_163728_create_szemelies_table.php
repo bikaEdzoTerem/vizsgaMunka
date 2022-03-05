@@ -22,7 +22,7 @@ return new class extends Migration
 	$table->string('nev');
 	$table->date('szul_datum');
 	$table->string('neme');
-	$table->string('igazolvany_szam')->unique();
+	$table->string('igazolvany_szam');
 	$table->string('igazolvany_tipusa');
 	$table->integer('tel_szam');
 	$table->string('kep');
