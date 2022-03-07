@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\api\GepekController;
 use App\Http\Controllers\CostumAuthController;
-
+use App\Http\Controllers\api\EszkozDbController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -26,7 +26,7 @@ Route::get('/regisztracio', function () { return view('pages.regisztracio'); });
 Route::get('/elfelejtettjelszo', function () { return view('pages.elfelejtettjelszo'); });
 Route::get('/berletVasarlas', function () { return view('pages.berletVasarlas'); });
 Route::get('/admin', function () { return view('pages.admin'); });
-
+Route::get("eszkozDB",[EszkozDbController::class,"show"]);
 
 
 /*Login, regist*/

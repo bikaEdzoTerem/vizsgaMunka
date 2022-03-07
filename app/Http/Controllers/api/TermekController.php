@@ -6,9 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Models\Terem;
 use Illuminate\Http\Request;
 
-class EszkozDb extends Controller
+class TermekController extends Controller
 {
-    public function show(){
-        dd(Terem::find(1)->eszkozok->count());
+    public function index()
+    {
+        return response()->json(Terem::all());
     }
 }

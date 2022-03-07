@@ -1,10 +1,19 @@
 {
-  "szemely": ["szemely_id","email_cim","nev","jogosultsag_id","szul_datum","Neme","igazolvany_szam","igazolvany_tipusa"
-  ],
+  "szemely": ["szemely_id","email_cim","nev","jogosultsag_id","szul_datum","Neme","igazolvany_szam","igazolvany_tipusa"],
+  "szemelyKicsik": ["szemely_id","email_cim","nev","jogosultsag_id","szul_datum","Neme","igazolvany_szam","igazolvany_tipusa"],
   "eszkoz":["eszkoz_id","eszkoz_tipus","eszkoz_neve","kep","leiras","terem_id"],
   "eszkozKicsik":["eszkoz_id","eszkoz_neve","terem_id"],
-  "szemelyKicsik": ["szemely_id","email_cim","nev","jogosultsag_id","szul_datum","Neme","igazolvany_szam","igazolvany_tipusa"
-  ],
   "gepek":["eszkoz_tipus_szamlalo","eszkoz_neve","suly","kep","leiras"],
-  "gepekKicsik":["eszkoz_tipus_szamlalo","eszkoz_neve","suly","leiras"]
+  "gepekKicsik":["eszkoz_tipus_szamlalo","eszkoz_neve","suly","leiras"],
+  "berlet":["berlet_tipus_id", "ugyfel", "datum_tol", "datum_ig"],
+  "berletKicsik":["berlet_tipus_id", "ugyfel", "datum_tol", "datum_ig"],
+  "edzes":["ugyfel", "ugyfel", "belepes_datum_ido", "datum_ig"],
+  "edzesKicsik":["ugyfel", "ugyfel", "belepes_datum_ido", "datum_ig"],
+  "gyakorlat":["eszkoz_tipus_szamlalo", "izomcsoport_id", "megnevezes", "video","leiras","szint"],
+  "gyakorlatKicsik":["eszkoz_tipus_szamlalo","izomcsoport_id", "megnevezes", "szint"],
+  "izomcsoport":["izomcsoport_id", "megnevezes", "abra"],
+  "izomcsoportKicsik":["izomcsoport_id", "megnevezes", "abra"],
+  "jogosultsag":["jogosultsag_id", "nev"],
+  "jogosultsagKicsik":["jogosultsag_id", "nev"]
+
 }

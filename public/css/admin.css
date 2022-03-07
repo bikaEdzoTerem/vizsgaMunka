@@ -37,6 +37,9 @@ article{
     grid-area: el;
     border:2px solid palegoldenrod ;
 }
+.elemek.clicked{
+    background-color: pink;
+}
 .elem{
     display: grid;
     grid-template-columns:  auto ;

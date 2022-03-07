@@ -4,10 +4,15 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\api\GepekController;
 use App\Http\Controllers\api\BerletVasarlasController;
+use App\Http\Controllers\api\EdzesekController;
 use App\Http\Controllers\api\EszkozController;
-use App\Http\Controllers\api\EszkozDb;
-use App\Http\Controllers\api\SzemelyController;
 
+use App\Http\Controllers\api\gyakorlatokController;
+use App\Http\Controllers\api\MunkaidoController;
+use App\Http\Controllers\api\OltozofoglalasokController;
+use App\Http\Controllers\api\SzekrenyekController;
+use App\Http\Controllers\api\SzemelyController;
+use App\Http\Controllers\api\TermekController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,5 +33,11 @@ Route::apiResource('gepek', GepekController::class);
 Route::apiResource('berletVasarlas', BerletVasarlasController::class);
 Route::apiResource('szemely', SzemelyController::class);
 Route::apiResource('eszkoz', EszkozController::class);
+Route::apiResource('edzes', EdzesekController::class);
+Route::apiResource('gyakorlat', gyakorlatokController::class);
+Route::apiResource('munkaido', MunkaidoController::class);
+Route::apiResource('oltozofoglalas', OltozofoglalasokController::class);
+Route::apiResource('szekreny', SzekrenyekController::class);
+Route::apiResource('terem', TermekController::class);
 Route::get("proba",[BerletVasarlasController::class,"getAr"]);
-Route::get("eszkozDB",[EszkozDb::class,"show"]);
+//Route::put()

@@ -16,14 +16,49 @@ let adat="gepek";
 
   
  
-  
+  gombok();
 kezdes(adat);
   
-$("#emberek").on("click",()=>{
+/*$("#emberek").on("click",()=>{
   adat="emberek"
 superapivegponto= "api/szemely";
 kezdes(adat);
 })
+$("#gepek").on("click",()=>{
+  adat="gepek"
+superapivegponto= "api/gepek";
+kezdes(adat);
+})
+$("#munkaido").on("click",()=>{
+  adat="munkaido"
+superapivegponto= "api/munkaido";
+kezdes(adat);
+})
+$("#edzések").on("click",()=>{
+  adat="edzések"
+superapivegponto= "api/edzések";
+kezdes(adat);
+})
+$("#szekrenyek").on("click",()=>{
+  adat="szekrenyek"
+superapivegponto= "api/szekrenyek";
+kezdes(adat);
+})
+$("#gyakorlatok").on("click",()=>{
+  adat="gyakorlatok"
+superapivegponto= "api/gyakorlatok";
+kezdes(adat);
+})
+$("#termek").on("click",()=>{
+  adat="termek"
+superapivegponto= "api/termek";
+kezdes(adat);
+})
+$("#berletek").on("click",()=>{
+  adat="berletek"
+superapivegponto= "api/berletek";
+kezdes(adat);
+})*/
   
   $("#listaz").on("change", () => {
     console.log($("#listaz").val());
@@ -42,14 +77,19 @@ kezdes(adat);
   $(window).on("modosit", function (eseny) {
     $(".elemek").remove();
     $("main").append(
-      '<section class="elemek row" style="border:1px solid black;width:400px;height:550px;overflow:auto" ><div class="elem" >'
+      '<section class="elemek row clicked" style="border:1px solid black;width:400px;height:550px;overflow:auto" ><div class="elem" >'
+
     );
+
     $("main").css(
       "grid-template-areas",
       '"he he he he he he""as ar ar ar ar el"'
     );
     kicsiE(true,adat);
     seged = beviteliMezoGeneralas();
+    $("#kuld").click(()=>{
+      myAjax.adatmodosit()
+    });
     console.log(eseny.detail);
     adatbeilleszt(eseny.detail, seged);
     apiOsszealitas();
@@ -73,6 +113,20 @@ kezdes(adat);
     tomb,
     adat+"Kicsik"
   );}}
+  function gombok(){
+
+    let id=["szemely","eszkoz","gepek","munkaido","edzések","szekrenyek","gyakorlatok","termek","berletek"]
+    id.forEach(element => {
+
+      $("#"+element+"").on("click",()=>{
+        adat=element
+        console.log(element);
+      superapivegponto= "api/"+element;
+      kezdes(adat);
+      })
+    });
+    
+  }
   function adatbeilleszt(adatok, seged) {
     tomb.forEach((element) => {
       if (element == "eszkoz_neve") {
@@ -153,7 +207,7 @@ kezdes(adat);
       }
     });
     $("#javitas").append(txt);
-    $("#javitas").append('<input type="button" id="kuld" value="kld">');
+    $("#javitas").append('<input type="button" id="kuld" value="küld">');
     return seged;
   }
  
