@@ -86,8 +86,17 @@ function oszlop(){
   myAjax.adatbeolvas(apiVegpont, idopontokTomb, idopontLista,jelenlegiDatum);
   function datumKereses(){
     let datumkeres=$(".datumKeres").val();
-    
+    let c= (Math.floor(new Date(datumkeres).getTime() - new Date().getTime()));
+    eltolas=(Math.round(c/1000/60/60/24));
+    idopontLista(idopontokTomb,jelenlegiDatum);
   }
+
+  $(".datumKeres").on("input", () => {//ha kivan töltve
+    datumKereses();
+});
+/* $(function() {
+  datumKereses();
+}); */
   function idopontLista(idopontokT,myCallback){
     idopontok.megjelenit(myCallback,eltolas,(hanyOszlopos));
     const szuloElem = $('.tablaadat');
@@ -165,7 +174,7 @@ function oszlop(){
         console.log("jó");
         apiVegpont = "http://localhost:4005/szemelyiEdzesek";
         let szoveg = {
-          id: 11,
+          id: 12,
           ugyfel_id: parseInt(szemelyKeres[0].szemely_id),
           ugyfel_nev: szemelyKeres[0].nev,
           datum: datumSeged+" "+oraraSeged,
@@ -207,7 +216,7 @@ function oszlop(){
     $(document).on("click", () => {//rákattintás az oldalon
       oraBeallitas();
     });
-    $(".datum").on("click", () => {//rákattintás a dátumra
+    $(".datum").on("input", () => {//rákattintás a dátumra
       let jelenlegiDatumSeged=new Date().toISOString().split(".")[0].slice(0,10);
       $(".datum")[0].min=jelenlegiDatumSeged;//a jelenlegi idő a minimum, utólagos lefoglalás nem lehetséges
       let max=parseInt(jelenlegiDatumSeged.slice(0,4))+1;//jelenlegi datumnak az évét átalakítja számmá és hozzáad 1-et
