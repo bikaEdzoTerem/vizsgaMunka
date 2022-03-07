@@ -9,11 +9,9 @@ table {
   border-style: hidden;
 }
 table td {
-  /* padding: 0.5rem; */
   border: 3px solid rgb(145, 0, 0);
 }
 table th {
-  /* padding: 0.5rem; */
   border: 3px solid rgb(145, 0, 0);
 }
 .oszlopSzam{
