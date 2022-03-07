@@ -31,7 +31,7 @@
           <input type="date" class="datum"  list="datumValasztasok" required/>
             <datalist id="datumValasztasok"></datalist>
             
-            <input class="orara"type="text" list="oraraValasztasok" placeholder="órára" maxlength="4" required>
+            <input class="orara"type="text" list="oraraValasztasok" placeholder="órára" minlength="4" maxlength="5" required>
             <datalist id="oraraValasztasok"> </datalist>
 
           <input class="ora"type="text" list="oraValasztasok" placeholder="edzés hossza(1:00)" maxlength="4" required>
@@ -40,12 +40,20 @@
           <!-- <input type="submit" class="lefoglal" value="Lefoglal" > -->
         </div>
       </form>
-      
     </article>
     <section>
       <div class="idopontok"></div>
-  </section>
-  <div class="tablazat"></div>
+    </section >
+    <div class="tablaSeged">
+      <label>
+        <input type="date" class="datumKeres" required><br>
+        <span class="validity"></span>
+      </label>
+      <button type="button" class="BalraCsokkent" id="gomb"><<</button>
+      <input type="number" list="hanyOszlopos" class="oszlopSzam" min="3" value="3">
+      <button type="button" class="JobbraNovel" id="gomb">>></button>
+      <div class="tablazat" id="oszlop"></div>
+    </div>
   <footer>
     <div class="idopont">
       <h3 class="szemelyNeve">a</h3>
@@ -54,7 +62,9 @@
       <p class="ora">1</p>
       <button class="feloldasGomb">Felold</button>
   </div>
-    © Minden jog fenntartva ©<br /></footer>
+    © Minden jog fenntartva ©<br />
+
+  </footer>
 
 </main>
 </body>
