@@ -18,14 +18,18 @@ class GepekController extends Controller
     /*Konkrét keresés*/
     public function search(Request $request)
     {
-        $queryString = $request->query();
+        /*$queryString = $request->query();
         foreach ($queryString as $key => $value) {
             $explodedKey = explode('_', $key);
             $column = $explodedKey[0];
             $expression = $explodedKey[1];
             $tasks = Eszkoz_tipus::with('eszkoz_tipuse')->where($column, $expression, '%' . $value . '%')->get();
         }
-        return $tasks;
+        return $tasks;*/
+        $task = DB::table('eszkoz_tipus')
+            ->where('eszkoz_neve like %', $request, '%')
+            ->get();
+        return response()->json($task);
     }
 
     /*Rendezés*/
@@ -34,9 +38,13 @@ class GepekController extends Controller
         $column = $request->_sort;
         if ($request->has('_order')) {
             $order = $request->_order;
-            $task = Eszkoz_tipus::with('eszkoz_tipus')->orderBy($column, $order)->get();
+            $task = Eszkoz_tipus::with('eszkoz_tipus')
+                ->orderBy($column, $order)
+                ->get();
         } else {
-            $task = Eszkoz_tipus::with('eszkoz_tipus')->orderBy($column, 'asc')->get();
+            $task = Eszkoz_tipus::with('eszkoz_tipus')
+                ->orderBy($column, 'asc')
+                ->get();
         }
         return response()->json($task);
     }
@@ -45,7 +53,8 @@ class GepekController extends Controller
     public function show($id)
     {
         $task = DB::table('eszkoz_tipuses')
-            ->where('eszkoz_tipus_szamlalo', $id)->get();
+            ->where('eszkoz_tipus_szamlalo', $id)
+            ->get();
         return response()->json($task);
     }
 }

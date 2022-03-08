@@ -26,7 +26,7 @@ class MyAjax {
       url: faljnev,
       type: "GET",
       success: function (result) {
-        result./*api vegpont nélkül a tömb belseje.*/ forEach((value) => {
+        result.forEach((value) => {
           tomb.push(value);
         });
         if (seged === false) {

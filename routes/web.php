@@ -42,6 +42,6 @@ Route::get('/logout', [CostumAuthController::class, 'logout']);
 
 
 /*Gépek keresőpontjai*/
-//Route::get('/api/gepek/search', [GepekController::class, 'search']);
-//Route::get('/api/gepek/sort', [GepekController::class, 'sortBy']);
+Route::get('/api/gepek/search', [GepekController::class, 'search']);
+Route::get('/api/gepek/sort', [GepekController::class, 'sortBy']);
 Route::get('/api/gepek/{id}', [GepekController::class, 'show']);

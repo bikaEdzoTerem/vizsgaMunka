@@ -12,7 +12,7 @@
     </div>
     <div id="k_mezo">
         <form>
-            <input type="text" name="k_mezo" id="k_mezo" placeholder="Keresés:">
+            <input type="text" name="k_mezo" id="k_mezo" class="k_mezo" placeholder="Keresés:">
         </form>
     </div>
 </header>
