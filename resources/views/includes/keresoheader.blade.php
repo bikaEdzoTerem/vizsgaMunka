@@ -1,6 +1,6 @@
 <header class="felulet">
     <div id="logo">
-        <a href="/"><img src="" alt="szia, máj ném isz logo"></a>
+        <a href="/"><img src="../kepek/logo.jpg" alt="szia, máj ném isz logo" style="width:100px"></a>
     </div>
     <div id="ki-be_jel">
         <div id="bejelentkezes">
