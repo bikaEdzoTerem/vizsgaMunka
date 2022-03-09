@@ -55,28 +55,28 @@ myAjax.adattorles(`api/${adat}`,id)
     );
     kicsiE(true,adat);
     const seged=[];
-    tomb.forEach((element) => {
-      console.log(element)
-            switch (element) {
-              case "jogosultsag_id":
+    let eldont=false;
+     
+            switch (adat) {
+              case "jogosultsag":
               keresetTabla="jogosultsag";
                 keresetErtek="jogosultsag_id";
                 console.log("jogosultsag_id");
                 eldont=true;
                 break;
-                case "eszkoz_neve":
+                case "eszkoz":
                   keresetTabla="eszkoz";
                   keresetErtek="eszkoz_neve";
                   eldont=true;
                   console.log("eszkoz_neve");
                 break;
-                case "ugyfel":
+                case "edzesek":
                   keresetTabla="szemely";
                   keresetErtek="szemely_id";
                   eldont=true;
                   console.log("szemely_id");
                 break;
-                case "izomcsoport_id":
+                case "izomcsoport":
                   keresetTabla="izomcsoport"
                   keresetErtek="izomcsoport_id";
                   eldont=true;
@@ -86,10 +86,10 @@ myAjax.adattorles(`api/${adat}`,id)
               default:
                 break;
             };
-          });
+          
 
             myAjax.adatbeolvas("api/"+keresetTabla,seged,(tomb)=>{ 
-              beviteliMezoGeneralas(seged);
+              beviteliMezoGeneralas(seged,keresetErtek,eldont);
               $("#kuld").click(()=>{
                 const inputs={};
               for (element of $("#javitas select,#javitas input")){
@@ -151,9 +151,9 @@ myAjax.adattorles(`api/${adat}`,id)
     tomb.forEach((element) => {
       if (element == "eszkoz_neve") {
        // console.log(adatok)
-         seged=adatok[element].split(" ");
+         let nevek=adatok[element].split(" ");
         nev="";
-        seged.forEach(neve => {
+        nevek.forEach(neve => {
           nev+=neve;
         });
             //$("#" + segetelem[element] + " ").text(segetelem[element]);
@@ -170,7 +170,7 @@ myAjax.adattorles(`api/${adat}`,id)
 
 
 
-  function beviteliMezoGeneralas(seged) {
+  function beviteliMezoGeneralas(seged,keresetErtek,eldont) {
     $("#javitas").remove();
     $("#fo").append('<form id="javitas"></form>');
     
@@ -196,22 +196,22 @@ console.log(element)
           element +
           '" disabled>';
         }
-       else if (element === "eszkoz_neve") {
+       else if (eldont==true) {
        
 
-        txt += '<select id="eszozneve" name="eszkoz_neve">';
+        txt += '<select id="eszozneve" name="'+keresetErtek+'">';
         seged.forEach((element) => {
-          seged=element.eszkoz_neve.split(" ");
+          let nevek=element[keresetErtek].split(" ");
           nev="";
-          seged.forEach(neve => {
+          nevek.forEach(neve => {
             nev+=neve;
           });
           txt +=
             '<option value="' +
-            element.eszkoz_neve +
+            element[keresetErtek] +
             '"id="'+nev +
             '">' +
-            element.eszkoz_neve +
+            element[keresetErtek] +
             "</option>";
         });
         txt += "</select>";
@@ -270,10 +270,10 @@ function Alap(tomb) {
   
   tomb.forEach((element) => {
     if (index == 0) {
-      txt += "  <h4 >" + element + ":</h4>";
-      txt += "<h3 class=" + element + ">Lorem ipsum dolor</h3>";
+      txt += "  <h6 >" + element + ":</h6>";
+      txt += "<h5 class=" + element + ">Lorem ipsum dolor</h5>";
     } else {
-      txt += "  <h4 >" + element + ":</h4>";
+      txt += "  <h6 >" + element + ":</h6>";
       txt += "  <p class=" + element + "></p>";
     }
     index++;
