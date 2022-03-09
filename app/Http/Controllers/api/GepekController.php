@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Eszkoz;
 use Illuminate\Http\Request;
 use App\Models\Eszkoz_tipus;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
 
 class GepekController extends Controller
@@ -57,4 +59,5 @@ class GepekController extends Controller
             ->get();
         return response()->json($task);
     }
+    
 }

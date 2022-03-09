@@ -33,7 +33,7 @@ Route::apiResource('gepek', GepekController::class);
 Route::apiResource('berletVasarlas', BerletVasarlasController::class);
 Route::apiResource('szemely', SzemelyController::class);
 Route::apiResource('eszkoz', EszkozController::class);
-Route::apiResource('edzes', EdzesekController::class);
+Route::apiResource('edzesek', EdzesekController::class);
 Route::apiResource('gyakorlat', gyakorlatokController::class);
 Route::apiResource('munkaido', MunkaidoController::class);
 Route::apiResource('oltozofoglalas', OltozofoglalasokController::class);

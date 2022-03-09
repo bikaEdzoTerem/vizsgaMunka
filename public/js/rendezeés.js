@@ -44,7 +44,7 @@ class AdminRend{
     };
     oldalakSzama(mindenadat){
         let txt="";
-        console.log(mindenadat);
+       // console.log(mindenadat);
         let adathoszz=mindenadat.length ;
           $("#navig").empty();
           

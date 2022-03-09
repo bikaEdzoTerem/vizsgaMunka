@@ -1,3 +1,5 @@
+//const { map } = require("lodash");
+
 let rendezes;
 let superapivegponto = "api/proba";
 let tomb = [];
@@ -19,46 +21,7 @@ let adat="gepek";
   gombok();
 kezdes(adat);
   
-/*$("#emberek").on("click",()=>{
-  adat="emberek"
-superapivegponto= "api/szemely";
-kezdes(adat);
-})
-$("#gepek").on("click",()=>{
-  adat="gepek"
-superapivegponto= "api/gepek";
-kezdes(adat);
-})
-$("#munkaido").on("click",()=>{
-  adat="munkaido"
-superapivegponto= "api/munkaido";
-kezdes(adat);
-})
-$("#edzések").on("click",()=>{
-  adat="edzések"
-superapivegponto= "api/edzések";
-kezdes(adat);
-})
-$("#szekrenyek").on("click",()=>{
-  adat="szekrenyek"
-superapivegponto= "api/szekrenyek";
-kezdes(adat);
-})
-$("#gyakorlatok").on("click",()=>{
-  adat="gyakorlatok"
-superapivegponto= "api/gyakorlatok";
-kezdes(adat);
-})
-$("#termek").on("click",()=>{
-  adat="termek"
-superapivegponto= "api/termek";
-kezdes(adat);
-})
-$("#berletek").on("click",()=>{
-  adat="berletek"
-superapivegponto= "api/berletek";
-kezdes(adat);
-})*/
+
   
   $("#listaz").on("change", () => {
     console.log($("#listaz").val());
@@ -74,6 +37,11 @@ kezdes(adat);
     rend.rendezesTabla();
     
   });
+  $(window).on("torol",function(event){
+ const id= event.detail[tomb[0]];
+myAjax.adattorles(`api/${adat}`,id)
+
+  });
   $(window).on("modosit", function (eseny) {
     $(".elemek").remove();
     $("main").append(
@@ -86,14 +54,58 @@ kezdes(adat);
       '"he he he he he he""as ar ar ar ar el"'
     );
     kicsiE(true,adat);
-    seged = beviteliMezoGeneralas();
+    const seged=[];
+    tomb.forEach((element) => {
+      console.log(element)
+            switch (element) {
+              case "jogosultsag_id":
+              keresetTabla="jogosultsag";
+                keresetErtek="jogosultsag_id";
+                console.log("jogosultsag_id");
+                eldont=true;
+                break;
+                case "eszkoz_neve":
+                  keresetTabla="eszkoz";
+                  keresetErtek="eszkoz_neve";
+                  eldont=true;
+                  console.log("eszkoz_neve");
+                break;
+                case "ugyfel":
+                  keresetTabla="szemely";
+                  keresetErtek="szemely_id";
+                  eldont=true;
+                  console.log("szemely_id");
+                break;
+                case "izomcsoport_id":
+                  keresetTabla="izomcsoport"
+                  keresetErtek="izomcsoport_id";
+                  eldont=true;
+                  console.log("izomcsoport_id");
+                break;
+            
+              default:
+                break;
+            };}
+    myAjax.adatbeolvas(keresetTabla,seged,beviteliMezoGeneralas)
+    
     $("#kuld").click(()=>{
-      myAjax.adatmodosit()
+      const inputs={};
+    for (element of $("#javitas select,#javitas input")){
+      const name=$(element).attr("name");
+      const value=$(element).val();
+      inputs[name]=value;
+    }
+    console.log($("#javitas input"));
+      myAjax.adatmodosit("api/"+adat,inputs,$("#javitas input").val());
     });
-    console.log(eseny.detail);
+    
     adatbeilleszt(eseny.detail, seged);
     apiOsszealitas();
   });
+
+
+
+
   function kezdes(adat){
     $(".elemek").remove();
     $("#fo").empty();
@@ -107,6 +119,9 @@ kezdes(adat);
     rend.oldalakSzama(mindenadat);
     apiOsszealitas();
   }
+
+
+
   function kicsiE(ertek,adat){
     if(ertek==true){tomb = myAjax.adatBeolvasasElore(
     "../json/alapnevek.json",
@@ -115,7 +130,7 @@ kezdes(adat);
   );}}
   function gombok(){
 
-    let id=["szemely","eszkoz","gepek","munkaido","edzések","szekrenyek","gyakorlatok","termek","berletek"]
+    let id=["szemely","eszkoz","gepek","munkaido","edzesek","szekrenyek","gyakorlat","termek","berletVasarlas"]
     id.forEach(element => {
 
       $("#"+element+"").on("click",()=>{
@@ -127,26 +142,20 @@ kezdes(adat);
     });
     
   }
+
+
   function adatbeilleszt(adatok, seged) {
     tomb.forEach((element) => {
       if (element == "eszkoz_neve") {
-        console.log(adatok)
-       
-          
-          
-        seged=adatok[element].split(" ");
+       // console.log(adatok)
+         seged=adatok[element].split(" ");
         nev="";
         seged.forEach(neve => {
           nev+=neve;
         });
             //$("#" + segetelem[element] + " ").text(segetelem[element]);
             $('#' + nev+  '').attr({'selected':true});
-            console.log(adatok[element])
-          
-         
-        ;
-        
-       
+            console.log(adatok[element]);     
       } else {
         $("#" + element + " ").val(adatok[element]);
         console.log(adatok[element]);
@@ -158,16 +167,60 @@ kezdes(adat);
     $("#javitas").remove();
     $("#fo").append('<form id="javitas"></form>');
     let seged = [];
-    seged = myAjax.adatBeolvasasElore(
-      "../json/eszkoz_tipuses.json",
-      seged,
-      "eszkoztipus"
-    );
-    let txt = "";
-    tomb.forEach((element) => {
-      txt += '<label for="' + element + '">' + element + ":</label>";
+   
+  
 
-      if (tomb[0] == element) {
+         
+        
+     
+    
+    console.log(seged);
+    let txt = "";
+    let keresetTabla=""
+    let keresetErtek="";
+    let eldont=false;
+    tomb.forEach((element) => {
+console.log(element)
+      switch (element) {
+        case "jogosultsag_id":
+        keresetTabla="jogosultsag";
+          keresetErtek="jogosultsag_id";
+          console.log("jogosultsag_id");
+          eldont=true;
+          break;
+          case "eszkoz_neve":
+            keresetTabla="eszkoz";
+            keresetErtek="eszkoz_neve";
+            eldont=true;
+            console.log("eszkoz_neve");
+          break;
+          case "ugyfel":
+            keresetTabla="szemely";
+            keresetErtek="szemely_id";
+            eldont=true;
+            console.log("szemely_id");
+          break;
+          case "izomcsoport_id":
+            keresetTabla="izomcsoport"
+            keresetErtek="izomcsoport_id";
+            eldont=true;
+            console.log("izomcsoport_id");
+          break;
+      
+        default:
+          break;
+      }
+      if (eldont==true) {
+        seged=myAjax.adatBeolvasasElore(
+          keresetTabla,
+          tomb,
+          keresetTabla
+        );
+        console.log(seged);
+      }
+      txt += '<label for="' + element + '">' + element + ":</label>";
+      if(element!=keresetErtek){
+       if (tomb[0] == element) {
         txt +=
           '<input type="text" id="' +
           element +
@@ -176,10 +229,11 @@ kezdes(adat);
           '" autofocus placeholder="' +
           element +
           '" disabled>';
+        }
       } else if (element === "eszkoz_neve") {
        
 
-        txt += '<select id="eszozneve">';
+        txt += '<select id="eszozneve" name="eszkoz_neve">';
         seged.forEach((element) => {
           seged=element.eszkoz_neve.split(" ");
           nev="";
@@ -206,8 +260,9 @@ kezdes(adat);
           '" required>';
       }
     });
+    
     $("#javitas").append(txt);
-    $("#javitas").append('<input type="button" id="kuld" value="küld">');
+    $("#javitas").append(`<button type="button" id="kuld" >küld</button`);
     return seged;
   }
  
@@ -230,7 +285,7 @@ rend.oldalakSzama(termekek);
   szuloElem.empty();
   termekek.forEach(function (elem,index) {
     if(megjelenit<=index &megjelenit+parseInt($("#listaz").val())>index){
-      console.log(megjelenit+parseInt($("#listaz").val())+"  "+index);
+     
     
     let node = sablonElem.clone().appendTo(szuloElem);
     const obj = new Kartya(node, elem, tomb);
@@ -238,11 +293,14 @@ rend.oldalakSzama(termekek);
   });
   sablonElem.hide(); //sablonelem eltávolítása
 }
+
+
 function Alap(tomb) {
   $(".elemek").empty();
   $(".elemek").append('<div class="elem  id"leftmenuinnerinner" ></div>');
   let txt = "";
   let index = 0;
+  
   tomb.forEach((element) => {
     if (index == 0) {
       txt += "  <h6 >" + element + ":</h4>";

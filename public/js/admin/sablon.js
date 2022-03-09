@@ -16,12 +16,12 @@ class Kartya {
     this.termekTorles.on("click ", ()=> {
       // this.kattintasTrigger("torol");
       this.torol();
-      console.log("torlés");
+      //console.log("torlés");
     });
     this.termekModosit.on("click ", ()=>{
       // this.kattintasTrigger("modosit");
       this.modosit();
-      console.log("modosit");
+      //console.log("modosit");
     });
   }
 
