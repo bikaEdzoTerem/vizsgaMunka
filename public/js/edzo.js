@@ -57,7 +57,7 @@ $(function () {
       return jelenlegiDatumSzerkesztes;
     }
     console.log(jelenlegiDatum(0));
-    let apiVegpont = "http://localhost:4005/szemelyiEdzesek";
+    let apiVegpont = "http://localhost:4005/ugyfel_edzes";
     $(".JobbraNovel").on("click ", () => {
       idopontok.kattintasTrigger("jobbra");
       console.log("jobbra");
@@ -172,10 +172,10 @@ function oszlop(){
         console.log("Nincs megadva dátum");
       }else if(talaltNev===true&&talaltDatum==true){
         console.log("jó");
-        apiVegpont = "http://localhost:4005/szemelyiEdzesek";
+        apiVegpont = "http://localhost:4005/ugyfel_edzes";
         let szoveg = {
-          id: 12,
-          ugyfel_id: parseInt(szemelyKeres[0].szemely_id),
+          id: parseInt(idopontokTomb[idopontokTomb.length-1].id),
+          ugyfel_id:  parseInt(szemelyKeres[0].szemely_id) ,
           ugyfel_nev: szemelyKeres[0].nev,
           datum: datumSeged+" "+oraraSeged,
           ora: oraSeged,
@@ -253,7 +253,7 @@ function oszlop(){
     }
     $(window).on('felold', (event) => {//ha rányomok a feloldra torli az adatot
       myAjax.adattorles(apiVegpont, event.detail.id);
-      apiVegpont = "http://localhost:4005/szemelyiEdzesek";
+      apiVegpont = "http://localhost:4005/ugyfel_edzes";
     });
 
     function oraListaz(){//orakhoz hozzá adja a valószínű lehettőségeket opciok nak
