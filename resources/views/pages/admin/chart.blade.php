@@ -8,3 +8,31 @@
 @section('css')
     <link rel="stylesheet" href="../css/chart.css">
 @endsection
+@section('content')
+    <div id="chart" ></div>
+<script>
+    const chart=new Chartisan({
+        el:'#chart',
+        url:"@chart('diagram_chart') ",
+        hooks:new ChartisanHooks()
+        .datasets([
+            {type:"line"}
+        ])
+        .custom(({data,merge})=>{
+        const dataZoom=[{
+            type:"slider",
+            start:1,
+            end:2
+        },
+        {
+            type:"inside",
+            start:1,
+            end:2
+        }
+        ];
+        return merge(data,{dataZoom});
+        })
+        
+    });
+</script>
+@endsection

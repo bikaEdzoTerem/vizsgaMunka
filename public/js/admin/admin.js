@@ -85,22 +85,25 @@ myAjax.adattorles(`api/${adat}`,id)
             
               default:
                 break;
-            };}
-    myAjax.adatbeolvas(keresetTabla,seged,beviteliMezoGeneralas)
-    
-    $("#kuld").click(()=>{
-      const inputs={};
-    for (element of $("#javitas select,#javitas input")){
-      const name=$(element).attr("name");
-      const value=$(element).val();
-      inputs[name]=value;
-    }
-    console.log($("#javitas input"));
-      myAjax.adatmodosit("api/"+adat,inputs,$("#javitas input").val());
-    });
-    
-    adatbeilleszt(eseny.detail, seged);
-    apiOsszealitas();
+            };
+          });
+
+            myAjax.adatbeolvas("api/"+keresetTabla,seged,(tomb)=>{ 
+              beviteliMezoGeneralas(seged);
+              $("#kuld").click(()=>{
+                const inputs={};
+              for (element of $("#javitas select,#javitas input")){
+                const name=$(element).attr("name");
+                const value=$(element).val();
+                inputs[name]=value;
+              }
+              console.log($("#javitas input"));
+                myAjax.adatmodosit("api/"+adat,inputs,$("#javitas input").val());
+              });
+              
+              adatbeilleszt(eseny.detail, seged);
+              apiOsszealitas();});
+           
   });
 
 
@@ -163,63 +166,26 @@ myAjax.adattorles(`api/${adat}`,id)
     });
   }
 
-  function beviteliMezoGeneralas() {
+
+
+
+
+  function beviteliMezoGeneralas(seged) {
     $("#javitas").remove();
     $("#fo").append('<form id="javitas"></form>');
-    let seged = [];
-   
-  
-
-         
-        
-     
     
+   
     console.log(seged);
     let txt = "";
-    let keresetTabla=""
-    let keresetErtek="";
-    let eldont=false;
+   
     tomb.forEach((element) => {
 console.log(element)
-      switch (element) {
-        case "jogosultsag_id":
-        keresetTabla="jogosultsag";
-          keresetErtek="jogosultsag_id";
-          console.log("jogosultsag_id");
-          eldont=true;
-          break;
-          case "eszkoz_neve":
-            keresetTabla="eszkoz";
-            keresetErtek="eszkoz_neve";
-            eldont=true;
-            console.log("eszkoz_neve");
-          break;
-          case "ugyfel":
-            keresetTabla="szemely";
-            keresetErtek="szemely_id";
-            eldont=true;
-            console.log("szemely_id");
-          break;
-          case "izomcsoport_id":
-            keresetTabla="izomcsoport"
-            keresetErtek="izomcsoport_id";
-            eldont=true;
-            console.log("izomcsoport_id");
-          break;
       
-        default:
-          break;
-      }
-      if (eldont==true) {
-        seged=myAjax.adatBeolvasasElore(
-          keresetTabla,
-          tomb,
-          keresetTabla
-        );
-        console.log(seged);
-      }
+     
+        
+     
       txt += '<label for="' + element + '">' + element + ":</label>";
-      if(element!=keresetErtek){
+      
        if (tomb[0] == element) {
         txt +=
           '<input type="text" id="' +
@@ -230,7 +196,7 @@ console.log(element)
           element +
           '" disabled>';
         }
-      } else if (element === "eszkoz_neve") {
+       else if (element === "eszkoz_neve") {
        
 
         txt += '<select id="eszozneve" name="eszkoz_neve">';
@@ -263,7 +229,8 @@ console.log(element)
     
     $("#javitas").append(txt);
     $("#javitas").append(`<button type="button" id="kuld" >küld</button`);
-    return seged;
+    
+   
   }
  
 });
@@ -303,10 +270,10 @@ function Alap(tomb) {
   
   tomb.forEach((element) => {
     if (index == 0) {
-      txt += "  <h6 >" + element + ":</h4>";
-      txt += "<h5 class=" + element + ">Lorem ipsum dolor</h3>";
+      txt += "  <h4 >" + element + ":</h4>";
+      txt += "<h3 class=" + element + ">Lorem ipsum dolor</h3>";
     } else {
-      txt += "  <h6 >" + element + ":</h4>";
+      txt += "  <h4 >" + element + ":</h4>";
       txt += "  <p class=" + element + "></p>";
     }
     index++;

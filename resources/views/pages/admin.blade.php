@@ -19,6 +19,7 @@
         <button id="gyakorlat">gyakorlatok</button>
         <button id="termek">termek</button>
         <button id="berletek">berletek</button>
+        <button id="diagram">diagram</button>
     
     </aside>
     <article>
