@@ -12,6 +12,7 @@ $(function () {
   var elorefoglalas=100;
   var eltolas=0;
   var hanyOszlopos=3;
+  var apiEdzoIdopontok="/api/edzoIdopont";
 
   function jelenlegiDatum(napvaltoztat) {
       var jelenlegiDatum = new Date();
@@ -57,7 +58,7 @@ $(function () {
       return jelenlegiDatumSzerkesztes;
     }
     console.log(jelenlegiDatum(0));
-    let apiVegpont = "http://localhost:4005/ugyfel_edzes";
+    let apiVegpont = apiEdzoIdopontok;
     $(".JobbraNovel").on("click ", () => {
       idopontok.kattintasTrigger("jobbra");
       console.log("jobbra");
@@ -98,6 +99,7 @@ function oszlop(){
   datumKereses();
 }); */
   function idopontLista(idopontokT,myCallback){
+    console.log(idopontokT);
     idopontok.megjelenit(myCallback,eltolas,(hanyOszlopos));
     const szuloElem = $('.tablaadat');
             const sablonElem = $('footer .idopont');
@@ -105,6 +107,7 @@ function oszlop(){
             szuloElem.empty();
     for (let index = 0; index < hanyOszlopos; index++) {
       idopontokT.forEach(function (elem) {
+        console.log(elem.datum);
               let datum1=elem.datum.slice(0,10);
               let datum2=myCallback(index+eltolas).slice(0,10);
               console.log(myCallback(index+eltolas));
@@ -172,7 +175,7 @@ function oszlop(){
         console.log("Nincs megadva dátum");
       }else if(talaltNev===true&&talaltDatum==true){
         console.log("jó");
-        apiVegpont = "http://localhost:4005/ugyfel_edzes";
+        apiVegpont = apiEdzoIdopontok;
         let szoveg = {
           id: parseInt(idopontokTomb[idopontokTomb.length-1].id),
           ugyfel_id:  parseInt(szemelyKeres[0].szemely_id) ,
@@ -252,8 +255,8 @@ function oszlop(){
       }
     }
     $(window).on('felold', (event) => {//ha rányomok a feloldra torli az adatot
+      apiVegpont = apiEdzoIdopontok;
       myAjax.adattorles(apiVegpont, event.detail.id);
-      apiVegpont = "http://localhost:4005/ugyfel_edzes";
     });
 
     function oraListaz(){//orakhoz hozzá adja a valószínű lehettőségeket opciok nak

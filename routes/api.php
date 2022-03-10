@@ -13,6 +13,7 @@ use App\Http\Controllers\api\OltozofoglalasokController;
 use App\Http\Controllers\api\SzekrenyekController;
 use App\Http\Controllers\api\SzemelyController;
 use App\Http\Controllers\api\TermekController;
+use App\Http\Controllers\api\EdzoIdopontokController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,4 +41,5 @@ Route::apiResource('oltozofoglalas', OltozofoglalasokController::class);
 Route::apiResource('szekreny', SzekrenyekController::class);
 Route::apiResource('terem', TermekController::class);
 Route::get("proba",[BerletVasarlasController::class,"getAr"]);
+Route::apiResource('edzoIdopont', EdzoIdopontokController::class);
 //Route::put()
