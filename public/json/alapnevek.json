@@ -8,7 +8,7 @@
   "berletTipus":["berlet_tipus_id", "megnevezes", "idotartam_nap", "ar"],
   "berletTipusKicsik":["berlet_tipus_id", "megnevezes", "idotartam_nap", "ar"],
   "edzesek":["edzo", "ugyfel", "datum", "ora"],
-  "edzesesKicsik":["edzo", "ugyfel", "datum", "ora"],
+  "edzesekKicsik":["edzo", "ugyfel", "datum", "ora"],
   "gyakorlat":["eszkoz_tipus_szamlalo", "izomcsoport_id", "megnevezes", "video","leiras","szint"],
   "gyakorlatKicsik":["eszkoz_tipus_szamlalo","izomcsoport_id", "megnevezes", "szint"],
   "izomcsoport":["izomcsoport_id", "megnevezes", "abra"],

@@ -8,7 +8,8 @@ class AdminRend{
     
 
     megjelenit=0;
-        rendezes= "?q=" + $("#keresSzoveg").val();
+       // keres= "?q=" + $("#keresSzoveg").val();
+        queryParams.set("q",$("#keresSzoveg").val());
        
         
     
@@ -24,7 +25,9 @@ class AdminRend{
           let darabolas = $("#rendezes").val();
           let vegtemek = darabolas.split("!");
           console.log(vegtemek);
-          rendezes = "?_sort=" + vegtemek[0] + "&_order=" + vegtemek[1] + "";
+         // rendezes = "?_sort=" + vegtemek[0] + "&_order=" + vegtemek[1] + "";
+         queryParams.set("_sort",vegtemek[0])
+         queryParams.set("_order",vegtemek[1])
           console.log("?_sort=" + vegtemek[0] + "&_order=" + vegtemek[1] + "");
           apiOsszealitas();
            

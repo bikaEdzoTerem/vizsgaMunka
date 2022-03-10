@@ -1,6 +1,7 @@
 //const { map } = require("lodash");
-
-let rendezes;
+const queryParams=new URLSearchParams();
+let keres="";
+let rendezes="";
 let superapivegponto = "api/proba";
 let tomb = [];
 let megjelenit = 0;
@@ -63,7 +64,7 @@ $(function () {
                 break;
             case "edzesek":
                 keresetTabla = "szemely";
-                keresetErtek = "szemely_id";
+                keresetErtek = "";
                 eldont = true;
                 console.log("szemely_id");
                 break;
@@ -80,7 +81,7 @@ $(function () {
                 break;
         }
 
-        myAjax.adatbeolvas("api/" + keresetTabla, seged, (tomb) => {
+        myAjax.adatbeolvas("api/" + keresetTabla, seged, () => {
             beviteliMezoGeneralas(seged, keresetErtek, eldont);
             $("#kuld").click(() => {
                 const inputs = {};
@@ -110,6 +111,7 @@ $(function () {
         );
         myAjax.adatbeolvas(superapivegponto, mindenadat, rend.oldalakSzama);
         tomb = myAjax.adatBeolvasasElore("../json/alapnevek.json", tomb, adat);
+        
         kicsiE(false, " ");
         rendezes = "";
         rend.rendezoMezoLetreHozas(tomb);
@@ -145,6 +147,7 @@ $(function () {
                 megjelenit=0;
                 console.log(element);
                 superapivegponto = "api/" + element;
+                console.log({superapivegponto});
                 kezdes(adat);
             });
         });
@@ -246,7 +249,7 @@ $(function () {
 });
 
 function apiOsszealitas() {
-    vegApi = superapivegponto + rendezes;
+    vegApi = superapivegponto +"?"+queryParams.toString();
     console.log(vegApi);
     myAjax.adatbeolvas(vegApi, termek, termekLista, tomb);
 }
