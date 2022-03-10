@@ -15,10 +15,10 @@
         <button id="gepek">eszkoz tipus</button>
         <button id="munkaido">munkaido</button>
         <button id="edzesek">edzések</button>
-        <button id="szekrenyek">szekrenyek</button>
+        <button id="szekreny">szekrenyek</button>
         <button id="gyakorlat">gyakorlatok</button>
-        <button id="termek">termek</button>
-        <button id="berletek">berletek</button>
+        <button id="terem">termek</button>
+        <button id="berletTipus">berletek</button>
         <button id="diagram">diagram</button>
     
     </aside>

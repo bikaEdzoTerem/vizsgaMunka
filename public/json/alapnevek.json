@@ -5,8 +5,8 @@
   "eszkozKicsik":["eszkoz_id","eszkoz_neve","terem_id"],
   "gepek":["eszkoz_tipus_szamlalo","eszkoz_neve","suly","kep","leiras"],
   "gepekKicsik":["eszkoz_tipus_szamlalo","eszkoz_neve","suly","leiras"],
-  "berletVasarlas":["berlet_tipus_id", "ugyfel", "datum_tol", "datum_ig"],
-  "berletVasarlasKicsik":["berlet_tipus_id", "ugyfel", "datum_tol", "datum_ig"],
+  "berletTipus":["berlet_tipus_id", "megnevezes", "idotartam_nap", "ar"],
+  "berletTipusKicsik":["berlet_tipus_id", "megnevezes", "idotartam_nap", "ar"],
   "edzesek":["edzo", "ugyfel", "datum", "ora"],
   "edzesesKicsik":["edzo", "ugyfel", "datum", "ora"],
   "gyakorlat":["eszkoz_tipus_szamlalo", "izomcsoport_id", "megnevezes", "video","leiras","szint"],
@@ -14,6 +14,13 @@
   "izomcsoport":["izomcsoport_id", "megnevezes", "abra"],
   "izomcsoportKicsik":["izomcsoport_id", "megnevezes", "abra"],
   "jogosultsag":["jogosultsag_id", "nev"],
-  "jogosultsagKicsik":["jogosultsag_id", "nev"]
+  "jogosultsagKicsik":["jogosultsag_id", "nev"],
+  "munkaido":["dolgozo", "mettol", "meddig"],
+  "munkaidoKicsik":["dolgozo", "mettol", "meddig"],
+  "szekreny":["szekreny_id", "ures_e", "tipusa"],
+  "szekrenyKicsik":["szekreny_id", "ures_e", "tipusa"],
+  "terem":["terem_id","terem_neve","ferfi_ferohely","noi_ferohely","nyitas","zaras"],
+  "teremKicsik":["terem_id","terem_neve","ferfi_ferohely","noi_ferohely","nyitas","zaras"]
+ 
 
 }
