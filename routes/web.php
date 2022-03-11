@@ -28,7 +28,7 @@ Route::get('/berletVasarlas', function () { return view('pages.berletVasarlas');
 Route::get('/admin', function () { return view('pages.admin'); });
 Route::get("eszkozDB",[EszkozDbController::class,"show"]);
 Route::get('/chart',function(){return view('pages.admin.chart');});
-
+Route::get('/edzo', function () { return view('pages.edzo'); });
 
 /*Login, regist*/
 
