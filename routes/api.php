@@ -46,4 +46,8 @@ Route::apiResource('izomcsoport', IzomcsoportController::class);
 Route::apiResource('jogosultsag', IzomcsoportController::class);
 Route::get("proba",[BerletTipusController::class,"getAr"]);
 Route::apiResource('edzoIdopont', EdzoIdopontokController::class);
+
+Route::apiResource('ugyfelEdzesek', UgyfelEdzesController::class);//majd torolheto
+Route::apiResource('ugyfelEdzesek2', ugyfelEdzesSzemellyel::class);
+
 //Route::put()
