@@ -21,7 +21,7 @@ class MyAjax {
   }
   
   adatbeolvas(faljnev, tomb, myCallback, seged) {
-   tomb.splice(0, tomb.length);
+   tomb=[];
     $.ajax({
       url: faljnev,
       type: "GET",

@@ -2,7 +2,9 @@
 @section('javascript')
 <script src="../js/admin/admin.js"></script>
 <script src="../js/admin/sablon.js"></script>
-    <script src="../js/rendezeés.js"></script>
+<script src="../js/admin/megjelenites.js"></script>
+<script src="../js/rendezeés.js"></script>
+
 @endsection
 @section('content')
 <main>
@@ -23,26 +25,7 @@
     
     </aside>
     <article>
-        <section id="RendezesekHelye">
-            <select id="rendezes">
-                <option id="NameListAsc" value="NameListAsc">Név szerint csökkenő</option>
-                <option id="NameListDesc" value="NameListDesc">Név szerint emelkedő</option>
-                <option id="CostListDesc" value="CostListDesc">Ár szerint csökkenő</option>
-                <option id="CostListAsc" value="CostListAsc">Ár szerint emelkedő</option>
-            </select>
-            <select id="listaz">
-                <option id="25" value="5" >5</option>
-                <option id="50" value="10">10</option>
-                <option id="100" value="15">15</option>
-                
-            </select>
-        <form>
-            
-            <input type="text" id="keresSzoveg">
-            
-            </form>
-            
-        </section>
+        @include('includes.rendezés')
         
         <section id="fo">
             
