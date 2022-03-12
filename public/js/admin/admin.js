@@ -82,8 +82,8 @@ $(function () {
                 break;
         }
 
-        myAjax.adatbeolvas("api/" + keresetTabla, seged, (Oszlopnev) => {
-            adatMeg.beviteliMezoGeneralas(seged, keresetErtek, eldont);
+        myAjax.adatbeolvas("api/" + keresetTabla, seged, (tomb) => {
+            adatMeg.beviteliMezoGeneralas(tomb, keresetErtek, eldont,Oszlopnev,0);
             $("#kuld").click(() => {
                 const inputs = {};
                 for (element of $("#javitas select,#javitas input")) {

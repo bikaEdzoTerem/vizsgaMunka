@@ -4,7 +4,7 @@ namespace Database\Seeders;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Seeder;
 
-class JogusoltsagSeeder extends Seeder
+class JogosultsagSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -13,7 +13,7 @@ class JogusoltsagSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('jogosultasgs')->insert([[
+        DB::table('jogosultsags')->insert([[
             'nev' => 'ugyfel',
            
         ],[

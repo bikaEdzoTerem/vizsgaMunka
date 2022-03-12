@@ -14,7 +14,7 @@ adatbeilleszt(adatok, keresetErtek, eldont,oszlopNevek) {
             if (eldont == true) {
                 // console.log(adatok)
                 console.log(adatok[element]);
-                nev = "";
+                let nev = "";
                 try {
                   let nevek = element[keresetErtek].split(" ");
                   
@@ -41,19 +41,20 @@ adatbeilleszt(adatok, keresetErtek, eldont,oszlopNevek) {
 }
 
 
- beviteliMezoGeneralas(seged, keresetErtek, eldont,oszlopNevek) {
+ beviteliMezoGeneralas(seged, keresetErtek, eldont,oszlopNevek,nemValtoztathato=false) {
     $("#javitas").remove();
     $("#fo").append('<form id="javitas"></form>');
 
     console.log(seged);
     let txt = "";
-
-    oszlopNevek.forEach((element) => {
-        console.log(element);
+let id=oszlopNevek[0];
+//console.log(id.split("_"));
+    oszlopNevek.forEach((element,index) => {
+        
 
         txt += '<label for="' + element + '">' + element + ":</label>";
 
-        if (tomb[0] == element) {
+        if ( index=== nemValtoztathato) {
             txt +=
                 '<input type="text" id="' +
                 element +
@@ -64,9 +65,9 @@ adatbeilleszt(adatok, keresetErtek, eldont,oszlopNevek) {
                 '" disabled>';
         } else if (eldont == true) {
             eldont = false;
-            txt += '<select id="eszozneve" name="' + keresetErtek + '">';
+            txt += '<select id="'+keresetErtek+'" name="' + keresetErtek + '">';
             seged.forEach((element) => {
-              nev = "";
+              let nev = "";
               try {
                 let nevek = element[keresetErtek].split(" ");
                 
