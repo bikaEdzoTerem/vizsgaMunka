@@ -148,6 +148,7 @@ $(function () {
                 queryParams.delete("_sort");
                 queryParams.delete("_order");
                 queryParams.delete("q");
+                $("#keresSzoveg").val("");
                 console.log(element);
                 superapivegponto = "api/" + element;
                 console.log({superapivegponto});

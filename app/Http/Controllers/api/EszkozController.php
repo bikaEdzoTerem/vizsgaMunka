@@ -3,22 +3,40 @@
 namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Models\EszkozView;
 use App\Models\Eszkoz;
 use App\Models\Eszkoz_tipus;
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Http\Request;
 
 class EszkozController extends Controller
 {
-    /*public function index(){
-        return response()->json(EszkozView::all());
-    }*/
+   
 
-    public function index(){
-        $result=EszkozView::all();
-        return $result;
-        //return response()->json(EszkozView::all());
-     }
+    public function index(Request $request)
+    { $sort=$request->query ('_sort');
+        $order=$request->query ('_order');
+        $q=$request->query('q');
+        $eszkozok=EszkozView::selectRaw("*");
+        if($sort&&$order){
+            $eszkozok->orderBy($sort,$order);
+        }
+        if($q){
+            
+            foreach ( Schema::getColumnListing("eszkozs") as $column) {
+               // dd(Schema::getColumnType("szemelies",$column));
+                $eszkozok->orWhere($column,'like','%'.$q.'%');
+                $eszkozok->orWhere($column,$q);
+            };
+        }
+        //$szemelyek= ($sort&&$order) ? Szemely::orderBy($sort,$order)->get(): Szemely::all();
+      
+       
+        //dd($szemelyek->toSql());
+
+        return response()->json($eszkozok->get());
+    }
+    
      public function update(Request $request,string $eszkozId)
     {
   $eszkozNeve=$request->input("eszkoz_neve");

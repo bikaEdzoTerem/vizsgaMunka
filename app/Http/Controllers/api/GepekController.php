@@ -3,18 +3,36 @@
 namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
-use App\Models\Eszkoz;
 use Illuminate\Http\Request;
 use App\Models\Eszkoz_tipus;
-use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 
 class GepekController extends Controller
 {
     /*Minden vissza ad json-ba*/
-    public function index()
-    {
-        return response()->json(Eszkoz_tipus::all());
+    public function index(Request $request)
+    { $sort=$request->query ('_sort');
+        $order=$request->query ('_order');
+        $q=$request->query('q');
+        $eszkoztipusok=Eszkoz_tipus::selectRaw("*");
+        if($sort&&$order){
+            $eszkoztipusok->orderBy($sort,$order);
+        }
+        if($q){
+            
+            foreach ( Schema::getColumnListing("eszkoz_tipuses") as $column) {
+               // dd(Schema::getColumnType("szemelies",$column));
+                $eszkoztipusok->orWhere($column,'like','%'.$q.'%');
+                $eszkoztipusok->orWhere($column,$q);
+            };
+        }
+        //$szemelyek= ($sort&&$order) ? Szemely::orderBy($sort,$order)->get(): Szemely::all();
+      
+       
+        //dd($szemelyek->toSql());
+
+        return response()->json($eszkoztipusok->get());
     }
 
     /*Konkrét keresés*/

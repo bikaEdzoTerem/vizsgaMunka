@@ -3,25 +3,25 @@
 namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
-use App\Models\Gyakorlat;
+use App\Models\Arvaltozas;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Schema;
-class gyakorlatokController extends Controller
+class arvaltozasController extends Controller
 {
     public function index(Request $request)
     { $sort=$request->query ('_sort');
         $order=$request->query ('_order');
         $q=$request->query('q');
-        $gyakorlatok=Gyakorlat::selectRaw("*");
+        $arvaltozasok=Arvaltozas::selectRaw("*");
         if($sort&&$order){
-            $gyakorlatok->orderBy($sort,$order);
+            $arvaltozasok->orderBy($sort,$order);
         }
         if($q){
             
-            foreach ( Schema::getColumnListing("gyakorlats") as $column) {
+            foreach ( Schema::getColumnListing("arvaltozas") as $column) {
                // dd(Schema::getColumnType("szemelies",$column));
-                $gyakorlatok->orWhere($column,'like','%'.$q.'%');
-                $gyakorlatok->orWhere($column,$q);
+                $arvaltozasok->orWhere($column,'like','%'.$q.'%');
+                $arvaltozasok->orWhere($column,$q);
             };
         }
         //$szemelyek= ($sort&&$order) ? Szemely::orderBy($sort,$order)->get(): Szemely::all();
@@ -29,6 +29,6 @@ class gyakorlatokController extends Controller
        
         //dd($szemelyek->toSql());
 
-        return response()->json($gyakorlatok->get());
+        return response()->json($arvaltozasok->get());
     }
 }
