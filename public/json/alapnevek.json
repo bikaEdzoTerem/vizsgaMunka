@@ -1,6 +1,6 @@
 {
-  "szemely": ["szemely_id","jogosultsag_id","nev","email_cim","szul_datum","Neme","igazolvany_szam","igazolvany_tipusa"],
-  "szemelyKicsik": ["szemely_id","jogosultsag_id","nev","email_cim","szul_datum","Neme","igazolvany_szam","igazolvany_tipusa"],
+  "szemely": ["szemely_id","jogosultsag_id","nev","email_cim","szul_datum","neme","igazolvany_szam","igazolvany_tipusa"],
+  "szemelyKicsik": ["szemely_id","jogosultsag_id","nev","email_cim","szul_datum","neme","igazolvany_szam","igazolvany_tipusa"],
   "eszkoz":["eszkoz_id","eszkoz_tipus_szamlalo","eszkoz_neve","kep","leiras","terem_id"],
   "eszkozKicsik":["eszkoz_id","eszkoz_neve","terem_id"],
   "gepek":["eszkoz_tipus_szamlalo","eszkoz_neve","suly","kep","leiras"],
@@ -15,6 +15,8 @@
   "izomcsoportKicsik":["izomcsoport_id", "megnevezes", "abra"],
   "jogosultsag":["jogosultsag_id", "nev"],
   "jogosultsagKicsik":["jogosultsag_id", "nev"],
+  "oltozofoglalas":["oltozofog_id","szekreny_id","ugyfel","datum"],
+  "oltozofoglalasKicsik":["oltozofog_id","szekreny_id","ugyfel","datum"],
   "munkaido":["dolgozo", "mettol", "meddig"],
   "munkaidoKicsik":["dolgozo", "mettol", "meddig"],
   "szekreny":["szekreny_id", "ures_e", "tipusa"],

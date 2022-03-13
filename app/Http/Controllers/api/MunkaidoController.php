@@ -31,4 +31,25 @@ class MunkaidoController extends Controller
 
         return response()->json($munkaidok->get());
     }
+    public function update(Request $request,string $eszkozId)
+    {
+  $eszkozNeve=$request->input("eszkoz_neve");
+  $teremId=$request->input("terem_id");
+ $eszkozTipusSzamlalo=Munkaido::firstWhere("eszkoz_neve",$eszkozNeve)->eszkoz_tipus_szamlalo;
+ 
+        $eszkoz=Munkaido::find($eszkozId);
+        $eszkoz->terem_id=$teremId;
+        $eszkoz->eszkoz_tipus_szamlalo=$eszkozTipusSzamlalo;
+        $eszkoz->save();
+      
+
+        return response()->json(true);
+        
+    }
+    public function destroy(string $eszkozId){
+        $eszkoz=Munkaido::find($eszkozId);
+       
+        $eszkoz->delete();
+        return response()->json(true);
+    }
 }

@@ -30,5 +30,32 @@ class gyakorlatokController extends Controller
         //dd($szemelyek->toSql());
 
         return response()->json($gyakorlatok->get());
+    }  public function update(Request $request,string $eszkozId)
+    {
+  $izomcsopotId=$request->input("izomcsopor_id");
+  $megnevezes=$request->input("megnevezes");
+  $video=$request->input("video");
+  $leiras=$request->input("leiras");
+  $szint=$request->input("szint");
+
+ 
+        $eszkoz=Gyakorlat::find($eszkozId);
+        $eszkoz->izomcsopor_id=$izomcsopotId;
+        $eszkoz->megnevezes=$megnevezes;
+        $eszkoz->video=$video;
+        $eszkoz->leiras=$leiras;
+        $eszkoz->szint=$szint;
+    
+        $eszkoz->save();
+      
+
+        return response()->json(true);
+        
+    }
+    public function destroy(string $eszkozId){
+        $eszkoz=Gyakorlat::find($eszkozId);
+       
+        $eszkoz->delete();
+        return response()->json(true);
     }
 }

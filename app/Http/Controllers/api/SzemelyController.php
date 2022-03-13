@@ -3,8 +3,13 @@
 namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Berlet;
+use App\Models\Edzotorles;
+use App\Models\Jogosultsag;
+use App\Models\Munkaido;
 use Illuminate\Http\Request;
 use App\Models\Szemely;
+use App\Models\Ugyfel_edzes;
 use Illuminate\Support\Facades\Schema;
 
 class SzemelyController extends Controller
@@ -33,6 +38,40 @@ class SzemelyController extends Controller
 
         return response()->json($szemelyek->get());
     }
+    public function update(Request $request,string $szemelyId)
+    {
+        $emailCim=$request->input("email_cim");
+        $nev=$request->input("nev");
+        $szulDatum=$request->input("szul_datum");
+        $neme=$request->input("neme");
+        $igazolvanySzam=$request->input("igazolvany_szam");
+        $igazolvanyTipusa=$request->input("igazolvany_tipusa");
+       // $telSzam=$request->input("tel_szam");
+       // $kep=$request->input("kep");
+        $jogosultsagId=$request->input("jogosultsag_id");
+//$eszkozTipusSzamlalo=Jogosultsag::firstWhere("jogosultsag_id",$jogosultsagId)->jogosultsag_id;
+ 
+        $szemely=Szemely::find($szemelyId);
+        $szemely->jogosultsag_id=$jogosultsagId;
+        $szemely->email_cim=$emailCim;
+        $szemely->nev=$nev;
+        $szemely->szul_datum=$szulDatum;
+        $szemely->neme=$neme;
+        $szemely->igazolvany_szam=$igazolvanySzam;
+        $szemely->igazolvany_tipusa=$igazolvanyTipusa;
+       // $szemely->tel_szam=$telSzam;
+        //$szemely->kep=$kep;
+        $szemely->save();
+      
 
-
+        return response()->json(true);
+        
+    }
+    public function destroy(string $szemelyId){
+        $szemely=Szemely::find($szemelyId);
+        $szemely->delete();
+       
+        
+        return response()->json(true);
+    }
 }

@@ -31,6 +31,31 @@ class BerletekController extends Controller
 
         return response()->json($berletek->get());
     }
+    public function update(Request $request,string $berletId)
+    {
+  $Berlet_tipus_id=$request->input("Berlet_tipus_id");
+  $ugyfel=$request->input("ugyfel");
+  $datum_tol=$request->input("datum_tol");
+  $datum_ig=$request->input("datum_ig");
+ 
+        $eszkoz=Berlet::find($berletId);
+        $Berlet_tipus_id->eszkoz_neve=$Berlet_tipus_id;
+        $eszkoz->ugyfel=$ugyfel;
+        $eszkoz->datum_tol=$datum_tol;
+        $eszkoz->datum_ig=$datum_ig;
+       
+        $eszkoz->save();
+      
+
+        return response()->json(true);
+        
+    }
+    public function destroy(string $eszkozId){
+        $eszkoz=berlet::find($eszkozId);
+       
+        $eszkoz->delete();
+        return response()->json(true);
+    }
        
     
    

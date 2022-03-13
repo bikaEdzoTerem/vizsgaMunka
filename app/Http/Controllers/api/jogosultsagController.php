@@ -32,4 +32,5 @@ class jogosultsagController extends Controller
 
         return response()->json($jogosultsagok->get());
     }
+    
 }

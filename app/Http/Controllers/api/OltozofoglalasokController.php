@@ -31,4 +31,29 @@ class OltozofoglalasokController extends Controller
 
         return response()->json($oltozofoglalasok->get());
     }
+
+
+public function update(Request $request,string $oltozofoglalas)
+{
+$szekrenyId=$request->input("szekreny_id");
+$ugyfel=$request->input("ugyfel");
+$datum=$request->input("datum");
+
+
+    $eszkoz=Oltozofoglalas::find($oltozofoglalas);
+    $eszkoz->szekreny_id=$szekrenyId;
+    $eszkoz->ugyfel=$ugyfel;
+    $eszkoz->datum=$datum;
+    $eszkoz->save();
+  
+
+    return response()->json(true);
+    
+}
+public function destroy(string $eszkozId){
+    $eszkoz=Oltozofoglalas::find($eszkozId);
+   
+    $eszkoz->delete();
+    return response()->json(true);
+}
 }

@@ -18,6 +18,7 @@
         <button id="munkaido">munkaido</button>
         <button id="edzesek">edzések</button>
         <button id="szekreny">szekrenyek</button>
+        <button id="oltozofoglalas">oltozofoglalas</button>
         <button id="gyakorlat">gyakorlatok</button>
         <button id="terem">termek</button>
         <button id="berletTipus">berletek</button>
@@ -26,6 +27,7 @@
     </aside>
     <article>
         @include('includes.rendezés')
+        <button id="ujFelvetel">uj</button>
         
         <section id="fo">
             

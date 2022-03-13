@@ -8,7 +8,7 @@ apiOsszealitas(adatok,oszlopNevek) {
     myAjax.adatbeolvas(vegApi, adatok, (adatok,oszlopNevek)=>{$(".elemek").empty();Alap(oszlopNevek);rend.elemMegjelenit(adatok,oszlopNevek)}, oszlopNevek);
 }
 adatbeilleszt(adatok, keresetErtek, eldont,oszlopNevek) {
-    console.log()
+    console.log(adatok)
     oszlopNevek.forEach((element) => {
         if (element == keresetErtek) {
             if (eldont == true) {
@@ -47,8 +47,6 @@ adatbeilleszt(adatok, keresetErtek, eldont,oszlopNevek) {
 
     console.log(seged);
     let txt = "";
-let id=oszlopNevek[0];
-//console.log(id.split("_"));
     oszlopNevek.forEach((element,index) => {
         
 
