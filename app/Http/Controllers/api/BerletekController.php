@@ -30,30 +30,46 @@ class BerletekController extends Controller
         //dd($szemelyek->toSql());
 
         return response()->json($berletek->get());
-    }
-    public function update(Request $request,string $berletId)
+    }public function store(Request $request){
+        $Berlet_tipus_id=$request->input("Berlet_tipus_id");
+        $ugyfel=$request->input("ugyfel");
+        $datum_tol=$request->input("datum_tol");
+        $datum_ig=$request->input("datum_ig");
+       
+              $Berlet_tipus=new Berlet;
+              $Berlet_tipus->Berlet_tipus_id=$Berlet_tipus_id;
+              $Berlet_tipus->ugyfel=$ugyfel;
+              $Berlet_tipus->datum_tol=$datum_tol;
+              $Berlet_tipus->datum_ig=$datum_ig;
+             
+              $Berlet_tipus->save();
+            
+      
+              return response()->json(true);
+    }      
+    public function update(Request $request,string $Berlet_tipusId)
     {
   $Berlet_tipus_id=$request->input("Berlet_tipus_id");
   $ugyfel=$request->input("ugyfel");
   $datum_tol=$request->input("datum_tol");
   $datum_ig=$request->input("datum_ig");
  
-        $eszkoz=Berlet::find($berletId);
-        $Berlet_tipus_id->eszkoz_neve=$Berlet_tipus_id;
-        $eszkoz->ugyfel=$ugyfel;
-        $eszkoz->datum_tol=$datum_tol;
-        $eszkoz->datum_ig=$datum_ig;
+        $Berlet_tipus=Berlet::find($Berlet_tipusId);
+        $Berlet_tipus->eszkoz_neve=$Berlet_tipus_id;
+        $Berlet_tipus->ugyfel=$ugyfel;
+        $Berlet_tipus->datum_tol=$datum_tol;
+        $Berlet_tipus->datum_ig=$datum_ig;
        
-        $eszkoz->save();
+        $Berlet_tipus->save();
       
 
         return response()->json(true);
         
     }
-    public function destroy(string $eszkozId){
-        $eszkoz=berlet::find($eszkozId);
+    public function destroy(string $Berlet_tipusId){
+        $Berlet_tipus=berlet::find($Berlet_tipusId);
        
-        $eszkoz->delete();
+        $Berlet_tipus->delete();
         return response()->json(true);
     }
        

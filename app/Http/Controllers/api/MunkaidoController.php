@@ -30,26 +30,41 @@ class MunkaidoController extends Controller
         //dd($szemelyek->toSql());
 
         return response()->json($munkaidok->get());
-    }
-    public function update(Request $request,string $eszkozId)
-    {
-  $eszkozNeve=$request->input("eszkoz_neve");
-  $teremId=$request->input("terem_id");
- $eszkozTipusSzamlalo=Munkaido::firstWhere("eszkoz_neve",$eszkozNeve)->eszkoz_tipus_szamlalo;
+    }public function store(Request $request){
+        $szemely_id=$request->input("szemely_id");
+  $mettol=$request->input("mettol");
+  $meddig=$request->input("meddig");
+
  
-        $eszkoz=Munkaido::find($eszkozId);
-        $eszkoz->terem_id=$teremId;
-        $eszkoz->eszkoz_tipus_szamlalo=$eszkozTipusSzamlalo;
-        $eszkoz->save();
+        $munkaido=new Munkaido;
+        $munkaido->dolgozo=$szemely_id;
+        $munkaido->mettol=$mettol;
+        $munkaido->meddig=$meddig;
+        $munkaido->save();
       
 
+        return response()->json(true);}
+    public function update(Request $request,string $munkaidoId)
+    {
+        $szemely_id=$request->input("szemely_id");
+        $mettol=$request->input("mettol");
+        $meddig=$request->input("meddig");
+      
+       
+              $munkaido=Munkaido::find($munkaidoId);
+              $munkaido->dolgozo=$szemely_id;
+              $munkaido->mettol=$mettol;
+              $munkaido->meddig=$meddig;
+              $munkaido->save();
+            
+  
         return response()->json(true);
         
     }
-    public function destroy(string $eszkozId){
-        $eszkoz=Munkaido::find($eszkozId);
+    public function destroy(string $munkaidoId){
+        $munkaido=Munkaido::find($munkaidoId);
        
-        $eszkoz->delete();
+        $munkaido->delete();
         return response()->json(true);
     }
 }

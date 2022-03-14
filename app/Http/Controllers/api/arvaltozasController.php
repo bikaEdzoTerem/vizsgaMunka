@@ -30,8 +30,24 @@ class arvaltozasController extends Controller
         //dd($szemelyek->toSql());
 
         return response()->json($arvaltozasok->get());
-    }
-    public function update(Request $request,string $berletId)
+    }public function store(Request $request){  $Berlet_tipus_id=$request->input("Berlet_tipus_id");
+        $regi_ar=$request->input("regi_ar");
+        $uj_ar=$request->input("uj_ar");
+        $mettol=$request->input("mettol");
+        $meddig=$request->input("meddig");
+       
+              $arvaltozas=new Arvaltozas;
+              $arvaltozas->eszkoz_neve=$Berlet_tipus_id;
+              $arvaltozas->regi_ar=$regi_ar;
+              $arvaltozas->uj_ar=$uj_ar;
+              $arvaltozas->mettol=$mettol;
+              $arvaltozas->meddig=$meddig;
+             
+              $arvaltozas->save();
+            
+      
+              return response()->json(true);}
+    public function update(Request $request,string $arvaltozasId)
     {
   $Berlet_tipus_id=$request->input("Berlet_tipus_id");
   $regi_ar=$request->input("regi_ar");
@@ -39,23 +55,23 @@ class arvaltozasController extends Controller
   $mettol=$request->input("mettol");
   $meddig=$request->input("meddig");
  
-        $eszkoz=Arvaltozas::find($berletId);
-        $Berlet_tipus_id->eszkoz_neve=$Berlet_tipus_id;
-        $eszkoz->regi_ar=$regi_ar;
-        $eszkoz->uj_ar=$uj_ar;
-        $eszkoz->mettol=$mettol;
-        $eszkoz->meddig=$meddig;
+        $arvaltozas=Arvaltozas::find($arvaltozasId);
+        $arvaltozas->Berlet_tipus_id=$Berlet_tipus_id;
+        $arvaltozas->regi_ar=$regi_ar;
+        $arvaltozas->uj_ar=$uj_ar;
+        $arvaltozas->mettol=$mettol;
+        $arvaltozas->meddig=$meddig;
        
-        $eszkoz->save();
+        $arvaltozas->save();
       
 
         return response()->json(true);
         
     }
-    public function destroy(string $eszkozId){
-        $eszkoz=Arvaltozas::find($eszkozId);
+    public function destroy(string $arvaltozasId){
+        $arvaltozas=Arvaltozas::find($arvaltozasId);
        
-        $eszkoz->delete();
+        $arvaltozas->delete();
         return response()->json(true);
     }
 }

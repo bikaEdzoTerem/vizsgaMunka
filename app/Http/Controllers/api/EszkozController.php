@@ -36,7 +36,17 @@ class EszkozController extends Controller
 
         return response()->json($eszkozok->get());
     }
-    
+    public function store(Request $request){ $eszkozNeve=$request->input("eszkoz_neve");
+        $teremId=$request->input("terem_id");
+       $eszkozTipusSzamlalo=Eszkoz_tipus::firstWhere("eszkoz_neve",$eszkozNeve)->eszkoz_tipus_szamlalo;
+       
+              $eszkoz=new Eszkoz;
+              $eszkoz->terem_id=$teremId;
+              $eszkoz->eszkoz_tipus_szamlalo=$eszkozTipusSzamlalo;
+              $eszkoz->save();
+            
+      
+              return response()->json(true);}
      public function update(Request $request,string $eszkozId)
     {
   $eszkozNeve=$request->input("eszkoz_neve");

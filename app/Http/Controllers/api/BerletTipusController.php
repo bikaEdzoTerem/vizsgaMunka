@@ -31,7 +31,20 @@ class BerletTipusController extends Controller
         //dd($szemelyek->toSql());
 
         return response()->json($berletTipus->get());
-    }
+    }public function store(Request $request){
+        $megnevezes=$request->input("megnevezes");
+  $idotartam=$request->input("idotartam_nap");
+  $ar=$request->input("ar");
+ 
+        $berletTipus=new Berlet_tipus;
+        $berletTipus->megnevezes=$megnevezes;
+        $berletTipus->idotartam_nap=$idotartam;
+        $berletTipus->ar=$ar;
+       
+        $berletTipus->save();
+      
+
+        return response()->json(true);}
     public function update(Request $request,string $berletTipusId)
     {
   $megnevezes=$request->input("megnevezes");

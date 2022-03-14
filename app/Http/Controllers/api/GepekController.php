@@ -34,29 +34,41 @@ class GepekController extends Controller
 
         return response()->json($eszkoztipusok->get());
     }
-
-    
-    public function update(Request $request,string $eszkozId)
+    public function store(Request $request){
+        $eszkozNeve=$request->input("eszkoz_neve");
+        $suly=$request->input("suly");
+        $leiras=$request->input("leiras");
+       
+              $eszkoz=new Eszkoz_tipus;
+              $eszkoz->eszkoz_neve=$eszkozNeve;
+              $eszkoz->suly=$suly;
+              $eszkoz->leiras=$leiras;
+             
+              $eszkoz->save();
+            
+      
+              return response()->json(true);}
+    public function update(Request $request,string $eszkozTipusId)
     {
   $eszkozNeve=$request->input("eszkoz_neve");
   $suly=$request->input("suly");
   $leiras=$request->input("leiras");
  
-        $eszkoz=Eszkoz_tipus::find($eszkozId);
-        $eszkoz->eszkoz_neve=$eszkozNeve;
-        $eszkoz->suly=$suly;
-        $eszkoz->leiras=$leiras;
+        $eszkozTipus=Eszkoz_tipus::find($eszkozTipusId);
+        $eszkozTipus->eszkoz_neve=$eszkozNeve;
+        $eszkozTipus->suly=$suly;
+        $eszkozTipus->leiras=$leiras;
        
-        $eszkoz->save();
+        $eszkozTipus->save();
       
 
         return response()->json(true);
         
     }
-    public function destroy(string $eszkozId){
-        $eszkoz=Eszkoz_tipus::find($eszkozId);
+    public function destroy(string $eszkozTipusId){
+        $eszkozTipus=Eszkoz_tipus::find($eszkozTipusId);
        
-        $eszkoz->delete();
+        $eszkozTipus->delete();
         return response()->json(true);
     }
    

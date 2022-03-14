@@ -32,28 +32,41 @@ class OltozofoglalasokController extends Controller
         return response()->json($oltozofoglalasok->get());
     }
 
-
-public function update(Request $request,string $oltozofoglalas)
-{
-$szekrenyId=$request->input("szekreny_id");
+    public function store(Request $request){
+        $szekrenyId=$request->input("szekreny_id");
 $ugyfel=$request->input("ugyfel");
 $datum=$request->input("datum");
 
 
-    $eszkoz=Oltozofoglalas::find($oltozofoglalas);
+    $eszkoz=new Oltozofoglalas;
     $eszkoz->szekreny_id=$szekrenyId;
     $eszkoz->ugyfel=$ugyfel;
     $eszkoz->datum=$datum;
     $eszkoz->save();
   
 
+    return response()->json(true);}
+public function update(Request $request,string $oltozofoglalasId)
+{
+$szekrenyId=$request->input("szekreny_id");
+$ugyfel=$request->input("ugyfel");
+$datum=$request->input("datum");
+
+
+    $oltozofoglalas=Oltozofoglalas::find($oltozofoglalasId);
+    $oltozofoglalas->szekreny_id=$szekrenyId;
+    $oltozofoglalas->ugyfel=$ugyfel;
+    $oltozofoglalas->datum=$datum;
+    $oltozofoglalas->save();
+  
+
     return response()->json(true);
     
 }
-public function destroy(string $eszkozId){
-    $eszkoz=Oltozofoglalas::find($eszkozId);
+public function destroy(string $oltozofoglalasId){
+    $oltozofoglalas=Oltozofoglalas::find($oltozofoglalasId);
    
-    $eszkoz->delete();
+    $oltozofoglalas->delete();
     return response()->json(true);
 }
 }

@@ -22,7 +22,27 @@ $(function () {
     $("#ujFelvetel").on("click", () => {
         adatMeg.apiOsszealitas(termek,Oszlopnev);
         let keresetErtek,eldont,seged=[];
-        vizsgal(adat,keresetErtek,eldont,Oszlopnev,seged);
+        vizsgal(adat,keresetErtek,eldont,Oszlopnev,seged,()=>{
+            
+            $("#kuld").click(() => {
+                
+            const inputs = {};
+            for (element of $("#javitas select,#javitas input")) {
+                const name = $(element).attr("name");
+                const value = $(element).val();
+                inputs[name] = value;
+            }
+            console.log($("#javitas input"));
+            myAjax. adatkuldes("api/" + adat,
+            inputs);
+            
+            
+            adatMeg.apiOsszealitas(termek,Oszlopnev);
+            
+        });
+
+        
+        adatMeg.apiOsszealitas(termek,Oszlopnev);});
     });
     $("#listaz").on("change", () => {
         console.log($("#listaz").val());
@@ -145,8 +165,8 @@ $(function () {
 });
 function vizsgal(adat,keresetErtek,eldont,Oszlopnev,seged,myCallback=false){
     
-    let nemModosithato;
-
+    let nemModosithato=0;
+console.log(adat);
     switch (adat) {
         case "szemely":
             keresetTabla = "jogosultsag";
@@ -177,12 +197,14 @@ function vizsgal(adat,keresetErtek,eldont,Oszlopnev,seged,myCallback=false){
             nemModosithato=0;
             break;
         case "munkaido":
-            keresetTabla=
-            nemModosithato=1;
+            keresetTabla="szemely";
+            keresetErtek = "szemely_id";
+            eldont=true;
+            nemModosithato=9;
 
         default:
-          nemModosithato=0
-          keresetErtek="nincs";
+          
+         
             break;
     }
 try {

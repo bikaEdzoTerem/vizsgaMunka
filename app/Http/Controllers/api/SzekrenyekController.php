@@ -30,25 +30,40 @@ class SzekrenyekController extends Controller
         //dd($szemelyek->toSql());
 
         return response()->json($szekrenyek->get());
-    }public function update(Request $request,string $szekrenyId)
+    }
+    public function store(Request $request){
+        $urese=$request->input("ures_e");
+  $tipusa=$request->input("tipusa");
+
+ 
+        $szekreny=new Szekeny;
+        $szekreny->ures_e=$urese;
+        $szekreny->tipusa=$tipusa;
+        $szekreny->save();
+      
+
+        return response()->json(true);
+    }
+
+    public function update(Request $request,string $szekrenyId)
     {
   $urese=$request->input("ures_e");
   $tipusa=$request->input("tipusa");
 
  
-        $eszkoz=Szekeny::find($szekrenyId);
-        $eszkoz->ures_e=$urese;
-        $eszkoz->tipusa=$tipusa;
-        $eszkoz->save();
+        $szekreny=Szekeny::find($szekrenyId);
+        $szekreny->ures_e=$urese;
+        $szekreny->tipusa=$tipusa;
+        $szekreny->save();
       
 
         return response()->json(true);
         
     }
-    public function destroy(string $eszkozId){
-        $eszkoz=Szekeny::find($eszkozId);
+    public function destroy(string $szekrenyId){
+        $szekreny=Szekeny::find($szekrenyId);
        
-        $eszkoz->delete();
+        $szekreny->delete();
         return response()->json(true);
     }
 }

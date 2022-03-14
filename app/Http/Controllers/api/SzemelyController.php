@@ -37,6 +37,33 @@ class SzemelyController extends Controller
         //dd($szemelyek->toSql());
 
         return response()->json($szemelyek->get());
+    } public function store(Request $request){
+        $emailCim=$request->input("email_cim");
+        $jelszo="jelszo";
+        $nev=$request->input("nev");
+        $szulDatum=$request->input("szul_datum");
+        $neme=$request->input("neme");
+        $igazolvanySzam=$request->input("igazolvany_szam");
+        $igazolvanyTipusa=$request->input("igazolvany_tipusa");
+        $tel_szam=$request->input("tel_szam");
+        $kep="alap";
+       // $telSzam=$request->input("tel_szam");
+       // $kep=$request->input("kep");
+        $jogosultsagId=$request->input("jogosultsag_id");
+        $szemely=new Szemely;
+        $szemely->jogosultsag_id=$jogosultsagId;
+        $szemely->email_cim=$emailCim;
+        $szemely->jelszo=$$jelszo;
+        $szemely->nev=$nev;
+        $szemely->szul_datum=$szulDatum;
+        $szemely->neme=$neme;
+        $szemely->igazolvany_szam=$igazolvanySzam;
+        $szemely->igazolvany_tipusa=$igazolvanyTipusa;
+        $szemely->tel_szam=$tel_szam;
+        $szemely->kep=$kep;
+       // $szemely->tel_szam=$telSzam;
+        //$szemely->kep=$kep;
+        $szemely->save();
     }
     public function update(Request $request,string $szemelyId)
     {

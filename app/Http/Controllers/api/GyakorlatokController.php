@@ -30,7 +30,27 @@ class gyakorlatokController extends Controller
         //dd($szemelyek->toSql());
 
         return response()->json($gyakorlatok->get());
-    }  public function update(Request $request,string $eszkozId)
+    } public function store(Request $request){
+        $izomcsopotId=$request->input("izomcsopor_id");
+  $megnevezes=$request->input("megnevezes");
+  $video=$request->input("video");
+  $leiras=$request->input("leiras");
+  $szint=$request->input("szint");
+
+ 
+        $gyakorlat=new Gyakorlat;
+        $gyakorlat->izomcsopor_id=$izomcsopotId;
+        $gyakorlat->megnevezes=$megnevezes;
+        $gyakorlat->video=$video;
+        $gyakorlat->leiras=$leiras;
+        $gyakorlat->szint=$szint;
+    
+        $gyakorlat->save();
+      
+
+        return response()->json(true);}
+        
+        public function update(Request $request,string $gyakorlatId)
     {
   $izomcsopotId=$request->input("izomcsopor_id");
   $megnevezes=$request->input("megnevezes");
@@ -39,23 +59,23 @@ class gyakorlatokController extends Controller
   $szint=$request->input("szint");
 
  
-        $eszkoz=Gyakorlat::find($eszkozId);
-        $eszkoz->izomcsopor_id=$izomcsopotId;
-        $eszkoz->megnevezes=$megnevezes;
-        $eszkoz->video=$video;
-        $eszkoz->leiras=$leiras;
-        $eszkoz->szint=$szint;
+        $gyakorlat=Gyakorlat::find($gyakorlatId);
+        $gyakorlat->izomcsopor_id=$izomcsopotId;
+        $gyakorlat->megnevezes=$megnevezes;
+        $gyakorlat->video=$video;
+        $gyakorlat->leiras=$leiras;
+        $gyakorlat->szint=$szint;
     
-        $eszkoz->save();
+        $gyakorlat->save();
       
 
         return response()->json(true);
         
     }
-    public function destroy(string $eszkozId){
-        $eszkoz=Gyakorlat::find($eszkozId);
+    public function destroy(string $gyakorlatid){
+        $gyakorlat=Gyakorlat::find($gyakorlatid);
        
-        $eszkoz->delete();
+        $gyakorlat->delete();
         return response()->json(true);
     }
 }
