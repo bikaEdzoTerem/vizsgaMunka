@@ -12,7 +12,8 @@ $(function () {
   var elorefoglalas=100;
   var eltolas=0;
   var hanyOszlopos=3;
-  var apiEdzoIdopontok="/api/edzoIdopont";
+  var apiEdzoIdopontok="/api/ugyfelEdzesek2";
+  var apiSzemelyek="/api/ugyfelEdzesek2";
 
   function jelenlegiDatum(napvaltoztat) {
       var jelenlegiDatum = new Date();
@@ -107,10 +108,12 @@ function oszlop(){
             szuloElem.empty();
     for (let index = 0; index < hanyOszlopos; index++) {
       idopontokT.forEach(function (elem) {
-        console.log(elem.datum);
+        /* console.log(elem.datum); */
               let datum1=elem.datum.slice(0,10);
               let datum2=myCallback(index+eltolas).slice(0,10);
-              console.log(myCallback(index+eltolas));
+              /* console.log(datum1);
+              console.log(datum2); */
+              /* console.log(myCallback(index+eltolas)); */
               if(datum2===datum1){
                 console.log("kreal");
                   let node = sablonElem.clone().appendTo($('.tablaadat'+index));
@@ -131,7 +134,7 @@ function oszlop(){
     $(".szemelyKereso").on("keyup", () => {//ha lenyomja a szememely beirasa kozben a billentyut
       
       let szemelyfoglall = $(".szemelyKereso").val();
-      let apiVegpont2 = "http://localhost:4001/adat";
+      let apiVegpont2 = apiSzemelyek;
       apiVegpont2 += "?nev=" + szemelyfoglall;
       myAjax.adatbeolvas(apiVegpont2, szemelyKeres, szemlyFunction);
     });
@@ -219,33 +222,60 @@ function oszlop(){
     $(document).on("click", () => {//rákattintás az oldalon
       oraBeallitas();
     });
-    $(".datum").on("input", () => {//rákattintás a dátumra
-      let jelenlegiDatumSeged=new Date().toISOString().split(".")[0].slice(0,10);
+
+    let jelenlegiDatumSeged=new Date().toISOString().split(".")[0].slice(0,10);
       $(".datum")[0].min=jelenlegiDatumSeged;//a jelenlegi idő a minimum, utólagos lefoglalás nem lehetséges
       let max=parseInt(jelenlegiDatumSeged.slice(0,4))+1;//jelenlegi datumnak az évét átalakítja számmá és hozzáad 1-et
       max=max.toString();//visszaalakítás string-é
       let seged=jelenlegiDatumSeged.replace(jelenlegiDatumSeged.slice(0,4),max);//a jelenlegi évet kicseréli a jelenlegi év +1 re
       $(".datum")[0].max=seged;//a jelenlegi idő +1 év a maximum
+
+    $(".datum").on("input", () => {//rákattintás a dátumra
       if(!($(".datum").val()==="")){//ha megvan adva dátum 
-        Megjelenit(".orara");
-        console.log($(".datum").val());
-        /* $(".datum")[0].value=$(".datum").val().slice(0,13);//levágja a másodpercet és hozzá adjuk a 00 így mindig ha megadunk másodpercet akkor 00 lesz */
-      }else{
+        let datumBeirt =new Date($(".datum").val()+" 00:00:00");//beirt datum
+        let maiDatum=new Date();//jelenlegi datum
+        maiDatum.setHours(00)
+        maiDatum.setMinutes(00);
+        maiDatum.setSeconds(00);
+        console.log(maiDatum.toString()===datumBeirt.toString());
+        console.log(maiDatum.toString());
+        console.log(datumBeirt.toString());
+        if(maiDatum.toString()===datumBeirt.toString()){//mai napot irt be
+          console.log( "MAI NAP");
+          oraraListaz(true);
+          Megjelenit(".orara");
+          let maiNapOraPerc=new Date();//jelenlegi datum
+        }else if(maiDatum<datumBeirt){//jövőbeli datumot irt be
+          oraraListaz(false);
+          Megjelenit(".orara");
+          console.log("nagyobb datum van beirva mint a jelenlegi");
+        }else if(maiDatum>datumBeirt){
+          /* oraraListaz(null); */
+          console.log("kisebb datum van beirva mint a jelenlegi");
+          /* $(".datum")[0].value =jelenlegiDatum(0).slice(0,10); */
+          console.log($(".datum").val());
+         /*  $(".datum").value ="2000-10-10"; */
+         Elrejt(".orara");
+         Elrejt(".ora");
+         Elrejt(".lefoglal");
+        }
+      }/* else{
         Elrejt(".orara");
         Elrejt(".ora");
         Elrejt(".lefoglal");
-      }
+      } */
     });
-    $(".datum").on("keyup", () => {
+    /* $(".datum").on("keyup", () => {
       if(!($(".datum").val()==="")){//ha megvan adva dátum 
         Megjelenit(".orara");
+        oraraListaz()
         console.log($(".datum").val().slice(0,13));
       }else{
         Elrejt(".orara");
         Elrejt(".ora");
         Elrejt(".lefoglal");
       }
-    });
+    }); */
     function DatumKitoltottE(){
       if(!($(".datum").val()==="")){//ha megvan adva dátum 
         Megjelenit(".orara");
@@ -372,50 +402,94 @@ function oszlop(){
         
       /* oraraListaz(); */
     });
-    oraraListaz();
-    function oraraListaz(){
+    /* oraraListaz(); */
+    function oraraListaz(maE){
       let oraraValasztasokSzoveg;
       let oraraLista=[];
-     /*  if()//ha mai napra nézi */
-     if($(".datum").val()===""){//ures a datum
-       console.log("nincs kitoltve a datum");
-     }else if($(".datum").val()===jelenlegiDatum(0).slice(0,10)){//ma
-       for (let index = 0; index < 8; index++) {
-        let datum = new Date();
-         console.log(datum);
-       }
-     }else if(!($(".datum").val()===jelenlegiDatum(0).slice(0,10))){//nem ma
+      let kiegeszit;
+      for (let index = 0; index < 8; index++) {//8 segédlet
+        let ora2Szamjegy;
+        let datum = new Date();//mindig lenullázuk a jelenlegi dátumot
+        if(maE){//ha true tehat ma akkor a jelenlegi ora ajanlastol kell indulnia, ha nem ma akkor meg 8 tol
+        
+          datum.setHours(20);///teszteléshez beállítja az időt
+          datum.setMinutes(00);///teszteléshez beállítja az időt
+          if(datum.getHours()<munkaoratol){//8 ora elott van a jelenlegi datum akkor segitsegek 8 tol kezdodnek
+            datum.setHours(8);
+            datum.setMinutes(00);
+            console.log("segitseg 8 tol kezdodik");
+            ora2Szamjegy=false;
+          }else if(datum.getHours()>munkaoraig-2){//21 ora utan mar nem lehet foglalni 1 oras edzesnel kevesebbet nem lehet szemelyedzovel lenni
+            console.log("mara mar nem lehet foglalni");
+          }else{//napkozben 
+            console.log("normal");
+          }
+        }else if(!(maE)){//nem ma tehat 8 tol listazas
+          console.log("holnap vagy masnap");
+          ora2Szamjegy=false;
+            datum.setHours(8);
+            datum.setMinutes(00);
+        }
+        var hanyperccelNagyobb=index*15
+        datum.setMinutes(datum.getMinutes()+hanyperccelNagyobb);
+      var oraraBeallit=datum.getMinutes();
+        if(oraraBeallit<1){//időbeállítások csak 00 15 30 45 lehet a perc
+          datum.setMinutes(00);
+          if(index===0){
+            kiegeszit="Egyből kezdés";
+          }else{
+            kiegeszit="";
+          }
+        }else if(oraraBeallit>0&&oraraBeallit<16){
+            datum.setMinutes(15);
+            kiegeszit="";
+          }else if(oraraBeallit>15&&oraraBeallit<31){
+            datum.setMinutes(30);
+            kiegeszit="";
+          }else if(oraraBeallit>30&&oraraBeallit<46){
+            datum.setMinutes(45);
+            kiegeszit="";
+          }else if(oraraBeallit>45&&oraraBeallit<61){
+            datum.setHours(datum.getHours()+1, 00);
+            kiegeszit="";
+          }
+          oraraLista.push(datum);
+          if(datum.getHours()>=10){
+            ora2Szamjegy=true;
+          }else if(datum.getHours()<10){
+            console.log("10");
+            ora2Szamjegy=false;
+          }
+          
+          if(ora2Szamjegy===true){
+            oraraValasztasokSzoveg +='<option label="'+kiegeszit+'">'+(oraraLista[index]).toString().slice(16,21)+'</option>'
+          }else if(ora2Szamjegy===false){
+            oraraValasztasokSzoveg +='<option label="'+kiegeszit+'">'+(oraraLista[index]).toString().slice(17,21)+'</option>'
+          }
 
-     }
+          
+          if(datum.getHours()>munkaoraig-2){//21 ora utan mar nem lehet foglalni 1 oras edzesnel kevesebbet nem lehet szemelyedzovel lenni
+            console.log("mara mar nem lehet foglalni");
+            $("#oraraValasztasok").append("");
+          }else{
+            $("#oraraValasztasok").html(oraraValasztasokSzoveg);
+          }
+      }
+        
+
+      
+      
+
+     /* let datum = new Date();
+     console.log(datum.getHours()<munkaoratol);
+     if(datum.getHours()<munkaoratol+1||datum.getHours()>munkaoraig-1){//
+       console.log("csak 8 tol lehet foglalni");
+     } */
       /* console.log($(".datum").val());
       console.log(jelenlegiDatum(0).slice(0,10)); */
       /* $(".datum").val(); */
-      for (let index = 0; index < 8; index++) {//8 segédlet
-        let datum = new Date(jelenlegiDatum(0));//mindig lenullázuk a jelenlegi dátumot
-        let hanyperccelNagyobb=index*15
-      datum.setMinutes(datum.getMinutes()+hanyperccelNagyobb);
-      let oraraBeallit=datum.getMinutes();
-      if(oraraBeallit<1){//időbeállítások csak 00 15 30 45 lehet a perc
-          datum.setMinutes(0);
-          kiegeszit="Egyből kezdés";
-        }else if(oraraBeallit>0&&oraraBeallit<16){
-          datum.setMinutes(15);
-          kiegeszit="";
-        }else if(oraraBeallit>15&&oraraBeallit<31){
-          datum.setMinutes(30);
-          kiegeszit="";
-        }else if(oraraBeallit>30&&oraraBeallit<46){
-          datum.setMinutes(45);
-          kiegeszit="";
-        }else if(oraraBeallit>45&&oraraBeallit<61){
-          datum.setHours(datum.getHours()+1, 00);
-          kiegeszit="";
-        }
-        oraraLista.push(datum);
-        console.log(oraraLista);
-        oraraValasztasokSzoveg +='<option label="'+kiegeszit+'">'+(oraraLista[index]).toString().slice(16,21)+'</option>'
-      }
-      $("#oraraValasztasok").html(oraraValasztasokSzoveg);
+      
+      
     }
     function datumListaz(){//datumokhoz hozzá ad 7 nap választást
       const hetNapjai = ["Vasárnap","Hétfő","Kedd","Szerda","Csütörtök","Péntek","Szombat"];

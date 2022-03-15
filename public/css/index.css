@@ -1,0 +1,45 @@
+@charset "utf-8";
+
+main {
+    display: grid;
+    grid-template-areas: 
+        "c c c c c c" 
+        "h h h h h h" 
+        "n n n n n n" 
+        "s a a a a a" 
+        "f f f f f f";
+    font-size: 19px;
+}
+
+article {
+    grid-area: a;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 95%;
+    margin: auto;
+}
+
+article img {
+    width: 100%;
+    height: auto;
+    opacity: 85%;
+}
+
+article ul li {
+    list-style-type: none;
+}
+
+aside {
+    grid-area: s;
+    width: 90%;
+    margin: auto;
+}
+
+aside ul li {
+    list-style-type: none;
+}
+
+aside div {
+    margin: 15px;
+}
+

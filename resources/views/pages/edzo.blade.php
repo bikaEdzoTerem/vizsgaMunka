@@ -5,10 +5,10 @@
     <p>Bogdán Gábor</p>
     <form>
         <input placeholder="személy neve" type="txt"  class="szemelyKereso"  required/>
-        <input type="date" class="datum"  list="datumValasztasok" required/>
+        <input type="date" class="datum"  list="datumValasztasok"  required/>
           <datalist id="datumValasztasok"></datalist>
           
-          <input class="orara"type="text" list="oraraValasztasok" placeholder="órára" minlength="4" maxlength="5" required>
+          <input class="orara"type="text" list="oraraValasztasok" placeholder="órára" minlength="4" maxlength="10" required>
           <datalist id="oraraValasztasok"> </datalist>
 
           <input class="ora"type="text" list="oraValasztasok" placeholder="edzés hossza(1:00)" maxlength="4" required>
@@ -27,6 +27,16 @@
     <button type="button" class="JobbraNovel" id="gomb">></button>
     <div class="tablazat" id="oszlop"></div>
   </div>
+  <footer>
+    <div class="idopont">
+      <h3 class="szemelyNeve">a</h3>
+      <p class="datumtol">10</p>
+      <p class="ora">1</p>
+      <button class="feloldasGomb">Felold</button>
+  </div>
+    © Minden jog fenntartva ©<br />
+
+  </footer>
 {{-- <html lang="hu">
   <head>
     <meta charset="UTF-8" />

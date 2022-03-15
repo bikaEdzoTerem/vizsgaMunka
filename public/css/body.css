@@ -1,5 +1,10 @@
 @charset "utf-8";
 
+* {
+    padding: 0;
+    margin: 0;
+}
+
 body {
     width: 100%;
     margin: auto;
@@ -8,36 +13,28 @@ body {
     opacity: 98%;
 }
 
-.kepvaltas{
-    grid-area: h;
-    height: 1280px;
-    background-image: url("../kepek/hh1.jpg");
+header div img {
+    width: 100%;
 }
 
-.felulet{
+.felulet {
     grid-area: c;
-    border: 1px solid blanchedalmond;
+    width: 100%;
+    margin: auto;
+    /*border: 1px solid blanchedalmond;*/
 }
 
-#bal{
-    position: absolute;
-    left: 40px;
-    top: 120px;
-    height: 760px;
-}
-
-#jobb{
-    position: absolute;
-    right: 40px;
-    top: 120px;
-    height: 760px;
+.kepvaltas {
+    grid-area: h;
+    width: 100%;
+    margin: auto;
 }
 
 #logo {
     position: fixed;
     z-index: 6000;
-    left: 100px;
-    top: 80px;
+    left: 60px;
+    top: 60px;
 }
 
 #ki-be_jel {
@@ -53,7 +50,6 @@ body {
     z-index: 6000;
     right: 220px;
     top: 20px;
-    
 }
 #regisztracio {
     position: fixed;
@@ -61,73 +57,149 @@ body {
     right: 80px;
     top: 20px;
 }
-#k_mezo{
+#k_mezo {
     position: fixed;
     z-index: 6000;
     right: 80px;
     top: 80px;
 }
 
-nav{
+nav {
     grid-area: n;
     height: 60px;
     background-color: rgba(235, 80, 69, 0.842);
     padding-top: 13px;
-    opacity: 90%;  
+    opacity: 90%;
+}
+
+nav ul {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    width: 70%;
+    margin: auto;
 }
 
 nav ul li {
+    width: 80%;
+    margin: auto;
     list-style: none;
 }
 
-footer{
+footer {
     grid-area: f;
     text-align: center;
     background-color: rgba(235, 80, 69, 0.842);
     opacity: 80%;
 }
 
-.instakep{
-    /*background-image: linear-gradient(to right, red,orange,yellow,green,blue,indigo,violet);*/
-    /*background-image: radial-gradient(circle, red, yellow, green);*/
-    font-size:100px;
+.instakep {
+    font-size: 100px;
     color: orange;
     margin-right: 15px;
 }
 
-.facekep{
-    font-size:100px;
+.facekep {
+    font-size: 100px;
     color: blue;
     margin-right: 34px;
 }
 
-footer span{
+footer span {
     font-size: 40px;
 }
 
-/* unvisited link */
 a:link {
     color: white;
 }
-
-/* visited link */
 a:visited {
     color: red;
 }
-
-/* mouse over link */
 a:hover {
     color: orange;
     text-decoration: none;
 }
-
-/* selected link */
 a:active {
     color: rgba(235, 80, 69, 0.842);
 }
+article div ul li a:visited {
+    color: rgba(235, 80, 69, 0.842);
+}
+nav ul li a:visited {
+    color: white;
+}
+nav ul li a:hover {
+    color: orange;
+}
+#logo img {
+    width: 100px;
+}
 
-article div ul li a:visited{color: rgba(235, 80, 69, 0.842);}
+@media only screen and (max-width: 1200px) {
+    #logo {
+        visibility: hidden;
+    }
+    main {
+        display: grid;
+        grid-template-areas:
+            "c c c c c c"
+            "h h h h h h"
+            "n n n n n n"
+            "s s s s s s"
+            "a a a a a a"
+            "f f f f f f";
+        font-size: 17px;
+    }
+    nav {
+        padding: 0px;
+        height: auto;
+        width: 100%;
+        margin: auto;
+        text-align: center;
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+    nav ul {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-gap: 10px;
+    }
+    aside {
+        margin-bottom: 30px;
+    }
+    article img {
+        width: 100%;
+        height: auto;
+    }
+    #allomany {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        width: 80%;
+        margin: auto;
+    }
+}
 
-nav ul li a:visited{color: white;}
+@media only screen and (max-width: 1000px) {
+    #valasztek{
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-gap: 10px;
+    }
+}
 
-nav ul li a:hover{color: orange;}
+@media only screen and (max-width: 800px) {
+    #leiras{
+        width: 100%;
+        margin: auto;
+        text-align: center;
+    }
+}
+
+@media only screen and (max-width: 700px) {
+    #allomany {
+        display: grid;
+        grid-template-columns: 1fr;
+        width: 100%;
+        margin: auto;
+    }
+}
+

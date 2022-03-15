@@ -10,34 +10,26 @@ body {
 
 main {
     display: grid;
-    grid-template-areas: 
-    "h h h h h h"
-    "n n n n n n"
-    "a a a a a a"
-    "s s s s s s"
-    "f f f f f f";
+    grid-template-areas:
+        "h h h h h h"
+        "n n n n n n"
+        "a a a a a a"
+        "s s s s s s"
+        "f f f f f f";
     background-color: bisque;
     font-size: 17px;
 }
 
+img {
+    width: 100%;
+    height: auto;
+}
+
 header {
     grid-area: h;
-    height: 600px;
-    width: 1200px;
-}
-
-#bal{
-    position: absolute;
-    left: 40px;
-    top: 120px;
-    height: 760px;
-}
-
-#jobb{
-    position: absolute;
-    right: 40px;
-    top: 120px;
-    height: 760px;
+    width: 100%;
+    height: auto;
+    margin: auto;
 }
 
 #logo {
@@ -60,20 +52,12 @@ header {
     z-index: 6000;
     right: 200px;
     top: 20px;
-    
 }
 #regisztracio {
     position: fixed;
     z-index: 6000;
     right: 60px;
     top: 20px;
-}
-#k_mezo{
-    position: fixed;
-    z-index: 6000;
-    right: 80px;
-    top: 80px;
-    font-size: 19px;
 }
 
 nav {
@@ -83,9 +67,9 @@ nav {
     font-size: 19px;
 }
 
-nav ul{
+nav ul {
     display: grid;
-    grid-template-columns: 300px 100px 400px 100px;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
     text-align: center;
 }
 
@@ -96,18 +80,17 @@ nav ul li {
 
 article {
     grid-area: a;
-    margin-left: 50px;
-    margin-right: 50px;
-}
-
-article div {
-    padding: 6px
+    width: 100%;
+    margin: 5px;
+    text-align: center;
 }
 
 #dieta1 {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    grid-gap:5px;
+    grid-gap: 20px;
+    width: 85%;
+    margin: auto;
     margin-top: 30px;
     background-color: blanchedalmond;
 }
@@ -115,7 +98,9 @@ article div {
 #dieta2 {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    grid-gap:5px;
+    grid-gap: 20px;
+    width: 90%;
+    margin: auto;
     margin-top: 30px;
     background-color: blanchedalmond;
 }
@@ -123,78 +108,124 @@ article div {
 #dieta3 {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-gap:5px;
-    margin-left: 60px;
-    margin-right: 60px;
-    margin-top: 50px;
+    grid-gap: 20px;
+    width: 80%;
+    margin: auto;
+    margin-top: 30px;
     background-color: blanchedalmond;
 }
+
 #dieta4 {
     display: grid;
-    grid-template-columns: 1fr 1fr ;
-    grid-gap:10px;
-    margin-left: 40px;
-    margin-right: 40px;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 10px;
+    width: 90%;
+    margin: auto;
     margin-top: 30px;
     background-color: blanchedalmond;
 }
 
 aside {
     grid-area: s;
-    margin-left: 80px;
-    margin-right: 80px;
+    width: 90%;
+    margin: auto;
     margin-top: 100px;
     margin-bottom: 50px;
     font-size: 20px;
 }
 
-footer{
+footer {
     grid-area: f;
     text-align: center;
     background-color: rgba(235, 80, 69, 0.842);
     opacity: 80%;
 }
 
-.instakep{
-    /*background-image: linear-gradient(to right, red,orange,yellow,green,blue,indigo,violet);*/
-    /*background-image: radial-gradient(circle, red, yellow, green);*/
-    font-size:100px;
+.instakep {
+    font-size: 100px;
     color: orange;
     margin-right: 15px;
 }
 
-.facekep{
-    font-size:100px;
+.facekep {
+    font-size: 100px;
     color: blue;
     margin-right: 34px;
 }
 
-footer span{
+footer span {
     font-size: 40px;
 }
 
+#logo {
+    position: fixed;
+    z-index: 6000;
+    left: 60px;
+    top: 60px;
+}
 
-/* unvisited link */
+#logo img {
+    width: 100px;
+}
 a:link {
     color: white;
 }
-  
-/* visited link */
 a:visited {
     color: red;
 }
-  
-/* mouse over link */
 a:hover {
     color: orange;
     text-decoration: none;
 }
-  
-/* selected link */
 a:active {
     color: rgba(235, 80, 69, 0.842);
 }
+nav ul li a:visited {
+    color: white;
+}
+nav ul li a:hover {
+    color: orange;
+}
 
-nav ul li a:visited{color: white;}
+@media only screen and (max-width: 1200px) {
+    #logo {
+        visibility: hidden;
+    }
+    body {
+        width: 100%;
+        margin: auto;
+    }
+    nav {
+        padding: 0px;
+        height: auto;
+        width: 100%;
+        margin: auto;
+        text-align: center;
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+    nav ul {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-gap: 10px;
+    }
+}
 
-nav ul li a:hover{color: orange;}
+@media only screen and (max-width: 850px) {
+    #dieta1 {
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+    #dieta2 {
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+    #dieta3 {
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+    #dieta4 {
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+}

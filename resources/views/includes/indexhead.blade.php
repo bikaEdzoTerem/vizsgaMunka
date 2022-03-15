@@ -19,17 +19,7 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="../js/index_script.js"></script>
-    <style>
-        @charset "utf-8";
-        main {display: grid;grid-template-areas:"c c c c c c""h h h h h h""n n n n n n""s a a a a a""f f f f f f";font-size: 19px;}
-        nav ul{display: grid;grid-template-columns: 300px 200px 300px 300px;margin-left: 400px;}
-        article{grid-area: a;display: grid;grid-template-columns: 1fr 1fr;}
-        article div {margin-left: 15px;}
-        article img {width: 780px;height: auto;opacity: 85%;}
-        article ul li {list-style-type: none;}
-        aside{grid-area: s;width: 300px;}
-        aside div {margin: 15px;}
-    </style>
+    <link rel="stylesheet" href="css/index.css">
     <link rel="stylesheet" href="css/body.css">
     <title>Kezdőoldal</title>
 </head>

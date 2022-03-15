@@ -48,4 +48,8 @@ Route::apiResource('jogosultsag', jogosultsagController::class);
 Route::get("proba",[BerletTipusController::class,"getAr"]);
 
 Route::apiResource('edzoIdopont', EdzoIdopontokController::class);
+
+Route::apiResource('ugyfelEdzesek', UgyfelEdzesController::class);//majd torolheto
+Route::apiResource('ugyfelEdzesek2', ugyfelEdzesSzemellyel::class);
+
 //Route::put()
