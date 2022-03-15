@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Charts\DiagramChart;
+use App\Charts\EszkozokChart;
 use ConsoleTVs\Charts\Registrar as Charts;
 use Illuminate\Support\ServiceProvider;
 
@@ -27,8 +28,10 @@ class AppServiceProvider extends ServiceProvider
     {
         $chart->register([
             DiagramChart::class,
+            EszkozokChart::class
 
             //charts.diagram_chart 
+            //charts.eszkozok_chart 
         ]);
     }
 }

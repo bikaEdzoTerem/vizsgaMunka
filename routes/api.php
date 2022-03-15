@@ -46,5 +46,6 @@ Route::apiResource('terem', TermekController::class);
 Route::apiResource('izomcsoport', IzomcsoportController::class);
 Route::apiResource('jogosultsag', jogosultsagController::class);
 Route::get("proba",[BerletTipusController::class,"getAr"]);
+
 Route::apiResource('edzoIdopont', EdzoIdopontokController::class);
 //Route::put()

@@ -10,10 +10,34 @@
 @endsection
 @section('content')
     <div id="chart" ></div>
+    <div id="chart2" ></div>
 <script>
     const chart=new Chartisan({
         el:'#chart',
         url:"@chart('diagram_chart') ",
+        hooks:new ChartisanHooks()
+        .datasets([
+            {type:"line"}
+        ])
+        .custom(({data,merge})=>{
+        const dataZoom=[{
+            type:"slider",
+            start:1,
+            end:2
+        },
+        {
+            type:"inside",
+            start:1,
+            end:2
+        }
+        ];
+        return merge(data,{dataZoom});
+        })
+        
+    });
+    const chart2=new Chartisan({
+        el:'#chart2',
+        url:"@chart('eszkozok_chart') ",
         hooks:new ChartisanHooks()
         .datasets([
             {type:"line"}

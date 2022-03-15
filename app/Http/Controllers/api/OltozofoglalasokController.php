@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Oltozofoglalas;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 class OltozofoglalasokController extends Controller
 {
     public function index(Request $request)
@@ -68,5 +69,9 @@ public function destroy(string $oltozofoglalasId){
    
     $oltozofoglalas->delete();
     return response()->json(true);
+}
+public function proba(){
+    dd($arvalt= DB::table("oltozofoglalas")->where("date(datum)","=","date(CURRENT_DATE())" )
+    ->where("hour(datum)","=",DB::raw("hour(CURRENT_TIME)"))->count());
 }
 }
