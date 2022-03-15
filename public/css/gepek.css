@@ -1,0 +1,47 @@
+@charset "utf-8";
+
+
+
+main {
+    display: grid;
+    grid-template-areas: 
+        "c c c c c c" 
+        "h h h h h h" 
+        "n n n n n n" 
+        "a a a a a a" 
+        "f f f f f f";
+    font-size: 19px;
+}
+
+article {
+    grid-area: a;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    width: 60%;
+    margin: auto;
+}
+
+.klonja {
+    border-radius: 25px;
+    width: 250px;
+    height: 350px;
+    margin: 20px;
+    background-color: brown;
+    /*box-shadow: 5px 10px rgb(180, 175, 175);*/
+    box-shadow: 10px 10px 10px 10px rgba(206, 206, 206, 0.2), 0 6px 20px 0 rgba(255, 5, 5, 0.5);;
+}
+
+.klonja h3 {
+    text-align: center;
+}
+
+.klonja img {
+    margin-left: 35px;
+    border: 1px solid black;
+    width: 180px;
+    height: 160px;
+}
+
+.klonja p {
+    margin: 20px;
+}
