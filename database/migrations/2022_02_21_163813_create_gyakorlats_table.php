@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('gyakorlats', function (Blueprint $table) {
             //külső kulcs
         $table->integer('eszkoz_tipus_szamlalo')->unsigned();		
-        $table->foreign('eszkoz_tipus_szamlalo')->references('eszkoz_tipus_szamlalo')->on('eszkozs');
+        $table->foreign('eszkoz_tipus_szamlalo')->references('eszkoz_tipus_szamlalo')->on('eszkoz_tipuses');
             //külső kulcs
         $table->integer('izomcsoport_id')->unsigned();		
         $table->foreign('izomcsoport_id')->references('izomcsoport_id')->on('izomcsoports');
