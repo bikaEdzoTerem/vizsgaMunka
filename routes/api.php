@@ -17,6 +17,7 @@ use App\Http\Controllers\api\TermekController;
 use App\Http\Controllers\api\EdzoIdopontokController;
 use App\Http\Controllers\api\IzomcsoportController;
 use App\Http\Controllers\api\jogosultsagController;
+use App\Http\Controllers\api\ugyfelEdzesSzemellyel;
 
 /*
 |--------------------------------------------------------------------------
