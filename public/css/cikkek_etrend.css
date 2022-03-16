@@ -1,0 +1,231 @@
+@charset "utf-8";
+
+body {
+    width: 80%;
+    max-width: 1200px;
+    margin: auto;
+    background-image: url("../kepek/hatter3.jpg");
+    opacity: 89%;
+}
+
+main {
+    display: grid;
+    grid-template-areas:
+        "h h h h h h"
+        "n n n n n n"
+        "a a a a a a"
+        "s s s s s s"
+        "f f f f f f";
+    background-color: bisque;
+    font-size: 17px;
+}
+
+img {
+    width: 100%;
+    height: auto;
+}
+
+header {
+    grid-area: h;
+    width: 100%;
+    height: auto;
+    margin: auto;
+}
+
+#logo {
+    position: fixed;
+    z-index: 6000;
+    left: 100px;
+    top: 80px;
+}
+
+#ki-be_jel {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    font-size: 23px;
+    color: rgba(241, 50, 36, 0.842);
+    font-weight: 480;
+}
+
+#bejelentkezes {
+    position: fixed;
+    z-index: 6000;
+    right: 200px;
+    top: 20px;
+}
+#regisztracio {
+    position: fixed;
+    z-index: 6000;
+    right: 60px;
+    top: 20px;
+}
+
+nav {
+    grid-area: n;
+    background-color: rgba(235, 80, 69, 0.842);
+    padding-top: 13px;
+    font-size: 19px;
+}
+
+nav ul {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    text-align: center;
+}
+
+nav ul li {
+    list-style-type: none;
+    color: white;
+}
+
+article {
+    grid-area: a;
+    width: 100%;
+    margin: 5px;
+    text-align: center;
+}
+
+#dieta1 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 20px;
+    width: 85%;
+    margin: auto;
+    margin-top: 30px;
+    background-color: blanchedalmond;
+}
+
+#dieta2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 20px;
+    width: 90%;
+    margin: auto;
+    margin-top: 30px;
+    background-color: blanchedalmond;
+}
+
+#dieta3 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 20px;
+    width: 80%;
+    margin: auto;
+    margin-top: 30px;
+    background-color: blanchedalmond;
+}
+
+#dieta4 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 10px;
+    width: 90%;
+    margin: auto;
+    margin-top: 30px;
+    background-color: blanchedalmond;
+}
+
+aside {
+    grid-area: s;
+    width: 90%;
+    margin: auto;
+    margin-top: 100px;
+    margin-bottom: 50px;
+    font-size: 20px;
+}
+
+footer {
+    grid-area: f;
+    text-align: center;
+    background-color: rgba(235, 80, 69, 0.842);
+    opacity: 80%;
+}
+
+.instakep {
+    font-size: 100px;
+    color: orange;
+    margin-right: 15px;
+}
+
+.facekep {
+    font-size: 100px;
+    color: blue;
+    margin-right: 34px;
+}
+
+footer span {
+    font-size: 40px;
+}
+
+#logo {
+    position: fixed;
+    z-index: 6000;
+    left: 60px;
+    top: 60px;
+}
+
+#logo img {
+    width: 100px;
+}
+a:link {
+    color: white;
+}
+a:visited {
+    color: red;
+}
+a:hover {
+    color: orange;
+    text-decoration: none;
+}
+a:active {
+    color: rgba(235, 80, 69, 0.842);
+}
+nav ul li a:visited {
+    color: white;
+}
+nav ul li a:hover {
+    color: orange;
+}
+
+@media only screen and (max-width: 1200px) {
+    #logo {
+        visibility: hidden;
+    }
+    body {
+        width: 100%;
+        margin: auto;
+    }
+    nav {
+        padding: 0px;
+        height: auto;
+        width: 100%;
+        margin: auto;
+        text-align: center;
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+    nav ul {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-gap: 10px;
+    }
+}
+
+@media only screen and (max-width: 850px) {
+    #dieta1 {
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+    #dieta2 {
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+    #dieta3 {
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+    #dieta4 {
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+}

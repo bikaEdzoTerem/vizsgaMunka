@@ -1,0 +1,38 @@
+@extends('layouts.admin') 
+
+@section('javascript')
+<script src="https://unpkg.com/echarts@^4.9.0/dist/echarts.min.js"></script>
+
+<script src="https://unpkg.com/@chartisan/echarts@^2.2.3/dist/chartisan_echarts.js"></script>
+@endsection
+@section('css')
+    <link rel="stylesheet" href="../css/chart.css">
+@endsection
+@section('content')
+    <div id="chart" ></div>
+<script>
+    const chart=new Chartisan({
+        el:'#chart',
+        url:"@chart('diagram_chart') ",
+        hooks:new ChartisanHooks()
+        .datasets([
+            {type:"line"}
+        ])
+        .custom(({data,merge})=>{
+        const dataZoom=[{
+            type:"slider",
+            start:1,
+            end:2
+        },
+        {
+            type:"inside",
+            start:1,
+            end:2
+        }
+        ];
+        return merge(data,{dataZoom});
+        })
+        
+    });
+</script>
+@endsection

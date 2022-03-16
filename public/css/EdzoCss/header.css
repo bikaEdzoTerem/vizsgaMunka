@@ -1,0 +1,19 @@
+
+@charset "utf-8";
+#gomb{
+  width: 30px;
+  text-align: center;
+}
+table {
+  border-collapse: collapse;
+  border-style: hidden;
+}
+table td {
+  border: 3px solid rgb(145, 0, 0);
+}
+table th {
+  border: 3px solid rgb(145, 0, 0);
+}
+.oszlopSzam{
+  width: 40px;
+}
