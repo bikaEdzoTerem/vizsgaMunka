@@ -4,13 +4,12 @@ declare(strict_types = 1);
 
 namespace App\Charts;
 
-use App\Models\Eszkoz;
-use App\Models\Eszkoz_tipus;
+use App\Models\Berlet_tipus;
 use Chartisan\PHP\Chartisan;
 use ConsoleTVs\Charts\BaseChart;
 use Illuminate\Http\Request;
 
-class EszkozokChart extends BaseChart
+class BerleteladasokChart extends BaseChart
 {
     /**
      * Handles the HTTP request for the given chart.
@@ -19,6 +18,7 @@ class EszkozokChart extends BaseChart
      */
     public function handler(Request $request): Chartisan
     {
+       
         $result= $this->getEszkozByTerem();
 
         return Chartisan::build()
@@ -31,8 +31,8 @@ class EszkozokChart extends BaseChart
         $labels=[];
         $dataset=[];
 
-        foreach(Eszkoz_tipus::all() as $terem){
-            $labels[]=$terem->eszkoz_tipus_szamlalo;
+        foreach(Berlet_tipus::all() as $terem){
+            $labels[]=$terem->megnevezes;
             $dataset[]=$terem->eszkozok->count();
         }
         return ['labels'=>$labels,'dataset'=>$dataset];

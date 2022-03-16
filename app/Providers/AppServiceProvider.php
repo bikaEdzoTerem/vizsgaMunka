@@ -2,6 +2,9 @@
 
 namespace App\Providers;
 
+use App\Charts\ArvaltozasokChart;
+use App\Charts\BerleteEladasokChart;
+use App\Charts\BerleteladasokChart;
 use App\Charts\DiagramChart;
 use App\Charts\EszkozokChart;
 use ConsoleTVs\Charts\Registrar as Charts;
@@ -16,7 +19,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        
     }
 
     /**
@@ -28,10 +31,13 @@ class AppServiceProvider extends ServiceProvider
     {
         $chart->register([
             DiagramChart::class,
-            EszkozokChart::class
+            EszkozokChart::class,
+           BerleteladasokChart::class,
+           ArvaltozasokChart::class
 
             //charts.diagram_chart 
             //charts.eszkozok_chart 
+            //charts.berleteeladasok_chart 
         ]);
     }
 }

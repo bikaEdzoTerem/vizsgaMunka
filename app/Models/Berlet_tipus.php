@@ -19,4 +19,10 @@ class Berlet_tipus extends Model
 
         return $arvalt ? $arvalt->uj_ar : $this->attributes["ar"];
     }
+    public function eszkozok(){
+        return $this->hasMany(Berlet::class,"berlet_tipus_id");
+    }
+    public function valtozasok(){
+        return $this->hasMany(Arvaltozas::class,"berlet_tipus_id");
+    }
 }
