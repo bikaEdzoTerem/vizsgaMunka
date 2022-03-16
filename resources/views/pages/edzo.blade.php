@@ -1,5 +1,6 @@
   
   @include('layouts.edzo')
+  @include('includes.feluletheader')
   @section('content')
     <p>Bogdán Gábor</p>
     <form>

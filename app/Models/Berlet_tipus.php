@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
@@ -18,11 +18,5 @@ class Berlet_tipus extends Model
         ->where("meddig",">=",DB::raw("CURRENT_DATE()"))->first();
 
         return $arvalt ? $arvalt->uj_ar : $this->attributes["ar"];
-    }
-    public function eszkozok(){
-        return $this->hasMany(Berlet::class,"berlet_tipus_id");
-    }
-    public function valtozasok(){
-        return $this->hasMany(Arvaltozas::class,"berlet_tipus_id");
     }
 }

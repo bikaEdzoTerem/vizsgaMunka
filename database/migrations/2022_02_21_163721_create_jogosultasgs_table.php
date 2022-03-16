@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('jogosultsags', function (Blueprint $table) {
+        Schema::create('jogosultasgs', function (Blueprint $table) {
             //fő kulcs
         $table->increments('jogosultsag_id');	
         $table->string('nev');

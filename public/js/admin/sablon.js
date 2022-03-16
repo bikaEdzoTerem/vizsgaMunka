@@ -31,7 +31,6 @@ class Kartya {
       this[element].html(ertekek[element]);
     });
   }
-  
 
   torol() {
     let esemeny = new CustomEvent("torol", { detail: this.adat });

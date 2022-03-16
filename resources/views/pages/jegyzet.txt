@@ -1,0 +1,11 @@
+feltétel lehetőségek:
+-Route::has('login')        mindig be vagyok jelentkezve
+-Session::has('login')      semmi nem történik
+-Session::has('loginId')    semmi nem történik
+
+
+@if(feltétel hogy be van jelentkezve) 
+   @include('includes.bejelentkezettheader')
+@else
+   @include('includes.feluletheader') 
+@endif

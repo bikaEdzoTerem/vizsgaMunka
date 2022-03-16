@@ -1,5 +1,5 @@
 $(function () {
-  var idopontokTomb=[];
+  const idopontokTomb=[];
   const idopontok = new Idopontok(idopontokTomb);
   const myAjax = new MyAjax();
   /* idopontok.megjelenit(idopontokTomb,jelenlegiDatum); */
@@ -13,10 +13,9 @@ $(function () {
   var eltolas=0;
   var hanyOszlopos=3;
   var apiEdzoIdopontok="/api/ugyfelEdzesek2";
-  var apiSzemelyek="/api/szemely";
-  var szamol=0;
+  var apiSzemelyek="/api/ugyfelEdzesek2";
 
-function jelenlegiDatum(napvaltoztat) {
+  function jelenlegiDatum(napvaltoztat) {
       var jelenlegiDatum = new Date();
       jelenlegiDatum.setDate(jelenlegiDatum.getDate() + napvaltoztat);
       let jelenlegiDatumSzerkesztes = "";
@@ -58,52 +57,50 @@ function jelenlegiDatum(napvaltoztat) {
         jelenlegiDatumSzerkesztes += jelenlegiDatum.getSeconds().toString();
       }
       return jelenlegiDatumSzerkesztes;
-  }
+    }
     console.log(jelenlegiDatum(0));
     let apiVegpont = apiEdzoIdopontok;
-$(".JobbraNovel").on("click ", () => {
-  idopontok.kattintasTrigger("jobbra");
-  console.log("jobbra");
-  eltolas++;
-  idopontLista(idopontokTomb,jelenlegiDatum);
-});
-$(".oszlopSzam").on("keyup", () => {
-  oszlop();
+    $(".JobbraNovel").on("click ", () => {
+      idopontok.kattintasTrigger("jobbra");
+      console.log("jobbra");
+      eltolas++;
+      idopontLista(idopontokTomb,jelenlegiDatum);
+  });
+  $(".oszlopSzam").on("keyup", () => {
+    oszlop()
 });
 $(".oszlopSzam").on("click", () => {
-  oszlop();
+  oszlop()
 });
 function oszlop(){
   console.log($(".oszlopSzam").val());
   hanyOszlopos=parseInt($(".oszlopSzam").val());
   idopontLista(idopontokTomb,jelenlegiDatum);
 }
-$(".BalraCsokkent").on("click ", () => {
-    idopontok.kattintasTrigger("balra");
+  $(".BalraCsokkent").on("click ", () => {
+      idopontok.kattintasTrigger("balra");
     /* idopontok.megjelenit(); */
-    console.log("balra");
-    eltolas--;
-    idopontLista(idopontokTomb,jelenlegiDatum);
+      console.log("balra");
+      eltolas--;
+      idopontLista(idopontokTomb,jelenlegiDatum);
+
   });
-  /* myAjax.adatBeolvasasElore(apiEdzoIdopontok,idopontokTomb); */
-  myAjax.adatbeolvas(apiEdzoIdopontok, idopontokTomb, idopontLista,jelenlegiDatum);
-  console.log(idopontokTomb);
+  myAjax.adatbeolvas(apiVegpont, idopontokTomb, idopontLista,jelenlegiDatum);
   function datumKereses(){
     let datumkeres=$(".datumKeres").val();
     let c= (Math.floor(new Date(datumkeres).getTime() - new Date().getTime()));
     eltolas=(Math.round(c/1000/60/60/24));
     idopontLista(idopontokTomb,jelenlegiDatum);
   }
-  
+
   $(".datumKeres").on("input", () => {//ha kivan töltve
     datumKereses();
-  });
+});
+/* $(function() {
+  datumKereses();
+}); */
   function idopontLista(idopontokT,myCallback){
     console.log(idopontokT);
-    if(szamol==0){
-      idopontokTomb=idopontokT;
-    }
-    szamol++;
     idopontok.megjelenit(myCallback,eltolas,(hanyOszlopos));
     const szuloElem = $('.tablaadat');
             const sablonElem = $('footer .idopont');
@@ -135,17 +132,13 @@ $(".BalraCsokkent").on("click ", () => {
     Elrejt(".ora");
     Elrejt(".lefoglal");
     $(".szemelyKereso").on("keyup", () => {//ha lenyomja a szememely beirasa kozben a billentyut
-      if($(".szemelyKereso").val()==""){
-        console.log("nincs megadva szemely");
-      }else{
+      
       let szemelyfoglall = $(".szemelyKereso").val();
       let apiVegpont2 = apiSzemelyek;
       apiVegpont2 += "?nev=" + szemelyfoglall;
       myAjax.adatbeolvas(apiVegpont2, szemelyKeres, szemlyFunction);
-    }
     });
     function szemlyFunction(tomb){
-      console.log(tomb);
       if(tomb[0]===undefined){
         console.log("nincs ilyen nev");
         talaltNev=false;
@@ -156,7 +149,6 @@ $(".BalraCsokkent").on("click ", () => {
       }else{
         console.log("van ilyen név");
         console.log(tomb[0]);
-        szemelyKeres=tomb;
         talaltNev=true;
         Megjelenit(".datum");
         /* if(talaltDatum===true){
@@ -186,12 +178,9 @@ $(".BalraCsokkent").on("click ", () => {
         console.log("Nincs megadva dátum");
       }else if(talaltNev===true&&talaltDatum==true){
         console.log("jó");
-        console.log(idopontokTomb);
-        console.log(szemelyKeres);
         apiVegpont = apiEdzoIdopontok;
         let szoveg = {
-          id: 0,
-          /* id: parseInt(idopontokTomb[idopontokTomb.length-1].id), */
+          id: parseInt(idopontokTomb[idopontokTomb.length-1].id),
           ugyfel_id:  parseInt(szemelyKeres[0].szemely_id) ,
           ugyfel_nev: szemelyKeres[0].nev,
           datum: datumSeged+" "+oraraSeged,

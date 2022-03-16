@@ -61,26 +61,41 @@ class CostumAuthController extends Controller
             'jelszo' => 'required|min:5|max:20'
         ]);
         $szemely = Szemely::where('email_cim', '=', $request->email_cim)->first();
+        //$szemelyjog = Szemely::where('jogosultsag_id', "=",$request->jogosultsag_id)->get();      //nem biztos hogy kell
         if ($szemely) {
-            if (Hash::check($request->jelszo, $szemely->jelszo)) {
-                $request->session()->put('loginId', $szemely->id);
-                return redirect('dashboard');
+            //if (Hash::check($request->jelszo, $szemely->jelszo)) { 
+            //    $request->session()->put('loginId', $szemely->id);
+            //    //return redirect('/');
+            //   return redirect('dashboard');
+            if(Hash::check($request->jelszo, $szemely->jelszo) && $szemely->jogosultsag_id == 1){ //alap felhasználó
+                $data = array();
+                if (Session::has('loginId')) {
+                    $data = Szemely::where('id', '=', Session::get('loginId'))->first();
+                }
+                return view('pages.index', compact('data'));
+            } else if(Hash::check($request->jelszo, $szemely->jelszo) && $szemely->jogosultsag_id == 2){ //$szemelyjog vagy $szemely->jogosultsag_id    dolgozó
+                return redirect('/dolgozo'); 
+            } else if(Hash::check($request->jelszo, $szemely->jelszo) && $szemely->jogosultsag_id == 3){ //edző
+                return redirect('/edzo'); 
+            } else if(Hash::check($request->jelszo, $szemely->jelszo) && $szemely->jogosultsag_id == 4){ //admin
+                return redirect('/admin'); 
             } else {
-                return back()->with('fail', 'A jelszavak nem egyeznek.');
+                return back()->with('fail', 'A jelszó nem jó.');
             }
         } else {
             return back()->with('fail', 'Ez az email nincs regisztrálva.');
         }
     }
 
-    public function dashboard()
+    /*public function dashboard()
     {
         $data = array();
         if (Session::has('loginId')) {
             $data = Szemely::where('id', '=', Session::get('loginId'))->first();
         }
-        return view('auth.dashboard', compact('data'));
-    }
+        //return view('auth.dashboard', compact('data'));
+        return view('pages.index', compact('data'));
+    }*/
 
     public function logout()
     {

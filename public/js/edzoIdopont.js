@@ -1,11 +1,10 @@
 class Idopont{
     
     constructor(node,adat){
-        console.log(adat);
         this.node = node;
         this.adat = adat;
         this.ugyfel_nev = this.node.children(".szemelyNeve");
-        this.ugyfel_nev.text("Név: "+adat.nev);
+        this.ugyfel_nev.text("Név: "+adat.ugyfel_nev);
         
         this.datumtol=this.node.children(".datumtol");
         this.datumtol.text(adat.datum+" órától");

@@ -1,6 +1,6 @@
 class AdminRend{
     constructor(){
-      let megjelenit = 0;
+      
      
     };
     
@@ -13,7 +13,7 @@ class AdminRend{
        
         
     
-        adatMeg.apiOsszealitas(termek,Oszlopnev);
+        apiOsszealitas();
    };
        
    
@@ -29,15 +29,15 @@ class AdminRend{
          queryParams.set("_sort",vegtemek[0])
          queryParams.set("_order",vegtemek[1])
           console.log("?_sort=" + vegtemek[0] + "&_order=" + vegtemek[1] + "");
-          adatMeg.apiOsszealitas(termek,Oszlopnev);
+          apiOsszealitas();
            
     }
 
-    rendezoMezoLetreHozas(nev){
+    rendezoMezoLetreHozas(){
         let txt="";
         $("#rendezes").empty();
         
-        nev.forEach(element => {
+        tomb.forEach(element => {
             txt+='<option id="'+element+'Asc" value="'+element+'!asc">'+element+' szerint csökkenő</option>';
             txt+='<option id="'+element+'Desc" value="'+element+'!desc">'+element+' szerint emelkedő</option>';
         });
@@ -45,27 +45,6 @@ class AdminRend{
 
     
     };
-    elemMegjelenit(termekek, tomb) {
-      
-      rend.oldalakSzama(termekek);
-      const szuloElem = $(".elemek");
-      const sablonElem = $(".elem");
-      //  myAjax.getjson("alapnevek.json", tomb);
-  
-      szuloElem.empty();
-      termekek.forEach(function (elem, index) {
-          if (
-              (megjelenit <= index) &
-              (megjelenit + parseInt($("#listaz").val()) > index)
-          ) {
-              let node = sablonElem.clone().appendTo(szuloElem);
-              const obj = new Kartya(node, elem, tomb);
-          }
-      });
-      sablonElem.hide(); //sablonelem eltávolítása
-  }
-
-
     oldalakSzama(mindenadat){
         let txt="";
        // console.log(mindenadat);
@@ -90,6 +69,6 @@ function oldalValt(ertek){
     megjelenit=($("#listaz").val()*ertek)
     console.log($("#listaz").val()*ertek);
     
-    adatMeg.apiOsszealitas(termek,Oszlopnev);
+    apiOsszealitas();
   
   }

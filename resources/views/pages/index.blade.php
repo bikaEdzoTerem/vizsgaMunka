@@ -1,6 +1,6 @@
 @extends('layouts.indexapp')
     @section('content')
-      @if(Route::has('login'))
+      @if(Route::has('login-user')) 
         @include('includes.bejelentkezettheader')
       @else
         @include('includes.feluletheader') 

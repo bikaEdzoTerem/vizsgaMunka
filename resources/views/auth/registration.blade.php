@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hu-HU">
 
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <!--<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">-->
+    <link rel="stylesheet" href="css/reg_logstilus.css">
     <title>Document</title>
 </head>
 
@@ -13,7 +14,7 @@
     <div class="container">
         <div class="row">
             <div id="logo">
-                <a href="/"><img src="" alt="szia, máj ném isz logo"></a>
+                <a href="/"><img src="../kepek/logo.jpg" alt="logo"></a>
             </div>
             <div class="col-md-4 col-md-offset-4" style="margin-top:20px;">
                 <h4>Regisztráció:</h4>
@@ -41,11 +42,13 @@
                         <input type="password" class="from-control" placeholder="Írd be a jelszavad:" name="jelszo" value="{{old('jelszo')}}">
                         <span class="text-danger">@error('jelszo') {{$message}} @enderror</span>
                     </div>
-                    <!--<div class="from-group">
+                    <!--
+                    <div class="from-group">
                         <label for="jelszo_re">Jelszó újra:</label>
                         <input type="password" class="from-control" placeholder="Jelszavad újra:" name="jelszo_re" value="{{old('jelszo_re')}}">
                         <span class="text-danger">@error('jelszo_re') {{$message}} @enderror</span>
-                    </div>-->
+                    </div>
+                    -->
                     <div class="from-group">
                         <label for="neme">Neme:</label>
                         <input type="text" class="from-control" placeholder="Nemed:" name="neme" value="{{old('neme')}}">
