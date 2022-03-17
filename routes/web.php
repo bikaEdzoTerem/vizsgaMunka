@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\api\GepekController;
 use App\Http\Controllers\CostumAuthController;
 use App\Http\Controllers\api\EszkozDbController;
+use App\Http\Controllers\IndexController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,7 +18,7 @@ use App\Http\Controllers\api\EszkozDbController;
 */
 
 /*oldalak*/
-Route::get('/', function () { return view('pages.index'); });
+Route::get('/', [IndexController::class ,'index'  ]);
 Route::get('/gepek', function () { return view('pages.gepek'); });
 Route::get('/kapcsolatok', function () { return view('pages.kapcsolatok'); });
 Route::get('/vasarlas', function () { return view('pages.vasarlas'); });

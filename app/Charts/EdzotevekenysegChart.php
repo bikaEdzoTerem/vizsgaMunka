@@ -31,7 +31,7 @@ class EdzotevekenysegChart extends BaseChart
         $dataset=[];
 
         foreach(Szemely::all() as $terem){
-            $terem=$terem->jogosultsag_id->where("jogosultsag_id","=","3");
+          //  $terem=$terem->jogosultsag_id->where("jogosultsag_id","=","3");
             $labels[]=$terem->szemely_id;
             $dataset[]=$terem->eszkozok->count();
         }

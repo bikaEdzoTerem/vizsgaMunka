@@ -65,22 +65,14 @@ class AdatokMegjelenitese{
                 eldont = false;
                 txt += '<select id="'+keresetErtek+'" name="' + keresetErtek + '">';
                 seged.forEach((element) => {
-                  let nev = "";
-                  try {
-                    let nevek = element[keresetErtek].split(" ");
-                    
-                    nevek.forEach((neve) => {
-                        nev += neve;
-                    });
-                  } catch (error) {
-                    nev=element[keresetErtek];
-                  }
+                 
+                   
+                  
                   
                     txt +=
                         '<option value="' +
                         element[keresetErtek] +
-                        '"id="' +
-                        nev +
+                        
                         '">' +
                         element[keresetErtek] +
                         "</option>";

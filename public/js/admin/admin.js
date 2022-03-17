@@ -21,8 +21,8 @@ $(function () {
     kezdes(adat);
     $("#ujFelvetel").on("click", () => {
         adatMeg.apiOsszealitas(termek,Oszlopnev);
-        let keresetErtek,eldont,seged=[];
-        vizsgal(adat,keresetErtek,eldont,Oszlopnev,seged,()=>{
+        
+        vizsgal(adat,()=>{
             
             $("#kuld").click(() => {
                 
@@ -71,9 +71,8 @@ $(function () {
             '"he he he he he he""as ar ar ar ar el"'
         );
         kicsiE(true, adat);
-        let keresetErtek,eldont=false;
-        let seged=[];
-        vizsgal(adat,keresetErtek,eldont,Oszlopnev,seged,()=>{ $("#kuld").click(() => {
+        
+        vizsgal(adat,(keresetErtek,eldont)=>{ $("#kuld").click(() => {
                 
             const inputs = {};
             for (element of $("#javitas select,#javitas input")) {
@@ -163,8 +162,9 @@ $(function () {
 
 
 });
-function vizsgal(adat,keresetErtek,eldont,Oszlopnev,seged,myCallback=false){
-    
+function vizsgal(adat,myCallback=false){
+    let keresetErtek,eldont=false;
+        let seged=[];
     let nemModosithato=0;
 console.log(adat);
     switch (adat) {
@@ -210,9 +210,9 @@ console.log(adat);
 try {
     myAjax.adatbeolvas("api/" + keresetTabla, seged, (tomb) => {
         adatMeg.beviteliMezoGeneralas(tomb, keresetErtek, eldont,Oszlopnev,nemModosithato);
-        if(myCallback!=false){
+        
         myCallback(keresetErtek,eldont);
-        } });
+        });
 } catch (error) {
     adatMeg.beviteliMezoGeneralas(seged, keresetErtek, eldont,Oszlopnev,nemModosithato);
     myCallback(keresetErtek,eldont);

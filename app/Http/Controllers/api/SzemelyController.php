@@ -42,7 +42,6 @@ class SzemelyController extends Controller
         return response()->json($szemelyek->get());
     } public function store(Request $request){
         $emailCim=$request->input("email_cim");
-        $jelszo="jelszo";
         $nev=$request->input("nev");
         $szulDatum=$request->input("szul_datum");
         $neme=$request->input("neme");
@@ -56,7 +55,7 @@ class SzemelyController extends Controller
         $szemely=new Szemely;
         $szemely->jogosultsag_id=$jogosultsagId;
         $szemely->email_cim=$emailCim;
-        $szemely->jelszo=$$jelszo;
+        $szemely->jelszo=$igazolvanySzam;
         $szemely->nev=$nev;
         $szemely->szul_datum=$szulDatum;
         $szemely->neme=$neme;

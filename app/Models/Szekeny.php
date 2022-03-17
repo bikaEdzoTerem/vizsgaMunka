@@ -9,4 +9,5 @@ class Szekeny extends Model
 {protected $primaryKey = 'szekreny_id';
     protected $szekreny = ['szekreny_id', 'ures_e', 'tipusa'];
     
+    
 }

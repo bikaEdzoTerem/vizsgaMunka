@@ -2,7 +2,9 @@
 @section('content')
 @include('includes.kepvaltas')
 @include('includes.kozosnav')
+jelenlegi létszam:  {{$letszam}}
 <article>
+
   <div id="bemutatkozo">
     <p>Üdvözlünk konditerműnkben! <br><br>
 
