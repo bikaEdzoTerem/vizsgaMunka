@@ -43,6 +43,7 @@ class EszkozController extends Controller
               $eszkoz=new Eszkoz;
               $eszkoz->terem_id=$teremId;
               $eszkoz->eszkoz_tipus_szamlalo=$eszkozTipusSzamlalo;
+              $eszkoz->qr_kod="null";
               $eszkoz->save();
             
       

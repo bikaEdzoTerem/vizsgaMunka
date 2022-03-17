@@ -16,6 +16,8 @@ use App\Http\Controllers\api\SzemelyController;
 use App\Http\Controllers\api\TermekController;
 use App\Http\Controllers\api\EdzoIdopontokController;
 use App\Http\Controllers\api\IzomcsoportController;
+use App\Http\Controllers\api\jogosultsagController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -43,7 +45,7 @@ Route::apiResource('oltozofoglalas', OltozofoglalasokController::class);
 Route::apiResource('szekreny', SzekrenyekController::class);
 Route::apiResource('terem', TermekController::class);
 Route::apiResource('izomcsoport', IzomcsoportController::class);
-Route::apiResource('jogosultsag', IzomcsoportController::class);
+Route::apiResource('jogosultsag', jogosultsagController::class);
 Route::get("proba",[BerletTipusController::class,"getAr"]);
 Route::apiResource('edzoIdopont', EdzoIdopontokController::class);
 

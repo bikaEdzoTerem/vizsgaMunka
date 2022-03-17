@@ -9,4 +9,5 @@ class Szemely extends Model
 {
     protected $primaryKey = 'szemely_id';
     protected $szemely = ['szemely_id', 'jogosultsag_id', 'email_cim', 'jelszo', 'nev', 'szul_datum', 'neme', 'igazolvany_szam', 'igazolvany_tipusa', 'tel_szam', 'kep'];
+    
 }
