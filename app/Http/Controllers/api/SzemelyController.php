@@ -19,6 +19,7 @@ class SzemelyController extends Controller
         $sort=$request->query ('_sort');
         $order=$request->query ('_order');
         $q=$request->query('q');
+        $nev=$request->query('nev');
         $szemelyek=Szemely::selectRaw("*");
         if($sort&&$order){
             $szemelyek->orderBy($sort,$order);
@@ -30,6 +31,8 @@ class SzemelyController extends Controller
                 $szemelyek->orWhere($column,'like','%'.$q.'%');
                 $szemelyek->orWhere($column,$q);
             };
+        }if($nev){
+            $szemelyek->where('nev','like','%'.$nev.'%');
         }
         //$szemelyek= ($sort&&$order) ? Szemely::orderBy($sort,$order)->get(): Szemely::all();
       
