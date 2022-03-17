@@ -190,7 +190,6 @@ $(".BalraCsokkent").on("click ", () => {
         console.log(szemelyKeres);
         apiVegpont = apiEdzoIdopontok;
         let szoveg = {
-          id: 0,
           /* id: parseInt(idopontokTomb[idopontokTomb.length-1].id), */
           ugyfel_id:  parseInt(szemelyKeres[0].szemely_id) ,
           ugyfel_nev: szemelyKeres[0].nev,

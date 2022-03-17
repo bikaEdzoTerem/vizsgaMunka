@@ -4,10 +4,8 @@ use App\Http\Controllers\api\BerletTipusController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\api\GepekController;
-
 use App\Http\Controllers\api\EdzesekController;
 use App\Http\Controllers\api\EszkozController;
-
 use App\Http\Controllers\api\gyakorlatokController;
 use App\Http\Controllers\api\MunkaidoController;
 use App\Http\Controllers\api\OltozofoglalasokController;
@@ -17,6 +15,7 @@ use App\Http\Controllers\api\TermekController;
 use App\Http\Controllers\api\EdzoIdopontokController;
 use App\Http\Controllers\api\IzomcsoportController;
 use App\Http\Controllers\api\jogosultsagController;
+use App\Http\Controllers\api\BerletekController;
 
 
 /*
@@ -48,6 +47,7 @@ Route::apiResource('izomcsoport', IzomcsoportController::class);
 Route::apiResource('jogosultsag', jogosultsagController::class);
 Route::get("proba",[BerletTipusController::class,"getAr"]);
 Route::apiResource('edzoIdopont', EdzoIdopontokController::class);
+Route::apiResource('berletek', BerletekController::class);
 
 Route::apiResource('ugyfelEdzesek', UgyfelEdzesController::class);//majd torolheto
 Route::apiResource('ugyfelEdzesek2', ugyfelEdzesSzemellyel::class);
