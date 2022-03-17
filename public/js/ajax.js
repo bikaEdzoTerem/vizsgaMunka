@@ -16,12 +16,10 @@ class MyAjax {
     return tombe
   }
 
-  adatbeolvas(faljnev, tomb, myCallback) {
-    this.adatbeolvas(faljnev, tomb, myCallback, false);
-  }
   
-  adatbeolvas(faljnev, tomb, myCallback, seged) {
-   tomb.splice(0, tomb.length);
+  
+  adatbeolvas(faljnev, tomb, myCallback, seged=false) {
+   tomb=[];
     $.ajax({
       url: faljnev,
       type: "GET",

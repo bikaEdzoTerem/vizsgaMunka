@@ -11,6 +11,7 @@ body {
     background-image: url("../kepek/hatter3.jpg");
     color: white;
     opacity: 98%;
+    text-align: justify;
 }
 
 header div img {

@@ -72,7 +72,7 @@ class CostumAuthController extends Controller
                 if (Session::has('loginId')) {
                     $data = Szemely::where('id', '=', Session::get('loginId'))->first();
                 }
-                return view('pages.index', compact('data'));
+                return redirect('dashboard', compact('data'));
             } else if(Hash::check($request->jelszo, $szemely->jelszo) && $szemely->jogosultsag_id == 2){ //$szemelyjog vagy $szemely->jogosultsag_id    dolgozó
                 return redirect('/dolgozo'); 
             } else if(Hash::check($request->jelszo, $szemely->jelszo) && $szemely->jogosultsag_id == 3){ //edző
