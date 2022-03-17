@@ -49,7 +49,7 @@ class Szekrenyek {
       /* if(tomb[i].ures_e == "R"||tomb[i].ures_e == "F"){ */
       txt +=
       "<tr ><td class=>" +
-        tomb[i].id +
+        tomb[i].szekreny_id +
         "</td>" +
         "<td>" +
         tomb[i].tipusa +
