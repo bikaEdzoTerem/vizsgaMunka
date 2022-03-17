@@ -19,6 +19,11 @@ $(function () {
   var segedUtolsoOltozofog_id ="";
   const OsszesSzemely = [];
   let berletsTomb=[];
+  var szemelyapi="/api/szemely";
+  const szekrenyApi="/api/szekreny";
+  const oltozofoglalasApi="/api/oltozofoglalas";
+  const beretTipusApi="/api/berletTipus";
+  const beretekApi="/api/berletek";
 
   /* var hibaUzenet = [];
   const errorElement = document.getElementById('szemelyerror');
@@ -40,12 +45,12 @@ $(function () {
   var div2 = document.querySelector(".bal");
   
   function szekrenyekMegjelenit() {
-    let apiVegpont = "http://localhost:4000/szekenies";
+    let apiVegpont = szekrenyApi;
     myAjax.adatbeolvas(apiVegpont, szekrenyekTomb, kiir);
 
   }
   szekrenyekMegjelenit();
-  let apiVegpont = "http://localhost:4000/szekenies";
+  let apiVegpont = szekrenyApi;
 
   function kiir(tomb) {
     let seged = ".osszesSzekreny";
@@ -102,7 +107,7 @@ $(function () {
   }
   $(window).on("kattint", (event) => {
     console.log("...");
-    let apiVegpont = "http://localhost:4000/szekenies";
+    let apiVegpont = szekrenyApi;
     let gombId = event.detail.id;
     let tomb = event.detail.tomb;
     let szoveg = {
@@ -152,8 +157,8 @@ $(function () {
   }
     $(".keresSzekrenykulcs").on("keyup", () => {
       let tomb=[];
-      let apiVegpont = "http://localhost:4000/szekenies";
-      apiVegpont += "?id=" + $(".keresSzekrenykulcs").val();
+      let apiVegpont = szekrenyApi;
+      apiVegpont += "?q=" + $(".keresSzekrenykulcs").val();
       myAjax.adatbeolvas(apiVegpont,tomb,szekrenyKeresoMegjelenit);
     }); 
     function szekrenyKeresoMegjelenit(tomb){
@@ -199,8 +204,8 @@ $(function () {
     
     $(".keresSzemely").on("keyup", () => {
       let tomb=[];
-      let apiVegpont = "http://localhost:4001/szemely";
-      apiVegpont += "?szemely_id=" + $(".keresSzemely").val();
+      let apiVegpont = szemelyapi;
+      apiVegpont += "?nev=" + $(".keresSzemely").val();
       myAjax.adatbeolvas(apiVegpont,tomb,szemelyKeresoMegjelenit);
     }); 
     function szemelyKeresoMegjelenit(tomb){
@@ -240,7 +245,7 @@ $(function () {
     };
     $("#katt1").on("keyup", () => {
       let szemelyfoglall = $(".szemelyLefoglal").val();
-      let apiVegpont2 = "http://localhost:4001/szemely";
+      let apiVegpont2 = szemelyapi;
       apiVegpont2 += "?nev=" + szemelyfoglall;
       myAjax.adatbeolvas(apiVegpont2, OsszesSzemely, kepMegj);
     });
@@ -248,8 +253,8 @@ $(function () {
       let tomb=[];
       
       let kulcsfoglall = $(".kulcsLefoglal").val();
-      let apiVegpont = "http://localhost:4000/szekenies";
-      apiVegpont += "?id=" + kulcsfoglall;
+      let apiVegpont = szekrenyApi;
+      apiVegpont += "?q=" + kulcsfoglall;
       myAjax.adatbeolvas(apiVegpont, egyDbKulcs, kulcsMegjelenit);
       myAjax.adatbeolvas(apiVegpont,tomb,keresés);
   });
@@ -266,7 +271,7 @@ $(function () {
       $("#alertUzenet").html("Első edzése");
       setTimeout(function(){ 
       //itt  van egy kód duplikálás
-      apiVegpont = "http://localhost:4002/oltozofoglalas";
+      apiVegpont = oltozofoglalasApi;
       let szoveg = {
         id: segedUtolsoOltozofog_id,
         szekreny_id: kulcsSzama,
@@ -274,7 +279,7 @@ $(function () {
         datum: jelenlegiDatum(),
       };
       myAjax.adatkuldes(apiVegpont, szoveg);
-      apiVegpont = "http://localhost:4000/szekenies";
+      apiVegpont = szekrenyApi;
       szoveg = {
         id: kulcsSzama,
         ures_e: "F",
@@ -297,7 +302,7 @@ $(function () {
         $("#alertUzenet").html("Ma még nem volt edzeni,Szekrény lefoglalva");
         //itt  van egy kód duplikálás
         setTimeout(function(){ 
-        apiVegpont = "http://localhost:4002/oltozofoglalas";
+        apiVegpont = oltozofoglalasApi;
         let szoveg = {
           id: segedUtolsoOltozofog_id,
           szekreny_id: kulcsSzama,
@@ -305,7 +310,7 @@ $(function () {
           datum: jelenlegiDatum(),
         };
         myAjax.adatkuldes(apiVegpont, szoveg);
-        apiVegpont = "http://localhost:4000/szekenies";
+        apiVegpont = szekrenyApi;
         szoveg = {
           id: kulcsSzama,
           ures_e: "F",
@@ -327,7 +332,7 @@ $(function () {
             hibaUzenet.push("Nála romlott el ma egy szekrény, adunk egy masikat"); */
             $("#szemelyerror").html(hibak[1]);
             $("#alertUzenet").html("Nála romlott el ma egy szekrény, adunk egy masikat");
-            apiVegpont = "http://localhost:4002/oltozofoglalas";
+            apiVegpont = oltozofoglalasApi;
             let szoveg = {
               id: segedUtolsoOltozofog_id,
               szekreny_id: kulcsSzama,
@@ -335,7 +340,7 @@ $(function () {
               datum: jelenlegiDatum(),
             };
             myAjax.adatkuldes(apiVegpont, szoveg);
-            apiVegpont = "http://localhost:4000/szekenies";
+            apiVegpont = szekrenyApi;
             szoveg = {
               id: kulcsSzama,
               ures_e: "F",
@@ -364,7 +369,7 @@ $(function () {
   }
   function oltozofoglalasUtolsoid(tomb,esemeny) {
     let OltozofoglalasokTomb = [];
-    apiVegpont = "http://localhost:4002/oltozofoglalas";
+    apiVegpont = oltozofoglalasApi;
     apiVegpont += "?ugyfel=" + segedSzemelyId;
       myAjax.adatbeolvas(apiVegpont,OltozofoglalasokTomb,oltozofoglalasUgyfelSzures,esemeny);
     segedUtolsoOltozofog_id =  (JSON.parse(tomb[tomb.length-1 ].id)+1).toString();
@@ -387,7 +392,7 @@ $(function () {
       /* console.log("Szekreny lefoglalva");
       hibaUzenet.push("Szekreny lefoglalva"); */
       
-      apiVegpont = "http://localhost:4002/oltozofoglalas";
+      apiVegpont = oltozofoglalasApi;
       myAjax.adatbeolvas(apiVegpont,OltozofoglalasokTomb,oltozofoglalasUtolsoid,esemeny);
     } else if (
       !(segedSzekrenyNeme === segedSzemelyNeme) &&
@@ -522,7 +527,7 @@ $(function () {
       for (let index = 0; index < tomb.length; index++) {
         tombBerlets.push(tomb[index]);
       }
-      let apiVegpont="http://localhost:4004/berlet_tipuses";
+      let apiVegpont=beretTipusApi;
       apiVegpont=apiVegpont += "?berlet_tipus_id=" + tomb[0].berlet_tipus_id;
       myAjax.adatbeolvas(apiVegpont,berletsTomb,berletTipusKereses);
     }
@@ -534,7 +539,7 @@ $(function () {
       segedSzemelyNeme = tomb[0].neme;
       segedSzemelyId = tomb[0].szemely_id;
       segedSzemelyTalaltE = true;
-      let apiVegpont="http://localhost:4003/berlets";
+      let apiVegpont=beretekApi;
       apiVegpont=apiVegpont += "?ugyfel=" + tomb[0].szemely_id;
       myAjax.adatbeolvas(apiVegpont,berletsTomb,datumTolBerlet);
       console.log("Talált ilyen személyt");
