@@ -14,8 +14,13 @@ return view("pages.index",["letszam"=>$letszam]);
     }
     private function getLetszam():int{
         
-        return Oltozofoglalas::where('datum','<',DB::RAW('NOW()'))
+        return  Oltozofoglalas::where('datum','<',DB::RAW('NOW()'))
         ->whereRelation('szekreny','ures_e','F')
+        ->whereIn(DB::raw("(szekreny_id, datum)"),function($query){
+            $query->select('szekreny_id',DB::raw('MAX(datum)'))
+                ->from('oltozofoglalas')
+                ->groupBy('szekreny_id');
+        })
         ->count();
     }
 }
