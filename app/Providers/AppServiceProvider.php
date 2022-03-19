@@ -8,6 +8,8 @@ use App\Charts\BerleteladasokChart;
 use App\Charts\DiagramChart;
 use App\Charts\EdzotevekenysegChart;
 use App\Charts\EszkozokChart;
+use App\Charts\LetszamChart;
+use App\Charts\NapiletszamChart;
 use ConsoleTVs\Charts\Registrar as Charts;
 use Illuminate\Support\ServiceProvider;
 
@@ -35,7 +37,9 @@ class AppServiceProvider extends ServiceProvider
             EszkozokChart::class,
            BerleteladasokChart::class,
            ArvaltozasokChart::class,
-           EdzotevekenysegChart::class
+           EdzotevekenysegChart::class,
+           LetszamChart::class,
+           NapiletszamChart::class
 
             //charts.diagram_chart 
             //charts.eszkozok_chart 
