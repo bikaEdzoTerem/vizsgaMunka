@@ -16,6 +16,7 @@ use App\Http\Controllers\api\EdzoIdopontokController;
 use App\Http\Controllers\api\IzomcsoportController;
 use App\Http\Controllers\api\jogosultsagController;
 use App\Http\Controllers\api\BerletekController;
+use App\Http\Controllers\api\ugyfelEdzesSzemellyel;
 
 
 /*
@@ -49,7 +50,8 @@ Route::get("proba",[BerletTipusController::class,"getAr"]);
 Route::apiResource('edzoIdopont', EdzoIdopontokController::class);
 Route::apiResource('berletek', BerletekController::class);
 
-Route::apiResource('ugyfelEdzesek', UgyfelEdzesController::class);//majd torolheto
+//Route::apiResource('ugyfelEdzesek', UgyfelEdzesController::class);//majd torolheto
 Route::apiResource('ugyfelEdzesek2', ugyfelEdzesSzemellyel::class);
-
+Route::get('/ugyfelEdzesek2/{dolgozo}', [UgyfeledzesFelviszController::class, 'show']);
+Route::delete('/ugyfelEdzesek2/{id}', [UgyfeledzesFelviszController::class, 'delete']);
 //Route::put()
