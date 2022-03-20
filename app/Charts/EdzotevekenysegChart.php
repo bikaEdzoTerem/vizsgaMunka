@@ -5,6 +5,7 @@ declare(strict_types = 1);
 namespace App\Charts;
 
 use App\Models\Szemely;
+use App\Models\Terem;
 use Chartisan\PHP\Chartisan;
 use ConsoleTVs\Charts\BaseChart;
 use Illuminate\Http\Request;
@@ -31,10 +32,12 @@ class EdzotevekenysegChart extends BaseChart
         $dataset=[];
 
         foreach(Szemely::all() as $terem){
+            
           //  $terem=$terem->jogosultsag_id->where("jogosultsag_id","=","3");
+          if($terem->jogosultsag_id===3){
             $labels[]=$terem->szemely_id;
             $dataset[]=$terem->eszkozok->count();
-        }
+        }}
         return ['labels'=>$labels,'dataset'=>$dataset];
     }
 }

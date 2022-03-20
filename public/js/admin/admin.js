@@ -183,7 +183,7 @@ console.log(adat);
             nemModosithato=0;
             break;
         case "edzesek":
-            keresetTabla = "szemely";
+            keresetTabla = "szemely/ugyfelek";
             keresetErtek = "szemely_id";
             eldont = true;
             console.log("szemely_id");

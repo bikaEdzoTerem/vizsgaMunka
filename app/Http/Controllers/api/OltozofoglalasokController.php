@@ -70,8 +70,11 @@ public function destroy(string $oltozofoglalasId){
     $oltozofoglalas->delete();
     return response()->json(true);
 }
-public function proba(){
-    dd($arvalt= DB::table("oltozofoglalas")->where("date(datum)","=","date(CURRENT_DATE())" )
-    ->where("hour(datum)","=",DB::raw("hour(CURRENT_TIME)"))->count());
+
+public function letszamNaponta(){
+    $oltozok=Oltozofoglalas::selectRaw("date(datum) as napok,count(1) as letszam")
+        ->groupByRaw('date(datum)')->get();
+        return response()->json( $oltozok);
 }
+
 }

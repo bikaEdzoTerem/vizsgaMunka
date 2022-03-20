@@ -78,7 +78,7 @@ class SzemelyController extends Controller
        // $telSzam=$request->input("tel_szam");
        // $kep=$request->input("kep");
         $jogosultsagId=$request->input("jogosultsag_id");
-//$eszkozTipusSzamlalo=Jogosultsag::firstWhere("jogosultsag_id",$jogosultsagId)->jogosultsag_id;
+
  
         $szemely=Szemely::find($szemelyId);
         $szemely->jogosultsag_id=$jogosultsagId;
@@ -102,5 +102,9 @@ class SzemelyController extends Controller
        
         
         return response()->json(true);
+    }
+    public function ugyfelek(){
+        $szemelyek=Szemely::where('jogosultsag_id',1)->get();
+        return response()->json($szemelyek);
     }
 }

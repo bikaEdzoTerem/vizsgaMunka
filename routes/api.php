@@ -16,6 +16,7 @@ use App\Http\Controllers\api\EdzoIdopontokController;
 use App\Http\Controllers\api\IzomcsoportController;
 use App\Http\Controllers\api\jogosultsagController;
 use App\Http\Controllers\api\BerletekController;
+
 use App\Http\Controllers\api\ugyfelEdzesSzemellyel;
 
 
@@ -36,11 +37,13 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::apiResource('gepek', GepekController::class);
 Route::apiResource('berletTipus', BerletTipusController::class);
+Route::get("szemely/ugyfelek",[SzemelyController::class,'ugyfelek']);
 Route::apiResource('szemely', SzemelyController::class);
 Route::apiResource('eszkoz', EszkozController::class);
 Route::apiResource('edzesek', EdzesekController::class);
 Route::apiResource('gyakorlat', gyakorlatokController::class);
 Route::apiResource('munkaido', MunkaidoController::class);
+Route::get("oltozofoglalas/letszam/napi",[OltozofoglalasokController::class,"letszamNaponta"]);
 Route::apiResource('oltozofoglalas', OltozofoglalasokController::class);
 Route::apiResource('szekreny', SzekrenyekController::class);
 Route::apiResource('terem', TermekController::class);
