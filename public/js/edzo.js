@@ -87,7 +87,7 @@ $(".BalraCsokkent").on("click ", () => {
   });
   /* myAjax.adatBeolvasasElore(apiEdzoIdopontok,idopontokTomb); */
   myAjax.adatbeolvas(apiEdzoIdopontok, idopontokTomb, idopontLista,jelenlegiDatum);
-  console.log(idopontokTomb);
+  
   function datumKereses(){
     let datumkeres=$(".datumKeres").val();
     let c= (Math.floor(new Date(datumkeres).getTime() - new Date().getTime()));
@@ -146,14 +146,14 @@ $(".BalraCsokkent").on("click ", () => {
     });
     function szemlyFunction(tomb){
       console.log(tomb);
-      if(tomb[0]===undefined){
+      if(tomb[0]===undefined ||tomb.length>1){
         console.log("nincs ilyen nev");
         talaltNev=false;
         Elrejt(".datum");
         Elrejt(".orara");
         Elrejt(".ora");
         Elrejt(".lefoglal");
-      }else{
+      }else if(tomb.length===1){
         console.log("van ilyen név");
         console.log(tomb[0]);
         szemelyKeres=tomb;
@@ -166,9 +166,11 @@ $(".BalraCsokkent").on("click ", () => {
       }
     }
     function Elrejt(mit){
+      /* $(mit).remove(); */
       $(mit)[0].style.display = "none";
     }
     function Megjelenit(mit){
+      /* $(mit).html("<button type=submit  class=lefoglal>Lefoglal</button>") */
       $(mit)[0].style.display = "block";
     }
     $(".lefoglal").on("click", () => {// ha kattintunk a lefoglal gomb-ra
@@ -269,11 +271,11 @@ $(".BalraCsokkent").on("click ", () => {
          Elrejt(".ora");
          Elrejt(".lefoglal");
         }
-      }/* else{
+      }else{
         Elrejt(".orara");
         Elrejt(".ora");
         Elrejt(".lefoglal");
-      } */
+      }
     });
     /* $(".datum").on("keyup", () => {
       if(!($(".datum").val()==="")){//ha megvan adva dátum 
@@ -295,7 +297,7 @@ $(".BalraCsokkent").on("click ", () => {
       }
     }
     $(window).on('felold', (event) => {//ha rányomok a feloldra torli az adatot
-      apiVegpont = apiEdzoIdopontok;
+      apiVegpont = "/api/ugyfelEdzesek2";
       myAjax.adattorles(apiVegpont, event.detail.id);
     });
 
@@ -306,7 +308,6 @@ $(".BalraCsokkent").on("click ", () => {
     for (let index = 0; index < orak.length; index++) {//orak tomb vegigjarasa
       if(index>-1&&index<3){//ha elso harom elem
         let i=0
-        oravalasztasok+='<option label="'+edzesekHossz[i]+'">'+orak[index]+'</option>'//opciok letrehozasa
       }else if(index>2&&index<6){// ha 4.-6.elem
         i=1;
         oravalasztasok+='<option label="'+edzesekHossz[i]+'">'+orak[index]+'</option>'
@@ -422,8 +423,8 @@ $(".BalraCsokkent").on("click ", () => {
         let datum = new Date();//mindig lenullázuk a jelenlegi dátumot
         if(maE){//ha true tehat ma akkor a jelenlegi ora ajanlastol kell indulnia, ha nem ma akkor meg 8 tol
         
-          datum.setHours(20);///teszteléshez beállítja az időt
-          datum.setMinutes(00);///teszteléshez beállítja az időt
+          /* datum.setHours(20);///teszteléshez beállítja az időt
+          datum.setMinutes(00);///teszteléshez beállítja az időt */
           if(datum.getHours()<munkaoratol){//8 ora elott van a jelenlegi datum akkor segitsegek 8 tol kezdodnek
             datum.setHours(8);
             datum.setMinutes(00);
