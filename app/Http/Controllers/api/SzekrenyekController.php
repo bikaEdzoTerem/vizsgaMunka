@@ -12,6 +12,8 @@ class SzekrenyekController extends Controller
     { $sort=$request->query ('_sort');
         $order=$request->query ('_order');
         $q=$request->query('q');
+        $pontosSz=$request->query('pontosSzekreny');
+
         $szekrenyek=Szekeny::selectRaw("*");
         if($sort&&$order){
             $szekrenyek->orderBy($sort,$order);
@@ -23,6 +25,10 @@ class SzekrenyekController extends Controller
                 $szekrenyek->orWhere($column,'like','%'.$q.'%');
                 $szekrenyek->orWhere($column,$q);
             };
+        }
+        if($pontosSz){
+            $szekrenyek->where('szekreny_id','like',$pontosSz);
+            
         }
         //$szemelyek= ($sort&&$order) ? Szemely::orderBy($sort,$order)->get(): Szemely::all();
       
