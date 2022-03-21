@@ -9,17 +9,23 @@
             <li><a href="#">Page 2</a></li>
           </ul>
         </nav>
-          <form>
-              <input id="katt1" placeholder="személy neve" type="txt"  class="szemelyLefoglal"/>
-              <input id="katt2" type="number" placeholder="szekrény száma" min="0" pattern='([0-9]+)'  class="kulcsLefoglal"/>
+        <form action="{{route('OltozoFoglalasFelvitel')}}" method="post">
+        @csrf
+              <input id="katt1" placeholder="személy neve" type="txt"  class="szemelyLefoglal" name="ugyfelNev" value="{{old('ugyfelNev')}}"/>
+              <input id="katt2" type="number" placeholder="szekrény száma" min="0" pattern='([0-9]+)'  class="kulcsLefoglal" name="szekrenySzama" value="{{old('szekrenySzama')}}"/>
               <span id="szekrenyerror"></span>
-              <button type="button" class="lefoglal">Lefoglal</button>
+              <button type="submit" class="lefoglal">Lefoglal</button>
             </div>
             <p id="Szabad">Férfi szabad hely:</p>
             <span id="ferfiLetszam"></span>
             <p id="Szabad">Női szabad hely:</p>
             <span id="noiiLetszam">100</span>
-            
+            @if(Session::has('sikeres'))
+          <div class="alert alert-sikeres">{{Session::get('sikeres')}}</div>
+          @endif
+          @if(Session::has('sikertelen'))
+            <div class="alert alert-sikertelen">{{Session::get('sikertelen')}}</div>
+          @endif
           </form>
         
       </header>
@@ -28,7 +34,7 @@
       <div  class="bal" style="display:none;">
         <table>
           <thead><tr><th>Neve</th><th>Képe</th><th>Bérlete</th></tr></thead>
-          <tbody><tr><td>Neve</td><td id="kep"></td><td id="berletDatum"></td></tr></tbody>
+          <tbody><tr><td id="neve" ></td><td id="kep"></td><td id="berletDatum"></td></tr></tbody>
         </table>
       </div>
       <div class="jobbTablazatSzekreny" style="display:none;"></div>

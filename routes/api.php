@@ -58,3 +58,4 @@ Route::apiResource('ugyfelEdzesek2', ugyfelEdzesSzemellyel::class);
 Route::get('/ugyfelEdzesek2/{dolgozo}', [UgyfeledzesFelviszController::class, 'show']);
 Route::delete('/ugyfelEdzesek2/{id}', [UgyfeledzesFelviszController::class, 'delete']);
 //Route::put()
+Route::get('/ugyfelEdzesek3', [UgyfelEdzesSzemellyel::class, 'osszekapcsol']);

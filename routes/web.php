@@ -6,6 +6,7 @@ use App\Http\Controllers\CostumAuthController;
 use App\Http\Controllers\api\EszkozDbController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\UgyfeledzesFelviszController;
+use App\Http\Controllers\OltozoFoglalasFelviszController;
 
 /*
 |--------------------------------------------------------------------------
@@ -55,3 +56,5 @@ Route::get('/api/gepek/{id}', [GepekController::class, 'show']);
 Route::post('/ugyfelEdzesFoglalasFelvitel', [UgyfeledzesFelviszController::class, 'felviszUgyfelFoglalas'] )->name('ugyfelEdzesFoglalasFelvitel');
 //Route::post('/ugyfelEdzesFoglalasTorol', [UgyfeledzesFelviszController::class, 'torolUgyfelFoglalas'] )->name('ugyfelEdzesFoglalasTorol');
 Route::delete('/ugyfelEdzesFoglalasTorol/{id}',  [UgyfeledzesFelviszController::class, 'torolUgyfelFoglalas'] )->name('ugyfelEdzesFoglalasTorol');
+//recepcio Oltozo foglalas felvitele
+Route::post('/OltozoFoglalasFelvitel', [OltozoFoglalasFelviszController::class, 'OltozoFoglalas'] )->name('OltozoFoglalasFelvitel');
