@@ -5,6 +5,7 @@ use App\Http\Controllers\api\GepekController;
 use App\Http\Controllers\CostumAuthController;
 use App\Http\Controllers\api\EszkozDbController;
 use App\Http\Controllers\IndexController;
+use App\Http\Controllers\UgyfeledzesFelviszController;
 
 /*
 |--------------------------------------------------------------------------
@@ -49,3 +50,8 @@ Route::get('/logout', [CostumAuthController::class, 'logout']);
 Route::get('/api/gepek/search', [GepekController::class, 'search']);
 Route::get('/api/gepek/sort', [GepekController::class, 'sortBy']);
 Route::get('/api/gepek/{id}', [GepekController::class, 'show']);
+
+/* Ugyfel edzes foglalas felvitele */
+Route::post('/ugyfelEdzesFoglalasFelvitel', [UgyfeledzesFelviszController::class, 'felviszUgyfelFoglalas'] )->name('ugyfelEdzesFoglalasFelvitel');
+//Route::post('/ugyfelEdzesFoglalasTorol', [UgyfeledzesFelviszController::class, 'torolUgyfelFoglalas'] )->name('ugyfelEdzesFoglalasTorol');
+Route::delete('/ugyfelEdzesFoglalasTorol/{id}',  [UgyfeledzesFelviszController::class, 'torolUgyfelFoglalas'] )->name('ugyfelEdzesFoglalasTorol');

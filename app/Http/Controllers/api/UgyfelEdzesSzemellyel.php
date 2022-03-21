@@ -3,8 +3,6 @@
 namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
-use App\Models\Ugyfel_edzes;
-use App\Models\Szemely;
 use Illuminate\Support\Facades\DB;
 
 
