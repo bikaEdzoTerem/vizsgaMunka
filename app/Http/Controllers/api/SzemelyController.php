@@ -107,4 +107,13 @@ class SzemelyController extends Controller
         $szemelyek=Szemely::where('jogosultsag_id',1)->get();
         return response()->json($szemelyek);
     }
+    public function edzok(){
+        $szemelyek=Szemely::where('jogosultsag_id',3)->get();
+        return response()->json($szemelyek);
+    }
+    public function dolgozok(){
+        $szemelyek=Szemely::where('jogosultsag_id',2)->get();
+        return response()->json($szemelyek);
+    }
+
 }

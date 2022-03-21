@@ -36,6 +36,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::apiResource('gepek', GepekController::class);
 Route::apiResource('berletTipus', BerletTipusController::class);
 Route::get("szemely/ugyfelek",[SzemelyController::class,'ugyfelek']);
+Route::get("szemely/edzok",[SzemelyController::class,'edzok']);
+Route::get("szemely/dolgozok",[SzemelyController::class,'dolgozok']);
 Route::apiResource('szemely', SzemelyController::class);
 Route::apiResource('eszkoz', EszkozController::class);
 Route::apiResource('edzesek', EdzesekController::class);
