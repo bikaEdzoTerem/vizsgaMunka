@@ -73,7 +73,7 @@ class AdatokMegjelenitese{
         console.log(seged);
         let txt = "";
         oszlopNevek.forEach((element,index) => {
-            
+           
     
             txt += '<label for="' + element + '">' + element + ":</label>";
     
@@ -85,10 +85,11 @@ class AdatokMegjelenitese{
                     element +
                     '" autofocus placeholder="' +
                     element +
-                    '" disabled>';
+                    '" disabled'+
+                    '>';
             } else if (eldont === true) {
                 eldont = false;
-                txt += '<select id="'+keresetErtek+'" name="' + keresetErtek + '">';
+                txt += '<select id="'+element+'" name="' + element + '">';
                 seged.forEach((element) => {
                  
                     let nev = "";
@@ -116,7 +117,7 @@ class AdatokMegjelenitese{
             } 
             else if (eldont2 === true) {
                 eldont2 = false;
-                txt += '<select id="'+keresetErtek2+'" name="' + keresetErtek2 + '">';
+                txt += '<select id="'+element+'" name="' + element + '">';
                 tomb2.forEach((element) => {
                     let nev = "";
                     try {

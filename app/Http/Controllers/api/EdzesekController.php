@@ -4,7 +4,9 @@ namespace App\Http\Controllers\api;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Edzesek;
+use App\Models\Ugyfel_edzes;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 
 class EdzesekController extends Controller
 {
@@ -12,7 +14,7 @@ class EdzesekController extends Controller
     { $sort=$request->query ('_sort');
         $order=$request->query ('_order');
         $q=$request->query('q');
-        $edzesek=Edzesek::selectRaw("*");
+        $edzesek=Edzesek::selectRaw("*,1 as hidden");
         if($sort&&$order){
             $edzesek->orderBy($sort,$order);
         }
@@ -28,8 +30,29 @@ class EdzesekController extends Controller
       
        
         //dd($szemelyek->toSql());
+    $edzesek=$edzesek->get();
+        return response()->json($edzesek);
+        
 
-        return response()->json($edzesek->get());
+    }public function update(Request $request){
+        $original=$request->input('originalInputs');
+        $new=$request->input('newInputs');
+       DB::Table('ugyfel_edzes')
+       ->where([
+           ['edzo',$original['edzo']],
+           ['ugyfel',$original['ugyfel']],
+           ['datum',$original['datum']],
+           ['ora',$original['ora']],
+       ])
+       ->update([
+       'edzo' => $new['edzo'],
+       'ugyfel' => $new['ugyfel'],
+       'datum' => $new['datum'],
+       'ora' => $new['ora'],
+       ]);
+
+       
+        return response()->json(true);
     }
     
 }

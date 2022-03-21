@@ -86,18 +86,15 @@ $(function () {
             adatMeg.adatbeilleszt(eseny.detail, keresetErtek, eldont ,Oszlopnev,keresetErtek2,eldont2);
             adatMeg.apiOsszealitas(termek,Oszlopnev);
             kicsiE(true, adat);
-            
+            const originalInputs=getinpits();
+
              $("#kuld").click(() => {
-            const inputs = {};
-            for (element of $("#javitas select,#javitas input")) {
-                const name = $(element).attr("name");
-                const value = $(element).val();
-                inputs[name] = value;
-            }
+                const newInputs=getinpits();
+           
             console.log($("#javitas input"));
             myAjax.adatmodosit(
                 "api/" + adat,
-                inputs,
+                adat==="edzesek" ? {originalInputs,newInputs}:newInputs,
                 $("#javitas input").val()
             );
             adatMeg.adatbeilleszt(eseny.detail, keresetErtek, eldont ,Oszlopnev);
@@ -110,7 +107,16 @@ $(function () {
        
            
     });
+    function getinpits(){
+        const inputs = {};
+         for (element of $("#javitas select,#javitas input")) {
+        const name = $(element).attr("name");
+        const value = $(element).val();
+        inputs[name] = value;
 
+    }
+        return inputs
+    }
     function kezdes(adat) {
         $(".elemek").remove();
         $("#fo").empty();
@@ -207,11 +213,14 @@ console.log(adat);
             nemModosithato=10;
             break;
         case "gyakorlat":
-            keresetTabla = "izomcsoport";
-            keresetErtek = "izomcsoport_id";
+            keresetTabla = "gepek";
+            keresetTabla2 = "izomcsoport";
+            keresetErtek = "eszkoz_tipus_szamlalo";
+            keresetErtek2 = "izomcsoport_id";
             eldont = true;
+            eldont2 = true;
             console.log("izomcsoport_id");
-            nemModosithato=0;
+            nemModosithato=9;
             break;
         case "munkaido":
             keresetTabla="szemely";
