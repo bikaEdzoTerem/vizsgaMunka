@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\api\arvaltozasController;
 use App\Http\Controllers\api\BerletTipusController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -54,6 +55,7 @@ Route::apiResource('jogosultsag', jogosultsagController::class);
 Route::get("proba",[BerletTipusController::class,"getAr"]);
 Route::apiResource('edzoIdopont', EdzoIdopontokController::class);
 Route::apiResource('berletek', BerletekController::class);
+Route::apiResource('arvaltozas', arvaltozasController::class);
 
 //Route::apiResource('ugyfelEdzesek', UgyfelEdzesController::class);//majd torolheto
 Route::apiResource('ugyfelEdzesek2', ugyfelEdzesSzemellyel::class);

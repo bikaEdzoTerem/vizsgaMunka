@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Arvaltozas;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 class arvaltozasController extends Controller
 {
     public function index(Request $request)
@@ -47,27 +48,35 @@ class arvaltozasController extends Controller
             
       
               return response()->json(true);}
-    public function update(Request $request,string $arvaltozasId)
+    public function update(Request $request)
     {
-  $Berlet_tipus_id=$request->input("Berlet_tipus_id");
-  $regi_ar=$request->input("regi_ar");
-  $uj_ar=$request->input("uj_ar");
-  $mettol=$request->input("mettol");
-  $meddig=$request->input("meddig");
+  
  
-        $arvaltozas=Arvaltozas::find($arvaltozasId);
-        $arvaltozas->Berlet_tipus_id=$Berlet_tipus_id;
-        $arvaltozas->regi_ar=$regi_ar;
-        $arvaltozas->uj_ar=$uj_ar;
-        $arvaltozas->mettol=$mettol;
-        $arvaltozas->meddig=$meddig;
-       
-        $arvaltozas->save();
-      
+  $original=$request->input('originalInputs');
+  $new=$request->input('newInputs');
+ DB::Table('arvaltozas')
+ ->where([
+     ['berlet_tipus_id',$original['berlet_tipus_id']],
+     ['regi_ar',$original['regi_ar']],
+     ['uj_ar',$original['uj_ar']],
+     ['mettol',$original['mettol']],
+     ['meddig',$original['meddig']],
+ ])
+ ->update([
+        'berlet_tipus_id'=>$new['berlet_tipus_id'],
+        'regi_ar'=>$new['regi_ar'],
+        'uj_ar'=>$new['uj_ar'],
+        'mettol'=>$new['mettol'],
+        'meddig'=>$new['meddig'],
+ ]);
 
-        return response()->json(true);
+ 
+  return response()->json(true);
+}
+
+       
         
-    }
+    
     public function destroy(string $arvaltozasId){
         $arvaltozas=Arvaltozas::find($arvaltozasId);
        

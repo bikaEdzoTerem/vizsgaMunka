@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Gyakorlat;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 class gyakorlatokController extends Controller
 {
     public function index(Request $request)
@@ -31,17 +32,19 @@ class gyakorlatokController extends Controller
 
         return response()->json($gyakorlatok->get());
     } public function store(Request $request){
-        $izomcsopotId=$request->input("izomcsopor_id");
+        $eszkoztipusszamlalo=$request->input("eszkoz_tipus_szamlalo");
+        $izomcsopotId=$request->input("izomcsoport_id");
   $megnevezes=$request->input("megnevezes");
-  $video=$request->input("video");
+  
   $leiras=$request->input("leiras");
   $szint=$request->input("szint");
 
  
         $gyakorlat=new Gyakorlat;
-        $gyakorlat->izomcsopor_id=$izomcsopotId;
+        $gyakorlat->eszkoz_tipus_szamlalo=$eszkoztipusszamlalo;
+        $gyakorlat->izomcsoport_id=$izomcsopotId;
         $gyakorlat->megnevezes=$megnevezes;
-        $gyakorlat->video=$video;
+        $gyakorlat->video="toábbFejlesztés";
         $gyakorlat->leiras=$leiras;
         $gyakorlat->szint=$szint;
     
@@ -50,26 +53,30 @@ class gyakorlatokController extends Controller
 
         return response()->json(true);}
         
-        public function update(Request $request,string $gyakorlatId)
+        public function update(Request $request)
     {
-  $izomcsopotId=$request->input("izomcsopor_id");
-  $megnevezes=$request->input("megnevezes");
-  $video=$request->input("video");
-  $leiras=$request->input("leiras");
-  $szint=$request->input("szint");
+         
+
+         $original=$request->input('originalInputs');
+         $new=$request->input('newInputs');
+        DB::Table('gyakorlats')
+        ->where([
+            ['eszkoz_tipus_szamlalo',$original['eszkoz_tipus_szamlalo']],
+            ['izomcsoport_id',$original['izomcsoport_id']],
+            ['megnevezes',$original['megnevezes']],
+            ['leiras',$original['leiras']],
+            ['szint',$original['szint']],
+        ])
+        ->update([
+        'eszkoz_tipus_szamlalo' => $new['eszkoz_tipus_szamlalo'],
+        'izomcsoport_id' => $new['izomcsoport_id'],
+        'megnevezes' => $new['megnevezes'],
+        'leiras' => $new['leiras'],
+        'szint' => $new['szint'],
+        ]);
 
  
-        $gyakorlat=Gyakorlat::find($gyakorlatId);
-        $gyakorlat->izomcsopor_id=$izomcsopotId;
-        $gyakorlat->megnevezes=$megnevezes;
-        $gyakorlat->video=$video;
-        $gyakorlat->leiras=$leiras;
-        $gyakorlat->szint=$szint;
-    
-        $gyakorlat->save();
-      
-
-        return response()->json(true);
+  return response()->json(true);
         
     }
     public function destroy(string $gyakorlatid){

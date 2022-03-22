@@ -7,60 +7,13 @@ class AdatokMegjelenitese{
         console.log(vegApi);
         myAjax.adatbeolvas(vegApi, adatok, (adatok,oszlopNevek)=>{$(".elemek").empty();Alap(oszlopNevek);rend.elemMegjelenit(adatok,oszlopNevek)}, oszlopNevek);
     }
-    adatbeilleszt(adatok, keresetErtek, eldont,oszlopNevek,keresetErtek2="",eldont2=false) {
+    adatbeilleszt(adatok,oszlopNevek) {
         console.log(adatok)
         oszlopNevek.forEach((element) => {
-            if (element == keresetErtek) {
-                if (eldont == true) {
-                    // console.log(adatok)
-                    console.log(adatok[element]);
-                    let nev = "";
-                    try {
-                      let nevek = element[keresetErtek].split(" ");
-                      
-                      nevek.forEach((neve) => {
-                          nev += neve;
-                      });
-                    } catch (error) {
-                      nev=element[keresetErtek];
-                    }
-                    //$("#" + segetelem[element] + " ").text(segetelem[element]);
-                    $("#" + nev + "p").attr({ selected: true });
-                    
-                    eldont = false;
-                }
-                else {
-                  $("#" + element + " ").val(adatok[element]);
-                  console.log(adatok[element]);
-              }
-            }
-            if (element == keresetErtek2) {
-                if (eldont2===true) {
-                    // console.log(adatok)
-                    console.log(adatok[element]);
-                    let nev = "";
-                    try {
-                      let nevek = element[keresetErtek2].split(" ");
-                      
-                      nevek.forEach((neve) => {
-                          nev += neve;
-                      });
-                    } catch (error) {
-                      nev=element[keresetErtek2];
-                    }
-                    //$("#" + segetelem[element] + " ").text(segetelem[element]);
-                    $("#" + nev + "p").attr({ selected: true });
-                    
-                    eldont2 = false;
-                }
-                else {
-                  $("#" + element + " ").val(adatok[element]);
-                  console.log(adatok[element]);
-              }
-            } else {
+           
                 $("#" + element + " ").val(adatok[element]);
                 console.log(adatok[element]);
-            }
+            
         });
     }
     
@@ -109,7 +62,7 @@ class AdatokMegjelenitese{
                         element[keresetErtek] +
                         '"id="'+
                         nev   +                     
-                        'p">' +
+                        's1">' +
                         element[keresetErtek] +
                         '</option>';
                 });
@@ -137,7 +90,7 @@ class AdatokMegjelenitese{
                         element[keresetErtek2] +
                         '"id="'+
                         nev+
-                        'p">' +
+                        's2">' +
                         element[keresetErtek2] +
                         '</option>';
                 });

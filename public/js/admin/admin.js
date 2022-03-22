@@ -81,11 +81,11 @@ $(function () {
             '"he he he he he he""as ar ar ar ar el"'
         );
         
-        
+        kicsiE(true, adat);
         vizsgal(adat,(keresetErtek,eldont,keresetErtek2,eldont2)=>{
-            adatMeg.adatbeilleszt(eseny.detail, keresetErtek, eldont ,Oszlopnev,keresetErtek2,eldont2);
+            adatMeg.adatbeilleszt(eseny.detail,Oszlopnev);
             adatMeg.apiOsszealitas(termek,Oszlopnev);
-            kicsiE(true, adat);
+      
             const originalInputs=getinpits();
 
              $("#kuld").click(() => {
@@ -94,10 +94,10 @@ $(function () {
             console.log($("#javitas input"));
             myAjax.adatmodosit(
                 "api/" + adat,
-                adat==="edzesek" ? {originalInputs,newInputs}:newInputs,
+                adat==="edzesek"||adat==="gyakorlat"||adat==="munkaido"||adat==="arvaltozas"||adat==="berletek" ? {originalInputs,newInputs}:newInputs,
                 $("#javitas input").val()
             );
-            adatMeg.adatbeilleszt(eseny.detail, keresetErtek, eldont ,Oszlopnev);
+            adatMeg.adatbeilleszt(eseny.detail,Oszlopnev);
             adatMeg.apiOsszealitas(termek,Oszlopnev);
         });
 
@@ -153,7 +153,8 @@ $(function () {
             "oltozofoglalas",
             "jogosultsag",
             "gyakorlat",
-            "terem",
+            "berletek",
+            "arvaltozas",
             "berletTipus"
             
         ];
@@ -182,14 +183,14 @@ $(function () {
 
 });
 function vizsgal(adat,myCallback=false){
-    let keresetErtek,eldont=false;
+    let keresetErtek="",keresetErtek2="",eldont=false,eldont2=false;
         let seged=[];
     let nemModosithato=0;
 console.log(adat);
     switch (adat) {
         case "szemely":
             keresetTabla = "jogosultsag";
-            keresetErtek = "jogosultsag_id";
+            keresetErtek = "megnevezes";
             console.log("jogosultsag_id");
             eldont = true;
             nemModosithato=0;
@@ -223,11 +224,38 @@ console.log(adat);
             nemModosithato=9;
             break;
         case "munkaido":
-            keresetTabla="szemely";
+            keresetTabla="szemely/dolgozok";
             keresetErtek = "szemely_id";
             eldont=true;
             nemModosithato=9;
+            break
+        case "oltozofoglalas":
+            keresetTabla = "szekreny";
+            keresetTabla2 = "szemely/ugyfelek";
+            keresetErtek = "szekreny_id";
+            keresetErtek2 = "szemely_id";
+            eldont = true;
+            eldont2 = true;
+            console.log("izomcsoport_id");
+            nemModosithato=0;
 
+        break
+        case "arvaltozas":
+            keresetTabla="berletTipus";
+            keresetErtek="berlet_tipus_id";
+            eldont =true;
+            nemModosithato=9
+            break;
+            case "berletek":
+                keresetTabla = "berletTipus";
+            keresetTabla2 = "szemely/ugyfelek";
+            keresetErtek = "berlet_tipus_id";
+            keresetErtek2 = "szemely_id";
+            eldont = true;
+            eldont2 = true;
+            console.log("izomcsoport_id");
+            nemModosithato=3;
+                break
         default:
           
          
@@ -246,13 +274,13 @@ try {
         });} catch (error) {
             adatMeg.beviteliMezoGeneralas(tomb, keresetErtek, eldont,Oszlopnev,nemModosithato);
         
-        myCallback(keresetErtek,eldont);
+        myCallback();
         }
         
         });
 } catch (error) {
     adatMeg.beviteliMezoGeneralas(seged, keresetErtek, eldont,Oszlopnev,nemModosithato);
-    myCallback(keresetErtek,eldont);
+    myCallback();
 }
     
    

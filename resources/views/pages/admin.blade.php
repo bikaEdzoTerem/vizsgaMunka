@@ -20,8 +20,9 @@
         <button id="szekreny">szekrenyek</button>
         <button id="oltozofoglalas">oltozofoglalas</button>
         <button id="gyakorlat">gyakorlatok</button>
-        <button id="terem">termek</button>
-        <button id="berletTipus">berletek</button>
+        <button id="berletTipus">berlet tupusok</button>
+        <button id="berletek">berletek</button>
+        <button id="arvaltozas">arvaltozas</button>
         <button id="diagram">diagram</button>
     
     </aside>

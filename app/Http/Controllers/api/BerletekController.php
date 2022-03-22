@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Berlet;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 class BerletekController extends Controller
 {
     public function index(Request $request)
@@ -47,24 +48,28 @@ class BerletekController extends Controller
       
               return response()->json(true);
     }      
-    public function update(Request $request,string $Berlet_tipusId)
+    public function update(Request $request)
     {
-  $Berlet_tipus_id=$request->input("Berlet_tipus_id");
-  $ugyfel=$request->input("ugyfel");
-  $datum_tol=$request->input("datum_tol");
-  $datum_ig=$request->input("datum_ig");
- 
-        $Berlet_tipus=Berlet::find($Berlet_tipusId);
-        $Berlet_tipus->eszkoz_neve=$Berlet_tipus_id;
-        $Berlet_tipus->ugyfel=$ugyfel;
-        $Berlet_tipus->datum_tol=$datum_tol;
-        $Berlet_tipus->datum_ig=$datum_ig;
-       
-        $Berlet_tipus->save();
-      
 
-        return response()->json(true);
-        
+  $original=$request->input('originalInputs');
+  $new=$request->input('newInputs');
+ DB::Table('berlets')
+ ->where([
+     ['berlet_tipus_id',$original['berlet_tipus_id']],
+     ['ugyfel',$original['ugyfel']],
+     ['datum_tol',$original['datum_tol']],
+     ['datum_ig',$original['datum_ig']],
+ ])
+ ->update([
+ 'berlet_tipus_id' => $new['berlet_tipus_id'],
+ 'ugyfel' => $new['ugyfel'],
+ 'datum_tol' => $new['datum_tol'],
+ 'datum_ig' => $new['datum_ig'],
+ ]);
+
+ 
+  return response()->json(true);
+
     }
     public function destroy(string $Berlet_tipusId){
         $Berlet_tipus=berlet::find($Berlet_tipusId);
