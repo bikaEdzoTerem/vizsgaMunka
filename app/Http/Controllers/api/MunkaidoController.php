@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Munkaido;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 class MunkaidoController extends Controller
 {
     public function index(Request $request)
@@ -31,40 +32,50 @@ class MunkaidoController extends Controller
 
         return response()->json($munkaidok->get());
     }public function store(Request $request){
-        $szemely_id=$request->input("szemely_id");
+        $dolgozo=$request->input("dolgozo");
   $mettol=$request->input("mettol");
   $meddig=$request->input("meddig");
 
  
         $munkaido=new Munkaido;
-        $munkaido->dolgozo=$szemely_id;
+        $munkaido->dolgozo=$dolgozo;
         $munkaido->mettol=$mettol;
         $munkaido->meddig=$meddig;
         $munkaido->save();
+        
       
 
         return response()->json(true);}
-    public function update(Request $request,string $munkaidoId)
-    {
-        $szemely_id=$request->input("szemely_id");
-        $mettol=$request->input("mettol");
-        $meddig=$request->input("meddig");
-      
-       
-              $munkaido=Munkaido::find($munkaidoId);
-              $munkaido->dolgozo=$szemely_id;
-              $munkaido->mettol=$mettol;
-              $munkaido->meddig=$meddig;
-              $munkaido->save();
-            
-  
+    public function update(Request $request)
+    {         $original=$request->input('originalInputs');
+              $new=$request->input('newInputs');
+             DB::Table('munkaidos')
+             ->where([
+                 ['dolgozo',$original['dolgozo']],
+                 ['mettol',$original['mettol']],
+                 ['meddig',$original['meddig']],
+                
+             ])
+             ->update([
+             'dolgozo' => $new['dolgozo'],
+             'mettol' => $new['mettol'],
+             'meddig' => $new['meddig'],
+             
+             ]);
         return response()->json(true);
         
     }
-    public function destroy(string $munkaidoId){
-        $munkaido=Munkaido::find($munkaidoId);
+    public function delete(Request $request){
+        $original=$request->all();
        
-        $munkaido->delete();
+        DB::Table('munkaidos')
+             ->where([
+                 ['dolgozo',$original['dolgozo']],
+                 ['mettol',$original['mettol']],
+                 ['meddig',$original['meddig']],
+                
+             ])->delete();
+       
         return response()->json(true);
     }
 }

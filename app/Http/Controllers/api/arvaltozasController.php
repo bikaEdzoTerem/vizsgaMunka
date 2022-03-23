@@ -77,10 +77,18 @@ class arvaltozasController extends Controller
        
         
     
-    public function destroy(string $arvaltozasId){
-        $arvaltozas=Arvaltozas::find($arvaltozasId);
-       
-        $arvaltozas->delete();
-        return response()->json(true);
+public function delete(Request $request){
+    $original=$request->all();
+   
+    DB::Table('arvaltozas')
+ ->where([
+     ['berlet_tipus_id',$original['berlet_tipus_id']],
+     ['regi_ar',$original['regi_ar']],
+     ['uj_ar',$original['uj_ar']],
+     ['mettol',$original['mettol']],
+     ['meddig',$original['meddig']],
+ ])->delete();
+   
+    return response()->json(true);
     }
 }

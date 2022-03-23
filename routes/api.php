@@ -44,8 +44,11 @@ Route::get("szemely/dolgozok",[SzemelyController::class,'dolgozok']);
 Route::apiResource('szemely', SzemelyController::class);
 Route::apiResource('eszkoz', EszkozController::class);
 Route::apiResource('edzesek', EdzesekController::class);
+Route::post('edzesek/delete', [EdzesekController::class,"delete"]);
 Route::apiResource('gyakorlat', gyakorlatokController::class);
+Route::post('gyakorlat/delete', [gyakorlatokController::class,"delete"]);
 Route::apiResource('munkaido', MunkaidoController::class);
+Route::post('munkaido/delete', [MunkaidoController::class,"delete"]);
 Route::get("oltozofoglalas/letszam/napi",[OltozofoglalasokController::class,"letszamNaponta"]);
 Route::apiResource('oltozofoglalas', OltozofoglalasokController::class);
 Route::apiResource('szekreny', SzekrenyekController::class);
@@ -55,7 +58,9 @@ Route::apiResource('jogosultsag', jogosultsagController::class);
 Route::get("proba",[BerletTipusController::class,"getAr"]);
 Route::apiResource('edzoIdopont', EdzoIdopontokController::class);
 Route::apiResource('berletek', BerletekController::class);
+Route::post('berletek/delete', [BerletekController::class,"delete"]);
 Route::apiResource('arvaltozas', arvaltozasController::class);
+Route::post('arvaltozas/delete', [arvaltozasController::class,"delete"]);
 
 //Route::apiResource('ugyfelEdzesek', UgyfelEdzesController::class);//majd torolheto
 Route::apiResource('ugyfelEdzesek2', ugyfelEdzesSzemellyel::class);

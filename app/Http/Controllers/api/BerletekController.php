@@ -71,10 +71,16 @@ class BerletekController extends Controller
   return response()->json(true);
 
     }
-    public function destroy(string $Berlet_tipusId){
-        $Berlet_tipus=berlet::find($Berlet_tipusId);
+    public function delete(Request $request){
+        $original=$request->all();
        
-        $Berlet_tipus->delete();
+        DB::Table('berlets')->where([
+     ['berlet_tipus_id',$original['berlet_tipus_id']],
+     ['ugyfel',$original['ugyfel']],
+     ['datum_tol',$original['datum_tol']],
+     ['datum_ig',$original['datum_ig']],
+        ])->delete();
+       
         return response()->json(true);
     }
        

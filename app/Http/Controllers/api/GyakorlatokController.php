@@ -79,10 +79,18 @@ class gyakorlatokController extends Controller
   return response()->json(true);
         
     }
-    public function destroy(string $gyakorlatid){
-        $gyakorlat=Gyakorlat::find($gyakorlatid);
+    public function delete(Request $request){
+        $original=$request->all();
        
-        $gyakorlat->delete();
+        DB::Table('gyakorlats')
+        ->where([
+            ['eszkoz_tipus_szamlalo',$original['eszkoz_tipus_szamlalo']],
+            ['izomcsoport_id',$original['izomcsoport_id']],
+            ['megnevezes',$original['megnevezes']],
+            ['leiras',$original['leiras']],
+            ['szint',$original['szint']],
+        ])->delete();
+       
         return response()->json(true);
     }
 }

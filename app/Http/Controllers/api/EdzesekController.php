@@ -54,17 +54,18 @@ class EdzesekController extends Controller
        
         return response()->json(true);
     }
-   /* public function destroy(Request $request)){
-        $berletTipus= DB::Table('ugyfel_edzes')
-        ->where([
-            ['edzo',$original['edzo']],
-            ['ugyfel',$original['ugyfel']],
-            ['datum',$original['datum']],
-            ['ora',$original['ora']],
-        ])
+    public function delete(Request $request){
+        $original=$request->all();
        
-        $berletTipus->delete();
+        DB::Table('ugyfel_edzes')
+       ->where([
+           ['edzo',$original['edzo']],
+           ['ugyfel',$original['ugyfel']],
+           ['datum',$original['datum']],
+           ['ora',$original['ora']],
+       ])->delete();
+       
         return response()->json(true);
-    }*/
+     }
     
 }

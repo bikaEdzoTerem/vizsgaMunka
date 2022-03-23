@@ -68,7 +68,12 @@ $(function () {
     });
     $(window).on("torol", function (event) {
         const id = event.detail[Oszlopnev[0]];
-        myAjax.adattorles(`api/${adat}`, id);
+        const hasPrimarykey=["edzesek","gyakorlat","munkaido","arvaltozas","berletek"].includes(adat)
+        console.log(event.detail)
+         hasPrimarykey 
+         ? myAjax.adatkuldes(`api/${adat}/delete`,event.detail)
+         :myAjax.adattorles(`api/${adat}`, id);
+        
     });
     $(window).on("modosit", function (eseny) {
         $(".elemek").remove();
@@ -94,7 +99,7 @@ $(function () {
             console.log($("#javitas input"));
             myAjax.adatmodosit(
                 "api/" + adat,
-                adat==="edzesek"||adat==="gyakorlat"||adat==="munkaido"||adat==="arvaltozas"||adat==="berletek" ? {originalInputs,newInputs}:newInputs,
+                ["edzesek","gyakorlat","munkaido","arvaltozas","berletek"].includes(adat) ? { originalInputs, newInputs } : newInputs,
                 $("#javitas input").val()
             );
             adatMeg.adatbeilleszt(eseny.detail,Oszlopnev);
