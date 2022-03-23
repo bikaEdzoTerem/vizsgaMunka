@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Ugyfel_edzes;
 use Illuminate\Support\Facades\DB;
-use App\Models\Szemely;
 
 class UgyfeledzesFelviszController extends Controller
 {
@@ -44,7 +43,7 @@ class UgyfeledzesFelviszController extends Controller
     public function torolUgyfelFoglalas($id){
         $article = Ugyfel_edzes::find($id);
         $article->delete();
-        return ['message' => 'Törölve'];
+        return back()->with('sikeres','A törlés sikeres volt');
     }
     
     

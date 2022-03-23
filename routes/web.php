@@ -7,6 +7,7 @@ use App\Http\Controllers\api\EszkozDbController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\UgyfeledzesFelviszController;
 use App\Http\Controllers\OltozoFoglalasFelviszController;
+use App\Http\Controllers\szekrenyListazController;
 
 /*
 |--------------------------------------------------------------------------
@@ -58,3 +59,9 @@ Route::post('/ugyfelEdzesFoglalasFelvitel', [UgyfeledzesFelviszController::class
 Route::delete('/ugyfelEdzesFoglalasTorol/{id}',  [UgyfeledzesFelviszController::class, 'torolUgyfelFoglalas'] )->name('ugyfelEdzesFoglalasTorol');
 //recepcio Oltozo foglalas felvitele
 Route::post('/OltozoFoglalasFelvitel', [OltozoFoglalasFelviszController::class, 'OltozoFoglalas'] )->name('OltozoFoglalasFelvitel');
+
+
+//Szekrenyeket kilistaz
+Route::get('/list', [szekrenyListazController::class, 'listaz'] );
+Route::get('/felold/{szekreny_id}', [szekrenyListazController::class, 'felold'] );
+Route::get('/elront/{szekreny_id}', [szekrenyListazController::class, 'elront'] );
