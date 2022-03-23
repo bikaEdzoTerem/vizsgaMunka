@@ -5,6 +5,8 @@ namespace App\Http\Controllers\api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Berlet;
+use App\Models\Berlet_tipus;
+use DateTime;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\DB;
 class BerletekController extends Controller
@@ -53,6 +55,9 @@ class BerletekController extends Controller
 
   $original=$request->input('originalInputs');
   $new=$request->input('newInputs');
+  $datumig=Berlet_tipus::find($new['berlet_tipus_id']);
+  $alapDatum=new DateTime($new['datum_tol']);
+  $datum=date_add($alapDatum, date_interval_create_from_date_string($datumig->idotartam_nap.' days'));
  DB::Table('berlets')
  ->where([
      ['berlet_tipus_id',$original['berlet_tipus_id']],
@@ -64,7 +69,7 @@ class BerletekController extends Controller
  'berlet_tipus_id' => $new['berlet_tipus_id'],
  'ugyfel' => $new['ugyfel'],
  'datum_tol' => $new['datum_tol'],
- 'datum_ig' => $new['datum_ig'],
+ 'datum_ig' =>$datum->format('Y-m-d H:i:s')  ,
  ]);
 
  
