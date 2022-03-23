@@ -46,7 +46,9 @@ $(function () {
             myAjax. adatkuldes("api/" + adat,
             inputs);
             
-            
+            $("#fo").empty();
+            $(".elemek").remove();
+            $("#fo").append('<section class="elemek row"><div class="elem" ></section>');
             adatMeg.apiOsszealitas(termek,Oszlopnev);
             
         });
@@ -73,6 +75,7 @@ $(function () {
          hasPrimarykey 
          ? myAjax.adatkuldes(`api/${adat}/delete`,event.detail)
          :myAjax.adattorles(`api/${adat}`, id);
+         adatMeg.apiOsszealitas(termek,Oszlopnev);
         
     });
     $(window).on("modosit", function (eseny) {
@@ -102,7 +105,9 @@ $(function () {
                 ["edzesek","gyakorlat","munkaido","arvaltozas","berletek"].includes(adat) ? { originalInputs, newInputs } : newInputs,
                 $("#javitas input").val()
             );
-            adatMeg.adatbeilleszt(eseny.detail,Oszlopnev);
+            $("#fo").empty();
+            $(".elemek").remove();
+            $("#fo").append('<section class="elemek row"><div class="elem" ></section>');
             adatMeg.apiOsszealitas(termek,Oszlopnev);
         });
 
@@ -203,7 +208,10 @@ console.log(adat);
         case "eszkoz":
             keresetTabla = "eszkoz";
             keresetErtek = "eszkoz_neve";
+            keresetTabla2="terem"
+            keresetErtek2="terem_id"
             eldont = true;
+            eldont2=true;
             console.log("eszkoz_neve");
             nemModosithato=0;
             break;
