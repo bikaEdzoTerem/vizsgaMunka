@@ -5,12 +5,13 @@
         <nav>
           <ul>
             <li><a href="/recepcio">Recepcio felulet</a></li>
-            <li><a href="#">Page 1</a></li>
-            <li><a href="#">Page 2</a></li>
+            <li><a href="#">Szántai Barna</a></li>
+            <li><a href="#">Bogdán Gábor</a></li>
           </ul>
         </nav>
         <form action="{{route('OltozoFoglalasFelvitel')}}" method="post">
         @csrf
+          <p>Szántai Barna <br> Bogdán Gábor<br>Joó Edvárd<br>Gutyina András</p>
               <input id="katt1" placeholder="személy neve" type="txt"  class="szemelyLefoglal" name="ugyfelNev" value="{{old('ugyfelNev')}}"/>
               <input id="katt2" type="number" placeholder="szekrény száma" min="0" pattern='([0-9]+)'  class="kulcsLefoglal" name="szekrenySzama" value="{{old('szekrenySzama')}}"/>
               <span id="szekrenyerror"></span>
@@ -61,6 +62,43 @@
       
       </div>
     </label>
+    <table border="1">
+      <tr>
+        <td>Szekrény szám</td>
+        <td>Neme</td>
+        <td>Üres-e</td>
+        <td>Felodás</td>
+      </tr>
+      @foreach ($szekenies as $adat)
+      <tr>
+        <td>{{$adat['szekreny_id']}}</td>
+        <td>{{$adat['tipusa']}}</td>
+        @if ($adat->ures_e=="Ü")
+        <td><a>Üres</a></td>
+        @elseif($adat->ures_e=="F")
+          <td><a>Foglat</a></td>
+          @elseif($adat->ures_e=="R")
+          <td><a>Rossz!</a></td>
+        @endif
+        @if ($adat->ures_e=="F")
+          <td><a href={{"felold/".$adat['szekreny_id']}}><button >Felold</button></a></td>
+          @else
+          <td><a></a></td>
+          @endif
+          @if($adat->ures_e=="R")
+            @csrf
+            <td><a href={{"elront/".$adat['szekreny_id']}}><input type="checkbox" {{-- class="hibasGomb" --}} checked></a></td>
+          @else
+            @csrf
+            <td><a href={{"elront/".$adat['szekreny_id']}}><input type="checkbox" {{-- class="hibasGomb" --}}></a></td>
+          </form>
+          @endif
+      </tr>
+      @endforeach
+    </table>
+    <div class="osszesSzekreny2">
+      
+    </div>
     <div class="osszesSzekreny"></div>
     <div id="szemelyerror"></div>
   </section>
