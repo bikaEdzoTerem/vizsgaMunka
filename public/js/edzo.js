@@ -86,7 +86,7 @@ $(".BalraCsokkent").on("click ", () => {
     idopontLista(idopontokTomb,jelenlegiDatum);
   });
   /* myAjax.adatBeolvasasElore(apiEdzoIdopontok,idopontokTomb); */
-  myAjax.adatbeolvas(apiEdzoIdopontok, idopontokTomb, idopontLista,jelenlegiDatum);
+  myAjax.adatbeolvas(/* "/api/ugyfelEdzesek2" */"/api/ugyfelEdzes", idopontokTomb, idopontLista,jelenlegiDatum);
   
   function datumKereses(){
     let datumkeres=$(".datumKeres").val();
@@ -168,6 +168,7 @@ $(".BalraCsokkent").on("click ", () => {
     function Elrejt(mit){
       /* $(mit).remove(); */
       $(mit)[0].style.display = "none";
+      
     }
     function Megjelenit(mit){
       /* $(mit).html("<button type=submit  class=lefoglal>Lefoglal</button>") */
@@ -297,8 +298,10 @@ $(".BalraCsokkent").on("click ", () => {
       }
     }
     $(window).on('felold', (event) => {//ha rányomok a feloldra torli az adatot
-      apiVegpont = "/api/ugyfelEdzesek2";
+      apiVegpont = "api/ugyfelEdzes";
+      /* apiVegpont = "ugyfelEdzesFoglalasTorol"; */
       myAjax.adattorles(apiVegpont, event.detail.id);
+      window.location.reload();
     });
 
     function oraListaz(){//orakhoz hozzá adja a valószínű lehettőségeket opciok nak

@@ -53,15 +53,15 @@ Route::get('/api/gepek/search', [GepekController::class, 'search']);
 Route::get('/api/gepek/sort', [GepekController::class, 'sortBy']);
 Route::get('/api/gepek/{id}', [GepekController::class, 'show']);
 
-/* Ugyfel edzes foglalas felvitele */
+// Ugyfel edzes foglalas felvitele 
 Route::post('/ugyfelEdzesFoglalasFelvitel', [UgyfeledzesFelviszController::class, 'felviszUgyfelFoglalas'] )->name('ugyfelEdzesFoglalasFelvitel');
 //Route::post('/ugyfelEdzesFoglalasTorol', [UgyfeledzesFelviszController::class, 'torolUgyfelFoglalas'] )->name('ugyfelEdzesFoglalasTorol');
-Route::delete('/ugyfelEdzesFoglalasTorol/{id}',  [UgyfeledzesFelviszController::class, 'torolUgyfelFoglalas'] )->name('ugyfelEdzesFoglalasTorol');
+/* Route::get('/ugyfelEdzesFoglalasTorol/{id}',  [UgyfeledzesFelviszController::class, 'torolUgyfelFoglalas'] )->name('ugyfelEdzesFoglalasTorol'); */
 //recepcio Oltozo foglalas felvitele
 Route::post('/OltozoFoglalasFelvitel', [OltozoFoglalasFelviszController::class, 'OltozoFoglalas'] )->name('OltozoFoglalasFelvitel');
 
 
 //Szekrenyeket kilistaz
-Route::get('/list', [szekrenyListazController::class, 'listaz'] );
+/* Route::get('/list', [szekrenyListazController::class, 'index'] );
 Route::get('/felold/{szekreny_id}', [szekrenyListazController::class, 'felold'] );
-Route::get('/elront/{szekreny_id}', [szekrenyListazController::class, 'elront'] );
+Route::get('/elront/{szekreny_id}', [szekrenyListazController::class, 'elront'] ); */

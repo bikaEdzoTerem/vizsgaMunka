@@ -6,10 +6,13 @@ use Illuminate\Http\Request;
 use App\Models\Szekeny;
 
 class szekrenyListazController extends Controller{
-    public function listaz(Request $request){
+    public function index(Request $request){
+        dd("hopp");
      /* return view('pages/recepcio'); */
      $adat=Szekeny::all();
-        return view('pages/recepcio',['szekenies'=>$adat]);
+     dd($adat);
+       /*  return view('pages/recepcio',['szekenies'=>$adat]); */
+       return $adat->values()->all();
     }
     function felold($szekreny_id){
 

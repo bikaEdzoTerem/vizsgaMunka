@@ -69,7 +69,7 @@
         <td>Üres-e</td>
         <td>Felodás</td>
       </tr>
-      @foreach ($szekenies as $adat)
+      {{-- @foreach ($szekenies as $adat)
       <tr>
         <td>{{$adat['szekreny_id']}}</td>
         <td>{{$adat['tipusa']}}</td>
@@ -87,14 +87,14 @@
           @endif
           @if($adat->ures_e=="R")
             @csrf
-            <td><a href={{"elront/".$adat['szekreny_id']}}><input type="checkbox" {{-- class="hibasGomb" --}} checked></a></td>
+            <td><a href={{"elront/".$adat['szekreny_id']}}><input type="checkbox"  checked></a></td>
           @else
             @csrf
-            <td><a href={{"elront/".$adat['szekreny_id']}}><input type="checkbox" {{-- class="hibasGomb" --}}></a></td>
+            <td><a href={{"elront/".$adat['szekreny_id']}}><input type="checkbox" ></a></td>
           </form>
           @endif
       </tr>
-      @endforeach
+      @endforeach --}}
     </table>
     <div class="osszesSzekreny2">
       

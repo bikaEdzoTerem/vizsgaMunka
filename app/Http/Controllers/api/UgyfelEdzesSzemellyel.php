@@ -8,9 +8,7 @@ use Illuminate\Support\Facades\DB;
 
 class UgyfelEdzesSzemellyel extends Controller
 {
-    public function index()
-    {
-
+    public function index(){
         /* $result1=Ugyfel_edzes::all();
         $result2=Szemely::all();
         return $result2; */
@@ -20,19 +18,17 @@ class UgyfelEdzesSzemellyel extends Controller
             ->get();
             
         $rendez=$tabla->sortBy('datum');
-        /* echo"hopp"; */
         $rendez->all();
         return $rendez->values()->all();
     }
-    public function osszekapcsol()
-    {
+    
+    public function osszekapcsol(){
         $tabla= DB::table('szemelies')
             ->join('berlets','berlets.ugyfel','szemelies.szemely_id')
             ->join('berlet_tipuses','berlet_tipuses.berlet_tipus_id','berlets.berlet_tipus_id')
             ->select('szemelies.szemely_id','szemelies.nev','szemelies.kep','szemelies.neme','berlets.datum_tol')
             ->get();
-         
-        /* echo"hopp"; */
+
         $tabla->all();
         return $tabla->values()->all();
     }
