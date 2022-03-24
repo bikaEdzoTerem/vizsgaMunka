@@ -35,8 +35,8 @@ class OltozofoglalasokController extends Controller
 
     public function store(Request $request){
         $szekrenyId=$request->input("szekreny_id");
-$ugyfel=$request->input("ugyfel");
-$datum=$request->input("datum");
+        $ugyfel=$request->input("ugyfel");
+        $datum=$request->input("datum");
 
 
     $eszkoz=new Oltozofoglalas;
