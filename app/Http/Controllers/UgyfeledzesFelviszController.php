@@ -23,7 +23,7 @@ class UgyfeledzesFelviszController extends Controller
         ->where('nev','like','%'.$szemelyNev.'%')
         ->pluck('szemely_id');
         $tabla = trim($tabla, '[]');
-
+        
         $ujfoglalas =new Ugyfel_edzes;
 
         $seged=($request -> datum);
@@ -40,12 +40,4 @@ class UgyfeledzesFelviszController extends Controller
             return back()->with('sikertelen','A foglalás sikertelen volt');
         }
     }
-    public function torolUgyfelFoglalas($id){
-        $article = Ugyfel_edzes::find($id);
-        $article->delete();
-        return back()->with('sikeres','A törlés sikeres volt');
-    }
-    
-    
-
 }
