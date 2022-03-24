@@ -19,16 +19,10 @@ class AdminRend{
    
 
     rendezesTabla(){
-        
-        
-        
-          let darabolas = $("#rendezes").val();
-          let vegtemek = darabolas.split("!");
-          console.log(vegtemek);
-         // rendezes = "?_sort=" + vegtemek[0] + "&_order=" + vegtemek[1] + "";
+       
          queryParams.set("_sort",vegtemek[0])
          queryParams.set("_order",vegtemek[1])
-          console.log("?_sort=" + vegtemek[0] + "&_order=" + vegtemek[1] + "");
+          
           adatMeg.apiOsszealitas(termek,Oszlopnev);
            
     }
@@ -75,7 +69,7 @@ class AdminRend{
       for (let index = 0; index <adathoszz / $("#listaz").val(); index++) {
           $("#navig").append(' <button class="oldal"  id='+index+'>'+index+'</button>');
           $('#'+index+'').on("click", function() {
-            oldalValt(index);
+            oldalValt(index,mindenadat);
               console.log(index);
              });
       }
@@ -86,10 +80,10 @@ class AdminRend{
     
 
 } 
-function oldalValt(ertek){
+function oldalValt(ertek,mindenadat){
     megjelenit=($("#listaz").val()*ertek)
     console.log($("#listaz").val()*ertek);
     
-    adatMeg.apiOsszealitas(termek,Oszlopnev);
+    adatMeg.apiOsszealitas(mindenadat,Oszlopnev);
   
   }

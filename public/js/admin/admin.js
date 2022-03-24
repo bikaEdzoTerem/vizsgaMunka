@@ -33,7 +33,7 @@ $(function () {
     let adat = "gepek";
 
     gombok();
-    kezdes(adat);
+   
     clickToButtonUrlHash();
     $("#ujFelvetel").on("click", () => {
         $(".elemek").remove();
@@ -46,7 +46,7 @@ $(function () {
             '"he he he he he he""as ar ar ar ar el"'
         );
        
-        adatMeg.apiOsszealitas(termek,Oszlopnev);
+        
         kicsiE(true, adat);
         vizsgal(adat,()=>{
             
@@ -106,14 +106,14 @@ $(function () {
         );
         
         kicsiE(true, adat);
-        vizsgal(adat,(keresetErtek,eldont,keresetErtek2,eldont2)=>{
+        vizsgal(adat,()=>{
             adatMeg.adatbeilleszt(eseny.detail,Oszlopnev);
             adatMeg.apiOsszealitas(termek,Oszlopnev);
       
-            const originalInputs=getinpits();
+            const originalInputs=getinputs();
 
              $("#kuld").click(() => {
-                const newInputs=getinpits();
+                const newInputs=getinputs();
            
             console.log($("#javitas input"));
             myAjax.adatmodosit(
@@ -133,7 +133,7 @@ $(function () {
        
            
     });
-    function getinpits(){
+    function getinputs(){
         const inputs = {};
          for (element of $("#javitas select,#javitas input")) {
         const name = $(element).attr("name");
@@ -149,14 +149,16 @@ $(function () {
         $("#fo").append(
             '<section class="elemek row" ><div class="elem" ></div></section>'
         );
-        myAjax.adatbeolvas(superapivegponto, mindenadat, rend.oldalakSzama);
         Oszlopnev = myAjax.adatBeolvasasElore("../json/alapnevek.json", Oszlopnev, adat);
-        kicsiE(false, " ");
+        myAjax.adatbeolvas(superapivegponto, mindenadat, (madatok)=>{
+            kicsiE(false, " ");
         
         rend.rendezoMezoLetreHozas(Oszlopnev);
-
+        adatMeg.apiOsszealitas(madatok,Oszlopnev);
+        });
         
-        adatMeg.apiOsszealitas(termek,Oszlopnev);
+        
+        
     }
 
     function kicsiE(ertek, adat) {
@@ -192,7 +194,7 @@ function setUrlHash(hash){
     const url = new URL(location.href);
     url.hash=hash;
     
-    history.pushState(null,'',url);
+  history.pushState(null,'',url);
 
 }
     
@@ -200,6 +202,7 @@ function setUrlHash(hash){
 function clickToButtonUrlHash(){
     const { hash } =location;
     if(hash){
+        
         $(hash).click();
         return
     }
@@ -302,7 +305,7 @@ try {
                 console.log(tomb2)
                 adatMeg.beviteliMezoGeneralas(tomb, keresetErtek, eldont,Oszlopnev,nemModosithato,tomb2,keresetErtek2,eldont2);
         
-        myCallback(keresetErtek,eldont,keresetErtek2,eldont2);
+        myCallback();
         });} catch (error) {
             adatMeg.beviteliMezoGeneralas(tomb, keresetErtek, eldont,Oszlopnev,nemModosithato);
         

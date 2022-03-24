@@ -1,36 +1,46 @@
-class AdatokMegjelenitese{
-    constructor(){
-        
-    }
-    apiOsszealitas(adatok,oszlopNevek) {
-        let vegApi = superapivegponto +"?"+queryParams.toString();
+class AdatokMegjelenitese {
+    constructor() {}
+    apiOsszealitas(adatok, oszlopNev) {
+        let vegApi = superapivegponto + "?" + queryParams.toString();
         console.log(vegApi);
-        myAjax.adatbeolvas(vegApi, adatok, (adatok,oszlopNevek)=>{$(".elemek").empty();Alap(oszlopNevek);rend.elemMegjelenit(adatok,oszlopNevek)}, oszlopNevek);
-    }
-    adatbeilleszt(adatok,oszlopNevek) {
-        console.log(adatok)
-        oszlopNevek.forEach((element) => {
-           
-                $("#" + element + " ").val(adatok[element]);
-                console.log(adatok[element]);
+        myAjax.adatbeolvas(
+            vegApi,
+            adatok,
+            (adatok) => {
+                
+                Alap(oszlopNev);
+                rend.elemMegjelenit(adatok, oszlopNev);
+            },
             
+        );
+    }
+    adatbeilleszt(adatok, oszlopNevek) {
+        console.log(adatok);
+        oszlopNevek.forEach((element) => {
+            $("#" + element + " ").val(adatok[element]);
+            console.log(adatok[element]);
         });
     }
-    
-    
-     beviteliMezoGeneralas(seged, keresetErtek, eldont,oszlopNevek,nemValtoztathato=false,tomb2=[],keresetErtek2="",eldont2=false) {
+
+    beviteliMezoGeneralas(
+        seged,
+        keresetErtek,
+        eldont,
+        oszlopNevek,
+        nemValtoztathato = false,
+        tomb2 = [],
+        keresetErtek2 = "",
+        eldont2 = false
+    ) {
         $("#javitas").remove();
         $("#fo").append('<form id="javitas"></form>');
-        
-    
+
         console.log(seged);
         let txt = "";
-        oszlopNevek.forEach((element,index) => {
-           
-    
+        oszlopNevek.forEach((element, index) => {
             txt += '<label for="' + element + '">' + element + ":</label>";
-    
-            if ( index=== nemValtoztathato) {
+
+            if (index === nemValtoztathato) {
                 txt +=
                     '<input type="text" id="' +
                     element +
@@ -38,64 +48,59 @@ class AdatokMegjelenitese{
                     element +
                     '" autofocus placeholder="' +
                     element +
-                    '" disabled'+
-                    '>';
+                    '" disabled' +
+                    ">";
             } else if (eldont === true) {
                 eldont = false;
-                txt += '<select id="'+element+'" name="' + element + '">';
+                txt += '<select id="' + element + '" name="' + element + '">';
                 seged.forEach((element) => {
-                 
                     let nev = "";
                     try {
-                      let nevek = element[keresetErtek].split(" ");
-                      
-                      nevek.forEach((neve) => {
-                          nev += neve;
-                      });
+                        let nevek = element[keresetErtek].split(" ");
+
+                        nevek.forEach((neve) => {
+                            nev += neve;
+                        });
                     } catch (error) {
-                      nev=element[keresetErtek];
+                        nev = element[keresetErtek];
                     }
-                  
-                  
+
                     txt +=
                         '<option value="' +
                         element[keresetErtek] +
-                        '"id="'+
-                        nev   +                     
+                        '"id="' +
+                        nev +
                         's1">' +
                         element[keresetErtek] +
-                        '</option>';
+                        "</option>";
                 });
                 txt += "</select>";
-            } 
-            else if (eldont2 === true) {
+            } else if (eldont2 === true) {
                 eldont2 = false;
-                txt += '<select id="'+element+'" name="' + element + '">';
+                txt += '<select id="' + element + '" name="' + element + '">';
                 tomb2.forEach((element) => {
                     let nev = "";
                     try {
-                      let nevek = element[keresetErtek2].split(" ");
-                      
-                      nevek.forEach((neve) => {
-                          nev += neve;
-                      });
+                        let nevek = element[keresetErtek2].split(" ");
+
+                        nevek.forEach((neve) => {
+                            nev += neve;
+                        });
                     } catch (error) {
-                      nev=element[keresetErtek2];
+                        nev = element[keresetErtek2];
                     }
-                   
-                  
-                  
+
                     txt +=
                         '<option value="' +
                         element[keresetErtek2] +
-                        '"id="'+
-                        nev+
+                        '"id="' +
+                        nev +
                         's2">' +
                         element[keresetErtek2] +
-                        '</option>';
+                        "</option>";
                 });
                 txt += "</select>";
-            }else {
+            } else {
                 txt +=
                     '<input type="text" id="' +
                     element +
@@ -106,10 +111,8 @@ class AdatokMegjelenitese{
                     '" required>';
             }
         });
-    
+
         $("#javitas").append(txt);
         $("#javitas").append(`<button type="button" id="kuld" >küld</button`);
     }
-    
-    
-    }
+}
