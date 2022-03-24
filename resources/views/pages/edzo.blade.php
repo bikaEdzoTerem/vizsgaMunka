@@ -3,7 +3,7 @@
   @section('content')
     <p>Bogdán Gábor</p>
     
-      <form action="{{route('ugyfelEdzesFoglalasFelvitel')}}" method="post">
+        <form action="{{route('ugyfelEdzesFoglalasFelvitel')}}" method="post">
         @csrf
         <input placeholder="személy neve" type="txt"  class="szemelyKereso" name="ugyfelNev" value="{{old('ugyfelNev')}}" />
 
@@ -58,7 +58,7 @@
       <h3 class="szemelyNeve">a</h3>
       <p class="datumtol">10</p>
       <p class="ora">1</p>
-      <button class="feloldasGomb">Felold</button>
+      <button type="submit" class="feloldasGomb">Felold</button>
   </div>
     © Minden jog fenntartva ©<br />
 
