@@ -18,11 +18,22 @@ $(function () {
     let adat = "gepek";
 
     gombok();
-    kezdes(adat);
+   
+    clickToButtonUrlHash();
     $("#ujFelvetel").on("click", () => {
-        adatMeg.apiOsszealitas(termek,Oszlopnev);
-        let keresetErtek,eldont,seged=[];
-        vizsgal(adat,keresetErtek,eldont,Oszlopnev,seged,()=>{
+        $(".elemek").remove();
+        $("main").append(
+            '<section class="elemek row clicked" style="border:1px solid black;width:400px;height:550px;overflow:auto" ><div class="elem" >'
+        );
+
+        $("main").css(
+            "grid-template-areas",
+            '"he he he he he he""as ar ar ar ar el"'
+        );
+       
+        
+        kicsiE(true, adat);
+        vizsgal(adat,()=>{
             
             $("#kuld").click(() => {
                 
@@ -71,16 +82,15 @@ $(function () {
             '"he he he he he he""as ar ar ar ar el"'
         );
         kicsiE(true, adat);
-        let keresetErtek,eldont=false;
-        let seged=[];
-        vizsgal(adat,keresetErtek,eldont,Oszlopnev,seged,()=>{ $("#kuld").click(() => {
-                
-            const inputs = {};
-            for (element of $("#javitas select,#javitas input")) {
-                const name = $(element).attr("name");
-                const value = $(element).val();
-                inputs[name] = value;
-            }
+        vizsgal(adat,()=>{
+            adatMeg.adatbeilleszt(eseny.detail,Oszlopnev);
+            adatMeg.apiOsszealitas(termek,Oszlopnev);
+      
+            const originalInputs=getinputs();
+
+             $("#kuld").click(() => {
+                const newInputs=getinputs();
+           
             console.log($("#javitas input"));
             myAjax.adatmodosit(
                 "api/" + adat,
@@ -98,6 +108,12 @@ $(function () {
        
            
     });
+    function getinputs(){
+        const inputs = {};
+         for (element of $("#javitas select,#javitas input")) {
+        const name = $(element).attr("name");
+        const value = $(element).val();
+        inputs[name] = value;
 
     function kezdes(adat) {
         $(".elemek").remove();
@@ -105,14 +121,16 @@ $(function () {
         $("#fo").append(
             '<section class="elemek row" ><div class="elem" ></div></section>'
         );
-        myAjax.adatbeolvas(superapivegponto, mindenadat, rend.oldalakSzama);
         Oszlopnev = myAjax.adatBeolvasasElore("../json/alapnevek.json", Oszlopnev, adat);
-        kicsiE(false, " ");
+        myAjax.adatbeolvas(superapivegponto, mindenadat, (madatok)=>{
+            kicsiE(false, " ");
         
         rend.rendezoMezoLetreHozas(Oszlopnev);
-
+        adatMeg.apiOsszealitas(madatok,Oszlopnev);
+        });
         
-        adatMeg.apiOsszealitas(termek,Oszlopnev);
+        
+        
     }
 
     function kicsiE(ertek, adat) {
@@ -156,9 +174,24 @@ $(function () {
     }
 
     
+function setUrlHash(hash){
+    const url = new URL(location.href);
+    url.hash=hash;
+    
+  history.pushState(null,'',url);
 
     
 
+function clickToButtonUrlHash(){
+    const { hash } =location;
+    if(hash){
+        
+        $(hash).click();
+        return
+    }
+    const newHash=`#${buttonIds[0]}`;
+    setUrlHash(newHash);
+    $(newHash).click();
 
 
 
@@ -209,10 +242,21 @@ console.log(adat);
     }
 try {
     myAjax.adatbeolvas("api/" + keresetTabla, seged, (tomb) => {
-        adatMeg.beviteliMezoGeneralas(tomb, keresetErtek, eldont,Oszlopnev,nemModosithato);
-        if(myCallback!=false){
-        myCallback(keresetErtek,eldont);
-        } });
+        console.log(tomb);
+        try {
+            console.log("try 1")
+            myAjax.adatbeolvas("api/" + keresetTabla2, seged, (tomb2) => {
+                console.log(tomb2)
+                adatMeg.beviteliMezoGeneralas(tomb, keresetErtek, eldont,Oszlopnev,nemModosithato,tomb2,keresetErtek2,eldont2);
+        
+        myCallback();
+        });} catch (error) {
+            adatMeg.beviteliMezoGeneralas(tomb, keresetErtek, eldont,Oszlopnev,nemModosithato);
+        
+        myCallback();
+        }
+        
+        });
 } catch (error) {
     adatMeg.beviteliMezoGeneralas(seged, keresetErtek, eldont,Oszlopnev,nemModosithato);
     myCallback(keresetErtek,eldont);

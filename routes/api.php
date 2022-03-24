@@ -49,7 +49,15 @@ Route::get("proba",[BerletTipusController::class,"getAr"]);
 
 Route::apiResource('edzoIdopont', EdzoIdopontokController::class);
 
-Route::apiResource('ugyfelEdzesek', UgyfelEdzesController::class);//majd torolheto
-Route::apiResource('ugyfelEdzesek2', ugyfelEdzesSzemellyel::class);
-
+Route::apiResource('ugyfelEdzesSzemellyel', ugyfelEdzesSzemellyel::class);
+Route::get('/ugyfelEdzesek2/{dolgozo}', [UgyfeledzesFelviszController::class, 'show']);
+Route::delete('/ugyfelEdzesek2/{id}', [UgyfeledzesFelviszController::class, 'delete']);
 //Route::put()
+Route::get('/ugyfelEdzesek3', [UgyfelEdzesSzemellyel::class, 'osszekapcsol']);
+Route::apiResource('oltozo', UgyfeledzesFelviszController::class);
+
+//ügyfél edzés töröl módosít
+Route::apiResource('ugyfelEdzes', UgyfelEdzesController::class);
+
+//Recepció oldalhoz
+Route::apiResource('recepcioHoz', szekrenyListazController::class);

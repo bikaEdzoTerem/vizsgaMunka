@@ -19,6 +19,11 @@ $(function () {
   var segedUtolsoOltozofog_id ="";
   const OsszesSzemely = [];
   let berletsTomb=[];
+  const szemelyApi="/api/szemely";
+  const szekrenyApi="/api/recepcioHoz";
+  const oltozofoglalasApi="/api/oltozofoglalas";
+  const beretTipusApi="/api/berletTipus";
+  const beretekApi="/api/berletek";
 
   /* var hibaUzenet = [];
   const errorElement = document.getElementById('szemelyerror');
@@ -40,13 +45,14 @@ $(function () {
   var div2 = document.querySelector(".bal");
   
   function szekrenyekMegjelenit() {
-    let apiVegpont = "http://localhost:4000/szekenies";
+    
+    let apiVegpont = "/api/recepcioHoz";
     myAjax.adatbeolvas(apiVegpont, szekrenyekTomb, kiir);
 
   }
   szekrenyekMegjelenit();
-  let apiVegpont = "http://localhost:4000/szekenies";
-
+  let apiVegpont = "/api/recepcioHoz";
+console.log("hopika");
   function kiir(tomb) {
     let seged = ".osszesSzekreny";
     szekrenyemben.megjelenit(tomb, seged);
@@ -55,9 +61,6 @@ $(function () {
     $("#noiiLetszam").html(szekrenyemben.getSzabadHelySzam(tomb,"Nő"));
     
   }
-  
-  
-
   function jelenlegiDatum() {
     var jelenlegiDatum = new Date();
     let jelenlegiDatumSzerkesztes = "";
@@ -102,7 +105,7 @@ $(function () {
   }
   $(window).on("kattint", (event) => {
     console.log("...");
-    let apiVegpont = "http://localhost:4000/szekenies";
+    let apiVegpont = "/api/recepcioHoz";
     let gombId = event.detail.id;
     let tomb = event.detail.tomb;
     let szoveg = {
@@ -117,9 +120,6 @@ $(function () {
     console.log(szoveg);
     //console.log($(".hibasGomb").checked);
   });
-  function szemelyKereso(tomb) {
-
-  };
   function keresés(tomb) {
     console.log(tomb);
     let seged = ".keresettSzekreny";
@@ -152,8 +152,8 @@ $(function () {
   }
     $(".keresSzekrenykulcs").on("keyup", () => {
       let tomb=[];
-      let apiVegpont = "http://localhost:4000/szekenies";
-      apiVegpont += "?id=" + $(".keresSzekrenykulcs").val();
+      let apiVegpont = "/api/szekreny";
+      apiVegpont += "?pontosSzekreny=" + $(".keresSzekrenykulcs").val();
       myAjax.adatbeolvas(apiVegpont,tomb,szekrenyKeresoMegjelenit);
     }); 
     function szekrenyKeresoMegjelenit(tomb){
@@ -199,11 +199,12 @@ $(function () {
     
     $(".keresSzemely").on("keyup", () => {
       let tomb=[];
-      let apiVegpont = "http://localhost:4001/szemely";
-      apiVegpont += "?szemely_id=" + $(".keresSzemely").val();
+      let apiVegpont = "/api/ugyfelEdzesSzemellyel";
+      apiVegpont += "?nev=" + $(".keresSzemely").val();
       myAjax.adatbeolvas(apiVegpont,tomb,szemelyKeresoMegjelenit);
     }); 
     function szemelyKeresoMegjelenit(tomb){
+      console.log(tomb);
       let seged=""
       
       if(tomb.length>0){
@@ -220,7 +221,19 @@ $(function () {
         seged+="Jogosultsága: "
         seged+=tomb[0].jogosultsag_id+"<br>";
         seged+="Születési dátuma: "
-        seged+=tomb[0].szul_datum+"</span>";
+        seged+=tomb[0].szul_datum+"</span>"+"<br>";
+        seged+="Képe: "
+        seged+='<img src="' + tomb[0].kep + '"alt="Profilkép"></img>'+"<br>";
+        if(tomb[0].MegMeddigJo=== undefined){
+          seged+="Nincs bérlete!"
+        }else{
+          seged+="Bérlete még:"
+          seged+=tomb[0].MegMeddigJo;
+          seged+=" nap-ig jó";
+        }
+        
+      }else if(tomb.length>1){
+        seged="Egyszerre több személyT talált";
       }
       /* seged+="<p>"+"Neve: ";
         seged+="<p>"+tomb[0].nev+"</p>";
@@ -244,16 +257,26 @@ $(function () {
       apiVegpont2 += "?nev=" + szemelyfoglall;
       myAjax.adatbeolvas(apiVegpont2, OsszesSzemely, kepMegj);
     });
-    $("#katt2").on("keyup", () => {
+  });
+  function szemelyLefoglalKeres() {
+    console.log("nem ír");
+    let szemelyfoglall = $(".szemelyLefoglal").val();
+    let apiVegpont2 = "/api/ugyfelEdzesSzemellyel";
+    apiVegpont2 += "?nev=" + szemelyfoglall;
+    myAjax.adatbeolvas(apiVegpont2, OsszesSzemely, kepMegj);
+  }
+    $("#katt2").on("input", () => {
+      
       let tomb=[];
       
       let kulcsfoglall = $(".kulcsLefoglal").val();
-      let apiVegpont = "http://localhost:4000/szekenies";
-      apiVegpont += "?id=" + kulcsfoglall;
+      let apiVegpont = "/api/szekreny";
+      apiVegpont += "?pontosSzekreny=" + kulcsfoglall;
       myAjax.adatbeolvas(apiVegpont, egyDbKulcs, kulcsMegjelenit);
       myAjax.adatbeolvas(apiVegpont,tomb,keresés);
   });
   function oltozofoglalasUgyfelSzures(tomb,esemeny){
+    
     hibaUzenet=[];
     //console.log(tomb);//ugyfel szerint szurt oltozofoglalás
     //console.log(szekrenyekTomb);//összes szekrény
@@ -274,7 +297,7 @@ $(function () {
         datum: jelenlegiDatum(),
       };
       myAjax.adatkuldes(apiVegpont, szoveg);
-      apiVegpont = "http://localhost:4000/szekenies";
+      apiVegpont = "/api/recepcioHoz";
       szoveg = {
         id: kulcsSzama,
         ures_e: "F",
@@ -305,7 +328,7 @@ $(function () {
           datum: jelenlegiDatum(),
         };
         myAjax.adatkuldes(apiVegpont, szoveg);
-        apiVegpont = "http://localhost:4000/szekenies";
+        apiVegpont = "/api/recepcioHoz";
         szoveg = {
           id: kulcsSzama,
           ures_e: "F",
@@ -313,7 +336,7 @@ $(function () {
           created_at: "0000-00-00 00:00:00",
           updated_at: jelenlegiDatum(),
         };
-        myAjax.adatmodosit(apiVegpont, szoveg, kulcsSzama);//szekrenies táblát módosítja foglalt ra
+        //myAjax.adatmodosit(apiVegpont, szoveg, kulcsSzama);//szekrenies táblát módosítja foglalt ra
         }, 2000);
       }else{
         //ma már volt edzeni
@@ -334,8 +357,9 @@ $(function () {
               ugyfel: segedSzemelyId,
               datum: jelenlegiDatum(),
             };
-            myAjax.adatkuldes(apiVegpont, szoveg);
-            apiVegpont = "http://localhost:4000/szekenies";
+            /* myAjax.adatkuldes(apiVegpont, szoveg); */
+
+            apiVegpont = "/api/recepcioHoz";
             szoveg = {
               id: kulcsSzama,
               ures_e: "F",
