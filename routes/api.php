@@ -66,7 +66,7 @@ Route::post('berletek/delete', [BerletekController::class,"delete"]);
 Route::apiResource('arvaltozas', arvaltozasController::class);
 Route::post('arvaltozas/delete', [arvaltozasController::class,"delete"]);
 
-Route::apiResource('ugyfelEdzesek2', ugyfelEdzesSzemellyel::class);
+Route::apiResource('ugyfelEdzesSzemellyel', ugyfelEdzesSzemellyel::class);
 Route::get('/ugyfelEdzesek2/{dolgozo}', [UgyfeledzesFelviszController::class, 'show']);
 Route::delete('/ugyfelEdzesek2/{id}', [UgyfeledzesFelviszController::class, 'delete']);
 //Route::put()
@@ -77,4 +77,4 @@ Route::apiResource('oltozo', UgyfeledzesFelviszController::class);
 Route::apiResource('ugyfelEdzes', UgyfelEdzesController::class);
 
 //Recepció oldalhoz
-Route::apiResource('recepcio', szekrenyListazController::class);
+Route::apiResource('recepcioHoz', szekrenyListazController::class);
