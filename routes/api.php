@@ -19,7 +19,11 @@ use App\Http\Controllers\api\jogosultsagController;
 use App\Http\Controllers\api\BerletekController;
 
 use App\Http\Controllers\api\ugyfelEdzesSzemellyel;
-
+use App\Http\Controllers\api\UgyfeledzesFelviszController;
+//ügyfél edzés controller meghívása
+use App\Http\Controllers\api\UgyfelEdzesController;
+//Recepció oldalhoz
+use App\Http\Controllers\api\szekrenyListazController;
 
 /*
 |--------------------------------------------------------------------------
@@ -62,9 +66,15 @@ Route::post('berletek/delete', [BerletekController::class,"delete"]);
 Route::apiResource('arvaltozas', arvaltozasController::class);
 Route::post('arvaltozas/delete', [arvaltozasController::class,"delete"]);
 
-//Route::apiResource('ugyfelEdzesek', UgyfelEdzesController::class);//majd torolheto
 Route::apiResource('ugyfelEdzesek2', ugyfelEdzesSzemellyel::class);
 Route::get('/ugyfelEdzesek2/{dolgozo}', [UgyfeledzesFelviszController::class, 'show']);
 Route::delete('/ugyfelEdzesek2/{id}', [UgyfeledzesFelviszController::class, 'delete']);
 //Route::put()
 Route::get('/ugyfelEdzesek3', [UgyfelEdzesSzemellyel::class, 'osszekapcsol']);
+Route::apiResource('oltozo', UgyfeledzesFelviszController::class);
+
+//ügyfél edzés töröl módosít
+Route::apiResource('ugyfelEdzes', UgyfelEdzesController::class);
+
+//Recepció oldalhoz
+Route::apiResource('recepcio', szekrenyListazController::class);
