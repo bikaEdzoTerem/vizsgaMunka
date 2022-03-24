@@ -11,6 +11,21 @@ let myAjax;
 let rend;
 let adatMeg;
 $(function () {
+    let buttonIds = [
+        "szemely",
+        "eszkoz",
+        "gepek",
+        "munkaido",
+        "edzesek",
+        "szekreny",
+        "oltozofoglalas",
+        "jogosultsag",
+        "gyakorlat",
+        "berletek",
+        "arvaltozas",
+        "berletTipus"
+        
+    ];
      adatMeg=new AdatokMegjelenitese();
     var mindenadat = [];
     myAjax = new MyAjax();
@@ -19,6 +34,7 @@ $(function () {
 
     gombok();
     kezdes(adat);
+    clickToButtonUrlHash();
     $("#ujFelvetel").on("click", () => {
         $(".elemek").remove();
         $("main").append(
@@ -153,22 +169,8 @@ $(function () {
         }
     }
     function gombok() {
-        let id = [
-            "szemely",
-            "eszkoz",
-            "gepek",
-            "munkaido",
-            "edzesek",
-            "szekreny",
-            "oltozofoglalas",
-            "jogosultsag",
-            "gyakorlat",
-            "berletek",
-            "arvaltozas",
-            "berletTipus"
-            
-        ];
-        id.forEach((element) => {
+       
+        buttonIds.forEach((element) => {
             $("#" + element + "").on("click", () => {
                 adat = element;
                 megjelenit=0;
@@ -176,19 +178,36 @@ $(function () {
                 queryParams.delete("_order");
                 queryParams.delete("q");
                 $("#keresSzoveg").val("");
-                console.log(element);
+              
                 superapivegponto = "api/" + element;
-                console.log({superapivegponto});
+                
                 kezdes(adat);
+                
             });
         });
     }
 
     
+function setUrlHash(hash){
+    const url = new URL(location.href);
+    url.hash=hash;
+    
+    history.pushState(null,'',url);
 
+}
     
 
+function clickToButtonUrlHash(){
+    const { hash } =location;
+    if(hash){
+        $(hash).click();
+        return
+    }
+    const newHash=`#${buttonIds[0]}`;
+    setUrlHash(newHash);
+    $(newHash).click();
 
+}
 
 
 });

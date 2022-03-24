@@ -11,6 +11,8 @@ use Illuminate\Http\Request;
 use App\Models\Szemely;
 use App\Models\Ugyfel_edzes;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\Hash;
+
 
 class SzemelyController extends Controller
 {
@@ -55,7 +57,7 @@ class SzemelyController extends Controller
         $szemely=new Szemely;
         $szemely->jogosultsag_id=$jogosultsagId;
         $szemely->email_cim=$emailCim;
-        $szemely->jelszo=$igazolvanySzam;
+        $szemely->jelszo=Hash::make($igazolvanySzam);
         $szemely->nev=$nev;
         $szemely->szul_datum=$szulDatum;
         $szemely->neme=$neme;

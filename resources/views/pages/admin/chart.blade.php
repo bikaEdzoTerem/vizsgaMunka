@@ -7,8 +7,13 @@
 @endsection
 @section('css')
     <link rel="stylesheet" href="../css/chart.css">
+    <link rel="stylesheet" href="../css/admin.css">
 @endsection
 @section('content')
+<aside> 
+    @include('includes.adminNavigation')
+
+</aside>
     <div id="chart" ></div>
     <div id="chart2" ></div>
     <div id="chart3" ></div>
