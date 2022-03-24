@@ -20,7 +20,7 @@ $(function () {
   const OsszesSzemely = [];
   let berletsTomb=[];
   var szemelyapi="/api/szemely";
-  const szekrenyApi="/api/szekreny";
+  const szekrenyApi="/api/recepcio";
   const oltozofoglalasApi="/api/oltozofoglalas";
   const beretTipusApi="/api/berletTipus";
   const beretekApi="/api/berletek";
@@ -45,14 +45,16 @@ $(function () {
   var div2 = document.querySelector(".bal");
   
   function szekrenyekMegjelenit() {
-    let apiVegpont = szekrenyApi;
+    
+    let apiVegpont = "/api/recepcio";
     myAjax.adatbeolvas(apiVegpont, szekrenyekTomb, kiir);
 
   }
   szekrenyekMegjelenit();
   let apiVegpont = szekrenyApi;
-
+console.log("hopika");
   function kiir(tomb) {
+    console.log(tomb);
     let seged = ".osszesSzekreny";
     szekrenyemben.megjelenit(tomb, seged);
     console.log(szekrenyemben.getSzabadHelySzam(tomb,"Férfi"));
@@ -118,8 +120,8 @@ $(function () {
       created_at: "0000-00-00 00:00:00",
       updated_at: jelenlegiDatum(),
     };
+    console.log(2);
     myAjax.adatmodosit(apiVegpont, szoveg, gombId+1);
-    console.log(szoveg);
     //console.log($(".hibasGomb").checked);
   });
   function szemelyKereso(tomb) {
@@ -267,20 +269,20 @@ $(function () {
         console.log("ír");
         if(timeout) {
             clearTimeout(timeout);
+            console.log(timeout);
         }
         timeout = setTimeout(function() {
           szemelyLefoglalKeres();
         }, delay);
     });
-
-    function szemelyLefoglalKeres() {
-      console.log("nem ír");
-      let szemelyfoglall = $(".szemelyLefoglal").val();
-      let apiVegpont2 = szemelyapi;
-      apiVegpont2 += "?nev=" + szemelyfoglall;
-      myAjax.adatbeolvas(apiVegpont2, OsszesSzemely, kepMegj);
-    }
   });
+  function szemelyLefoglalKeres() {
+    console.log("nem ír");
+    let szemelyfoglall = $(".szemelyLefoglal").val();
+    let apiVegpont2 = szemelyapi;
+    apiVegpont2 += "?nev=" + szemelyfoglall;
+    myAjax.adatbeolvas(apiVegpont2, OsszesSzemely, kepMegj);
+  }
     $("#katt2").on("input", () => {
       
       let tomb=[];
