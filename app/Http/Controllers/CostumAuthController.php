@@ -75,22 +75,4 @@ class CostumAuthController extends BaseController
             return back()->with('fail', 'Ez az email nincs regisztrálva.');
         }
     }
-
-    /*public function dashboard()
-    {
-        $data = array();
-        if (Session::has('loginId')) {
-            $data = Szemely::where('id', '=', Session::get('loginId'))->first();
-        }
-        //return view('auth.dashboard', compact('data'));
-        return view('pages.index', compact('data'));
-    }*/
-
-    /*public function logout()
-    {
-        if (!Session::has('loginId')) {
-            Session::pull('loginId');
-            return redirect('login');
-        }
-    }*/
 }
