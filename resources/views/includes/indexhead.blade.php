@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-
+<html lang="hu-HU">
 <head>
     <meta charset="UTF-8">
     <meta name="description" content="Free Web tutorials">

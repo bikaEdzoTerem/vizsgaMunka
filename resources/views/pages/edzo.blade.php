@@ -1,35 +1,9 @@
   
   @include('layouts.edzo')
+  @include('includes.feluletheader')
   @section('content')
     <p>Bogdán Gábor</p>
-    
-        <form action="{{route('ugyfelEdzesFoglalasFelvitel')}}" method="post">
-        @csrf
-        <input placeholder="személy neve" type="txt"  class="szemelyKereso" name="ugyfelNev" value="{{old('ugyfelNev')}}" />
-
-        <input placeholder="edzo id" type="text" name="edzo" value="{{old('edzo')}}" />
-
-        <input type="date" class="datum" list="datumValasztasok" name="datum" value="{{old('datum')}}" />
-        <datalist id="datumValasztasok"></datalist>
-
-        <input class="orara"type="text" list="oraraValasztasok" placeholder="órára" minlength="4" maxlength="10" name="orara" value="{{old('orara')}}"/>
-        <datalist id="oraraValasztasok"> </datalist>
-
-        <input  class="ora"type="text" list="oraValasztasok" placeholder="edzés hossza(1:00)" maxlength="4" name="ora" value="{{old('ora')}}" />
-        <datalist id="oraValasztasok"> </datalist>
-        {{-- <div class="gomb"></div> --}}
-        <button type=submit  class=lefoglal>Lefoglal</button>
-
-        @if(Session::has('sikeres'))
-          <div class="alert alert-sikeres">{{Session::get('sikeres')}}</div>
-        @endif
-        @if(Session::has('sikertelen'))
-          <div class="alert alert-sikertelen">{{Session::get('sikertelen')}}</div>
-        @endif
-      </form>
-  
-    
-    {{-- <form>
+    <form>
         <input placeholder="személy neve" type="txt"  class="szemelyKereso"  required/>
         <input type="date" class="datum"  list="datumValasztasok"  required/>
           <datalist id="datumValasztasok"></datalist>
@@ -41,7 +15,7 @@
           <datalist id="oraValasztasok"> </datalist>
         <button type="button" class="lefoglal" >Lefoglal</button>
       </div>
-    </form> --}}
+    </form>
   </article>
   <section>
     <div class="idopontok"></div>
@@ -58,7 +32,7 @@
       <h3 class="szemelyNeve">a</h3>
       <p class="datumtol">10</p>
       <p class="ora">1</p>
-      <button type="submit" class="feloldasGomb">Felold</button>
+      <button class="feloldasGomb">Felold</button>
   </div>
     © Minden jog fenntartva ©<br />
 

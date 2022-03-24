@@ -63,9 +63,3 @@ article{
     padding-right: 20%;
     margin: 1px;
 }
-button a,
-button a:hover,
-button a:focus{
-    color: #000;
-    text-decoration: none;
-}

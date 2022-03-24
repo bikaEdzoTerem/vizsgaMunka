@@ -86,8 +86,8 @@ $(".BalraCsokkent").on("click ", () => {
     idopontLista(idopontokTomb,jelenlegiDatum);
   });
   /* myAjax.adatBeolvasasElore(apiEdzoIdopontok,idopontokTomb); */
-  myAjax.adatbeolvas(/* "/api/ugyfelEdzesek2" */"/api/ugyfelEdzes", idopontokTomb, idopontLista,jelenlegiDatum);
-  
+  myAjax.adatbeolvas(apiEdzoIdopontok, idopontokTomb, idopontLista,jelenlegiDatum);
+  console.log(idopontokTomb);
   function datumKereses(){
     let datumkeres=$(".datumKeres").val();
     let c= (Math.floor(new Date(datumkeres).getTime() - new Date().getTime()));
@@ -146,14 +146,14 @@ $(".BalraCsokkent").on("click ", () => {
     });
     function szemlyFunction(tomb){
       console.log(tomb);
-      if(tomb[0]===undefined ||tomb.length>1){
+      if(tomb[0]===undefined){
         console.log("nincs ilyen nev");
         talaltNev=false;
         Elrejt(".datum");
         Elrejt(".orara");
         Elrejt(".ora");
         Elrejt(".lefoglal");
-      }else if(tomb.length===1){
+      }else{
         console.log("van ilyen név");
         console.log(tomb[0]);
         szemelyKeres=tomb;
@@ -166,12 +166,9 @@ $(".BalraCsokkent").on("click ", () => {
       }
     }
     function Elrejt(mit){
-      /* $(mit).remove(); */
       $(mit)[0].style.display = "none";
-      
     }
     function Megjelenit(mit){
-      /* $(mit).html("<button type=submit  class=lefoglal>Lefoglal</button>") */
       $(mit)[0].style.display = "block";
     }
     $(".lefoglal").on("click", () => {// ha kattintunk a lefoglal gomb-ra
@@ -193,6 +190,7 @@ $(".BalraCsokkent").on("click ", () => {
         console.log(szemelyKeres);
         apiVegpont = apiEdzoIdopontok;
         let szoveg = {
+          id: 0,
           /* id: parseInt(idopontokTomb[idopontokTomb.length-1].id), */
           ugyfel_id:  parseInt(szemelyKeres[0].szemely_id) ,
           ugyfel_nev: szemelyKeres[0].nev,
@@ -272,11 +270,11 @@ $(".BalraCsokkent").on("click ", () => {
          Elrejt(".ora");
          Elrejt(".lefoglal");
         }
-      }else{
+      }/* else{
         Elrejt(".orara");
         Elrejt(".ora");
         Elrejt(".lefoglal");
-      }
+      } */
     });
     /* $(".datum").on("keyup", () => {
       if(!($(".datum").val()==="")){//ha megvan adva dátum 
@@ -298,10 +296,8 @@ $(".BalraCsokkent").on("click ", () => {
       }
     }
     $(window).on('felold', (event) => {//ha rányomok a feloldra torli az adatot
-      apiVegpont = "api/ugyfelEdzes";
-      /* apiVegpont = "ugyfelEdzesFoglalasTorol"; */
+      apiVegpont = apiEdzoIdopontok;
       myAjax.adattorles(apiVegpont, event.detail.id);
-      window.location.reload();
     });
 
     function oraListaz(){//orakhoz hozzá adja a valószínű lehettőségeket opciok nak
@@ -311,6 +307,7 @@ $(".BalraCsokkent").on("click ", () => {
     for (let index = 0; index < orak.length; index++) {//orak tomb vegigjarasa
       if(index>-1&&index<3){//ha elso harom elem
         let i=0
+        oravalasztasok+='<option label="'+edzesekHossz[i]+'">'+orak[index]+'</option>'//opciok letrehozasa
       }else if(index>2&&index<6){// ha 4.-6.elem
         i=1;
         oravalasztasok+='<option label="'+edzesekHossz[i]+'">'+orak[index]+'</option>'
@@ -426,8 +423,8 @@ $(".BalraCsokkent").on("click ", () => {
         let datum = new Date();//mindig lenullázuk a jelenlegi dátumot
         if(maE){//ha true tehat ma akkor a jelenlegi ora ajanlastol kell indulnia, ha nem ma akkor meg 8 tol
         
-          /* datum.setHours(20);///teszteléshez beállítja az időt
-          datum.setMinutes(00);///teszteléshez beállítja az időt */
+          datum.setHours(20);///teszteléshez beállítja az időt
+          datum.setMinutes(00);///teszteléshez beállítja az időt
           if(datum.getHours()<munkaoratol){//8 ora elott van a jelenlegi datum akkor segitsegek 8 tol kezdodnek
             datum.setHours(8);
             datum.setMinutes(00);

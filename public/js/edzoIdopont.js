@@ -14,7 +14,6 @@ class Idopont{
         
         this.ora = this.node.children(".ora");
         this.ora.text(adat.ora.slice(0,1)+" órás edzés");
-        this.ora.text("Edzés hossza: "+adat.ora.slice(1,5)+" óra");
 
         this.feloldas = this.node.children(".feloldasGomb");
         this.feloldas.on("click ", () => {

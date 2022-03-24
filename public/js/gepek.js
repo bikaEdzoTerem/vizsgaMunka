@@ -3,10 +3,10 @@ $(function(){
     const myAjax = new MyAjax();
     const eszkozokTomb = [];
     let alapApiVegpont = "/api/gepek";
-    let szamApiVegpont = "/api/gepek/";
-    let szoApiVegpont = "/api/gepek/search?eszkoz_neve=";
+    /*let szamApiVegpont = "/api/gepek/";
+    let szoApiVegpont = "/api/gepek/search?eszkoz_neve=";*/
 
-    myAjax.adatbeolvas(alapApiVegpont, eszkozokTomb, adatokMegjelenitese);
+    myAjax.adatbeolvasEredeti(alapApiVegpont, eszkozokTomb, adatokMegjelenitese);
 
     /*$(".k_mezo").on("keyup", ()=>{
         if(typeof ($(".k_mezo").val()) === Number){  //ez nem űködik
@@ -19,7 +19,7 @@ $(function(){
         }
     });*/
 
-    $(".k_mezo").on("keyup", ()=>{
+    /*$(".k_mezo").on("keyup", ()=>{
         let keresId = $(".k_mezo").val();
         myAjax.adatbeolvas(szamApiVegpont + keresId, eszkozokTomb, adatokMegjelenitese);
     });
@@ -27,7 +27,7 @@ $(function(){
     $(".k_mezo").on("keyup", ()=>{
         let keresId = $(".k_mezo").val();
         myAjax.adatbeolvas(szoApiVegpont + keresId, eszkozokTomb, adatokMegjelenitese);
-    });
+    });*/
     
     function adatokMegjelenitese() {
         const szuloElem = $("#allomany");

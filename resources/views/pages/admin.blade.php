@@ -12,7 +12,17 @@
 <p>kijelentkezés</p>
     </header>
     <aside> 
-        @include('includes.adminNavigation')
+        <button id="szemely">emberek</button>
+        <button id="eszkoz">gepek</button>
+        <button id="gepek">eszkoz tipus</button>
+        <button id="munkaido">munkaido</button>
+        <button id="edzesek">edzések</button>
+        <button id="szekreny">szekrenyek</button>
+        <button id="oltozofoglalas">oltozofoglalas</button>
+        <button id="gyakorlat">gyakorlatok</button>
+        <button id="terem">termek</button>
+        <button id="berletTipus">berletek</button>
+        <button id="diagram">diagram</button>
     
     </aside>
     <article>

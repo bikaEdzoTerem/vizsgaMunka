@@ -27,11 +27,18 @@ header h1 {
     font-size: 80px;
 }
 
-#logo {
+#kijel a{
     position: fixed;
     z-index: 6000;
     left: 100px;
     top: 80px;
+    font-size: 25px;
+    color: white;
+}
+
+#kijel a:hover{
+    text-decoration: none;
+    color: orange;
 }
 
 
@@ -49,7 +56,8 @@ article div {
     margin-left: 40px; /*nem kell*/
     margin-top: 20px;
     margin-bottom: 20px;
-    background-image: linear-gradient(to right, red,orange,yellow,green,blue,indigo,violet);
+    /*background-image: linear-gradient(to right, red,orange,yellow,green,blue,indigo,violet);*/
+    background-color: gray;
     text-align: center;
     
 }
@@ -61,7 +69,7 @@ aside {
 }
 
 aside div {
-    background-image: radial-gradient(circle, red, yellow, green);
+    /*background-image: radial-gradient(circle, red, yellow, green);*/
     width: 70%;
     margin: auto;
     padding: 10px;
@@ -98,4 +106,8 @@ footer span{
     font-size: 40px;
 }
 
-
+@media only screen and (max-width: 1150px) {
+    #kijel a{
+        top: 150px;
+    }
+}

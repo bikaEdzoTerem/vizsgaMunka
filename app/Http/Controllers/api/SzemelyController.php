@@ -11,8 +11,6 @@ use Illuminate\Http\Request;
 use App\Models\Szemely;
 use App\Models\Ugyfel_edzes;
 use Illuminate\Support\Facades\Schema;
-use Illuminate\Support\Facades\Hash;
-
 
 class SzemelyController extends Controller
 {
@@ -21,7 +19,6 @@ class SzemelyController extends Controller
         $sort=$request->query ('_sort');
         $order=$request->query ('_order');
         $q=$request->query('q');
-        $nev=$request->query('nev');
         $szemelyek=Szemely::selectRaw("*");
         if($sort&&$order){
             $szemelyek->orderBy($sort,$order);
@@ -34,9 +31,6 @@ class SzemelyController extends Controller
                 $szemelyek->orWhere($column,$q);
             };
         }
-        if($nev){
-            $szemelyek->where('nev','like','%'.$nev.'%');
-        }
         //$szemelyek= ($sort&&$order) ? Szemely::orderBy($sort,$order)->get(): Szemely::all();
       
        
@@ -45,6 +39,7 @@ class SzemelyController extends Controller
         return response()->json($szemelyek->get());
     } public function store(Request $request){
         $emailCim=$request->input("email_cim");
+        $jelszo="jelszo";
         $nev=$request->input("nev");
         $szulDatum=$request->input("szul_datum");
         $neme=$request->input("neme");
@@ -58,7 +53,7 @@ class SzemelyController extends Controller
         $szemely=new Szemely;
         $szemely->jogosultsag_id=$jogosultsagId;
         $szemely->email_cim=$emailCim;
-        $szemely->jelszo=Hash::make($igazolvanySzam);
+        $szemely->jelszo=$$jelszo;
         $szemely->nev=$nev;
         $szemely->szul_datum=$szulDatum;
         $szemely->neme=$neme;
@@ -81,7 +76,7 @@ class SzemelyController extends Controller
        // $telSzam=$request->input("tel_szam");
        // $kep=$request->input("kep");
         $jogosultsagId=$request->input("jogosultsag_id");
-
+//$eszkozTipusSzamlalo=Jogosultsag::firstWhere("jogosultsag_id",$jogosultsagId)->jogosultsag_id;
  
         $szemely=Szemely::find($szemelyId);
         $szemely->jogosultsag_id=$jogosultsagId;
@@ -106,17 +101,4 @@ class SzemelyController extends Controller
         
         return response()->json(true);
     }
-    public function ugyfelek(){
-        $szemelyek=Szemely::where('jogosultsag_id',1)->get();
-        return response()->json($szemelyek);
-    }
-    public function edzok(){
-        $szemelyek=Szemely::where('jogosultsag_id',3)->get();
-        return response()->json($szemelyek);
-    }
-    public function dolgozok(){
-        $szemelyek=Szemely::where('jogosultsag_id',2)->get();
-        return response()->json($szemelyek);
-    }
-
 }

@@ -4,10 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\api\GepekController;
 use App\Http\Controllers\CostumAuthController;
 use App\Http\Controllers\api\EszkozDbController;
-use App\Http\Controllers\IndexController;
-use App\Http\Controllers\UgyfeledzesFelviszController;
-use App\Http\Controllers\OltozoFoglalasFelviszController;
-use App\Http\Controllers\szekrenyListazController;
+use App\Http\Middleware\FelhasznaloJogosultsag;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,31 +17,47 @@ use App\Http\Controllers\szekrenyListazController;
 |
 */
 
+Route::get('/', function () {
+    return view('welcome');
+});
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
+
+//require __DIR__.'/auth.php';
+
 /*oldalak*/
-Route::get('/', [IndexController::class ,'index'  ]);
+Route::get('/', function () { return view('pages.index'); });
 Route::get('/gepek', function () { return view('pages.gepek'); });
-Route::get('/kapcsolatok', function () { return view('pages.kapcsolatok'); });
+Route::get('/elerhetoseg', function () { return view('pages.kapcsolatok'); });
 Route::get('/vasarlas', function () { return view('pages.vasarlas'); });
 Route::get('/cikkek_etrend', function () { return view('pages.cikkek_etrend'); });
 Route::get('/bejelentkezes', function () { return view('pages.bejelentkezes'); });
 Route::get('/regisztracio', function () { return view('pages.regisztracio'); });
 Route::get('/elfelejtettjelszo', function () { return view('pages.elfelejtettjelszo'); });
-Route::get('/berletVasarlas', function () { return view('pages.berletVasarlas'); });
-Route::get('/admin', function () { return view('pages.admin'); });
+//Route::get('/berletVasarlas', function () { return view('pages.berletVasarlas'); });
+//Route::get('/admin', function () { return view('pages.admin'); });
 Route::get("eszkozDB",[EszkozDbController::class,"show"]);
+Route::get("nezuk",[OltozofoglalasokController::class,"proba"]);
 Route::get('/chart',function(){return view('pages.admin.chart');});
-Route::get('/edzo', function () { return view('pages.edzo'); });
-Route::get('/recepcio', function () { return view('pages.recepcio'); });
+//Route::get('/edzo', function () { return view('pages.edzo'); });
+
+Route::middleware([FelhasznaloJogosultsag::class])->group(function () {
+    Route::get('/berletVasarlas', function() { return view('pages.berletVasarlas'); });     
+    Route::get('/admin', function() { return view('pages.admin'); }); 
+    Route::get('/edzo', function() { return 'edzo'; }); 
+    Route::get('/dolgozo', function() { return view('pages.edzo'); }); 
+});
 
 /*Login, regist*/
 
 //Route::get('/login', function(){ return view("Login"); });
 
-Route::get('/login', [CostumAuthController::class, 'login'])->middleware('alreadyLoggedIn');
-Route::get('/registration', [CostumAuthController::class, 'registration'])->middleware('alreadyLoggedIn');
+Route::get('/login', [CostumAuthController::class, 'login'])/*->middleware('alreadyLoggedIn')*/;
+Route::get('/registration', [CostumAuthController::class, 'registration'])/*->middleware('alreadyLoggedIn')*/;
 Route::post('/register-user', [CostumAuthController::class, 'registerUser'])->name('register-user');
-Route::post('/login-user',[CostumAuthController::class, 'loginUser'])->name('login-user');
-Route::get('/dashboard', [CostumAuthController::class, 'dashboard'])/*->middleware('isLoggedIn')*/;
+Route::post('/login-user',[CostumAuthController::class, 'loginUser'])->name('login-user')/*->middleware('FelhasznaloJogosultsag')*/;
 Route::get('/logout', [CostumAuthController::class, 'logout']);
 
 
@@ -52,16 +65,3 @@ Route::get('/logout', [CostumAuthController::class, 'logout']);
 Route::get('/api/gepek/search', [GepekController::class, 'search']);
 Route::get('/api/gepek/sort', [GepekController::class, 'sortBy']);
 Route::get('/api/gepek/{id}', [GepekController::class, 'show']);
-
-// Ugyfel edzes foglalas felvitele 
-Route::post('/ugyfelEdzesFoglalasFelvitel', [UgyfeledzesFelviszController::class, 'felviszUgyfelFoglalas'] )->name('ugyfelEdzesFoglalasFelvitel');
-//Route::post('/ugyfelEdzesFoglalasTorol', [UgyfeledzesFelviszController::class, 'torolUgyfelFoglalas'] )->name('ugyfelEdzesFoglalasTorol');
-/* Route::get('/ugyfelEdzesFoglalasTorol/{id}',  [UgyfeledzesFelviszController::class, 'torolUgyfelFoglalas'] )->name('ugyfelEdzesFoglalasTorol'); */
-//recepcio Oltozo foglalas felvitele
-Route::post('/OltozoFoglalasFelvitel', [OltozoFoglalasFelviszController::class, 'OltozoFoglalas'] )->name('OltozoFoglalasFelvitel');
-
-
-//Szekrenyeket kilistaz
-/* Route::get('/list', [szekrenyListazController::class, 'index'] );
-Route::get('/felold/{szekreny_id}', [szekrenyListazController::class, 'felold'] );
-Route::get('/elront/{szekreny_id}', [szekrenyListazController::class, 'elront'] ); */

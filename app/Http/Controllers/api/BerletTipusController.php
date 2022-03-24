@@ -35,8 +35,8 @@ class BerletTipusController extends Controller
     
     public function store(Request $request){
         $megnevezes=$request->input("megnevezes");
-         $idotartam=$request->input("idotartam_nap");
-                $ar=$request->input("ar");
+  $idotartam=$request->input("idotartam_nap");
+  $ar=$request->input("ar");
  
         $berletTipus=new Berlet_tipus;
         $berletTipus->megnevezes=$megnevezes;
@@ -51,9 +51,9 @@ class BerletTipusController extends Controller
 
     public function update(Request $request,string $berletTipusId)
     {
-        $megnevezes=$request->input("megnevezes");
-             $idotartam=$request->input("idotartam_nap");
-         $ar=$request->input("ar");
+  $megnevezes=$request->input("megnevezes");
+  $idotartam=$request->input("idotartam_nap");
+  $ar=$request->input("ar");
  
         $berletTipus=Berlet_tipus::find($berletTipusId);
         $berletTipus->megnevezes=$megnevezes;
