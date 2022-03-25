@@ -58,7 +58,7 @@ section .feloldasGomb:hover {
 
 
 
-section .osszesSzekreny table {
+section .szekrenyek table {
   border-collapse: collapse;
   /* margin: 25px 0; */
   margin: 0 0 0 30px;
@@ -68,36 +68,34 @@ section .osszesSzekreny table {
   overflow: hidden;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
 }
-.osszesSzekreny table thead tr {
+.szekrenyek table thead tr {
   background-color: #343a40;
   color: #fff;
   text-align: center;
   font-weight: bold;
 }
-.osszesSzekreny table th,
-.osszesSzekreny table td {
+.szekrenyek table th,
+.szekrenyek table td {
   padding: 12px 15px;
 }
-.osszesSzekreny table tbody tr {
+.szekrenyek table tbody tr {
   border-bottom: 1px solid #bdbdbd;
 }
-.osszesSzekreny table tbody tr:nth-of-type(even) {
+.szekrenyek table tbody tr:nth-of-type(even) {
   background-color: #e7e7e7;
 }
-.osszesSzekreny table tbody tr:last-of-type {
+.szekrenyek table tbody tr:last-of-type {
   border-bottom: 4px solid #343a40;
 }
-.osszesSzekreny table tbody tr:hover {
+.szekrenyek table tbody tr:hover {
   font-weight: bold;
   color: #2c3136;
   background-color: #cacaca;
 }
-section .keresettSzemely{
-  /* display: inline; */
+/* section .keresettSzemely{
   display: flex;
 }
 section .keresettSzekreny{
   width: auto;
   display: flex;
-  /* display: inline; */
-}
+} */
