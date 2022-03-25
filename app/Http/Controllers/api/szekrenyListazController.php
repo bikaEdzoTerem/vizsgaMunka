@@ -12,14 +12,32 @@ class szekrenyListazController extends Controller{
        /*  return view('pages/recepcio',['szekenies'=>$adat]); */
        return $adat->values()->all();
     }
-    function felold($szekreny_id){
+    function felold(/* string */ $szekreny_id){
+        
+ 
+        $szekreny=Szekeny::find($szekreny_id);
+        $szekreny->ures_e="Ü";
+        $szekreny->save();
+      
 
+        return response()->json(true);
         /* dd($szekreny_id); */
-        Szekeny::find($szekreny_id)
+        /* Szekeny::find($szekreny_id)
             ->update(['ures_e' => "Ü"]);
 
 
-        return redirect('list');
+        return redirect('list'); */
+    }
+    public function update(string $szekrenyId){
+
+ 
+        $szekreny=Szekeny::find($szekrenyId);
+        $szekreny->ures_e="Ü";
+        $szekreny->save();
+      
+
+        return response()->json(true);
+        
     }
     /* function elront($szekreny_id){
         Szekeny::find($szekreny_id)
