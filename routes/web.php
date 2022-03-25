@@ -8,6 +8,7 @@ use App\Http\Controllers\IndexController;
 use App\Http\Controllers\UgyfeledzesFelviszController;
 use App\Http\Controllers\OltozoFoglalasFelviszController;
 use App\Http\Controllers\szekrenyListazController;
+use App\Http\Middleware\FelhasznaloJogosultsag;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,23 +29,29 @@ Route::get('/vasarlas', function () { return view('pages.vasarlas'); });
 Route::get('/cikkek_etrend', function () { return view('pages.cikkek_etrend'); });
 Route::get('/bejelentkezes', function () { return view('pages.bejelentkezes'); });
 Route::get('/regisztracio', function () { return view('pages.regisztracio'); });
-Route::get('/elfelejtettjelszo', function () { return view('pages.elfelejtettjelszo'); });
-Route::get('/berletVasarlas', function () { return view('pages.berletVasarlas'); });
+//Route::get('/elfelejtettjelszo', function () { return view('pages.elfelejtettjelszo'); });
+//Route::get('/berletVasarlas', function () { return view('pages.berletVasarlas'); });
 Route::get('/admin', function () { return view('pages.admin'); });
 Route::get("eszkozDB",[EszkozDbController::class,"show"]);
 Route::get('/chart',function(){return view('pages.admin.chart');});
-Route::get('/edzo', function () { return view('pages.edzo'); });
-Route::get('/recepcio', function () { return view('pages.recepcio'); });
+//Route::get('/edzo', function () { return view('pages.edzo'); });
+//Route::get('/recepcio', function () { return view('pages.recepcio'); });
 
 /*Login, regist*/
+Route::middleware([FelhasznaloJogosultsag::class])->group(function () {
+    Route::get('/berletVasarlas', function() { return view('pages.berletVasarlas'); });     
+    //Route::get('/admin', function() { return view('pages.admin'); }); 
+    Route::get('/edzo', function() { return 'pages.edzo'; }); 
+    Route::get('/recepcio', function() { return view('pages.recepcio'); }); 
+});
 
 //Route::get('/login', function(){ return view("Login"); });
 
-Route::get('/login', [CostumAuthController::class, 'login'])->middleware('alreadyLoggedIn');
-Route::get('/registration', [CostumAuthController::class, 'registration'])->middleware('alreadyLoggedIn');
+Route::get('/login', [CostumAuthController::class, 'login'])/*->middleware('alreadyLoggedIn')*/;
+Route::get('/registration', [CostumAuthController::class, 'registration'])/*->middleware('alreadyLoggedIn')*/;
 Route::post('/register-user', [CostumAuthController::class, 'registerUser'])->name('register-user');
 Route::post('/login-user',[CostumAuthController::class, 'loginUser'])->name('login-user');
-Route::get('/dashboard', [CostumAuthController::class, 'dashboard'])/*->middleware('isLoggedIn')*/;
+//Route::get('/dashboard', [CostumAuthController::class, 'dashboard'])/*->middleware('isLoggedIn')*/;
 Route::get('/logout', [CostumAuthController::class, 'logout']);
 
 

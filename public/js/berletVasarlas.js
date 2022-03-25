@@ -3,9 +3,9 @@ $(function () {
     const myajax = new MyAjax();
     const berletek = [];
     const kisKosar = new Kosar();
-    let apiVegpont = "/api/berletVasarlas";
+    let apiVegpont = "/api/berletTipus";
 
-    myajax.adatbeolvas(apiVegpont, berletek, berletekMegjelenitese);
+    myajax.adatbeolvasEredeti(apiVegpont, berletek, berletekMegjelenitese);
 
     function berletekMegjelenitese(){
         const szuloElem = $("#taroloSzulo");

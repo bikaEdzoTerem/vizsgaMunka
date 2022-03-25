@@ -8,6 +8,7 @@ main {
         "c c c c c c" 
         "h h h h h h" 
         "n n n n n n" 
+        "s s s s s s"
         "a a a a a a" 
         "f f f f f f";
     font-size: 19px;
@@ -19,6 +20,15 @@ article {
     grid-template-columns: 1fr 1fr 1fr 1fr;
     width: 60%;
     margin: auto;
+}
+
+aside{
+    grid-area: s;
+    width: 80%;
+    max-width: 1000px;
+    margin: auto;
+    margin-top: 30px;
+    margin-bottom: 30px;
 }
 
 .klonja {
