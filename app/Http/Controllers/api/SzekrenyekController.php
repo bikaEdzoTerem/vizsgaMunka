@@ -12,6 +12,8 @@ class SzekrenyekController extends Controller
     { $sort=$request->query ('_sort');
         $order=$request->query ('_order');
         $q=$request->query('q');
+        $id=$request->query('id');
+        $idRossz=$request->query('idRossz');
         $pontosSz=$request->query('pontosSzekreny');
 
         $szekrenyek=Szekeny::selectRaw("*");
@@ -25,6 +27,23 @@ class SzekrenyekController extends Controller
                 $szekrenyek->orWhere($column,'like','%'.$q.'%');
                 $szekrenyek->orWhere($column,$q);
             };
+        }
+        if($id){
+            $oltozofoglalas=Szekeny::find($id);
+            
+            $oltozofoglalas->ures_e="Ü";
+            $oltozofoglalas->save();
+        }
+        if($idRossz){
+            $oltozofoglalas=Szekeny::find($idRossz);
+            if($oltozofoglalas->ures_e=="R"){
+                $oltozofoglalas->ures_e="Ü";
+            }else if($oltozofoglalas->ures_e=="Ü"){
+                $oltozofoglalas->ures_e="R";
+            }else if($oltozofoglalas->ures_e=="F"){
+                $oltozofoglalas->ures_e="R";
+            }
+            $oltozofoglalas->save();
         }
         if($pontosSz){
             $szekrenyek->where('szekreny_id','like',$pontosSz);
