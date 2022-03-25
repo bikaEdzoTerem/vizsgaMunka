@@ -1,31 +1,38 @@
 class Szekreny {
-  constructor(adat)  {
+  constructor(node,adat)  {
+    this.node = node;
     this.adat = adat;
-    this.txt="";
-    /* this.szekrenyElem = $(".szekreny");
-    this.szekrenyElem.on("click", ".feloldasGomb", (event) => {
-      let id = $(event.target).attr("data-id");
-      //this.szekrenyTomb.splice(id, 1);
-      console.log(this.szekrenyTomb.splice(id, 1));
-    }); */
-    /* console.log("Adat: ");
-        console.log(adat); */
+    this.syekreny_szama = this.node.children(".szama");
+    this.syekreny_szama.text(adat.szekreny_id);
 
-    /* $(".feloldasGomb").on("click", ".feloldasGomb", () => {
-      console.log("lalala");
-      this.kattintasTrigger();
-    }); */
+    this.szekreny_neme = this.node.children(".neme");
+    this.szekreny_neme.text(adat.tipusa);
 
-    this.adatAtiras(adat);
-  }
-  /* kattintasTrigger() {
-    let esemeny = new CustomEvent("click", {
-      detail: this.adat, //ezzel adatokat tudok átadni
+    this.szekreny_uresE = this.node.children(".uresE");
+    if(adat.ures_e==="Ü"){
+      this.szekreny_uresE.text("Üres");
+    }else if(adat.ures_e==="R"){
+      this.szekreny_uresE.text("Rossz!");
+    }else if(adat.ures_e==="F"){
+      this.szekreny_uresE.text("Foglalt");
+    }
+    this.szekreny_feloldas = this.node.children().children(".feloldasGomb");
+    this.szekreny_feloldas.on("click ", () => {
+      this.kattintasTrigger("felold");
     });
 
-    window.dispatchEvent(esemeny); // A főablakhoz adom az eseményt,
+    this.szekreny_rosszCheckBox = this.node.children().children(".hibasGomb");
+    this.szekreny_rosszCheckBox.on("input ", () => {
+      this.kattintasTrigger("rossz");
+    });
+  }
+  kattintasTrigger(esemenyneve) {// A főablakhoz adom az eseményt,
+    let esemeny = new CustomEvent(esemenyneve, {
+        detail: this.adat,//ezzel adatokat tudok átadni
+    });
+    window.dispatchEvent(esemeny);
     //Az eseményt majd a script.js-ben el tudom kapni.
-  } */
+  }
 
   adatAtiras(ertek) {
     this.txt =
