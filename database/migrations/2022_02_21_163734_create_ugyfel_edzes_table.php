@@ -14,6 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('ugyfel_edzes', function (Blueprint $table) {
+            $table->increments('id'); 
             //külső kulcs
         $table->integer('edzo')->unsigned();		
         $table->foreign('edzo')->references('szemely_id')->on('szemelies');
