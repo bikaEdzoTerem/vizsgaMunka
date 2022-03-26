@@ -16,7 +16,24 @@ class MyAjax {
     return tombe
   }
 
-  
+  adatbeolvasEredeti(faljnev, tomb, myCallback, seged=false) {
+    tomb.splice(0, tomb.length);
+     $.ajax({
+       url: faljnev,
+       type: "GET",
+       success: function (result) {
+         result.forEach((value) => {
+           tomb.push(value);
+         });
+         if (seged === false) {
+           myCallback(tomb);
+         } else {
+           myCallback(tomb, seged);
+         }
+         //console.log(tomb);
+       },
+     });
+   }
   
   adatbeolvas(faljnev, tomb, myCallback, seged=false) {
    tomb=[];

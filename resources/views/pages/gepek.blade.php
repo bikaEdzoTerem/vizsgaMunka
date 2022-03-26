@@ -1,6 +1,6 @@
 @extends('layouts.gepekapp')
 @section('content')
-@include('includes.kepvaltas')
+
 @include('includes.kozosnav')
 <article id="allomany">
     <div class="klonja">
