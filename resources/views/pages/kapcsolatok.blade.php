@@ -1,6 +1,6 @@
 @extends('layouts.kapcsolatokapp')
 @section('content')
-@include('includes.kepvaltas')
+
 @include('includes.kozosnav')
 <article id="szabalyzat">
     <h1>Szabályzat:</h1>

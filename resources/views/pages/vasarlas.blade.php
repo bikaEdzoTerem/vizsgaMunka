@@ -1,6 +1,6 @@
 @extends('layouts.vasarlasapp')
 @section('content')
-@include('includes.kepvaltas')
+
 
 @include('includes.kozosnav')
 <article id="valasztek">
