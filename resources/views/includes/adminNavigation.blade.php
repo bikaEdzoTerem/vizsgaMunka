@@ -18,15 +18,15 @@
 
 @foreach ($buttons as list('id' => $id,'text' => $text) )
 
-<button id="{{$id}}" ><a href="{{$isAdmin ? '' : '/admin' }}#{{$id}}">
+<a href="{{$isAdmin ? '' : '/admin' }}#{{$id}}"><button id="{{$id}}" >
     {{$text}}
-</a>
-</button>
+
+</button></a>
 
 @endforeach
 
 
-<button id="diagram">
-    <a href="{{$isAdmin ? '/chart' : '' }}">diagram
-    </a>
-    </button>
+<a href="{{$isAdmin ? '/chart' : '' }}"><button id="diagram">
+   diagram
+   
+    </button> </a>

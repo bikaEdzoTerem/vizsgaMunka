@@ -31,9 +31,13 @@ $(function () {
     myAjax = new MyAjax();
     rend = new AdminRend();
     let adat = "gepek";
-
+    window.addEventListener('popstate', (event) => {
+        console.log("location: " + document.location + ", state: " + JSON.stringify(event.state));
+       clickToButtonUrlHash();
+      });
+      
     gombok();
-   
+  
     clickToButtonUrlHash();
     $("#ujFelvetel").on("click", () => {
         $(".elemek").remove();
@@ -222,7 +226,7 @@ console.log(adat);
     switch (adat) {
         case "szemely":
             keresetTabla = "jogosultsag";
-            keresetErtek = "megnevezes";
+            keresetErtek = "jogosultsag_id";
             console.log("jogosultsag_id");
             eldont = true;
             nemModosithato=0;
