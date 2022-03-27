@@ -9,52 +9,16 @@ body{
 header {
   background-color: #222;
   border: 3px solid black;
-  border-radius: 0px 0px 3px 3px;
   width: 100%;
 }
-nav ul {
-    float: left;
-    padding:0px;
-}
-nav ul li {
-  display: inline-block;
-}
-nav ul li a {
-    text-decoration: none;
-    color: #cc0000;
-    padding-right: 20px;
-}
-nav ul li{
-    font-size: 14px;
-}
-nav ul li:first-child {
-    font-size: 18px;
-    font-weight: bold;
-}
-nav ul li a:hover {
-  color: white;
-}
-header form p {
-  /* Létszém megjelenítés módosítás */
-  color: darkred;
-  display: inline;
-}
-header #Szabad {
-    /* Létszém megjelenítés módosítás Férfi hely:*/
-    font-size: 22px;
-    color: rgb(121, 8, 8);
-  }
-  header #ferfiLetszam,#noiiLetszam {
+header p,span,form{
+    display: inline-block;
   /* létszám számláló megjelenítés módosítás */
   font-size: 22px;
-  color: darkred;
-  display: inline;
+  color: whitesmoke;
 }
-header form ::placeholder{
-    color: #cc0000;
-}
-header form{
-    margin-top: 5px;
+header .letszam,form{
+  display: inline-block;
 }
 .szemelyLefoglal,.kulcsLefoglal {
   height: 34px;
@@ -114,4 +78,18 @@ input[type="number"]::-webkit-inner-spin-button:hover,input[type="number"]::-web
     /*width: 100%; */
     left: 350px;
     top:45px;
+}
+.keresettSzekreny .keres{
+  display: grid;
+  grid-template-rows: auto auto auto auto;
+  
+}
+.keresettSzekreny .keres p{
+  margin: 2px;
+}
+.keresettSzekreny td{
+  display: grid;
+  grid-template-columns: 1fr;
+  font-size: 22px;
+  color: whitesmoke;
 }
