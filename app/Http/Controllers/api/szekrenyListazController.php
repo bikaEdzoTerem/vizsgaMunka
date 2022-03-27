@@ -28,11 +28,10 @@ class szekrenyListazController extends Controller{
 
         return redirect('list'); */
     }
-    public function update(string $szekrenyId){
-
- 
+    public function update(Request $request,string $szekrenyId){
         $szekreny=Szekeny::find($szekrenyId);
-        $szekreny->ures_e="Ü";
+        $szekreny->ures_e=$request->ures_e;
+        /* $szekreny->ures_e="Ü"; */
         $szekreny->save();
       
 
