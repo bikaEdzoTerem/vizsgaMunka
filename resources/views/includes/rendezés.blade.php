@@ -15,9 +15,9 @@
 
         </select>
         <form>
-
+            <p>keresés:  
             <input type="text" id="keresSzoveg">
-
+            </p>
         </form>
 
     </section>

@@ -14,6 +14,8 @@
     @include('includes.adminNavigation')
 
 </aside>
+<article>
+
     <div id="chart" ></div>
     <div id="chart2" ></div>
     <div id="chart3" ></div>
@@ -29,5 +31,6 @@
         edzotevekenyseg:"@chart('edzotevekenyseg_chart') ",
         napiletszam:"@chart('napiletszam_chart')"
     } </script>
+</article>
 <script src="/js/admin/chart.js"></script>
 @endsection

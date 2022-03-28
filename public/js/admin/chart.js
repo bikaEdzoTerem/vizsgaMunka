@@ -9,13 +9,11 @@ const chart=new Chartisan({
     .custom(({data,merge})=>{
     const dataZoom=[{
         type:"slider",
-        start:1,
-        end:2
+        
     },
     {
         type:"inside",
-        start:1,
-        end:2
+        
     }
     ];
     return merge(data,{dataZoom});
@@ -32,13 +30,11 @@ const chart2=new Chartisan({
     .custom(({data,merge})=>{
     const dataZoom=[{
         type:"slider",
-        start:1,
-        end:2
+        
     },
     {
         type:"inside",
-        start:1,
-        end:2
+     
     }
     ];
     return merge(data,{dataZoom});
@@ -55,13 +51,11 @@ const chart3=new Chartisan({
     .custom(({data,merge})=>{
     const dataZoom=[{
         type:"slider",
-        start:1,
-        end:2
+        
     },
     {
         type:"inside",
-        start:1,
-        end:2
+        
     }
     ];
     return merge(data,{dataZoom});
@@ -78,13 +72,11 @@ const chart4=new Chartisan({
     .custom(({data,merge})=>{
     const dataZoom=[{
         type:"slider",
-        start:1,
-        end:2
+       
     },
     {
         type:"inside",
-        start:1,
-        end:2
+        
     }
     ];
     return merge(data,{dataZoom});
@@ -96,18 +88,16 @@ const chart5=new Chartisan({
     url:urls.edzotevekenyseg,
     hooks:new ChartisanHooks()
     .datasets([
-        {type:"line"}
+        {type:"bar"}
     ])
     .custom(({data,merge})=>{
     const dataZoom=[{
         type:"slider",
-        start:1,
-        end:2
+        
     },
     {
         type:"inside",
-        start:1,
-        end:2
+      
     }
     ];
     return merge(data,{dataZoom});

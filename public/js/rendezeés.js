@@ -19,7 +19,8 @@ class AdminRend{
    
 
     rendezesTabla(){
-       
+      let darabolas = $("#rendezes").val();
+      let vegtemek = darabolas.split("!");
          queryParams.set("_sort",vegtemek[0])
          queryParams.set("_order",vegtemek[1])
           

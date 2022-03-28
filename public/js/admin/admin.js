@@ -45,10 +45,7 @@ $(function () {
             '<section class="elemek row clicked" style="border:1px solid black;width:400px;height:550px;overflow:auto" ><div class="elem" >'
         );
 
-        $("main").css(
-            "grid-template-areas",
-            '"he he he he he he""as ar ar ar ar el"'
-        );
+       
        
         
         kicsiE(true, adat);
@@ -101,13 +98,10 @@ $(function () {
     $(window).on("modosit", function (eseny) {
         $(".elemek").remove();
         $("main").append(
-            '<section class="elemek row clicked" style="border:1px solid black;width:400px;height:550px;overflow:auto" ><div class="elem" >'
+            '<section class="elemek row clicked" style="border:1px solid black;" ><div class="elem" >'
         );
 
-        $("main").css(
-            "grid-template-areas",
-            '"he he he he he he""as ar ar ar ar el"'
-        );
+       
         
         kicsiE(true, adat);
         vizsgal(adat,()=>{
@@ -122,7 +116,9 @@ $(function () {
             console.log($("#javitas input"));
             myAjax.adatmodosit(
                 "api/" + adat,
-                ["edzesek","gyakorlat","munkaido","arvaltozas","berletek"].includes(adat) ? { originalInputs, newInputs } : newInputs,
+                ["edzesek","gyakorlat","munkaido","arvaltozas","berletek"].includes(adat) ?
+                 { originalInputs, newInputs } : 
+                 newInputs,
                 $("#javitas input").val()
             );
             $("#fo").empty();
@@ -328,19 +324,16 @@ try {
 
 function Alap(nev) {
     $(".elemek").empty();
-    $(".elemek").append('<div class="elem  id"leftmenuinnerinner" ></div>');
+    $(".elemek").append('<div class="elem " ></div>');
     let txt = "";
-    let index = 0;
+    
 
     nev.forEach((element) => {
-        if (index == 0) {
-            txt += "  <h6 >" + element + ":</h6>";
-            txt += "<h5 class=" + element + ">Lorem ipsum dolor</h5>";
-        } else {
+       
             txt += "  <h6 >" + element + ":</h6>";
             txt += "  <p class=" + element + "></p>";
-        }
-        index++;
+        
+        
     });
     txt +=
         '<button class="torol">torol</button> <button class="modosit">modosit</button>';

@@ -9,14 +9,17 @@
 @section('content')
 <main>
     <header>
-<p>kijelentkezés</p>
+<a href="/">Kijelentkezés</a>
     </header>
     <aside> 
         @include('includes.adminNavigation')
     
     </aside>
+    <section id="rendez">
+    @include('includes.rendezés')
+    </section>
     <article>
-        @include('includes.rendezés')
+       
         <button id="ujFelvetel">uj</button>
         
         <section id="fo">
