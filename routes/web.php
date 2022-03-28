@@ -30,20 +30,26 @@ Route::get('/cikkek_etrend', function () { return view('pages.cikkek_etrend'); }
 Route::get('/bejelentkezes', function () { return view('pages.bejelentkezes'); });
 Route::get('/regisztracio', function () { return view('pages.regisztracio'); });
 //Route::get('/elfelejtettjelszo', function () { return view('pages.elfelejtettjelszo'); });
-//Route::get('/berletVasarlas', function () { return view('pages.berletVasarlas'); });
-Route::get('/admin', function () { return view('pages.admin'); });
+    //Route::get('/berletVasarlas', function () { return view('pages.berletVasarlas'); });
+    Route::get('/admin', function () { return view('pages.admin'); });
 Route::get("eszkozDB",[EszkozDbController::class,"show"]);
 Route::get('/chart',function(){return view('pages.admin.chart');});
 Route::get('/adminTeszt',function(){return view('pages.test.adminTest');});
-//Route::get('/edzo', function () { return view('pages.edzo'); });
-//Route::get('/recepcio', function () { return view('pages.recepcio'); });
+    Route::get('/edzo', function () { return view('pages.edzo'); });
+    Route::get('/recepcio', function () { return view('pages.recepcio'); });
 
 /*Login, regist*/
-Route::middleware([FelhasznaloJogosultsag::class])->group(function () {
-    Route::get('/berletVasarlas', function() { return view('pages.berletVasarlas'); });     
+//Route::middleware([FelhasznaloJogosultsag::class])->group(function () {
+    //Route::get('/berletVasarlas', function() { return view('pages.berletVasarlas'); });     
     //Route::get('/admin', function() { return view('pages.admin'); }); 
-    Route::get('/edzo', function() { return 'pages.edzo'; }); 
-    Route::get('/recepcio', function() { return view('pages.recepcio'); }); 
+    //Route::get('/edzo', function() { return 'pages.edzo'; }); 
+    //Route::get('/recepcio', function() { return view('pages.recepcio'); }); 
+//});
+Route::middleware([FelhasznaloJogosultsag::class])->group(function () {
+    Route::get('/berletVasarlas', function () { return view('pages.berletVasarlas');});
+    //Route::get('/recepcio', function() { return view('pages.recepcio'); }); 
+    //Route::get('/edzo', function() { return 'pages.edzo'; });
+    //Route::get('/admin', function() { return view('pages.admin'); }); 
 });
 
 //Route::get('/login', function(){ return view("Login"); });
@@ -62,11 +68,11 @@ Route::get('/api/gepek/sort', [GepekController::class, 'sortBy']);
 Route::get('/api/gepek/{id}', [GepekController::class, 'show']);
 
 // Ugyfel edzes foglalas felvitele 
-Route::post('/ugyfelEdzesFoglalasFelvitel', [UgyfeledzesFelviszController::class, 'felviszUgyfelFoglalas'] )->name('ugyfelEdzesFoglalasFelvitel');
+Route::post('/ugyfelEdzesFoglalasFelvitel', [UgyfeledzesFelviszController::class, 'felviszUgyfelFoglalas'] )->name('ugyfelEdzesFoglalasFelvitel1');
 //Route::post('/ugyfelEdzesFoglalasTorol', [UgyfeledzesFelviszController::class, 'torolUgyfelFoglalas'] )->name('ugyfelEdzesFoglalasTorol');
 /* Route::get('/ugyfelEdzesFoglalasTorol/{id}',  [UgyfeledzesFelviszController::class, 'torolUgyfelFoglalas'] )->name('ugyfelEdzesFoglalasTorol'); */
 //recepcio Oltozo foglalas felvitele
-Route::post('/OltozoFoglalasFelvitel', [OltozoFoglalasFelviszController::class, 'OltozoFoglalas'] )->name('OltozoFoglalasFelvitel');
+Route::post('/OltozoFoglalasFelvitel', [OltozoFoglalasFelviszController::class, 'OltozoFoglalas'] )->name('OltozoFoglalasFelvitel1');
 
 
 //Szekrenyeket kilistaz

@@ -144,6 +144,8 @@ nav ul li a:hover {
             "n n n n n n"
             "s s s s s s"
             "a a a a a a"
+            "r r r r r r"
+            "t t t t t t"
             "f f f f f f";
         font-size: 17px;
     }
@@ -168,11 +170,14 @@ nav ul li a:hover {
         width: 100%;
         height: auto;
     }
-    #allomany {
+    .elemek {
         display: grid;
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: 1fr 1fr;   
+    }
+    .elemek div{
         width: 80%;
         margin: auto;
+        margin-bottom: 30px;
     }
 }
 
@@ -184,20 +189,15 @@ nav ul li a:hover {
     }
 }
 
-@media only screen and (max-width: 800px) {
-    #leiras{
-        width: 100%;
-        margin: auto;
-        text-align: center;
-    }
-}
-
 @media only screen and (max-width: 700px) {
-    #allomany {
+    .elemek{
         display: grid;
         grid-template-columns: 1fr;
+    }
+    .elemek div{
         width: 100%;
         margin: auto;
+        margin-bottom: 30px;
     }
 }
 

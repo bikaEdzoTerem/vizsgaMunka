@@ -1,10 +1,11 @@
 class AdminRend{
+  
     constructor(){
-      let megjelenit = 0;
+      
      
     };
     
-   keresoMezo() {
+   keresoMezo(termek,Oszlopneve) {
     
 
     megjelenit=0;
@@ -13,18 +14,23 @@ class AdminRend{
        
         
     
-        adatMeg.apiOsszealitas(termek,Oszlopnev);
+        adatMeg.apiOsszealitas(termek,Oszlopneve);
    };
        
    
 
-    rendezesTabla(){
+
+    
+      
+
+    rendezesTabla(termek,Oszlopneve){
       let darabolas = $("#rendezes").val();
       let vegtemek = darabolas.split("!");
+
          queryParams.set("_sort",vegtemek[0])
          queryParams.set("_order",vegtemek[1])
           
-          adatMeg.apiOsszealitas(termek,Oszlopnev);
+          adatMeg.apiOsszealitas(termek,Oszlopneve);
            
     }
 
@@ -42,12 +48,13 @@ class AdminRend{
     };
     elemMegjelenit(termekek, tomb) {
       
-      rend.oldalakSzama(termekek);
+      rend.oldalakSzama(termekek ,tomb);
       const szuloElem = $(".elemek");
       const sablonElem = $(".elem");
       //  myAjax.getjson("alapnevek.json", tomb);
   
       szuloElem.empty();
+      console.log(termekek);
       termekek.forEach(function (elem, index) {
           if (
               (megjelenit <= index) &
@@ -61,7 +68,7 @@ class AdminRend{
   }
 
 
-    oldalakSzama(mindenadat){
+    oldalakSzama(mindenadat,Oszlopnev){
         let txt="";
        // console.log(mindenadat);
         let adathoszz=mindenadat.length ;
@@ -70,7 +77,7 @@ class AdminRend{
       for (let index = 0; index <adathoszz / $("#listaz").val(); index++) {
           $("#navig").append(' <button class="oldal"  id='+index+'>'+index+'</button>');
           $('#'+index+'').on("click", function() {
-            oldalValt(index,mindenadat);
+            oldalValt(index,mindenadat ,Oszlopnev);
               console.log(index);
              });
       }
@@ -81,7 +88,7 @@ class AdminRend{
     
 
 } 
-function oldalValt(ertek,mindenadat){
+function oldalValt(ertek,mindenadat,Oszlopnev){
     megjelenit=($("#listaz").val()*ertek)
     console.log($("#listaz").val()*ertek);
     

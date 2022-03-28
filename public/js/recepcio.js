@@ -50,7 +50,7 @@ $(function () {
   
   //-------------------------------------------------------------------------------------------------------------------------
   $(window).on('rossz', (event) => {//ha kipipálom a checkboxot akkor modositja az adatot rosssz ra
-    console.log(event.detail.szekreny_id);
+    /* console.log(event.detail.szekreny_id);
     let szekrenyKeres=[];
       let apiVegpont = "/api/szekreny";
       apiVegpont += "?idRossz=" + event.detail.szekreny_id;
@@ -59,21 +59,41 @@ $(function () {
   });
   function keres1(){
     console.log("feloldott");
-  }
-  //-------------------------------------------------------------------------------------------------------------------------
-  $(window).on('felold', (event) => {//ha rányomok a feloldra modositja az adatot
-    /* console.log(event.detail.szekreny_id);
-    apiVegpont = "api/recepcioHoz1";
+  } */
+  //event.detail.attr('checked');
+  console.log(event.detail.ures_e);
+  if(event.detail.ures_e==="Ü"){
+    szoveg = {
+      szekreny_id: event.detail.szekreny_id,
+      ures_e: "R",
+      tipusa:event.detail.tipusa,
+    };
+  }else if(event.detail.ures_e==="R"){
     szoveg = {
       szekreny_id: event.detail.szekreny_id,
       ures_e: "Ü",
       tipusa:event.detail.tipusa,
-      created_at: "null",
-      updated_at: "null", 
     };
-    myAjax.adatmodosit(apiVegpont,szoveg, event.detail.id);
-    window.location.reload(); */
-    let szekrenyKeres=[];
+  }
+  console.log(event.detail.szekreny_id);
+    apiVegpont = "api/recepcioHoz";
+    
+    myAjax.adatmodosit(apiVegpont,szoveg, event.detail.szekreny_id);
+    window.location.reload();
+  });
+  //-------------------------------------------------------------------------------------------------------------------------
+  $(window).on('felold', (event) => {//ha rányomok a feloldra modositja az adatot
+    console.log(event.detail.szekreny_id);
+    apiVegpont = "api/recepcioHoz";
+    szoveg = {
+      szekreny_id: event.detail.szekreny_id,
+      ures_e: "Ü",
+      tipusa:event.detail.tipusa,
+    };
+    myAjax.adatmodosit(apiVegpont,szoveg, event.detail.szekreny_id);
+    window.location.reload();
+  });
+    /* let szekrenyKeres=[];
       let apiVegpont = "/api/szekreny";
       apiVegpont += "?id=" + event.detail.szekreny_id;
       myAjax.adatbeolvas(apiVegpont, szekrenyKeres, keres2);
@@ -81,11 +101,11 @@ $(function () {
   });
   function keres2(){
     console.log("feloldott");
-  }
+  } */
 //-------------------------------------------------------------------------------------------------
     $(document).ready(function(e) {
       var timeout;
-      var delay = 2000;   // 2 másodperc
+      var delay = 1000;   // 1 másodperc
   
       $(".keresSzemely").on("input", () => {
           if(timeout) {
@@ -139,7 +159,7 @@ $(function () {
 //-------------------------------------------------------------------------------------------------
     $(document).ready(function(e) {
       var timeout;
-      var delay = 2000;   // 2 másodperc
+      var delay = 1000;   // 1 másodperc
   
       $(".keresSzekrenykulcs").on("input", () => {
           if(timeout) {
@@ -158,7 +178,28 @@ $(function () {
       myAjax.adatbeolvas(apiVegpont,tomb,szekrenyKeresoMegjelenit);
     };
     function szekrenyKeresoMegjelenit(tomb){
-      let seged="";
+      console.log(tomb);
+      const sablonElem = $('footer .szekreny ');
+      sablonElem.show();
+      $(".keresettSzekreny").empty();
+      tomb.forEach(function (elem) {
+        let node = sablonElem.clone().appendTo(".keresettSzekreny");
+        const obj = new Szekreny(node, elem);
+        if(elem.ures_e==="Ü"){
+          obj.szekreny_feloldas.hide();
+        }else if(elem.ures_e==="R"){
+          obj.szekreny_feloldas.hide();
+          obj.szekreny_rosszCheckBox.attr("checked", true);
+        }
+      });
+      sablonElem.hide(); 
+      $(".keresettSzekreny .szama").prepend("Szekrény száma: ");
+
+      $(".keresettSzekreny .neme").prepend("Tulajdonsága: ");
+      $(".keresettSzekreny .uresE").prepend("Állapota: ");
+      $(".keresettSzekreny .hibasGomb").parent().prepend("Funkcio: ");
+
+      /* let seged="";
       if(tomb.length===1){
         seged+="<span>"+"Szekrény száma: ";
         seged+=tomb[0].szekreny_id+"<br>";
@@ -183,7 +224,7 @@ $(function () {
       }else if(tomb.length>1){
         seged="";
       }
-      $(".keresettSzekreny").html(seged);
+      $(".keresettSzekreny").html(seged); */
       $(".feloldasGomb").on("click", (event) => {
         let id = $(event.target).attr("data-id");
         szekrenyemben.katt(tomb[0].szekreny_id,"kattint","Ü");

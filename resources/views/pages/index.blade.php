@@ -3,8 +3,7 @@
 @include('includes.kepvaltas')
 @include('includes.kozosnav')
 <article>
-  <div id="bemutatkozo">
-    <p>Üdvözlünk konditerműnkben! <br><br>
+    <p><img src="../kepek/articleimg.jpg" alt="sziaaaaaa">Üdvözlünk konditerműnkben! <br><br>
 
       Mindenkit szívesen fogadunk, legyél gyenge vagy erős.
       Mikor ide belépsz egyenlő vagy a bent lévőkkel. <br>
@@ -37,10 +36,7 @@
       <li><a href="https://www.youtube.com/watch?v=Aempr0QvAec&ab_channel=FitworkNation">Fittwork Nation</a></li>
       <li><a href="https://www.youtube.com/watch?v=gey73xiS8F4&ab_channel=GymLeague">Gym League</a></li>
     </ul>
-  </div>
-  <div id="nagykep_tarolo">
-    <img src="../kepek/articleimg.jpg" alt="sziaaaaaa">
-  </div>
+    
 </article>
 <aside>
   <div id="letszam_szamlalo">

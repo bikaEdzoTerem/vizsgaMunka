@@ -26,7 +26,7 @@ $(function () {
         "berletTipus"
         
     ];
-     adatMeg=new AdatokMegjelenitese();
+     adatMeg=new AdatokMegjeleniteseAdmin();
     var mindenadat = [];
     myAjax = new MyAjax();
     rend = new AdminRend();
@@ -75,15 +75,15 @@ $(function () {
     });
     $("#listaz").on("change", () => {
         console.log($("#listaz").val());
-
+        console.log(Oszlopnev);
         adatMeg.apiOsszealitas(termek,Oszlopnev);
     });
     $("#keresSzoveg").on("keyup", () => {
-        rend.keresoMezo();
+        rend.keresoMezo(termek,Oszlopnev);
         console.log(rendezes);
     });
     $("#rendezes").on("change", () => {
-        rend.rendezesTabla();
+        rend.rendezesTabla(termek,Oszlopnev);
     });
     $(window).on("torol", function (event) {
         const id = event.detail[Oszlopnev[0]];
@@ -322,20 +322,4 @@ try {
     
 };
 
-function Alap(nev) {
-    $(".elemek").empty();
-    $(".elemek").append('<div class="elem " ></div>');
-    let txt = "";
-    
 
-    nev.forEach((element) => {
-       
-            txt += "  <h6 >" + element + ":</h6>";
-            txt += "  <p class=" + element + "></p>";
-        
-        
-    });
-    txt +=
-        '<button class="torol">torol</button> <button class="modosit">modosit</button>';
-    $(".elem").append(txt);
-}

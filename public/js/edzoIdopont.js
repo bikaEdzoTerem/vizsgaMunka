@@ -1,7 +1,6 @@
 class Idopont{
     
     constructor(node,adat){
-        console.log(adat);
         this.node = node;
         this.adat = adat;
         this.ugyfel_nev = this.node.children(".szemelyNeve");

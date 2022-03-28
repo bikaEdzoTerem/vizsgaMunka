@@ -14,13 +14,13 @@ class EdzesekController extends Controller
     { $sort=$request->query ('_sort');
         $order=$request->query ('_order');
         $q=$request->query('q');
-        $edzesek=Edzesek::selectRaw("*,1 as hidden");
+        $edzesek=Edzesek::selectRaw("*");
         if($sort&&$order){
             $edzesek->orderBy($sort,$order);
         }
         if($q){
             
-            foreach ( Schema::getColumnListing("berlet_tipuses") as $column) {
+            foreach ( Schema::getColumnListing("ugyfel_edzes") as $column) {
                // dd(Schema::getColumnType("szemelies",$column));
                 $edzesek->orWhere($column,'like','%'.$q.'%');
                 $edzesek->orWhere($column,$q);

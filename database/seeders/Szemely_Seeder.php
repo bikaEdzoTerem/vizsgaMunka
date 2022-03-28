@@ -9,7 +9,7 @@ class Szemely_Seeder extends Seeder
 {
     public function run(){
         DB::table('szemelies')->insert([
-            ['jogosultsag_id' => '1','email_cim' => 'felhasznalo111111111111@gmail.com','jelszo' => Hash::make('Aa123456'),'nev' => 'Hecz Kaludia','szul_datum' => '1982-06-03','neme' => 'Nő','igazolvany_szam' => '17593716491','igazolvany_tipusa' => 'diák','tel_szam'=>'0620400598','kep' => 'alap_ert'],
+            ['jogosultsag_id' => '1','email_cim' => 'felhasznalo1@gmail.com','jelszo' => Hash::make('Aa123456'),'nev' => 'Hecz Kaludia','szul_datum' => '1982-06-03','neme' => 'Nő','igazolvany_szam' => '17593716491','igazolvany_tipusa' => 'diák','tel_szam'=>'0620400598','kep' => 'alap_ert'],
             ['jogosultsag_id' => '3','email_cim' => 'edzo1@gmail.com','jelszo' => Hash::make('Bb123456'),'nev' => 'Szabó Anett','szul_datum' => '2000-01-21','neme' => 'Nő','igazolvany_szam' => '572962SA','igazolvany_tipusa' => 'felnőtt','tel_szam'=>'0620400598','kep' => 'alap_ert'],
             ['jogosultsag_id' => '1','email_cim' => 'felhasznalo2@gmail.com','jelszo' => Hash::make('Cc123456'),'nev' => 'Szántai Barna','szul_datum' => '1982-06-03','neme' => 'Férfi','igazolvany_szam' => '16592711111','igazolvany_tipusa' => 'diak','tel_szam'=>'0620400598','kep' => 'alap_ert'],
             ['jogosultsag_id' => '2','email_cim' => 'dolgozo1@gmail.com','jelszo' => Hash::make('Dd123456'),'nev' => 'Bartucz Petra','szul_datum' => '1999-02-14','neme' => 'Nő','igazolvany_szam' => '112233SA','igazolvany_tipusa' => 'felnőtt','tel_szam'=>'0620400598','kep' => 'alap_ert'],

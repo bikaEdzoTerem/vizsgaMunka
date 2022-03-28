@@ -3,7 +3,7 @@
   @section('content')
     <p>Bogdán Gábor</p>
     
-        <form action="{{route('ugyfelEdzesFoglalasFelvitel')}}" method="post">
+        <form action="{{route('ugyfelEdzesFoglalasFelvitel1')}}" method="post">
         @csrf
         <input placeholder="személy neve" type="txt"  class="szemelyKereso" name="ugyfelNev" value="{{old('ugyfelNev')}}" />
 
@@ -18,7 +18,7 @@
         <input  class="ora"type="text" list="oraValasztasok" placeholder="edzés hossza(1:00)" maxlength="4" name="ora" value="{{old('ora')}}" />
         <datalist id="oraValasztasok"> </datalist>
         {{-- <div class="gomb"></div> --}}
-        <button type=submit  class=lefoglal>Lefoglal</button>
+        <button type="submit"  class=lefoglal>Lefoglal</button>
 
         @if(Session::has('sikeres'))
           <div class="alert alert-sikeres">{{Session::get('sikeres')}}</div>

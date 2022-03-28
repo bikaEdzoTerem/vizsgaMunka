@@ -26,7 +26,7 @@
   "szekreny":["szekreny_id", "ures_e", "tipusa"],
   "szekrenyKicsik":["szekreny_id", "ures_e", "tipusa"],
   "terem":["terem_id","terem_neve","ferfi_ferohely","noi_ferohely","nyitas","zaras"],
-  "teremKicsik":["terem_id","terem_neve","ferfi_ferohely","noi_ferohely","nyitas","zaras"]
- 
+  "teremKicsik":["terem_id","terem_neve","ferfi_ferohely","noi_ferohely","nyitas","zaras"],
+  "gepekoldal":["eszkoz_neve","kep","leiras"]
 
 }

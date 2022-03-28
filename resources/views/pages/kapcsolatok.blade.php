@@ -2,7 +2,7 @@
 @section('content')
 
 @include('includes.kozosnav')
-<article id="szabalyzat">
+<div id="szabalyzat">
     <h1>Szabályzat:</h1>
     <ul>
         <li>A terembe belépés után, az öltözőben, át kell venni a váltó ruhát, legfontosabb a váltó cipő!</li>
@@ -19,59 +19,58 @@
         <li>Verekedni/ balhézni/ kötekedni szigorúan tilos!</li>
         <li>Érezd jól magad!</li>
     </ul>
-</article>
-<aside id="kapcsolatok">
-    <div id="leiras">
-        <p>
-            Fenntartó: Bika KFT<br>
-            Terem neve: Bika edző és fitneszterem<br>
-            Telefonszám: 06 30 123 4567<br>
-            Fax: bikaterem@fax.com <br>
-            Email: bikaterem@gmail.com <br>
-            Irányítószám: 1122 <br>
-            Város: Szabadbattyán <br>
-            Utca: Kölcsey Ferenc utca <br>
-            Szám: 112 <br>
-        </p>
-    </div>
-    <div id="terkep">
+</div>
+<div id="leiras">
+    <p>
+        Fenntartó: Bika KFT<br>
+        Terem neve: Bika edző és fitneszterem<br>
+        Telefonszám: 06 30 123 4567<br>
+        Fax: bikaterem@fax.com <br>
+        Email: bikaterem@gmail.com <br>
+        Irányítószám: 1122 <br>
+        Város: Szabadbattyán <br>
+        Utca: Kölcsey Ferenc utca <br>
+        Szám: 112 <br>
+    </p>
+</div>
+<div id="terkep">
 
-    </div>
-    <div class="container">
-        <table class="table table-dark table-striped">
-            <tr>
-                <th>Nyitvatartás:</th>
-                <th>Időpont:</th>
-            </tr>
-            <tr>
-                <td>Hétfő:</td>
-                <td>6:00-22:00</td>
-            </tr>
-            <tr>
-                <td>Kedd:</td>
-                <td>6:00-22:00</td>
-            </tr>
-            <tr>
-                <td>Szerda</td>
-                <td>6:00-22:00</td>
-            </tr>
-            <tr>
-                <td>Csütörtök</td>
-                <td>6:00-22:00</td>
-            </tr>
-            <tr>
-                <td>Péntek</td>
-                <td>6:00-22:00</td>
-            </tr>
-            <tr>
-                <td>Szombat:</td>
-                <td>6:00-22:00</td>
-            </tr>
-            <tr>
-                <td>Vasárnap</td>
-                <td>6:00-22:00</td>
-            </tr>
-        </table>
-    </div>
-</aside>
+</div>
+<div class="container tablazat">
+    <table class="table table-dark table-striped">
+        <tr>
+            <th>Nyitvatartás:</th>
+            <th>Időpont:</th>
+        </tr>
+        <tr>
+            <td>Hétfő:</td>
+            <td>6:00-22:00</td>
+        </tr>
+        <tr>
+            <td>Kedd:</td>
+            <td>6:00-22:00</td>
+        </tr>
+        <tr>
+            <td>Szerda</td>
+            <td>6:00-22:00</td>
+        </tr>
+        <tr>
+            <td>Csütörtök</td>
+            <td>6:00-22:00</td>
+        </tr>
+        <tr>
+            <td>Péntek</td>
+            <td>6:00-22:00</td>
+        </tr>
+        <tr>
+            <td>Szombat:</td>
+            <td>6:00-22:00</td>
+        </tr>
+        <tr>
+            <td>Vasárnap</td>
+            <td>6:00-22:00</td>
+        </tr>
+    </table>
+</div>
+
 @endsection

@@ -28,17 +28,17 @@ class Eszkoz_Seeder extends Seeder
             ['eszkoz_tipus_szamlalo' => '17','terem_id' => '2','qr_kod' => 'Null'],
             ['eszkoz_tipus_szamlalo' => '18','terem_id' => '2','qr_kod' => 'Null'],
             ['eszkoz_tipus_szamlalo' => '19','terem_id' => '2','qr_kod' => 'Null'],
-            ['eszkoz_tipus_szamlalo' => '20','terem_id' => '2','qr_kod' => 'Null'],
-            ['eszkoz_tipus_szamlalo' => '21','terem_id' => '2','qr_kod' => 'Null'],
-            ['eszkoz_tipus_szamlalo' => '22','terem_id' => '2','qr_kod' => 'Null'],
-            ['eszkoz_tipus_szamlalo' => '23','terem_id' => '2','qr_kod' => 'Null'],
-            ['eszkoz_tipus_szamlalo' => '24','terem_id' => '2','qr_kod' => 'Null'],
-            ['eszkoz_tipus_szamlalo' => '25','terem_id' => '2','qr_kod' => 'Null'],
-            ['eszkoz_tipus_szamlalo' => '26','terem_id' => '2','qr_kod' => 'Null'],
-            ['eszkoz_tipus_szamlalo' => '27','terem_id' => '2','qr_kod' => 'Null'],
-            ['eszkoz_tipus_szamlalo' => '28','terem_id' => '2','qr_kod' => 'Null'],
-            ['eszkoz_tipus_szamlalo' => '29','terem_id' => '2','qr_kod' => 'Null'],
-            ['eszkoz_tipus_szamlalo' => '30','terem_id' => '2','qr_kod' => 'Null']
+            ['eszkoz_tipus_szamlalo' => '2','terem_id' => '2','qr_kod' => 'Null'],
+            ['eszkoz_tipus_szamlalo' => '2','terem_id' => '2','qr_kod' => 'Null'],
+            ['eszkoz_tipus_szamlalo' => '2','terem_id' => '2','qr_kod' => 'Null'],
+            ['eszkoz_tipus_szamlalo' => '2','terem_id' => '2','qr_kod' => 'Null'],
+            ['eszkoz_tipus_szamlalo' => '2','terem_id' => '2','qr_kod' => 'Null'],
+            ['eszkoz_tipus_szamlalo' => '2','terem_id' => '2','qr_kod' => 'Null'],
+            ['eszkoz_tipus_szamlalo' => '2','terem_id' => '2','qr_kod' => 'Null'],
+            ['eszkoz_tipus_szamlalo' => '2','terem_id' => '2','qr_kod' => 'Null'],
+            ['eszkoz_tipus_szamlalo' => '2','terem_id' => '2','qr_kod' => 'Null'],
+            ['eszkoz_tipus_szamlalo' => '2','terem_id' => '2','qr_kod' => 'Null'],
+            ['eszkoz_tipus_szamlalo' => '2','terem_id' => '2','qr_kod' => 'Null']
         ]);
         }
 }

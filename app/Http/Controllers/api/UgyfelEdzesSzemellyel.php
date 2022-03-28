@@ -28,7 +28,6 @@ class UgyfelEdzesSzemellyel extends Controller
             //->Where('datum_tol','<=',Now(),'and','datum_ig','>=',Now());
             ->whereRaw("NOW() BETWEEN datum_tol AND datum_ig")
             ->select('*',DB::raw("DATEDIFF(  datum_ig,now()) AS MegMeddigJo")->isnull);
-
         } */
         if($nev){
             $tabla= DB::table('szemelies')
