@@ -56,8 +56,20 @@ class UgyfelEdzesController extends Controller{
         }
     } */
     
-    public function destroy(string $id){//töröl egy ügyfél edzés foglalást
+    /* public function destroy(string $id){//töröl egy ügyfél edzés foglalást
         $article = Ugyfel_edzes::find($id);
         $article->delete();
-    }
+    } */
+    public function delete(Request $request){
+        $original=$request->all();
+        DB::Table('ugyfel_edzes')
+       ->where([
+           ['edzo',$original['edzo']],
+           ['ugyfel',$original['ugyfel']],
+           ['datum',$original['datum']],
+           ['ora',$original['ora']],
+       ])->delete();
+       
+        return response()->json(true);
+     }
 }

@@ -2,7 +2,7 @@
 @section('content')
 <main>
       <header>
-        <form action="{{route('OltozoFoglalasFelvitel')}}" method="post">
+        <form action="{{route('OltozoFoglalasFelvitel1')}}" method="post">
           <div id="kereso">
             @csrf
             <div class="bal1">

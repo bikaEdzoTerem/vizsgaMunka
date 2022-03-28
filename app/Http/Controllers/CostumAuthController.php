@@ -148,7 +148,7 @@ class CostumAuthController extends BaseController
             } else if (Hash::check($request->jelszo, $szemely->jelszo) && $szemely->jogosultsag_id==2) {
                 return view('pages.dolgozo');
             } else if (Hash::check($request->jelszo, $szemely->jelszo) && $szemely->jogosultsag_id==3) {
-                return view('pages.edzo');
+                return view('pages.recepcio');
             } else if (Hash::check($request->jelszo, $szemely->jelszo) && $szemely->jogosultsag_id==4) {
                 return view('pages.admin');
             } else {

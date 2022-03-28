@@ -53,7 +53,7 @@ class Szekrenyek {
 
       $(hova).html(txt);
 
-      $(".hibasGomb").on("change", (event) => {
+      /* $(".hibasGomb").on("change", (event) => {
           let id = $(event.target).attr("data-id");
           if (event.target.checked === true) {
               this.katt(id, "kattint", "R");
@@ -61,6 +61,6 @@ class Szekrenyek {
               this.katt(id, "kattint", "Ü");
           }
           console.log(event.target.checked);
-      });
+      }); */
   }
 }

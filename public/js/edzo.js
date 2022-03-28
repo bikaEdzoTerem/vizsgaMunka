@@ -114,9 +114,6 @@ $(".BalraCsokkent").on("click ", () => {
         /* console.log(elem.datum); */
               let datum1=elem.datum.slice(0,10);
               let datum2=myCallback(index+eltolas).slice(0,10);
-              /* console.log(datum1);
-              console.log(datum2); */
-              /* console.log(myCallback(index+eltolas)); */
               if(datum2===datum1){
                 console.log("kreal");
                   let node = sablonElem.clone().appendTo($('.tablaadat'+index));
@@ -174,7 +171,7 @@ $(".BalraCsokkent").on("click ", () => {
       /* $(mit).html("<button type=submit  class=lefoglal>Lefoglal</button>") */
       $(mit)[0].style.display = "block";
     }
-    $(".lefoglal").on("click", () => {// ha kattintunk a lefoglal gomb-ra
+    /* $(".lefoglal").on("click", () => {// ha kattintunk a lefoglal gomb-ra
       oraBeallitas();
       let szemelySeged=$(".szemelyKereso").val();
       let datumSeged=$(".datum").val();
@@ -193,7 +190,6 @@ $(".BalraCsokkent").on("click ", () => {
         console.log(szemelyKeres);
         apiVegpont = apiEdzoIdopontok;
         let szoveg = {
-          /* id: parseInt(idopontokTomb[idopontokTomb.length-1].id), */
           ugyfel_id:  parseInt(szemelyKeres[0].szemely_id) ,
           ugyfel_nev: szemelyKeres[0].nev,
           datum: datumSeged+" "+oraraSeged,
@@ -205,7 +201,7 @@ $(".BalraCsokkent").on("click ", () => {
       }else{
         console.log("hibás a dátum vagy a név");
       }
-    });
+    }); */
     
     function oraBeallitas(){
       if(!($(".ora").val()==="")){//ha megvan adva dátum 
@@ -298,9 +294,10 @@ $(".BalraCsokkent").on("click ", () => {
       }
     }
     $(window).on('felold', (event) => {//ha rányomok a feloldra torli az adatot
-      apiVegpont = "api/ugyfelEdzes";
-      /* apiVegpont = "ugyfelEdzesFoglalasTorol"; */
-      myAjax.adattorles(apiVegpont, event.detail.id);
+      /* apiVegpont = "api/ugyfelEdzes"; */
+      /* myAjax.adattorles(apiVegpont, event.detail.id); */
+      apiVegpont = "api/ugyfelEdzes/delete";
+      myAjax.adatkuldes(apiVegpont, event.detail);
       window.location.reload();
     });
 

@@ -10,6 +10,7 @@
         <script src="../js/edzo.js"></script>
         @yield('css')
         <link href="../css/EdzoCss/header.css" rel="stylesheet" type="text/css" />
+        <link href="../css/EdzoCss/body.css" rel="stylesheet" type="text/css" />
         <title>Edzo felulet</title>
     </head>
     <body>

@@ -105,7 +105,7 @@ $(function () {
 //-------------------------------------------------------------------------------------------------
     $(document).ready(function(e) {
       var timeout;
-      var delay = 2000;   // 2 másodperc
+      var delay = 1000;   // 1 másodperc
   
       $(".keresSzemely").on("input", () => {
           if(timeout) {
@@ -159,7 +159,7 @@ $(function () {
 //-------------------------------------------------------------------------------------------------
     $(document).ready(function(e) {
       var timeout;
-      var delay = 2000;   // 2 másodperc
+      var delay = 1000;   // 1 másodperc
   
       $(".keresSzekrenykulcs").on("input", () => {
           if(timeout) {
