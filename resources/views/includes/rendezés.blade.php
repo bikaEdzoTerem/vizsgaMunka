@@ -10,7 +10,7 @@
         </select>
         <select id="listaz">
             <option id="25" value="5">5</option>
-            <option id="50" value="10">50</option>
+            <option id="50" value="10">10</option>
             <option id="100" value="15">15</option>
 
         </select>

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Routing\Controller as BaseController;
+use Illuminate\Routing\Route;
 use SebastianBergmann\Environment\Console;
 
 class CostumAuthController extends BaseController
@@ -57,10 +58,92 @@ class CostumAuthController extends BaseController
             'email_cim' => 'required|email',
             'jelszo' => 'required|min:5|max:20'
         ]);
+
+        /*$routeName = Route::currentRouteName();
+        $szemely = new Szemely();
+        if (Hash::check($request->jelszo, $szemely->jelszo && $routeName == 'berletVasarlas')) {
+            switch ($szemely->jogosultsag_id) {
+                case 1:
+                    return view('/berletVasarlas');
+                    break;
+                case 2:
+                    return view('/');
+                    break;
+                case 3:
+                    return view('/');
+                    break;
+                case 4:
+                    return view('/');
+                    break;
+                default:
+                    return view('/');
+                    break;
+            }
+        }else{
+            return view('/login');
+        }
+        if (Hash::check($request->jelszo, $szemely->jelszo && $routeName == 'dolgozo')) {
+            switch ($szemely->jogosultsag_id) {
+                case 1:
+                    return view('/');
+                    break;
+                case 2:
+                    return view('/dolgozo');
+                    break;
+                case 3:
+                    return view('/');
+                    break;
+                case 4:
+                    return view('/');
+                    break;
+                default:
+                    return view('/');
+                    break;
+            }
+        }
+        if (Hash::check($request->jelszo, $szemely->jelszo && $routeName == 'edzo')) {
+            switch ($szemely->jogosultsag_id) {
+                case 1:
+                    return view('/');
+                    break;
+                case 2:
+                    return view('/');
+                    break;
+                case 3:
+                    return view('/edzo');
+                    break;
+                case 4:
+                    return view('/');
+                    break;
+                default:
+                    return view('/');
+                    break;
+            }
+        }
+        if (Hash::check($request->jelszo, $szemely->jelszo && $routeName == 'admin')) {
+            switch ($szemely->jogosultsag_id) {
+                case 1:
+                    return view('/');
+                    break;
+                case 2:
+                    return view('/');
+                    break;
+                case 3:
+                    return view('/');
+                    break;
+                case 4:
+                    return view('/admin');
+                    break;
+                default:
+                    return view('/');
+                    break;
+            }
+        }*/
+
+        
         $szemely = Szemely::where('email_cim', '=', $request->email_cim)->first();
         if ($szemely) {
-            if (Hash::check($request->jelszo, $szemely->jelszo) && $szemely->jogosultsag_id==1) {
-                
+            if (Hash::check($request->jelszo, $szemely->jelszo) && $szemely->jogosultsag_id == 1) {
                 return view('pages.berletVasarlas');
             } else if (Hash::check($request->jelszo, $szemely->jelszo) && $szemely->jogosultsag_id==2) {
                 return view('pages.dolgozo');
@@ -71,6 +154,13 @@ class CostumAuthController extends BaseController
             } else {
                 return back()->with('fail', 'A jelszó nem jó.');
             }
+            //} else if(url('/edzo')==$request->url()) {
+            //   if ($szemely && $szemely->jogosultsag_id == 3) {
+            //        if (Hash::check($request->jelszo, $szemely->jelszo)) {
+            //            return view('pages.edzo');
+            //        }
+            //    }
+            //
         } else {
             return back()->with('fail', 'Ez az email nincs regisztrálva.');
         }

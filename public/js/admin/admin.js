@@ -326,23 +326,4 @@ try {
     
 };
 
-function Alap(nev) {
-    $(".elemek").empty();
-    $(".elemek").append('<div class="elem  id"leftmenuinnerinner" ></div>');
-    let txt = "";
-    let index = 0;
 
-    nev.forEach((element) => {
-        if (index == 0) {
-            txt += "  <h6 >" + element + ":</h6>";
-            txt += "<h5 class=" + element + ">Lorem ipsum dolor</h5>";
-        } else {
-            txt += "  <h6 >" + element + ":</h6>";
-            txt += "  <p class=" + element + "></p>";
-        }
-        index++;
-    });
-    txt +=
-        '<button class="torol">torol</button> <button class="modosit">modosit</button>';
-    $(".elem").append(txt);
-}

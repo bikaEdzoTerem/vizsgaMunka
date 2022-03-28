@@ -9,7 +9,7 @@ class Eszkoz_tipus_Seeder extends Seeder
 {
     public function run(){
         DB::table('eszkoz_tipuses')->insert([
-            ['eszkoz_neve' => 'Kézisúlyzó','suly' => '1','kep' => 'Kép1','leiras' => 'Taláán a legegyszerűbb eszköz. Rengeteg gyakorlatot lehet vele csinálni és szimplán csak emelgetni kell.'],
+            ['eszkoz_neve' => 'Kézisúlyzó','suly' => '1','kep' => 'Kép1','leiras' => 'Talán a legegyszerűbb eszköz. Rengeteg gyakorlatot lehet vele csinálni és szimplán csak emelgetni kell.'],
             ['eszkoz_neve' => 'Fekvenyomó Pad','suly' => '1','kep' => 'Kép2','leiras' => 'Ezt a fajtát padot fekve kinyomáshoz használják rúddal, de lehet súlyzóval is.'],
             ['eszkoz_neve' => 'Keresztcsiga','suly' => '1','kep' => 'Kép5','leiras' => 'Leginkább váll etősítéshez használják, húzni kell egy kötelet, vagy egy vas rudat. Kéinek mi a kényelmesebb, cserégethető.'],
             ['eszkoz_neve' => 'Mellnyomó Gép','suly' => '1','kep' => 'Kép6','leiras' => 'A gépek a padok ellentétei, amíg egy padon neked kell figyelni mindenre egy gép pár dolgban segít, ez a gép olyan mint egy egyesnes fekvenyomód pad.'],

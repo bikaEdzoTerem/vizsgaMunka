@@ -1,13 +1,44 @@
+let rend;
+let adatMeg;
+let superapivegponto = "api/gepek";
+const queryParams=new URLSearchParams();
+let myAjax;
+let alapnev=[];
+let megjelenit=0;
 $(function(){
+    myAjax = new MyAjax();
     
-    const myAjax = new MyAjax();
     const eszkozokTomb = [];
-    let alapApiVegpont = "/api/gepek";
+    
+   
+   
+adatMeg=new AdatokMegjelenitese();
+rend = new AdminRend();
+$("#listaz").on("change", () => {
+    console.log($("#listaz").val());
+
+    adatMeg.apiOsszealitas(eszkozokTomb,alapnev);
+});
+$("#keresSzoveg").on("keyup", () => {
+    rend.keresoMezo(alapnev,eszkozokTomb);
+    console.log(rendezes);
+});
+$("#rendezes").on("change", () => {
+    rend.rendezesTabla(alapnev);
+});
+
     /*let szamApiVegpont = "/api/gepek/";
     let szoApiVegpont = "/api/gepek/search?eszkoz_neve=";*/
 
-    myAjax.adatbeolvasEredeti(alapApiVegpont, eszkozokTomb, adatokMegjelenitese);
-
+    alapnev=myAjax.adatBeolvasasElore("../json/alapnevek.json", alapnev, "gepekoldal");
+    myAjax.adatbeolvas(superapivegponto,eszkozokTomb,(eszkozok)=>{
+        adatMeg.apiOsszealitas(eszkozok,alapnev);
+        rend.oldalakSzama(eszkozokTomb,alapnev);
+        rend.rendezoMezoLetreHozas(alapnev);
+    })
+  
+    
+    
     /*$(".k_mezo").on("keyup", ()=>{
         if(typeof ($(".k_mezo").val()) === Number){  //ez nem űködik
             let keresId = $(".k_mezo").val();
@@ -17,16 +48,6 @@ $(function(){
             let keresId = $(".k_mezo").val();
             myAjax.adatbeolvas(szoApiVegpont + keresId, eszkozokTomb, adatokMegjelenitese);
         }
-    });*/
-
-    /*$(".k_mezo").on("keyup", ()=>{
-        let keresId = $(".k_mezo").val();
-        myAjax.adatbeolvas(szamApiVegpont + keresId, eszkozokTomb, adatokMegjelenitese);
-    });
-
-    $(".k_mezo").on("keyup", ()=>{
-        let keresId = $(".k_mezo").val();
-        myAjax.adatbeolvas(szoApiVegpont + keresId, eszkozokTomb, adatokMegjelenitese);
     });*/
     
     function adatokMegjelenitese() {

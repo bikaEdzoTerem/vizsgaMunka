@@ -47,13 +47,9 @@ class Kosar {
             localStorage.setItem("kosarban", JSON.stringify(this.kosar));
             this.megjelenit();
             tartalom--;
-            if (this.kosar.length == 0/*1*/) {
-                //elem.hide();
-                //$("#kosar").remove(elem);
+            if (this.kosar.length == 0) {
                 $("#kosar").empty();
                 localStorage.removeItem("kosarban");
-                //$(".fejlec").remove()/hide();
-                //$("table").remove();
             }
         });
     }

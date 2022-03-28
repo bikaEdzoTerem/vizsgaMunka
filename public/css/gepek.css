@@ -1,7 +1,5 @@
 @charset "utf-8";
 
-
-
 main {
     display: grid;
     grid-template-areas: 
@@ -31,28 +29,36 @@ aside{
     margin-bottom: 30px;
 }
 
-.klonja {
+.elem {
     border-radius: 25px;
     width: 90%;
     max-width: 250px;
-    height: 350px;
+    height: auto;
     margin: 20px;
     background-color: brown;
     /*box-shadow: 5px 10px rgb(180, 175, 175);*/
     box-shadow: 10px 10px 10px 10px rgba(206, 206, 206, 0.2), 0 6px 20px 0 rgba(255, 5, 5, 0.5);;
 }
 
-.klonja h3 {
+.elem h5 {
     text-align: center;
 }
 
-.klonja img {
+.elem img {
     margin-left: 35px;
     border: 1px solid black;
     width: 180px;
     height: 160px;
 }
 
-.klonja p {
+.elem p {
     margin: 20px;
+    text-align: justify;
+}
+
+@media only screen and (max-width: 1200px) {
+    article {
+        width: 100%;
+        margin: auto;
+    }
 }

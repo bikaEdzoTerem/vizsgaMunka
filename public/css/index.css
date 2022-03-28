@@ -14,14 +14,14 @@ main {
 
 article {
     grid-area: a;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
     width: 70%;
     margin: auto;
+    
 }
 
 article img {
-    width: 100%;
+    float: right;
+    width: 45%;
     height: auto;
     opacity: 85%;
     padding: 15px;
@@ -47,5 +47,17 @@ aside ul li {
 
 aside div {
     margin: 15px;
+}
+
+@media only screen and (max-width: 1000px) {
+    article {
+        width: 90%;
+        margin: auto;
+    }
+
+    aside{
+        width: 90%;
+        margin: auto;
+    };
 }
 

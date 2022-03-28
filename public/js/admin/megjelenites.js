@@ -1,5 +1,5 @@
-class AdatokMegjelenitese {
-    constructor() {}
+class AdatokMegjelenitese{
+    constructor(){}
     apiOsszealitas(adatok, oszlopNev) {
         let vegApi = superapivegponto + "?" + queryParams.toString();
         console.log(vegApi);
@@ -8,18 +8,49 @@ class AdatokMegjelenitese {
             adatok,
             (adatok) => {
                 
-                Alap(oszlopNev);
+                this.Alap(oszlopNev);
                 rend.elemMegjelenit(adatok, oszlopNev);
             },
             
         );
-    }
+}
+adatbeilleszt(adatok, oszlopNevek) {
+    console.log(adatok);
+    oszlopNevek.forEach((element) => {
+        $("#" + element + " ").val(adatok[element]);
+        console.log(adatok[element]);
+    });
+}
+Alap(nev) {
+    $(".elemek").empty();
+    $(".elemek").append('<div class="elem " ></div>');
+    let txt = "";
+    let index = 0;
+
+    nev.forEach((element) => {
+        if (index == 0) {
+           
+            txt += "<h5 class=" + element + ">Lorem ipsum dolor</h5>";
+        }else if(element==="kep"){
+            txt += "<img scr=" + element + "/>";
+        } else {
+          
+            txt += "  <p class=" + element + "></p>";
+        }
+        index++;
+    });
+    txt +=
+        
+    $(".elem").append(txt);
+}}
+
+
+class AdatokMegjeleniteseAdmin  {
+    constructor() {}
+    
+    
     adatbeilleszt(adatok, oszlopNevek) {
-        console.log(adatok);
-        oszlopNevek.forEach((element) => {
-            $("#" + element + " ").val(adatok[element]);
-            console.log(adatok[element]);
-        });
+      this.super();
     }
 
     beviteliMezoGeneralas(
@@ -114,5 +145,10 @@ class AdatokMegjelenitese {
 
         $("#javitas").append(txt);
         $("#javitas").append(`<button type="button" id="kuld" >küld</button`);
+    }
+     Alap(nev) {
+       this.super();
+        
+        $(".elem").append('<button class="torol">torol</button> <button class="modosit">modosit</button>');
     }
 }

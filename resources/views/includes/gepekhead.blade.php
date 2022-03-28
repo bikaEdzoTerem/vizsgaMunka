@@ -20,6 +20,10 @@
     <script src="../js/ajax.js"></script>
     <script src="../js/gepek_eszkoz.js"></script>
     <script src="../js/gepek.js"></script>
+    <script src="../js/rendezeés.js"></script>
+    <script src="../js/admin/sablon.js"></script>
+    <script src="../js/admin/megjelenites.js"></script>
+
     <link rel="stylesheet" href="../css/gepek.css">
     <link rel="stylesheet" href="../css/body.css">
     <title>Kezdőoldal</title>
