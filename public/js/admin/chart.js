@@ -7,7 +7,7 @@ const chart=new Chartisan({
     .title('gépek termenként')
        
     .datasets([
-        {type:"line"} 
+        {type:"bar"} 
        
     ])
     .custom(({data,merge})=>{
@@ -32,7 +32,7 @@ const chart2=new Chartisan({
     hooks:new ChartisanHooks()
     .title('tipusonkénti gépek')
     .datasets([
-        {type:"line"}
+        {type:"bar"}
     ])
     .custom(({data,merge})=>{
     const dataZoom=[{
@@ -54,7 +54,7 @@ const chart3=new Chartisan({
     hooks:new ChartisanHooks()
     .title('bérlet eladások')
     .datasets([
-        {type:"line"}
+        {type:"bar"}
     ])
     .custom(({data,merge})=>{
     const dataZoom=[{

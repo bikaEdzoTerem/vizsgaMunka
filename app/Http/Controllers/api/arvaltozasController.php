@@ -31,14 +31,15 @@ class arvaltozasController extends Controller
         //dd($szemelyek->toSql());
 
         return response()->json($arvaltozasok->get());
-    }public function store(Request $request){  $Berlet_tipus_id=$request->input("Berlet_tipus_id");
+    }public function store(Request $request){ 
+         $Berlet_tipus_id=$request->input("berlet_tipus_id");
         $regi_ar=$request->input("regi_ar");
         $uj_ar=$request->input("uj_ar");
         $mettol=$request->input("mettol");
         $meddig=$request->input("meddig");
        
               $arvaltozas=new Arvaltozas;
-              $arvaltozas->eszkoz_neve=$Berlet_tipus_id;
+              $arvaltozas->berlet_tipus_id=$Berlet_tipus_id;
               $arvaltozas->regi_ar=$regi_ar;
               $arvaltozas->uj_ar=$uj_ar;
               $arvaltozas->mettol=$mettol;
