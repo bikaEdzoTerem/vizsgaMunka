@@ -7,22 +7,23 @@
 @endsection
 @section('css')
     <link rel="stylesheet" href="../css/chart.css">
-    <link rel="stylesheet" href="../css/admin.css">
+    
 @endsection
 @section('content')
+<main>
 <aside> 
     @include('includes.adminNavigation')
 
 </aside>
 <article>
-
+    <select id="napok"></select>
+    <div id="chart6" ></div>
     <div id="chart" ></div>
     <div id="chart2" ></div>
     <div id="chart3" ></div>
     <div id="chart4" ></div>
     <div id="chart5" ></div>
-    <div id="chart6" ></div>
-    <select id="napok"></select>
+   
     <script> const urls={
         diagram:"@chart('diagram_chart') ",
         eszkozok:"@chart('eszkozok_chart') ",
@@ -32,5 +33,6 @@
         napiletszam:"@chart('napiletszam_chart')"
     } </script>
 </article>
+</main>
 <script src="/js/admin/chart.js"></script>
 @endsection

@@ -1,17 +1,23 @@
 (async()=>{
 const chart=new Chartisan({
+   
     el:'#chart',
     url:urls.diagram,
     hooks:new ChartisanHooks()
+    .title('gépek termenként')
+       
     .datasets([
-        {type:"line"}
+        {type:"line"} 
+       
     ])
     .custom(({data,merge})=>{
+       
     const dataZoom=[{
         type:"slider",
         
     },
     {
+        
         type:"inside",
         
     }
@@ -24,6 +30,7 @@ const chart2=new Chartisan({
     el:'#chart2',
     url:urls.eszkozok,
     hooks:new ChartisanHooks()
+    .title('tipusonkénti gépek')
     .datasets([
         {type:"line"}
     ])
@@ -45,6 +52,7 @@ const chart3=new Chartisan({
     el:'#chart3',
     url:urls.berleteladasok,
     hooks:new ChartisanHooks()
+    .title('bérlet eladások')
     .datasets([
         {type:"line"}
     ])
@@ -66,6 +74,7 @@ const chart4=new Chartisan({
     el:'#chart4',
     url:urls.arvaltozasok,
     hooks:new ChartisanHooks()
+    .title('árváltozások')
     .datasets([
         {type:"line"}
     ])
@@ -87,6 +96,7 @@ const chart5=new Chartisan({
     el:'#chart5',
     url:urls.edzotevekenyseg,
     hooks:new ChartisanHooks()
+    .title('edző tevékenységek')
     .datasets([
         {type:"bar"}
     ])
@@ -122,16 +132,22 @@ const chart5=new Chartisan({
             el:'#chart6',
             url:`${urls.napiletszam}?napok=${result[0].napok}`,
             hooks:new ChartisanHooks()
+           
+            .title('napi létszám')
+            
                 .datasets([
                     {type:"bar"}
                 ])
                 .custom(({data,merge})=>{
+                   
                     const dataZoom=[
                         {
                             type:"slider",
+                           
                         },
                         {
                             type:"inside",
+                           
                         }
                     ];
                     
@@ -140,6 +156,8 @@ const chart5=new Chartisan({
         });
 
         napokSelect.addEventListener('change',(event)=>{
+            console.log("szia")
+
             const newDate = event.target.value
             chart6.update({
                 url: `${urls.napiletszam}?napok=${newDate}`

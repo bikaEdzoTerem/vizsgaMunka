@@ -1,52 +1,30 @@
-aside {
-    grid-area: k;
-}
-#chart {
-    height: 400px;
-    width: 50%;
-    margin: auto;
-    grid-area: f;
-}
-#chart2 {
-    height: 400px;
-    grid-area: e;
-    width: 50%;
-    margin: auto;
-}
-#chart3 {
-    height: 400px;
-    grid-area: c;
-    width: 50%;
-    margin: auto;
-}
-#chart4 {
-    height: 400px;
-    grid-area: d;
-    width: 50%;
-    margin: auto;
-}
-#chart5 {
-    grid-area: b;
-    height: 600px;
-    width: 100%;
-    margin: auto;
-}
-#chart6 {
-    grid-area: a;
-    height: 600px;
-    width: 100%;
-    margin: auto;
-}
-#napo {
-    grid-area: n;
-}
-article {
+body {
     display: grid;
     grid-template-areas:
-        "k k k k k k"
-        "a a a a a a" 
-        "b b b b b b"
-        "c c c d d d"
-        "e e e f f f"
-        "n n n n n n";
+        "as ar "
+        "as ar";
+}
+aside {
+    width:  15%;
+    grid-area: as;
+}
+article{
+    grid-area: ar;
+    display: grid;
+}
+div{
+    height: 500px;
+    width: 95%;
+    padding: auto;
+    margin: 100px solid black;
+}
+select{
+    width: 150px;
+}
+body{
+    background-color: aqua;
+}
+main{
+    
+    width: 103%;
 }
