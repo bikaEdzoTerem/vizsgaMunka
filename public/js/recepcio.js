@@ -121,42 +121,66 @@ $(function () {
       let tomb=[];
       let apiVegpont = "/api/ugyfelEdzesSzemellyel";
       apiVegpont += "?nev=" + $(".keresSzemely").val();
-      myAjax.adatbeolvas(apiVegpont,tomb,szemelyKeresoMegjelenit);
-    }
-    function szemelyKeresoMegjelenit(tomb){
-      console.log(tomb);
-      let seged=""
-      
-      if(tomb.length===1){
-        seged+="<span>Neve: "
-        seged+=tomb[0].nev+"<br>";
-        seged+="Neme: "
-        seged+=tomb[0].neme+"<br>";
-        seged+="Igazolvány száma: "
-        seged+=tomb[0].igazolvany_szam+"<br>";
-        seged+="Igazolvány tipusa: "
-        seged+=tomb[0].igazolvany_tipusa+"<br>";
-        seged+="E-mail címe: "
-        seged+=tomb[0].email_cim+"<br>";
-        seged+="Jogosultsága: "
-        seged+=tomb[0].jogosultsag_id+"<br>";
-        seged+="Születési dátuma: "
-        seged+=tomb[0].szul_datum+"</span>"+"<br>";
-        seged+="Képe: "
-        seged+='<img src="' + tomb[0].kep + '"alt="Profilkép"></img>'+"<br>";
-        if(tomb[0].MegMeddigJo=== undefined){
-          seged+="Nincs bérlete!"
-        }else{
-          seged+="Bérlete még: "
-          seged+=tomb[0].MegMeddigJo;
-          seged+=" nap-ig jó";
-        }
-      }else if(tomb.length>1){
-        seged="Egyszerre több személyT talált";
+      if(!($(".keresSzemely").val()==="")){// ha nincs semmise megadva az inputnak akkor ne fusson le
+        myAjax.adatbeolvas(apiVegpont,tomb,szemelyKeresoMegjelenit);
+      }else{
+         $('.keresettSzemely ').empty();
       }
-      $(".keresettSzemely").html(seged);
+    }
+    function szemelyKeresoMegjelenit(szemely){
+          const szuloElem = $('.keresettSzemely');
+          const sablonElem = $('footer .szemely ');
+          sablonElem.show();
+          szuloElem.empty();
+          szemely.forEach(function (elem) {
+            let node = sablonElem.clone().appendTo('.keresettSzemely');
+            const obj1 = new Szemely(node, elem);
+          });
+          sablonElem.hide();
+          if(szemely[0].igazolvany_szam===""){
+            $(".igazolvanySzama").html('<input type="txt" placeholder="Igazolvány Száma" class="bekerIgazolvanySzam" />');
+            $(".igazolvanyTipusa").html('<input type="txt" placeholder="Igazolvány Típusa" class="bekerIgazolvanyTipus" />');
+            $(".felviszGomb").show();
+            $(".szemely .berlete").html(" NINCS!");
+          }else {
+            $(".felviszGomb").hide();
+            $(".szemely .berlete").append(" napig jó");
+          }
+  };
+  $(window).on('felviszAdat', (event) => {//ha rányomok a felviszre felviszi a szemnélyijét
+    $igazolvanySzam=$(".bekerIgazolvanySzam").val();
+    $igazolvanyTipus=$(".bekerIgazolvanyTipus").val();
+    /* apiVegpont = "api/szemely/berletfelvisz"; */
+    apiVegpont = "api/szemely";
+     szoveg = {
+      email_cim:event.detail.email_cim,
+      nev:event.detail.nev, 
+      szemely_id:event.detail.szemely_id,
+      szul_datum:event.detail.szul_datum,
+      neme:event.detail.neme,
+      jogosultsag_id:event.detail.jogosultsag_id,
+      igazolvany_szam:$igazolvanySzam,
+      igazolvany_tipusa:$igazolvanyTipus,
     };
+    
+    myAjax.adatmodosit(apiVegpont,szoveg, event.detail.szemely_id);
+    window.location.reload(); 
+  });
 //-------------------------------------------------------------------------------------------------
+$( ".igazolvanyFelvisz1" ).click(function() {
+  seg
+  /* $(".igazolvanyFelvisz").on("click", () => { */
+    console.log("hopp");
+    /* console.log(event.detail); */
+    /* apiVegpont="api/szemely";
+    adat = {
+      szemely_id: event.detail.szekreny_id,
+      ures_e: "Ü",
+      tipusa:event.detail.tipusa,
+    };
+    myAjax.adatmodosit(apiVegpont,adat,id)
+    $(".igazolvanyInput").val(); */
+  });
     $(document).ready(function(e) {
       var timeout;
       var delay = 1000;   // 1 másodperc
@@ -178,7 +202,7 @@ $(function () {
       myAjax.adatbeolvas(apiVegpont,tomb,szekrenyKeresoMegjelenit);
     };
     function szekrenyKeresoMegjelenit(tomb){
-      console.log(tomb);
+      
       const sablonElem = $('footer .szekreny ');
       sablonElem.show();
       $(".keresettSzekreny").empty();
@@ -198,39 +222,11 @@ $(function () {
       $(".keresettSzekreny .neme").prepend("Tulajdonsága: ");
       $(".keresettSzekreny .uresE").prepend("Állapota: ");
       $(".keresettSzekreny .hibasGomb").parent().prepend("Funkcio: ");
-
-      /* let seged="";
-      if(tomb.length===1){
-        seged+="<span>"+"Szekrény száma: ";
-        seged+=tomb[0].szekreny_id+"<br>";
-        seged+="Állapota: ";
-        if(tomb[0].ures_e==="F"){
-          seged+="Foglalt"+"<br>";
-          seged+='<button data-id="'+tomb[0].szekreny_id+'" class="feloldasGomb">Feloldás</button>';
-          seged+='<input type="checkbox" data-id="' +
-          tomb[0].szekreny_id +
-          '" class="hibasGomb" name="switch" >';
-        }else if(tomb[0].ures_e==="R"){
-          seged+="Rossz"+"<br>";
-          seged+="Típusa: ";
-          seged+=tomb[0].tipusa+"</span>";
-          seged+='<input type="checkbox" data-id="' +
-          tomb[0].szekreny_id +
-          '" class="hibasGomb" name="switch" checked>';
-        }else{
-          seged+="Üres"+"<br>";
-        }
-        
-      }else if(tomb.length>1){
-        seged="";
-      }
-      $(".keresettSzekreny").html(seged); */
       $(".feloldasGomb").on("click", (event) => {
         let id = $(event.target).attr("data-id");
         szekrenyemben.katt(tomb[0].szekreny_id,"kattint","Ü");
       });
-      $(".hibasGomb").on("change", (event) => {
-        let id = $(event.target).attr("data-id");
+      $(".hibasGomb").on("change", (event) => {//adott szekrény
         if(event.target.checked===true){
           szekrenyemben.katt(szekreny_id,"kattint","R") ;
         }else{
@@ -238,6 +234,11 @@ $(function () {
         }
       });
     };
+    
+    $(window).on('osszesFelold', () => {//összes szekrény feloldása
+      apiVegpont="/api/recepcioHozOsszesSzekrenyFelold";
+      myAjax.adatkuldes(apiVegpont)
+    });
 //-------------------------------------------------------------------------------------------------
   
 
