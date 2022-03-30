@@ -23,16 +23,16 @@ class EszkozController extends Controller
         }
         if ($q) {
 
-            foreach (Schema::getColumnListing("eszkozs") as $column) {
+            foreach (Schema::getColumnListing("Vieweszkoz") as $column) {
                 // dd(Schema::getColumnType("szemelies",$column));
                 $eszkozok->orWhere($column, 'like', '%' . $q . '%');
                 $eszkozok->orWhere($column, $q);
             };
         }
-        //$szemelyek= ($sort&&$order) ? Szemely::orderBy($sort,$order)->get(): Szemely::all();
+      
 
 
-        //dd($szemelyek->toSql());
+       
 
         return response()->json($eszkozok->get());
     }

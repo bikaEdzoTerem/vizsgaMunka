@@ -23,7 +23,7 @@ header {
   ;
 }
 aside {
-    height: 550px;
+    height: 600px;
     grid-area: as;
     border: peru;
     background-color: aqua;
@@ -33,7 +33,7 @@ aside {
 }
 aside button,
 aside a {
-    height: auto;
+    height: 40px;
     width: 100%;
     padding: auto;
 }
@@ -53,7 +53,7 @@ article {
   
 }
 .elemek.clicked {
-    background-color:white;
+   
     overflow-y: hidden;
     overflow-x: auto;
     overflow: scroll;
@@ -66,6 +66,10 @@ article {
    padding: 20px;
     margin: 0px;
     width: auto;
+}
+#kuld{
+    background-color: rgb(49, 194, 49);
+    color: aliceblue;
 }
 
 .elem {
@@ -130,7 +134,7 @@ button a:focus {
             "el el el el el el";
     }
     .elemek.clicked {
-        background-color: pink;
+    
         overflow-y: hidden;
         overflow-x: auto;
         overflow: scroll;
@@ -140,6 +144,8 @@ button a:focus {
         flex-direction: row;
         flex-wrap: nowrap;
     }
-    
+    header{
+        font-size: x-large;
+    };
     
 }

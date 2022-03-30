@@ -31,10 +31,11 @@ $(function () {
     myAjax = new MyAjax();
     rend = new AdminRend();
     let adat = "gepek";
+   
     window.addEventListener('popstate', (event) => {
-        console.log("location: " + document.location + ", state: " + JSON.stringify(event.state));
+        event.preventDefault();
        clickToButtonUrlHash();
-      });
+      },{once:true});
       
     gombok();
   
@@ -59,7 +60,7 @@ $(function () {
                 const value = $(element).val();
                 inputs[name] = value;
             }
-            console.log($("#javitas input"));
+           
             myAjax. adatkuldes("api/" + adat,
             inputs);
             
@@ -74,13 +75,11 @@ $(function () {
         adatMeg.apiOsszealitas(termek,Oszlopnev);});
     });
     $("#listaz").on("change", () => {
-        console.log($("#listaz").val());
-        console.log(Oszlopnev);
+
         adatMeg.apiOsszealitas(termek,Oszlopnev);
     });
     $("#keresSzoveg").on("keyup", () => {
         rend.keresoMezo(termek,Oszlopnev);
-        console.log(rendezes);
     });
     $("#rendezes").on("change", () => {
         rend.rendezesTabla(termek,Oszlopnev);
@@ -88,7 +87,6 @@ $(function () {
     $(window).on("torol", function (event) {
         const id = event.detail[Oszlopnev[0]];
         const hasPrimarykey=["edzesek","gyakorlat","munkaido","arvaltozas","berletek"].includes(adat)
-        console.log(event.detail)
          hasPrimarykey 
          ? myAjax.adatkuldes(`api/${adat}/delete`,event.detail)
          :myAjax.adattorles(`api/${adat}`, id);
@@ -113,7 +111,7 @@ $(function () {
              $("#kuld").click(() => {
                 const newInputs=getinputs();
            
-            console.log($("#javitas input"));
+            
             myAjax.adatmodosit(
                 "api/" + adat,
                 ["edzesek","gyakorlat","munkaido","arvaltozas","berletek"].includes(adat) ?
@@ -124,6 +122,7 @@ $(function () {
             $("#fo").empty();
             $(".elemek").remove();
             $("#fo").append('<section class="elemek row"><div class="elem" ></section>');
+            kicsiE(false ,adat)
             adatMeg.apiOsszealitas(termek,Oszlopnev);
         });
 
@@ -218,12 +217,10 @@ function vizsgal(adat,myCallback=false){
     let keresetErtek="",keresetErtek2="",eldont=false,eldont2=false;
         let seged=[];
     let nemModosithato=0;
-console.log(adat);
     switch (adat) {
         case "szemely":
             keresetTabla = "jogosultsag";
             keresetErtek = "jogosultsag_id";
-            console.log("jogosultsag_id");
             eldont = true;
             nemModosithato=0;
             break;
@@ -233,8 +230,7 @@ console.log(adat);
             keresetTabla2="terem"
             keresetErtek2="terem_id"
             eldont = true;
-            eldont2=true;
-            console.log("eszkoz_neve");
+            eldont2=true;;
             nemModosithato=0;
             break;
         case "edzesek":
@@ -244,8 +240,6 @@ console.log(adat);
             keresetErtek2 = "szemely_id";
             eldont = true;
             eldont2 = true;
-
-            console.log("szemely_id");
             nemModosithato=10;
             break;
         case "gyakorlat":
@@ -255,7 +249,6 @@ console.log(adat);
             keresetErtek2 = "izomcsoport_id";
             eldont = true;
             eldont2 = true;
-            console.log("izomcsoport_id");
             nemModosithato=9;
             break;
         case "munkaido":
@@ -271,9 +264,7 @@ console.log(adat);
             keresetErtek2 = "szemely_id";
             eldont = true;
             eldont2 = true;
-            console.log("izomcsoport_id");
             nemModosithato=0;
-
         break
         case "arvaltozas":
             keresetTabla="berletTipus";
@@ -288,7 +279,7 @@ console.log(adat);
             keresetErtek2 = "szemely_id";
             eldont = true;
             eldont2 = true;
-            console.log("izomcsoport_id");
+           
             nemModosithato=3;
                 break
         default:
@@ -298,11 +289,11 @@ console.log(adat);
     }
 try {
     myAjax.adatbeolvas("api/" + keresetTabla, seged, (tomb) => {
-        console.log(tomb);
+       
         try {
-            console.log("try 1")
+          
             myAjax.adatbeolvas("api/" + keresetTabla2, seged, (tomb2) => {
-                console.log(tomb2)
+            
                 adatMeg.beviteliMezoGeneralas(tomb, keresetErtek, eldont,Oszlopnev,nemModosithato,tomb2,keresetErtek2,eldont2);
         
         myCallback();

@@ -11,6 +11,9 @@
 @endsection
 @section('content')
 <main>
+    <header>
+        <a href="/">Kijelentkezés</a>
+    </header>
 <aside> 
     @include('includes.adminNavigation')
 

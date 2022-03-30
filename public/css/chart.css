@@ -1,6 +1,7 @@
 body {
     display: grid;
     grid-template-areas:
+        "he he"
         "as ar "
         "as ar";
 }
@@ -8,9 +9,13 @@ aside {
     width:  15%;
     grid-area: as;
 }
+header{
+    grid-area: he;
+}
 article{
     grid-area: ar;
     display: grid;
+    width: 100%;
 }
 div{
     height: 500px;
@@ -26,18 +31,26 @@ body{
 }
 main{
     
-    width: 103%;
+    width: 100%;
 }
 @media only screen and (max-width: 1000px) {
 
     main {
         display: grid;
         grid-template-areas:
+            "he"
             "as"
             "ar";
     }
     aside{
         width: 100%;
-        height: auto;
+        
     }
+    aside button{
+        height: 40px;
+    }
+    header{
+        font-size: x-large;
+};
+    
 }

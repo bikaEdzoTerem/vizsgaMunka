@@ -2,23 +2,20 @@ class AdatokMegjelenitese{
     constructor(){}
     apiOsszealitas(adatok, oszlopNev) {
         let vegApi = superapivegponto + "?" + queryParams.toString();
-        console.log(vegApi);
-        myAjax.adatbeolvas(
+           myAjax.adatbeolvas(
             vegApi,
             adatok,
             (adatok) => {
-                console.log(oszlopNev)
-                this.Alap(oszlopNev);
+                             this.Alap(oszlopNev);
                 rend.elemMegjelenit(adatok, oszlopNev);
             },
             
         );
 }
 adatbeilleszt(adatok, oszlopNevek) {
-    console.log(adatok);
-    oszlopNevek.forEach((element) => {
+   oszlopNevek.forEach((element) => {
         $("#" + element + " ").val(adatok[element]);
-        console.log(adatok[element]);
+      
     });
 }
 Alap(nev) {
@@ -50,12 +47,12 @@ class AdatokMegjeleniteseAdmin  {
     
     apiOsszealitas(adatok, oszlopNev) {
         let vegApi = superapivegponto + "?" + queryParams.toString();
-        console.log(vegApi);
+        
         myAjax.adatbeolvas(
             vegApi,
             adatok,
             (adatok) => {
-                console.log(oszlopNev)
+                
                 this.Alap(oszlopNev);
                 rend.elemMegjelenit(adatok, oszlopNev);
             },
@@ -63,10 +60,10 @@ class AdatokMegjeleniteseAdmin  {
         );
 }
     adatbeilleszt(adatok, oszlopNevek) {
-        console.log(adatok);
+        
         oszlopNevek.forEach((element) => {
             $("#" + element + " ").val(adatok[element]);
-            console.log(adatok[element]);
+           
         });
     }
 
@@ -83,8 +80,7 @@ class AdatokMegjeleniteseAdmin  {
         $("#javitas").remove();
         $("#fo").append('<form id="javitas"></form>');
 
-        console.log(seged);
-        let txt = "";
+          let txt = "";
         oszlopNevek.forEach((element, index) => {
             txt += '<label for="' + element + '">' + element + ":</label>";
 
@@ -167,9 +163,7 @@ class AdatokMegjeleniteseAdmin  {
         $(".elemek").empty();
         $(".elemek").append('<div class="elem " ></div>');
         let txt = "";
-        console.log(nev);
-    
-        nev.forEach((element) => {
+             nev.forEach((element) => {
            
                 txt += "  <h6 >" + element + ":</h6>";
                 txt += "  <p class=" + element + "></p>";

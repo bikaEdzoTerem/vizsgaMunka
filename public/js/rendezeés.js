@@ -39,8 +39,8 @@ class AdminRend{
         $("#rendezes").empty();
         
         nev.forEach(element => {
-            txt+='<option id="'+element+'Asc" value="'+element+'!asc">'+element+' szerint csökkenő</option>';
-            txt+='<option id="'+element+'Desc" value="'+element+'!desc">'+element+' szerint emelkedő</option>';
+            txt+='<option id="'+element+'Asc" value="'+element+'!asc">'+element+' szerint emelkedő</option>';
+            txt+='<option id="'+element+'Desc" value="'+element+'!desc">'+element+' szerint csökkenő </option>';
         });
         $("#rendezes").append(txt);
 
@@ -54,7 +54,11 @@ class AdminRend{
       //  myAjax.getjson("alapnevek.json", tomb);
   
       szuloElem.empty();
-      console.log(termekek);
+     
+      if(megjelenit>=termekek.length){
+          
+         megjelenit=megjelenit-parseInt($("#listaz").val());
+      };
       termekek.forEach(function (elem, index) {
           if (
               (megjelenit <= index) &
@@ -70,7 +74,7 @@ class AdminRend{
 
     oldalakSzama(mindenadat,Oszlopnev){
         let txt="";
-       // console.log(mindenadat);
+       
         let adathoszz=mindenadat.length ;
           $("#navig").empty();
           
@@ -78,7 +82,7 @@ class AdminRend{
           $("#navig").append(' <button class="oldal"  id='+index+'>'+index+'</button>');
           $('#'+index+'').on("click", function() {
             oldalValt(index,mindenadat ,Oszlopnev);
-              console.log(index);
+              
              });
       }
     }
@@ -90,7 +94,7 @@ class AdminRend{
 } 
 function oldalValt(ertek,mindenadat,Oszlopnev){
     megjelenit=($("#listaz").val()*ertek)
-    console.log($("#listaz").val()*ertek);
+    
     
     adatMeg.apiOsszealitas(mindenadat,Oszlopnev);
   
