@@ -19,6 +19,55 @@ $(function () {
         sablon.hide();
     }
 
+    
+    $(".osszegzes").on("click", function(){
+        let szamla = window.open(/*URL, name, specs, replace*/
+            "", 
+            "Szamla",
+            "toolbar=yes, scrollbars=yes, resizeable=yes, top=50%, left=50%, width=1200, height=1200",
+            ""
+        );
+        szamla.document.write("<main style='max-width:600px; width:100%; margin:auto;'>");
+        szamla.document.write("<h1>Számla:</h1>");
+        let localkosar = [];
+        let kosarka = JSON.parse(localStorage.getItem("kosarban"));
+        for (let elem in kosarka) {
+            localkosar.push(kosarka[elem]);
+        }  
+
+        console.log(localkosar);
+        szamla.document.write(
+            "<div style='max-width:600px; width:100%; margin:auto;'>"+
+            "<table>"+
+            "<tr id='fejlec'><th>Típus:</th><th>Ídőtaram(nap):</th><th>Ár(Forint):</th><th>Darabszám:</th></tr>"
+        );
+
+        for (let index = 0; index < localkosar.length; index++) {
+            szamla.document.write(
+            "<tr>"+
+                "<th>"+localkosar[index].megnevezes+"</th>"+
+                "<th>"+localkosar[index].idotartam_nap+"</th>"+
+                "<th>"+localkosar[index].eredeti_ár+"</th>"+
+                "<th>0</th>"+
+            "</tr>"
+            );
+        }
+
+        let osszeg=0;
+        for (let index = 0; index < localkosar.length; index++) {
+            osszeg+=localkosar[index].eredeti_ár;
+        }
+
+        szamla.document.write("</table></div><br>");
+        szamla.document.write("<p>Végösszeg: "+ osszeg + " Ft<p><br><br>");
+        szamla.document.write("<input onclick='window.close();' type='button' value='Fizetés' class='bezaras'>");
+        szamla.document.write("</main>");
+
+
+    });
+
+    
+
     $(window).on("kosarhozad", (esemeny) => {
         let aktTermek = esemeny.detail;
         kisKosar.setKoarhozAdd(aktTermek);

@@ -78,3 +78,5 @@ Route::apiResource('ugyfelEdzes', UgyfelEdzesController::class);
 
 //Recepció oldalhoz
 Route::apiResource('recepcioHoz', szekrenyListazController::class);
+
+Route::post('/recepcioHozOsszesSzekrenyFelold', [szekrenyListazController::class, 'osszesOltozoFeloldas']);

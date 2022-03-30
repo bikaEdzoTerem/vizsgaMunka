@@ -93,3 +93,7 @@ input[type="number"]::-webkit-inner-spin-button:hover,input[type="number"]::-web
   font-size: 22px;
   color: whitesmoke;
 }
+.keresettSzemely p{
+  margin: 2px;
+
+}

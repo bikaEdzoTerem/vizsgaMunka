@@ -7,8 +7,8 @@
         <script src="../js/ajax.js"></script>
         <script src="../js/szekreny.js"></script>
         <script src="../js/szekrenyek.js"></script>
-        <!-- <script src="../js/oltozofoglalasok.js"></script> -->
         <script src="../js/recepcio.js"></script>
+        <script src="../js/szemely.js"></script>
         @yield('css')
         <link href="../css/RecepcioCss/header.css" rel="stylesheet" type="text/css" />
         <link href="../css/RecepcioCss/szemelyMegjelenites.css" rel="stylesheet" type="text/css" />

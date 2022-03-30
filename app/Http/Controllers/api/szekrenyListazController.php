@@ -33,10 +33,11 @@ class szekrenyListazController extends Controller{
         $szekreny->ures_e=$request->ures_e;
         /* $szekreny->ures_e="Ü"; */
         $szekreny->save();
-      
-
         return response()->json(true);
-        
+    }
+    public function osszesOltozoFeloldas(){
+        Szekeny::where('ures_e', '=','F')->update(['ures_e' => 'Ü']);
+        return response()->json(true);
     }
     /* function elront($szekreny_id){
         Szekeny::find($szekreny_id)

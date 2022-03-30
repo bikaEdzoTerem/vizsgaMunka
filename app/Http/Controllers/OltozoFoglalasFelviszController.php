@@ -3,11 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Szemely;
 use App\Models\Oltozofoglalas;
-use App\Models\Berlet;
 use Illuminate\Support\Facades\DB;
-Use \Carbon\Carbon;
 
 
 class OltozoFoglalasFelviszController extends Controller
