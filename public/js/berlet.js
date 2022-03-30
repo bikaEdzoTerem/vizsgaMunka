@@ -19,6 +19,6 @@ class Berlet {
     setBerletAdatok(ertek){
         this.cim.html(ertek.megnevezes);
         this.leiras.html(ertek.idotartam_nap);
-        this.ar.html(ertek.ar+" Ft");
+        this.ar.html(ertek.eredeti_ár+" Ft");
     }
 }

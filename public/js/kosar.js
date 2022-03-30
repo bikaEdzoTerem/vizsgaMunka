@@ -26,20 +26,22 @@ class Kosar {
 
     megjelenit() {
         let tartalom = 0;
-        //console.log(this.kosar);
+        let darabszam = 1;
         $("#kosar").empty();
         $("#kosar").append("<table>");
-        let elem = "<tr id='fejlec'><th>Név:</th><th>Ídőtaram:</th><th>Ár:</th></tr>";
+        let elem = "<tr id='fejlec'><th>Típus:</th><th>Ídőtaram(nap):</th><th>Ár(Forint):</th><th>Darabszám:</th></tr>";
         this.kosar.forEach((value, index) => {
             console.log(value);
             for (let item in value) {
-                if (item === "megnevezes" || item === "idotartam_nap" || item === "eredeti_ár")
-                    elem += "<td>" + value[item] + "</td>";
+                if (item === "megnevezes" || item === "idotartam_nap" || item === "eredeti_ár" ){
+                    elem += "<td>" + value[item] + "</td>";}
                 tartalom++;
             }
+            elem += "<td>" + darabszam + "</td>"; 
             elem += "<td>" + "<button class='torol' data-id='" + index + "'>Töröl</button>" + "</td>";
             elem += "</tr>";
         });
+
         $("table").append(elem);
         $(".torol").on("click", (event) => {
             let aktTermek = $(event.target).attr("data-id");
