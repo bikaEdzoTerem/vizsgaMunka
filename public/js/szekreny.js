@@ -49,14 +49,5 @@ class Szekreny {
 
     this.txt += "<th>" + seged + "</th>" + segedGomb + "</tr>";
     this.kosarbaGombElem = $(".feloldasGomb");
-
-    //console.log(this.txt);
   }
 }
-/* class SzekrenyFoglalt extends Szekreny{
-    constructor(elem,adat){
-        super(elem, adat)
-        this.idElem=this.elem.children(".foglalas");
-    }
-
-} */

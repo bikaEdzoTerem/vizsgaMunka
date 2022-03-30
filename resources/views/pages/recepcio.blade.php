@@ -62,12 +62,23 @@
   </section> --}}
   
   <footer>
-    {{-- <div class="szekreny">
-      <h3 class="szama">1</h3>
-      <p class="neme">Férfi</p>
-      <p class="uresE">Üres</p>
-      <button type="submit" class="feloldasGomb">Felold</button>
-  </div> --}}
+    <div class="szemely">
+      <label id="keresoSzoveg"for="fname">Neve: </label>
+      <p class="neve"></p><br>
+      <label id="keresoSzoveg"for="fname">Neme: </label>
+      <p class="neme"></p><br>
+      <label id="keresoSzoveg"for="fname">Igazolvány száma: </label>
+      <p class="igazolvanySzama"></p><br>
+      <label id="keresoSzoveg"for="fname">Igazolvány típusa: </label>
+      <p class="igazolvanyTipusa"></p><br>
+      <button type="button" class="felviszGomb">Felvisz</button><br>
+      <label id="keresoSzoveg"for="fname">E-mail címe: </label>
+      <p class="email"></p><br>
+      {{-- <img src="img_girl.jpg" alt="profilkepe" class="szemelyKep"> --}}
+      <label id="keresoSzoveg"for="fname">Bérlete : </label>
+      <p class="berlete"></p>
+    </div>
+    
   <table >
     <tbody>
     <tr class="szekreny">
