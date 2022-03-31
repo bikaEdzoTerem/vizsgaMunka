@@ -21,8 +21,9 @@ $(function () {
   function kiir(tomb) {
     let seged = ".szekrenyek";
     szekrenyemben.megjelenit(tomb, seged);
+    console.log(tomb);
     $("#ferfiLetszam").html(szekrenyemben.getSzabadHelySzam(tomb,"Férfi"));
-    $("#noiiLetszam").html(szekrenyemben.getSzabadHelySzam(tomb,"Nő"));
+    $("#noiiLetszam").html(szekrenyemben.getSzabadHelySzam(tomb,"NŐ"));
     
   }
 //-----------------------------------------------------------------------------------------------------------------------
@@ -30,12 +31,13 @@ $(function () {
   myAjax.adatbeolvas(apiVegpont, szekrenyekTomb, szekreny);
   function szekreny(idopontokT){//szekrények táblába belerakja az adatokat
     console.log(idopontokT);
-    const szuloElem = $('.szekrenyekTabla > tbody:last-child');
+    /* const szuloElem = $('.szekrenyekTabla > tbody:last-child'); */
+    const szuloElem = $('.szekrenyek');
     const sablonElem = $('footer .szekreny ');
     sablonElem.show();
     szuloElem.empty();
     idopontokT.forEach(function (elem) {
-      let node = sablonElem.clone().appendTo('.szekrenyekTabla > tbody:last-child');
+      let node = sablonElem.clone().appendTo('.szekrenyek');
       const obj = new Szekreny(node, elem);
       if(elem.ures_e==="Ü"){
         obj.szekreny_feloldas.hide();
@@ -114,7 +116,7 @@ $(function () {
           szuloElem.empty();
           szemely.forEach(function (elem) {
             let node = sablonElem.clone().appendTo('.keresettSzemely');
-            const obj1 = new Szemely(node, elem);
+            const obj1 = new Szemely(node, elem);//példányosítja a személy osztályt
           });
           sablonElem.hide();
           if(szemely[0].igazolvany_szam===""){
@@ -203,10 +205,10 @@ $(function () {
         }
       });
     };
-    
-    $(window).on('osszesFelold', () => {//összes szekrény feloldása
+    $(".osszesFeloldasGomb").on('click', () => {//összes szekrény feloldása
       apiVegpont="/api/recepcioHozOsszesSzekrenyFelold";
       myAjax.adatkuldes(apiVegpont)
+      window.location.reload(); 
     });
 //-------------------------------------------------------------------------------------------------
   

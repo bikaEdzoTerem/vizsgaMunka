@@ -1,5 +1,6 @@
 @charset "utf-8";
 main{
+    background-color: rgb(224, 224, 224);
     display: grid;
     grid-template-areas: 
     "h h h h h h"

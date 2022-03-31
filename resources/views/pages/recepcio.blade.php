@@ -37,6 +37,7 @@
     <div id="szemelyMegjelenites" class="Lefoglatak">
     </div>
     <section>
+      <button type="submit" class="osszesFeloldasGomb">Felold</button>
       <div  class="szekrenyek"></div>
     </section>
   <footer>
@@ -58,7 +59,7 @@
     </div>
     
   <table >
-    <tbody>
+    <!-- <tbody>
     <tr class="szekreny">
       <td class="szama"></td>
       <td class="neme"></td>
@@ -66,8 +67,14 @@
       <td><button type="submit" class="feloldasGomb">Felold</button></td>
       <td class=""><input type="checkbox" class="hibasGomb" name="switch" ></td>
     </tr>
-  </tbody>
-</table>
+  </tbody> -->
+  <div class="szekreny">
+    <p class="szama"></p><br>
+    <p class="neme"></p><br>
+    <p class="uresE"></p><br>
+    <p ><button type="submit" class="feloldasGomb">Felold</button></p><br>
+    <p ><input type="checkbox" class="hibasGomb" name="switch" ></p><br>
+  </div>
     © Minden jog fenntartva ©<br /></footer>
 </main>
 </body>

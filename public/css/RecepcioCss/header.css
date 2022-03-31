@@ -35,8 +35,14 @@ header {
   width: 100%;
   display: inline-block;
 }
+form{
+  margin: 16px;
+}
 #keresoSzoveg{
   display: inline-block;
+}
+.szemely,.szekreny label{
+  color: rgb(226, 119, 57);
 }
 header form label,p{/* keresőnél összes szoveg */
   display: inline-block;
@@ -100,6 +106,9 @@ input[type="number"]::-webkit-inner-spin-button:hover,input[type="number"]::-web
   font-size: 22px;
   color: whitesmoke;
 }
+.jobb1 {
+  border-left: 3px solid red;
+}
 .keresettSzemely p{
   margin: 2px;
 }
@@ -111,6 +120,14 @@ input[type="number"]::-webkit-inner-spin-button:hover,input[type="number"]::-web
 }
 header .letszam,form{
   display: inline-block;
+}
+.jobb1 .szekreny{
+  background-color: #222;
+  color:whitesmoke;
+  border: 0px;
+}
+.jobb1 .szekreny p{
+  color:whitesmoke;
 }
 @media only screen and (max-width: 900px) {
   #kereso{
@@ -128,7 +145,8 @@ header .letszam,form{
   }
   .keresettSzekreny{
     margin: auto;
-    width: 50%;
+    width: auto;
+    
   }
   .szekreny{
     text-align: center;
@@ -142,13 +160,7 @@ header .letszam,form{
   header .letszam,form{
     display: block;
   }
-  .szekrenyekTabla {
-    -moz-column-count: 2;
-    -webkit-column-count: 2;
-    column-count: 2;
-    -webkit-column-break-inside: avoid;
-    page-break-inside: avoid;
-    break-inside: avoid;
-}
-
+  .jobb1 {
+    border-left: 0px;
+  }
 }
