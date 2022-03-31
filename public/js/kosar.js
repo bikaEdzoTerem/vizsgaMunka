@@ -33,7 +33,7 @@ class Kosar {
         this.kosar.forEach((value, index) => {
             console.log(value);
             for (let item in value) {
-                if (item === "megnevezes" || item === "idotartam_nap" || item === "eredeti_ár" ){
+                if (item === "megnevezes" || item === "idotartam_nap" || item === "ar" ){
                     elem += "<td>" + value[item] + "</td>";}
                 tartalom++;
             }

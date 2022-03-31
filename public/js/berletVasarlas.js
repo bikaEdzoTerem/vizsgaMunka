@@ -47,15 +47,15 @@ $(function () {
             "<tr>"+
                 "<th>"+localkosar[index].megnevezes+"</th>"+
                 "<th>"+localkosar[index].idotartam_nap+"</th>"+
-                "<th>"+localkosar[index].eredeti_ár+"</th>"+
-                "<th>0</th>"+
+                "<th>"+localkosar[index].ar+"</th>"+
+                "<th>1</th>"+
             "</tr>"
             );
         }
 
         let osszeg=0;
         for (let index = 0; index < localkosar.length; index++) {
-            osszeg+=localkosar[index].eredeti_ár;
+            osszeg+=localkosar[index].ar;
         }
 
         szamla.document.write("</table></div><br>");
