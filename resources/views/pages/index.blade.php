@@ -40,7 +40,7 @@
 </article>
 <aside>
   <div id="letszam_szamlalo">
-    ÓRA
+    Jelenlegi létszam:  {{$letszam}}
   </div>
   <div id="izomcsoport">
     Fontos, alap tudni való, mikor belépsz egy konditerembe hogy az izomcsoportjaiddal tisztában legyél.

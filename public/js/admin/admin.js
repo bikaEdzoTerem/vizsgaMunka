@@ -49,7 +49,7 @@ $(function () {
        
        
         
-        kicsiE(true, adat);
+        kicsiE(true);
         vizsgal(adat,()=>{
             
             $("#kuld").click(() => {
@@ -101,7 +101,7 @@ $(function () {
 
        
         
-        kicsiE(true, adat);
+        kicsiE(true);
         vizsgal(adat,()=>{
             adatMeg.adatbeilleszt(eseny.detail,Oszlopnev);
             adatMeg.apiOsszealitas(termek,Oszlopnev);
@@ -122,7 +122,7 @@ $(function () {
             $("#fo").empty();
             $(".elemek").remove();
             $("#fo").append('<section class="elemek row"><div class="elem" ></section>');
-            kicsiE(false ,adat)
+            kicsiE()
             adatMeg.apiOsszealitas(termek,Oszlopnev);
         });
 
@@ -150,7 +150,7 @@ $(function () {
         );
         Oszlopnev = myAjax.adatBeolvasasElore("../json/alapnevek.json", Oszlopnev, adat);
         myAjax.adatbeolvas(superapivegponto, mindenadat, (madatok)=>{
-            kicsiE(false, " ");
+            kicsiE();
         
         rend.rendezoMezoLetreHozas(Oszlopnev);
         adatMeg.apiOsszealitas(madatok,Oszlopnev);
@@ -160,12 +160,19 @@ $(function () {
         
     }
 
-    function kicsiE(ertek, adat) {
-        if (ertek == true) {
+    function kicsiE(ertek=false) {
+        if (ertek === true) {
             Oszlopnev = myAjax.adatBeolvasasElore(
                 "../json/alapnevek.json",
                 Oszlopnev,
                 adat + "Kicsik"
+            );
+        }
+        else{
+            Oszlopnev = myAjax.adatBeolvasasElore(
+                "../json/alapnevek.json",
+                Oszlopnev,
+                adat 
             );
         }
     }
