@@ -106,6 +106,13 @@ footer span{
     font-size: 40px;
 }
 
+.osszGomb{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+}
+
 @media only screen and (max-width: 1450px) {
     #kijel a{
         top: 150px;
