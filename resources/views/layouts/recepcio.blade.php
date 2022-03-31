@@ -10,12 +10,12 @@
         <script src="../js/recepcio.js"></script>
         <script src="../js/szemely.js"></script>
         @yield('css')
-        <link href="../css/RecepcioCss/header.css" rel="stylesheet" type="text/css" />
         <link href="../css/RecepcioCss/szemelyMegjelenites.css" rel="stylesheet" type="text/css" />
         <link href="../css/RecepcioCss/section.css" rel="stylesheet" type="text/css" />
         <link href="../css/RecepcioCss/article.css" rel="stylesheet" type="text/css" />
         <link href="../css/RecepcioCss/alert.css" rel="stylesheet" type="text/css" />
         <link href="../css/RecepcioCss/html.css" rel="stylesheet" type="text/css" />
+        <link href="../css/RecepcioCss/header.css" rel="stylesheet" type="text/css" />
         <title>Recepcios Felület</title>
     </head>
     <body>

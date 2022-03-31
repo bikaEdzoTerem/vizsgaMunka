@@ -33,21 +33,4 @@ class Szekreny {
     window.dispatchEvent(esemeny);
     //Az eseményt majd a script.js-ben el tudom kapni.
   }
-
-  adatAtiras(ertek) {
-    this.txt =
-      "<tr><th>" + ertek.szekreny_id + "</th>" + "<th>" + ertek.tipus + "</th>";
-    let seged = "Üres";
-    let segedGomb = "";
-    if (ertek.urese === false) {
-      seged = "Foglalt";
-      segedGomb =
-        '<th><button data-id="' +
-        ertek.szekreny_id +
-        '" class="feloldasGomb">Feloldás</button></th>';
-    }
-
-    this.txt += "<th>" + seged + "</th>" + segedGomb + "</tr>";
-    this.kosarbaGombElem = $(".feloldasGomb");
-  }
 }

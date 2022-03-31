@@ -17,11 +17,10 @@ $(function () {
     myAjax.adatbeolvas(apiVegpont, szekrenyekTomb, kiir);
 
   }
-  szekrenyekMegjelenit();
+  szekrenyekMegjelenit();//létrehozza s zekrények tábla szerkezetét
   function kiir(tomb) {
     let seged = ".szekrenyek";
     szekrenyemben.megjelenit(tomb, seged);
-    console.log(szekrenyemben.getSzabadHelySzam(tomb,"Férfi"));
     $("#ferfiLetszam").html(szekrenyemben.getSzabadHelySzam(tomb,"Férfi"));
     $("#noiiLetszam").html(szekrenyemben.getSzabadHelySzam(tomb,"Nő"));
     
@@ -29,7 +28,7 @@ $(function () {
 //-----------------------------------------------------------------------------------------------------------------------
   let apiVegpont = "/api/recepcioHoz";
   myAjax.adatbeolvas(apiVegpont, szekrenyekTomb, szekreny);
-  function szekreny(idopontokT){
+  function szekreny(idopontokT){//szekrények táblába belerakja az adatokat
     console.log(idopontokT);
     const szuloElem = $('.szekrenyekTabla > tbody:last-child');
     const sablonElem = $('footer .szekreny ');
@@ -46,21 +45,11 @@ $(function () {
       }
     });
     sablonElem.hide(); 
+    $('footer .szemely').hide()
   }
   
   //-------------------------------------------------------------------------------------------------------------------------
-  $(window).on('rossz', (event) => {//ha kipipálom a checkboxot akkor modositja az adatot rosssz ra
-    /* console.log(event.detail.szekreny_id);
-    let szekrenyKeres=[];
-      let apiVegpont = "/api/szekreny";
-      apiVegpont += "?idRossz=" + event.detail.szekreny_id;
-      myAjax.adatbeolvas(apiVegpont, szekrenyKeres, keres1);
-      window.location.reload();
-  });
-  function keres1(){
-    console.log("feloldott");
-  } */
-  //event.detail.attr('checked');
+  $(window).on('rossz', (event) => {//ha rányomok a checkboxot akkor modositja az adatot
   console.log(event.detail.ures_e);
   if(event.detail.ures_e==="Ü"){
     szoveg = {
@@ -82,7 +71,7 @@ $(function () {
     window.location.reload();
   });
   //-------------------------------------------------------------------------------------------------------------------------
-  $(window).on('felold', (event) => {//ha rányomok a feloldra modositja az adatot
+  $(window).on('felold', (event) => {//ha rányomok a feloldra modositja az adatot(feloldja a szekrényt)
     console.log(event.detail.szekreny_id);
     apiVegpont = "api/recepcioHoz";
     szoveg = {
@@ -93,17 +82,8 @@ $(function () {
     myAjax.adatmodosit(apiVegpont,szoveg, event.detail.szekreny_id);
     window.location.reload();
   });
-    /* let szekrenyKeres=[];
-      let apiVegpont = "/api/szekreny";
-      apiVegpont += "?id=" + event.detail.szekreny_id;
-      myAjax.adatbeolvas(apiVegpont, szekrenyKeres, keres2);
-      window.location.reload();
-  });
-  function keres2(){
-    console.log("feloldott");
-  } */
 //-------------------------------------------------------------------------------------------------
-    $(document).ready(function(e) {
+    $(document).ready(function(e) {// személy kereső inputnál gépelek csak akkor fut le a SzemélyKeres metódus ha abbahagyom 
       var timeout;
       var delay = 1000;   // 1 másodperc
   
@@ -127,7 +107,7 @@ $(function () {
          $('.keresettSzemely ').empty();
       }
     }
-    function szemelyKeresoMegjelenit(szemely){
+    function szemelyKeresoMegjelenit(szemely){//sablonelemet klónozza és ha nincs igazolványa létrehoz egy inputot
           const szuloElem = $('.keresettSzemely');
           const sablonElem = $('footer .szemely ');
           sablonElem.show();
@@ -147,7 +127,7 @@ $(function () {
             $(".szemely .berlete").append(" napig jó");
           }
   };
-  $(window).on('felviszAdat', (event) => {//ha rányomok a felviszre felviszi a szemnélyijét
+  $(window).on('felviszAdat', (event) => {//ha rányomok a felviszre felviszi az igazolványát
     $igazolvanySzam=$(".bekerIgazolvanySzam").val();
     $igazolvanyTipus=$(".bekerIgazolvanyTipus").val();
     /* apiVegpont = "api/szemely/berletfelvisz"; */
@@ -167,21 +147,7 @@ $(function () {
     window.location.reload(); 
   });
 //-------------------------------------------------------------------------------------------------
-$( ".igazolvanyFelvisz1" ).click(function() {
-  seg
-  /* $(".igazolvanyFelvisz").on("click", () => { */
-    console.log("hopp");
-    /* console.log(event.detail); */
-    /* apiVegpont="api/szemely";
-    adat = {
-      szemely_id: event.detail.szekreny_id,
-      ures_e: "Ü",
-      tipusa:event.detail.tipusa,
-    };
-    myAjax.adatmodosit(apiVegpont,adat,id)
-    $(".igazolvanyInput").val(); */
-  });
-    $(document).ready(function(e) {
+    $(document).ready(function(e) {// Szekrény kereső inputnál gépelek csak akkor fut le a SzemélyKeres metódus ha abbahagyom 
       var timeout;
       var delay = 1000;   // 1 másodperc
   
@@ -199,10 +165,13 @@ $( ".igazolvanyFelvisz1" ).click(function() {
       let tomb=[];
       let apiVegpont = "/api/szekreny";
       apiVegpont += "?pontosSzekreny=" + $(".keresSzekrenykulcs").val();
-      myAjax.adatbeolvas(apiVegpont,tomb,szekrenyKeresoMegjelenit);
+      if(!($(".keresSzekrenykulcs").val()==="")){// ha nincs semmise megadva az inputnak akkor ne fusson le
+        myAjax.adatbeolvas(apiVegpont,tomb,szekrenyKeresoMegjelenit);
+      }else{
+         $('.keresettSzekreny ').empty();
+      }
     };
-    function szekrenyKeresoMegjelenit(tomb){
-      
+    function szekrenyKeresoMegjelenit(tomb){//kiiratja a keresett szekrényt a klónozott szekrény osztályból
       const sablonElem = $('footer .szekreny ');
       sablonElem.show();
       $(".keresettSzekreny").empty();
@@ -216,7 +185,7 @@ $( ".igazolvanyFelvisz1" ).click(function() {
           obj.szekreny_rosszCheckBox.attr("checked", true);
         }
       });
-      sablonElem.hide(); 
+      sablonElem.hide();
       $(".keresettSzekreny .szama").prepend("Szekrény száma: ");
 
       $(".keresettSzekreny .neme").prepend("Tulajdonsága: ");

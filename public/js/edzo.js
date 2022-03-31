@@ -3,20 +3,54 @@ $(function () {
   const idopontok = new Idopontok(idopontokTomb);
   const myAjax = new MyAjax();
   /* idopontok.megjelenit(idopontokTomb,jelenlegiDatum); */
-  const adottEdzo=10;
   var munkaoratol=8;
   var munkaoraig=22;
-  var talaltNev=false;
-  var talaltDatum=false;
   var szemelyKeres=[];
   var elorefoglalas=100;
   var eltolas=0;
   var hanyOszlopos=3;
-  var apiEdzoIdopontok="/api/ugyfelEdzesek2";
   var apiSzemelyek="/api/szemely";
   var szamol=0;
-
-function jelenlegiDatum(napvaltoztat) {
+//-----------------------------------------------------------------------------------------------------------------------
+//Inputok elrejtése
+  Elrejt(".datum");
+  Elrejt(".orara");
+  Elrejt(".ora");
+  Elrejt(".lefoglal");
+  function Elrejt(mit){//elrejt
+    $(mit)[0].style.display = "none";
+  }
+  function Megjelenit(mit){//megjelenit
+    $(mit)[0].style.display = "block";
+  }
+  //-----------------------------------------------------------------------------------------------------------------------
+  function idopontLista(idopontokT,myCallback){//időpontokat belerakja a táblázatba
+    if(szamol==0){
+      idopontokTomb=idopontokT;
+    }
+    szamol++;
+    idopontok.megjelenit(myCallback,eltolas,(hanyOszlopos));
+    const szuloElem = $('.tablaadat');
+    const sablonElem = $('footer .idopont');
+    sablonElem.show();
+    szuloElem.empty();
+    for (let index = 0; index < hanyOszlopos; index++) {
+      idopontokT.forEach(function (elem) {
+        let datum1=elem.datum.slice(0,10);
+        let datum2=myCallback(index+eltolas).slice(0,10);
+        if(datum2===datum1){
+          let node = sablonElem.clone().appendTo($('.tablaadat'+index));
+          const obj = new Idopont(node, elem);
+          if(new Date(elem.datum)<new Date()){//ha régebbi foglalásokat nézünk akkor ne lehessen feloldani
+            obj.feloldas.hide();
+          }
+        }
+      });
+    }
+    sablonElem.hide(); 
+  }
+//-----------------------------------------------------------------------------------------------------------------------
+function jelenlegiDatum(napvaltoztat) {//függvény paramétereként megadhatjuk hogy a jelenlegi dátumhoz hány napot adjon hozzá(formátum:2022-03-10 06:14:58)
       var jelenlegiDatum = new Date();
       jelenlegiDatum.setDate(jelenlegiDatum.getDate() + napvaltoztat);
       let jelenlegiDatumSzerkesztes = "";
@@ -57,11 +91,12 @@ function jelenlegiDatum(napvaltoztat) {
       } else {
         jelenlegiDatumSzerkesztes += jelenlegiDatum.getSeconds().toString();
       }
+      console.log(jelenlegiDatumSzerkesztes); 
       return jelenlegiDatumSzerkesztes;
   }
-    console.log(jelenlegiDatum(0));
-    let apiVegpont = apiEdzoIdopontok;
-$(".JobbraNovel").on("click ", () => {
+//-----------------------------------------------------------------------------------------------------------------------
+    
+$(".JobbraNovel").on("click ", () => {//Táblázat nap növelés
   idopontok.kattintasTrigger("jobbra");
   console.log("jobbra");
   eltolas++;
@@ -73,64 +108,32 @@ $(".oszlopSzam").on("keyup", () => {
 $(".oszlopSzam").on("click", () => {
   oszlop();
 });
-function oszlop(){
-  console.log($(".oszlopSzam").val());
+function oszlop(){//hány oszlop legyen megjelenítve a táblázatból
   hanyOszlopos=parseInt($(".oszlopSzam").val());
   idopontLista(idopontokTomb,jelenlegiDatum);
 }
-$(".BalraCsokkent").on("click ", () => {
+$(".BalraCsokkent").on("click ", () => {//Táblázat nap csökkentés
     idopontok.kattintasTrigger("balra");
     /* idopontok.megjelenit(); */
     console.log("balra");
     eltolas--;
     idopontLista(idopontokTomb,jelenlegiDatum);
   });
-  /* myAjax.adatBeolvasasElore(apiEdzoIdopontok,idopontokTomb); */
-  myAjax.adatbeolvas(/* "/api/ugyfelEdzesek2" */"/api/ugyfelEdzes", idopontokTomb, idopontLista,jelenlegiDatum);
+  //-----------------------------------------------------------------------------------------------------------------------
+
+  myAjax.adatbeolvas("/api/ugyfelEdzes", idopontokTomb, idopontLista,jelenlegiDatum);
   
-  function datumKereses(){
+  function datumKereses(){//beirt dátom megkeresése táblázatban
     let datumkeres=$(".datumKeres").val();
     let c= (Math.floor(new Date(datumkeres).getTime() - new Date().getTime()));
     eltolas=(Math.round(c/1000/60/60/24));
     idopontLista(idopontokTomb,jelenlegiDatum);
   }
   
-  $(".datumKeres").on("input", () => {//ha kivan töltve
+  $(".datumKeres").on("input", () => {// viszek be adatot a dátum keresésnél
     datumKereses();
   });
-  function idopontLista(idopontokT,myCallback){
-    console.log(idopontokT);
-    if(szamol==0){
-      idopontokTomb=idopontokT;
-    }
-    szamol++;
-    idopontok.megjelenit(myCallback,eltolas,(hanyOszlopos));
-    const szuloElem = $('.tablaadat');
-            const sablonElem = $('footer .idopont');
-            sablonElem.show();
-            szuloElem.empty();
-    for (let index = 0; index < hanyOszlopos; index++) {
-      idopontokT.forEach(function (elem) {
-        /* console.log(elem.datum); */
-              let datum1=elem.datum.slice(0,10);
-              let datum2=myCallback(index+eltolas).slice(0,10);
-              if(datum2===datum1){
-                console.log("kreal");
-                  let node = sablonElem.clone().appendTo($('.tablaadat'+index));
-                  const obj = new Idopont(node, elem);
-                  if(new Date(elem.datum)<new Date()){//ha régebbi foglalásokat nézünk akkor ne lehessen feloldani
-                    console.log(obj.feloldas.hide());
-                  }
-                  console.log(elem.datum);
-              }
-          });
-        }
-        sablonElem.hide(); 
-  }
-    Elrejt(".datum");
-    Elrejt(".orara");
-    Elrejt(".ora");
-    Elrejt(".lefoglal");
+  //-----------------------------------------------------------------------------------------------------------------------
     $(".szemelyKereso").on("keyup", () => {//ha lenyomja a szememely beirasa kozben a billentyut
       if($(".szemelyKereso").val()==""){
         console.log("nincs megadva szemely");
@@ -156,62 +159,11 @@ $(".BalraCsokkent").on("click ", () => {
         szemelyKeres=tomb;
         talaltNev=true;
         Megjelenit(".datum");
-        /* if(talaltDatum===true){
-        }else{
-          Elrejt(".datum")
-        } */
       }
     }
-    function Elrejt(mit){
-      /* $(mit).remove(); */
-      $(mit)[0].style.display = "none";
-      
-    }
-    function Megjelenit(mit){
-      /* $(mit).html("<button type=submit  class=lefoglal>Lefoglal</button>") */
-      $(mit)[0].style.display = "block";
-    }
-    /* $(".lefoglal").on("click", () => {// ha kattintunk a lefoglal gomb-ra
-      oraBeallitas();
-      let szemelySeged=$(".szemelyKereso").val();
-      let datumSeged=$(".datum").val();
-      let oraraSeged=$(".orara").val();
-      let oraSeged=$(".ora").val();
-      console.log(datumSeged);
-      if(szemelySeged==="" && datumSeged===""){
-        console.log("Nincs megadva név, és dátum");
-      }else if(szemelySeged===""){
-        console.log("Nincs megadva név");
-      }else if(datumSeged===""){
-        console.log("Nincs megadva dátum");
-      }else if(talaltNev===true&&talaltDatum==true){
-        console.log("jó");
-        console.log(idopontokTomb);
-        console.log(szemelyKeres);
-        apiVegpont = apiEdzoIdopontok;
-        let szoveg = {
-          ugyfel_id:  parseInt(szemelyKeres[0].szemely_id) ,
-          ugyfel_nev: szemelyKeres[0].nev,
-          datum: datumSeged+" "+oraraSeged,
-          ora: oraSeged,
-          edzo_id:adottEdzo,
-        };
-        console.log(szoveg);
-        myAjax.adatkuldes(apiVegpont, szoveg);
-      }else{
-        console.log("hibás a dátum vagy a név");
-      }
-    }); */
-    
-    function oraBeallitas(){
-      if(!($(".ora").val()==="")){//ha megvan adva dátum 
-        //console.log($(".ora").val().slice(2,4));
-        talaltDatum=true;
-        if(talaltNev===true){
-          /* Megjelenit(".lefoglal") */
-        }else{
-          /* Elrejt(".lefoglal") */
-        }
+//-----------------------------------------------------------------------------------------------------------------------
+    function oraBeallitas(){//edzéshossz
+      if(!($(".ora").val()==="")){//ha megvan adva az edzéshossz 
         let oraBeallit=parseInt($(".ora").val().slice(2,4));
         if(oraBeallit<8){//időbeállítások csak 00 15 30 45 lehet a perc
           $(".ora")[0].value=$(".ora").val().slice(0,1)+":00";
@@ -231,14 +183,15 @@ $(".BalraCsokkent").on("click ", () => {
     $(document).on("click", () => {//rákattintás az oldalon
       oraBeallitas();
     });
-
+//-----------------------------------------------------------------------------------------------------------------------
+    //Dátum megadásánál min és max
     let jelenlegiDatumSeged=new Date().toISOString().split(".")[0].slice(0,10);
       $(".datum")[0].min=jelenlegiDatumSeged;//a jelenlegi idő a minimum, utólagos lefoglalás nem lehetséges
       let max=parseInt(jelenlegiDatumSeged.slice(0,4))+1;//jelenlegi datumnak az évét átalakítja számmá és hozzáad 1-et
       max=max.toString();//visszaalakítás string-é
       let seged=jelenlegiDatumSeged.replace(jelenlegiDatumSeged.slice(0,4),max);//a jelenlegi évet kicseréli a jelenlegi év +1 re
       $(".datum")[0].max=seged;//a jelenlegi idő +1 év a maximum
-
+//---------------------------
     $(".datum").on("input", () => {//rákattintás a dátumra
       if(!($(".datum").val()==="")){//ha megvan adva dátum 
         let datumBeirt =new Date($(".datum").val()+" 00:00:00");//beirt datum
@@ -261,9 +214,7 @@ $(".BalraCsokkent").on("click ", () => {
         }else if(maiDatum>datumBeirt){
           /* oraraListaz(null); */
           console.log("kisebb datum van beirva mint a jelenlegi");
-          /* $(".datum")[0].value =jelenlegiDatum(0).slice(0,10); */
           console.log($(".datum").val());
-         /*  $(".datum").value ="2000-10-10"; */
          Elrejt(".orara");
          Elrejt(".ora");
          Elrejt(".lefoglal");
@@ -274,25 +225,6 @@ $(".BalraCsokkent").on("click ", () => {
         Elrejt(".lefoglal");
       }
     });
-    /* $(".datum").on("keyup", () => {
-      if(!($(".datum").val()==="")){//ha megvan adva dátum 
-        Megjelenit(".orara");
-        oraraListaz()
-        console.log($(".datum").val().slice(0,13));
-      }else{
-        Elrejt(".orara");
-        Elrejt(".ora");
-        Elrejt(".lefoglal");
-      }
-    }); */
-    function DatumKitoltottE(){
-      if(!($(".datum").val()==="")){//ha megvan adva dátum 
-        Megjelenit(".orara");
-        console.log($(".datum").val().slice(0,13));
-      }else{
-        Elrejt(".orara");
-      }
-    }
     $(window).on('felold', (event) => {//ha rányomok a feloldra torli az adatot
       /* apiVegpont = "api/ugyfelEdzes"; */
       /* myAjax.adattorles(apiVegpont, event.detail.id); */
@@ -300,53 +232,53 @@ $(".BalraCsokkent").on("click ", () => {
       myAjax.adatkuldes(apiVegpont, event.detail);
       window.location.reload();
     });
-
-    function oraListaz(){//orakhoz hozzá adja a valószínű lehettőségeket opciok nak
-      const orak=["1:00","1:15","1:30","1:45","2:00","2:15","2:30","2:45","3:00"];
+//-----------------------------------------------------------------------------------------------------------------------
+    function oraListaz(){//edzés hossza hozzá adja a valószínű lehettőségeket opciok nak
+    const orak=["1:00","1:15","1:30","1:45","2:00","2:15","2:30","2:45","3:00"];
     const edzesekHossz=["Rövid edzés","Közepes edzés","Hosszú edzés"]
     var oravalasztasok=[];
     for (let index = 0; index < orak.length; index++) {//orak tomb vegigjarasa
+      let i;
       if(index>-1&&index<3){//ha elso harom elem
-        let i=0
+        i=0;
       }else if(index>2&&index<6){// ha 4.-6.elem
         i=1;
-        oravalasztasok+='<option label="'+edzesekHossz[i]+'">'+orak[index]+'</option>'
       }else if(index>5&&index<9){//ha 7.-9.elem
         i=2;
-        oravalasztasok+='<option label="'+edzesekHossz[i]+'">'+orak[index]+'</option>'
       }
+      oravalasztasok+='<option label="'+edzesekHossz[i]+'">'+orak[index]+'</option>'
     }
     $("#oraValasztasok").html(oravalasztasok);
     }
     oraListaz();
+//-----------------------------------------------------------------------------------------------------------------------
     var utolsoElemhosszSeged1=0;
-    $(".orara").on("keyup", () => {//ha az orara viszunk be adatot
-      //még kell egy olyat csinalni hogyha mára foglal akkor a jelenlegi órátol tudjon foglalni
-        let k1=$(".orara").val();//bevitt ertek
-        if(!(k1.charAt(0)>-1)){//ha 1. nem szam torol mindent
+    $(".orara").on("keyup", () => {//ha az orara(Edzés időpont) viszunk be adatot
+        let bevittErtek=$(".orara").val();//bevitt ertek
+        if(!(bevittErtek.charAt(0)>-1)){//ha 1. nem szam torol mindent
           console.log("elso nem szam");
-          k1="";
+          bevittErtek="";
         }
-        if(parseInt(k1.charAt(0))===1||parseInt(k1.charAt(0))===2){//ha egy vagy 2 vel kezdődik akkor biztos hogy 9 óránál nagyobb tehát 2 számjegyü
+        if(parseInt(bevittErtek.charAt(0))===1||parseInt(bevittErtek.charAt(0))===2){//ha egy vagy 2 vel kezdődik akkor biztos hogy 9 óránál nagyobb tehát 2 számjegyü
           console.log("kettö szamjegyu lesz");
-          if(!(parseInt(k1.charAt(1))>-1&&(parseInt(k1.charAt(1)))<10)&&k1.length===2){//ha 2. nem szam torli a 2.at
-            k1=k1.charAt(0);
+          if(!(parseInt(bevittErtek.charAt(1))>-1&&(parseInt(bevittErtek.charAt(1)))<10)&&bevittErtek.length===2){//ha 2. nem szam torli a 2.at
+            bevittErtek=bevittErtek.charAt(0);
             console.log("masodik nem szam");
-          }else if(!(parseInt(k1.charAt(3))>-1&&(parseInt(k1.charAt(3)))<10)&&k1.length===4){//ha a 4. nem szam akkor törli a negyediket
-            k1=k1.charAt(0)+k1.charAt(1)+k1.charAt(2);
+          }else if(!(parseInt(bevittErtek.charAt(3))>-1&&(parseInt(bevittErtek.charAt(3)))<10)&&bevittErtek.length===4){//ha a 4. nem szam akkor törli a negyediket
+            bevittErtek=bevittErtek.charAt(0)+bevittErtek.charAt(1)+bevittErtek.charAt(2);
             console.log("negyedik nem szam");
-          }else if(!(parseInt(k1.charAt(4))>-1&&(parseInt(k1.charAt(4)))<10)&&k1.length===5){//ha 5. nem szam akkor torli az 5.et
-            k1=k1.charAt(0)+k1.charAt(1)+k1.charAt(2)+k1.charAt(3);
+          }else if(!(parseInt(bevittErtek.charAt(4))>-1&&(parseInt(bevittErtek.charAt(4)))<10)&&bevittErtek.length===5){//ha 5. nem szam akkor torli az 5.et
+            bevittErtek=bevittErtek.charAt(0)+bevittErtek.charAt(1)+bevittErtek.charAt(2)+bevittErtek.charAt(3);
             console.log("otodik nem szam");
           }
-          if((parseInt(k1.charAt(1))>-1)&&(parseInt(k1.charAt(1))<10)&&utolsoElemhosszSeged1===1){//ha megvan adva a 2. karakter megvan adva valami akkor beallitjuk mögé a :
-          //if(k1.length===2){
-            k1+=":"
-          }else if(!(k1.charAt(2)===":")&&k1.length===3){//ha a harmadik nem :
+          if((parseInt(bevittErtek.charAt(1))>-1)&&(parseInt(bevittErtek.charAt(1))<10)&&utolsoElemhosszSeged1===1){//ha megvan adva a 2. karakter megvan adva valami akkor beallitjuk mögé a :
+          //if(bevittErtek.length===2){
+            bevittErtek+=":"
+          }else if(!(bevittErtek.charAt(2)===":")&&bevittErtek.length===3){//ha a harmadik nem :
             console.log("masodik szam");
-            k1=k1.charAt(0)+k1.charAt(1)+":";
+            bevittErtek=bevittErtek.charAt(0)+bevittErtek.charAt(1)+":";
           }
-          if(k1.length===5){
+          if(bevittErtek.length===5){
             Megjelenit(".ora");
           }else{
             Elrejt(".ora");
@@ -354,67 +286,38 @@ $(".BalraCsokkent").on("click ", () => {
           }
         }else{
           console.log("egy szamjegyü lesz");
-          console.log(k1.charAt(0));
+          console.log(bevittErtek.charAt(0));
           if(utolsoElemhosszSeged1===0){//ha megvan adva a 2. karakter megvan adva valami akkor beallitjuk mögé a :
-            //if(k1.length===2){
-              k1+=":"
-            }else if(!(k1.charAt(1)===":")&&k1.length===2){//ha a masodik nem :
+            //if(bevittErtek.length===2){
+              bevittErtek+=":"
+            }else if(!(bevittErtek.charAt(1)===":")&&bevittErtek.length===2){//ha a masodik nem :
               console.log("masodik szam");
-              k1=k1.charAt(0)+":";
+              bevittErtek=bevittErtek.charAt(0)+":";
             }
-            if(!(parseInt(k1.charAt(2))>-1&&(parseInt(k1.charAt(2)))<10)&&k1.length===3){//ha a 3. nem szam akkor torli a 3.at
-              k1=k1.charAt(0)+k1.charAt(1);
-            }else if(!(parseInt(k1.charAt(3))>-1&&(parseInt(k1.charAt(3)))<10)&&k1.length===4){//ha a 4. nem szam akkor torli a 4.et
-              k1=k1.charAt(0)+k1.charAt(1)+k1.charAt(2);
-            }else if(!(k1.charAt(4)===NaN)){//ha 5. beirt valamit akkor torli az5.et
-              k1=k1.charAt(0)+k1.charAt(1)+k1.charAt(2)+k1.charAt(3);
+            if(!(parseInt(bevittErtek.charAt(2))>-1&&(parseInt(bevittErtek.charAt(2)))<10)&&bevittErtek.length===3){//ha a 3. nem szam akkor torli a 3.at
+              bevittErtek=bevittErtek.charAt(0)+bevittErtek.charAt(1);
+            }else if(!(parseInt(bevittErtek.charAt(3))>-1&&(parseInt(bevittErtek.charAt(3)))<10)&&bevittErtek.length===4){//ha a 4. nem szam akkor torli a 4.et
+              bevittErtek=bevittErtek.charAt(0)+bevittErtek.charAt(1)+bevittErtek.charAt(2);
+            }else if(!(bevittErtek.charAt(4)===NaN)){//ha 5. beirt valamit akkor torli az5.et
+              bevittErtek=bevittErtek.charAt(0)+bevittErtek.charAt(1)+bevittErtek.charAt(2)+bevittErtek.charAt(3);
               console.log("otodik nem szabad kitolteni");
             }
-            if(!(k1.charAt(0)>-1)){//ha 1. nem szam torol mindent
+            if(!(bevittErtek.charAt(0)>-1)){//ha 1. nem szam torol mindent
               console.log("elso nem szam");
-              k1="";
+              bevittErtek="";
             }
-            if(k1.length===4){
+            if(bevittErtek.length===4){
               Megjelenit(".ora");
             }else{
               Elrejt(".lefoglal");
               Elrejt(".ora");
             }
         }
-          /* console.log(parseInt(k1));
-          if(!(parseInt(k1.charAt(0))>-1&&(parseInt(k1.charAt(0))<10))&&k1.length===1){//ha 1. nem szam torol mindent
-            k1="";
-            console.log("elso nem szam2");
-          }else if(!(parseInt(k1.charAt(1))>-1&&(parseInt(k1.charAt(1)))<10)&&k1.length===2){//ha 2. nem szam torli a 2.at
-            k1=k1.charAt(0);
-            console.log("masodik nem szam");
-          }else if(!(parseInt(k1.charAt(3))>-1&&(parseInt(k1.charAt(3)))<10)&&k1.length===4){//ha a 4. nem szam akkor törli a negyediket
-            k1=k1.charAt(0)+k1.charAt(1)+k1.charAt(2);
-            console.log("negyedik nem szam");
-          }else if(!(parseInt(k1.charAt(4))>-1&&(parseInt(k1.charAt(4)))<10)&&k1.length===5){//ha 5. nem szam akkor torli az 5.et
-            k1=k1.charAt(0)+k1.charAt(1)+k1.charAt(2)+k1.charAt(3);
-            console.log("otodik nem szam");
-          } 
-          */
-      /* } */
-        console.log(k1);
-        /* if(!(k1.match(/[a-z]/)===null)){//ha betüt irunk be akkor töröljön mindent
-          console.log("hop");
-          k1="";
-        }else if(parseInt(k1)>3){
-          k1=3;
-        }else if(k1.length===1&&utolsoElemhosszSeged1===0){//elso beirasnal fut le, beirt elem miatt 1 lessz a hossz es nem volt torles
-          k1=1+":";
-        }*/
-        console.log(utolsoElemhosszSeged1);
-          utolsoElemhosszSeged1=k1.length; 
-        
-        $(".orara")[0].value=k1;
-        
-      /* oraraListaz(); */
+          utolsoElemhosszSeged1=bevittErtek.length; 
+        $(".orara")[0].value=bevittErtek;
     });
-    /* oraraListaz(); */
-    function oraraListaz(maE){
+//-----------------------------------------------------------------------------------------------------------------------
+    function oraraListaz(maE){//órára választás segítségek
       let oraraValasztasokSzoveg;
       let oraraLista=[];
       let kiegeszit;
@@ -471,14 +374,11 @@ $(".BalraCsokkent").on("click ", () => {
             console.log("10");
             ora2Szamjegy=false;
           }
-          
           if(ora2Szamjegy===true){
             oraraValasztasokSzoveg +='<option label="'+kiegeszit+'">'+(oraraLista[index]).toString().slice(16,21)+'</option>'
           }else if(ora2Szamjegy===false){
             oraraValasztasokSzoveg +='<option label="'+kiegeszit+'">'+(oraraLista[index]).toString().slice(17,21)+'</option>'
           }
-
-          
           if(datum.getHours()>munkaoraig-2){//21 ora utan mar nem lehet foglalni 1 oras edzesnel kevesebbet nem lehet szemelyedzovel lenni
             console.log("mara mar nem lehet foglalni");
             $("#oraraValasztasok").append("");
@@ -486,23 +386,9 @@ $(".BalraCsokkent").on("click ", () => {
             $("#oraraValasztasok").html(oraraValasztasokSzoveg);
           }
       }
-        
-
-      
-      
-
-     /* let datum = new Date();
-     console.log(datum.getHours()<munkaoratol);
-     if(datum.getHours()<munkaoratol+1||datum.getHours()>munkaoraig-1){//
-       console.log("csak 8 tol lehet foglalni");
-     } */
-      /* console.log($(".datum").val());
-      console.log(jelenlegiDatum(0).slice(0,10)); */
-      /* $(".datum").val(); */
-      
-      
     }
-    function datumListaz(){//datumokhoz hozzá ad 7 nap választást
+//-----------------------------------------------------------------------------------------------------------------------
+    function datumListaz(){//Datum lefoglalás időponthoz hozzá ad 7 nap választást
       const hetNapjai = ["Vasárnap","Hétfő","Kedd","Szerda","Csütörtök","Péntek","Szombat"];
     var datumok=[];
     for (let index = 0; index < elorefoglalas; index++) {//100 napra előre lehet foglalni
@@ -514,9 +400,9 @@ $(".BalraCsokkent").on("click ", () => {
       let datum = new Date(jelenlegiDatum(index));
       if(datumok[index]===jelenlegiDatum(0).slice(0,10)){//ma datum esaz elso elore foglalhato datum
         kiegeszit="(Ma)";
-      }else if(datumok[index]===jelenlegiDatum(1).slice(0,10)){//holnapi datum esaz elso elore foglalhato datum
+      }else if(datumok[index]===jelenlegiDatum(1).slice(0,10)){//holnapi datum 
         kiegeszit="(Holnap)";
-      }else if(datumok[index]===jelenlegiDatum(2).slice(0,10)){//holnaputani datum esaz elso elore foglalhato datum
+      }else if(datumok[index]===jelenlegiDatum(2).slice(0,10)){//holnaputani datum
         kiegeszit="(Holnap után)";
       }else{
         kiegeszit="";
@@ -527,12 +413,11 @@ $(".BalraCsokkent").on("click ", () => {
     $("#datumValasztasok").html(datumValasztasokSzoveg);
     }
     datumListaz();
-    
+//-----------------------------------------------------------------------------------------------------------------------
     var utolsoElemhosszSeged=0;
     $(".ora").on("keyup", () => {//ha az edzeshossznál viszunk be adatot
       let k=$(".ora").val();//bevitt ertek
       console.log(k);
-      /* console.log(parseInt(k)>0&&parseInt(k)<9); */
       if(!(k.charAt(1)===":")&&utolsoElemhosszSeged===1){//ha a második nem :
         console.log("masodik szam");
         k=k.charAt(0)+":";
@@ -548,16 +433,6 @@ $(".BalraCsokkent").on("click ", () => {
         console.log("negyedik nem szam");
       }
       console.log(k.length);
-      
-     /*  if(!(k.match(/[a-z]/i)===null)){//ha betüt irunk be akkor töröljön mindent// ha nem szám
-      // if((typeof k.charAt(0))==="number"){//ha betüt irunk be akkor töröljön mindent// ha nem szám 
-        console.log("szam");
-        k="";
-      }else if(parseInt(k)>3){
-        k=3+":";
-      }else if(k.length===1&&utolsoElemhosszSeged===0){//elso beirasnal fut le, beirt elem miatt 1 lessz a hossz es nem volt torles
-        k=k+":";
-      }*/
       utolsoElemhosszSeged=k.length;
       $(".ora")[0].value=k;
       if(k.length===4){
@@ -568,6 +443,5 @@ $(".BalraCsokkent").on("click ", () => {
         Elrejt(".lefoglal");
       }
       }
-
     );
 });

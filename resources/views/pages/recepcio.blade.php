@@ -5,25 +5,25 @@
         <form action="{{route('OltozoFoglalasFelvitel1')}}" method="post">
           <div id="kereso">
             @csrf
+            <div id="lekerekitve"></div>
             <div class="bal1">
               <label id="keresoSzoveg"for="fname" >Személy kereső:</label>
-              <input type="txt" placeholder="Személy kereső" class="keresSzemely" name="ugyfelNev" value="{{old('ugyfelNev')}}"/>
+              <input type="txt" id="keresoInput" placeholder="Személy kereső" class="keresSzemely" name="ugyfelNev" value="{{old('ugyfelNev')}}"/>
               <div class="keresettSzemely"></div>
             </div>
+            <div id="lekerekitve"></div>
             <div class="jobb1">
               <label id="keresoSzoveg"for="fname">Szekrény kereső:</label>
-              <input type="number" placeholder="Szekrény kereső" min="0" class="keresSzekrenykulcs" name="szekrenySzama" value="{{old('szekrenySzama')}}"/>
-              <div >
+              <input type="number" id="keresoInput" placeholder="Szekrény kereső" min="0" class="keresSzekrenykulcs" name="szekrenySzama" value="{{old('szekrenySzama')}}"/>
                 <table class="keresettSzekreny"></table>
-              </div>
             </div>
           </div>
               <button type="submit" class="lefoglal">Lefoglal</button><br>
               @if(Session::has('sikeres'))
-                <div class="alert alert-sikeres">{{Session::get('sikeres')}}</div>
+                <div class="hibaüzenet sikeresUzenet">{{Session::get('sikeres')}}</div>
               @endif
               @if(Session::has('sikertelen'))
-                <div class="alert alert-sikertelen">{{Session::get('sikertelen')}}</div>
+                <div class="hibaüzenet sikertelenUzenet">{{Session::get('sikertelen')}}</div>
               @endif
           </form>
           <div class="letszam">
@@ -36,31 +36,9 @@
     
     <div id="szemelyMegjelenites" class="Lefoglatak">
     </div>
-    <article>
-      
-      
-      
-    </article>
     <section>
-      <div class="szekrenyek"></div>
+      <div  class="szekrenyek"></div>
     </section>
-    
-    {{-- <table class="szekrenyek">
-      <tbody>
-      </tbody>
-    </table> --}}
-    {{-- <section>
-      
-      </div>
-    </label>
-    </table>
-    <div class="osszesSzekreny2">
-      
-    </div>
-    <div class="osszesSzekreny"></div>
-    <div id="szemelyerror"></div>
-  </section> --}}
-  
   <footer>
     <div class="szemely">
       <label id="keresoSzoveg"for="fname">Neve: </label>
@@ -86,7 +64,7 @@
       <td class="neme"></td>
       <td class="uresE"></td>
       <td><button type="submit" class="feloldasGomb">Felold</button></td>
-      <td><input type="checkbox" class="hibasGomb" name="switch" ></td>
+      <td class=""><input type="checkbox" class="hibasGomb" name="switch" ></td>
     </tr>
   </tbody>
 </table>
