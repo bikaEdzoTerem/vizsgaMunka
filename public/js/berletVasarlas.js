@@ -24,7 +24,7 @@ $(function () {
         let szamla = window.open(/*URL, name, specs, replace*/
             "", 
             "Szamla",
-            "toolbar=yes, scrollbars=yes, resizeable=yes, top=50%, left=50%, width=1200, height=1200",
+            "toolbar=yes, scrollbars=yes, resizeable=yes, top=50%, left=50%, width=600, height=600",
             ""
         );
         szamla.document.write("<main style='max-width:600px; width:100%; margin:auto;'>");
