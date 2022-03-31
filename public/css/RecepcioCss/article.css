@@ -47,8 +47,8 @@ article .hibasGomb {
   }
   
   article .hibasGomb:checked {
-    right: 2px;
-    top: 3px;
+    /* right: 2px;
+    top: 3px; */
     background-color: transparent;
   }
   article .hibasGomb:before {
@@ -80,6 +80,6 @@ article .hibasGomb {
       box-shadow: 1px 0px 10px #0e9700;
         color: #0e9700;
   }
-  article .feloldasGomb{
+  /* article .feloldasGomb{
       margin: 5px;
-  }
+  } */
