@@ -3,16 +3,16 @@ class Szemely{
         this.node = node;
         this.adat = adat;
         this.neve = this.node.children(".neve");
-        this.neve.text(adat.nev);
+        this.neve.text("Neve: "+adat.nev);
 
         this.neme = this.node.children(".neme");
-        this.neme.text(adat.neme);
+        this.neme.text("Neme: "+adat.neme);
 
         this.igazolvanySzam = this.node.children(".igazolvanySzama");
-        this.igazolvanySzam.text(adat.igazolvany_szam);
+        this.igazolvanySzam.text("Igazolvány száma: "+adat.igazolvany_szam);
 
         this.igazolvanyTipus = this.node.children(".igazolvanyTipusa");
-        this.igazolvanyTipus.text(adat.igazolvany_tipusa);
+        this.igazolvanyTipus.text("Igazolvány típusa: "+adat.igazolvany_tipusa);
 
         this.felvisz = this.node.children(".felviszGomb");
         this.felvisz.on("click ", () => {
@@ -20,13 +20,18 @@ class Szemely{
         });
 
         this.email = this.node.children(".email");
-        this.email.text(adat.email_cim);
+        this.email.text("E-mail címe: "+adat.email_cim);
 
         /* this.kep.text(adat.kep);
         this.kep = this.node.children(".szemelyKep"); */
 
         this.berlet = this.node.children(".berlete");
-        this.berlet.text(adat.MegMeddigJo);
+        
+        if(adat.MegMeddigJo){
+            this.berlet.text("Bérlete: "+adat.MegMeddigJo+"napig jó");
+        }else{
+            this.berlet.text("Bérlete: NINCS!").css("color", "red");
+        }
     }
     kattintasTrigger(esemenyneve) {// A főablakhoz adom az eseményt,
         let esemeny = new CustomEvent(esemenyneve, {
