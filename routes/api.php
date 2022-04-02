@@ -80,3 +80,5 @@ Route::apiResource('ugyfelEdzes', UgyfelEdzesController::class);
 Route::apiResource('recepcioHoz', szekrenyListazController::class);
 
 Route::post('/recepcioHozOsszesSzekrenyFelold', [szekrenyListazController::class, 'osszesOltozoFeloldas']);
+//SZEKRENY LETSZAM
+Route::get('recepcioHozSzekrenyletszam', [szekrenyListazController::class, 'letszam']);
