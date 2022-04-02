@@ -1,164 +1,38 @@
 @charset "utf-8";
-main{
-    display: grid;
-    grid-template-areas: 
-    "h h h h h h"
-    "a a a a a a"
-    "s s s s s s"
-    "f f f f f f"
-}
-header{
-    grid-area:h;
-}
-nav{
-    grid-area:n;
-}
-article{
-    grid-area:a;
-}
-section{
-    grid-area:s;
-}
-footer{
-    grid-area:f;
-}
-html {
-  font-family: sans-serif;
-  background-color: white;
-}
-body{
-    margin:0;
-}
+
+
 header {
   background-color: #222;
   border: 3px solid black;
-  width: 100%;
-  display: inline-block;
+  padding: 10px;
+  /* display: inline; */
 }
-form{
-  margin: 16px;
-}
-#keresoSzoveg{
-  display: inline-block;
-}
-.szemely,.szekreny label{
-  color: rgb(226, 119, 57);
-}
-header form label,p{/* keresőnél összes szoveg */
-  display: inline-block;
-  font-size: 22px;
-  color: whitesmoke;
-}
-
-header .letszam p,span{/* szabad helyek számláló szerkesztés */
-  display: inline-block;
-  font-size: 22px;
-  color: whitesmoke;
-}
-.lefoglal {
-  cursor: pointer;
-  border: 1px solid black;
-  border-radius: 4px;
-}
-
-input[type="number"]::-webkit-inner-spin-button,input[type="number"]::-webkit-outer-spin-button {
-  /* szekrény szám kereső léptető módosítása */
-  position:absolute;
-  cursor: pointer;
-  top: 0;
-  right: 0;
-  bottom: 0;
-}
-input[type="number"]::-webkit-inner-spin-button:hover,input[type="number"]::-webkit-inner-spin-button:active {
-  /* szekrény szám kereső léptető módosítása derengő piros szín*/
-  box-shadow: 0 0 10px #cc0000;
-  opacity: 0.8;
-}
-
-.lefoglal {
-  /* Lefoglal gomb módosítása */
-  background-color: black;
-  color: #cc0000;
-  border: 2px solid #cc0000;
-  transition-duration: 0.4s;
-  padding: 5px 10px 5px 10px;
-}
-.lefoglal:hover {
-  /* Lefoglal gomb módosítása */
-  color: white;
-  border: 2px solid black;
-}
-.lefoglal:active {
-  /* Lefoglal gomb módosítása */
-  background-color: darkred;
-}
-#szemelyerror{
-    color: yellow;
-    position: fixed;
-     text-align: center;
-    /*width: 100%; */
-    left: 350px;
-    top:45px;
-}
-.keresettSzekreny td{
+header{
+  margin: 0px;
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: 3fr 1fr;
+}
+#kereso{
+  display: grid;
+  grid-template-columns: 2fr 2fr  1fr;
+}
+.letszam #SzabadSzoveg, .letszam .ferfiLetszam, .letszam .noiiLetszam{
+  display: inline;
+}
+header p, label,span{
+  color:whitesmoke;
   font-size: 22px;
-  color: whitesmoke;
 }
-.jobb1 {
-  border-left: 3px solid red;
-}
-.keresettSzemely p{
-  margin: 2px;
-}
-.sikeresUzenet{
-  color: green;
-}
-.sikertelenUzenet{
-  color:red;
-}
-header .letszam,form{
-  display: inline-block;
-}
-.jobb1 .szekreny{
-  background-color: #222;
-  color:whitesmoke;
-  border: 0px;
-}
-.jobb1 .szekreny p{
-  color:whitesmoke;
-}
+
 @media only screen and (max-width: 900px) {
-  #kereso{
-      display: block;
+  header,#kereso ,.letszam{
+    display: block;
   }
-  form{
-    text-align: center;
-  }
-  #lekerekitve{
-    border: 2px solid red;
-    border-radius: 25px;
-    background-color: red;
-    margin: auto;
-    width: 400px;
-  }
-  .keresettSzekreny{
-    margin: auto;
-    width: auto;
-    
-  }
-  .szekreny{
+  form,.szekreny,.letszam{
     text-align: center;
   }
   .bal1,.jobb1{
     padding: 5px;
-  }
-  .letszam{
-    text-align: center;
-  }
-  header .letszam,form{
-    display: block;
   }
   .jobb1 {
     border-left: 0px;
