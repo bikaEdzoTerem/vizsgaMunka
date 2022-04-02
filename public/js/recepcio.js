@@ -1,7 +1,7 @@
 $(function () {
   const myAjax = new MyAjax();
   let szekrenyekTomb = [];
-  const szekrenyemben = new Szekrenyek(szekrenyekTomb);
+/*   const szekrenyemben = new Szekrenyek(szekrenyekTomb); */
   const honapok = ["Január", "Február", "Március","Aprilis", "Május", "Június", "Július", "Augusztus","Szeptember", "Október", "November", "December"];
   const hetNapjai = ["Vasárnap","Hétfő","Kedd","Szerda","Csütörtök","Péntek","Szombat"];
 
@@ -12,39 +12,121 @@ $(function () {
 
 
   
-  function szekrenyekMegjelenit() {
-    let apiVegpont = "/api/recepcioHoz";
-    myAjax.adatbeolvas(apiVegpont, szekrenyekTomb, kiir);
-
-  }
-  szekrenyekMegjelenit();//létrehozza s zekrények tábla szerkezetét
-  function kiir(tomb) {
-    let seged = ".szekrenyek";
-    szekrenyemben.megjelenit(tomb, seged);
-    console.log(tomb);
-    $("#ferfiLetszam").html(szekrenyemben.getSzabadHelySzam(tomb,"Férfi"));
-    $("#noiiLetszam").html(szekrenyemben.getSzabadHelySzam(tomb,"NŐ"));
-    
-  }
 //-----------------------------------------------------------------------------------------------------------------------
-  let apiVegpont = "/api/recepcioHoz";
-  myAjax.adatbeolvas(apiVegpont, szekrenyekTomb, szekreny);
-  function szekreny(idopontokT){//szekrények táblába belerakja az adatokat
-    console.log(idopontokT);
-    /* const szuloElem = $('.szekrenyekTabla > tbody:last-child'); */
+//szűrésnél db számok és a szabad helyek létszáma
+  let apiVegpont = "/api/recepcioHozSzekrenyletszam";
+  myAjax.adatbeolvas(apiVegpont,false,letszam);
+  function letszam(tomb){
+    let osszesSzekrenySzam=0;
+    let NoiSzekrenyDb=0;
+    let FerfiSzekrenyDb=0;
+    let foglaltSzamF=0;
+    let foglaltSzamN=0;
+    let foglaltSzam=0;
+    let rosszSzamF=0;
+    let rosszSzamN=0;
+    let rosszSzam=0;
+    let üresSzamF=0;
+    let üresSzamN=0;
+    let üresSzam=0;
+    let szekrenySzuresValasztas;
+    tomb.forEach(function(key) {
+      osszesSzekrenySzam+=key.db;
+      if(key.ures_e==='F'&&key.tipusa==='Férfi'){
+        foglaltSzamF+=key.db;
+        foglaltSzam+=key.db;
+      }else if(key.ures_e==='F'&&key.tipusa==='Nő'){
+        foglaltSzamN+=key.db;
+        foglaltSzam+=key.db;
+      }else if(key.ures_e==='R'&&key.tipusa==='Férfi'){
+        rosszSzamF+=key.db;
+        rosszSzam+=key.db;
+      }else if(key.ures_e==='R'&&key.tipusa==='Nő'){
+        rosszSzamN+=key.db;
+        rosszSzam+=key.db;
+      }else if(key.ures_e==='Ü'&&key.tipusa==='Férfi'){
+        üresSzamF+=key.db;
+        üresSzam+=key.db;
+      }else if(key.ures_e==='Ü'&&key.tipusa==='Nő'){
+        üresSzamN+=key.db;
+        üresSzam+=key.db;
+      }
+      if(key.tipusa==='Férfi'){
+        FerfiSzekrenyDb+=key.db;
+      }else if(key.tipusa==='Nő'){
+        NoiSzekrenyDb+=key.db;
+      }
+      console.log(key);
+    });
+    /* console.log("Összes szekrény db: "+osszesSzekrenySzam);
+    console.log("Férfi szekrény db: "+FerfiSzekrenyDb);
+    console.log("Női szekrény db: "+NoiSzekrenyDb);
+
+    console.log("Üres  db: "+üresSzam);
+    console.log("Üres férfi db: "+üresSzamF);
+    console.log("Üres női db: "+üresSzamN);
+
+    console.log("Foglalt db: "+foglaltSzam);
+    console.log("Foglalt férfi db: "+foglaltSzamF);
+    console.log("Foglalt női db: "+foglaltSzamN);
+
+    console.log("Rossz db: "+rosszSzam);
+    console.log("Rossz férfi db: "+rosszSzamF);
+    console.log("Rossz női db: "+rosszSzamN);
+     */
+    szekrenySzuresValasztas='<option class="a" value="osszes"><p>'+"Összes szekrény ("+osszesSzekrenySzam+")"+'</p></option>';
+    szekrenySzuresValasztas+='<option value=osszesN><p>'+"Összes női szekrény ("+NoiSzekrenyDb+")"+'</p></option>';
+    szekrenySzuresValasztas+='<option value=osszesF><p>'+"Összes férfi szekrény ("+FerfiSzekrenyDb+")"+'</p></option>';
+
+    szekrenySzuresValasztas+='<option value=Üres><p>'+"Üres szekrények ("+üresSzam+")"+'</p></option>';
+    szekrenySzuresValasztas+='<option value=ÜresNő><p>'+"Üres női szekrények ("+üresSzamN+")"+'</p></option>';
+    szekrenySzuresValasztas+='<option value=ÜresFérfi><p>'+"Üres férfi szekrények ("+üresSzamF+")"+'</p></option>';
+
+    szekrenySzuresValasztas+='<option value=Foglalt><p>'+"Foglalt szekrények ("+foglaltSzam+")"+'</p></option>';
+    szekrenySzuresValasztas+='<option value=FoglaltN><p>'+"Foglalt női szekrények ("+foglaltSzamN+")"+'</p></option>';
+    szekrenySzuresValasztas+='<option value=FoglaltF><p>'+"Foglalt férfi szekrények ("+foglaltSzamF+")"+'</p></option>';
+
+    szekrenySzuresValasztas+='<option value=Rossz><p>'+"Rossz szekrények ("+rosszSzam+")"+'</p></option>';
+    szekrenySzuresValasztas+='<option value=RrosszN><p>'+"Rossz női szekrények ("+rosszSzamN+")"+'</p></option>';
+    szekrenySzuresValasztas+='<option value=RrosszF><p>'+"Rossz férfi szekrények ("+rosszSzamF+")"+'</p></option>';
+    $(".szekrenyekValasztas").html(szekrenySzuresValasztas);
+    $(".ferfiLetszam").html(üresSzamF);//férfi szabad hely db
+    $(".noiiLetszam").html(üresSzamN);//női szabad hely db
+    szekrenyekInformacioKuldes();//oldal betöltésekor lefut
+    }
+  
+//-----------------------------------------------------------------------------------------------------------------------
+  $(".szekrenyekValasztas").on('input', () => {//kiválasztunk egy szűrést akkor fut le
+    szekrenyekInformacioKuldes();
+  });
+  function szekrenyekInformacioKuldes(){
+    let apiVegpont = "/api/recepcioHoz";
+    apiVegpont += "?szuro=" + $(".szekrenyekValasztas").val();
+    console.log(apiVegpont);
+    myAjax.adatbeolvas(apiVegpont,false,szekreny);
+  }
+  function szekreny(szekrenyek){//szekrények táblába belerakja az adatokat
+    console.log(szekrenyek);
     const szuloElem = $('.szekrenyek');
     const sablonElem = $('footer .szekreny ');
     sablonElem.show();
     szuloElem.empty();
-    idopontokT.forEach(function (elem) {
+    szekrenyek.forEach(function (elem) {
       let node = sablonElem.clone().appendTo('.szekrenyek');
       const obj = new Szekreny(node, elem);
       if(elem.ures_e==="Ü"){
-        obj.szekreny_feloldas.hide();
+        obj.szekreny_feloldas.parent().hide();
+        $(node[0].children[0]).css("background-color", "green")//adott szekrény circle divjének a háttérszín megváltoztatása
       }else if(elem.ures_e==="R"){
-        obj.szekreny_feloldas.hide();
+        obj.szekreny_feloldas.parent().hide();
         obj.szekreny_rosszCheckBox.attr("checked", true);
+        $(node[0].children[0]).css("background-color", "rgb(105, 0, 0)")//adott szekrény circle divjének a háttérszín megváltoztatása
       }
+      /* if(elem.tipusa=== "Férfi"){//ha férfi szekrény akkor zöldes
+        $(node[0]).css("background-color", "rgb(234, 255, 233)");
+      }else if(elem.tipusa=== "Nő"){//ha női szekrény akkör rózsaszínes
+        $(node[0]).css("background-color", "(255, 233, 250)");
+      } */
     });
     sablonElem.hide(); 
     $('footer .szemely').hide()
@@ -110,7 +192,8 @@ $(function () {
       }
     }
     function szemelyKeresoMegjelenit(szemely){//sablonelemet klónozza és ha nincs igazolványa létrehoz egy inputot
-          const szuloElem = $('.keresettSzemely');
+          console.log(szemely);
+      const szuloElem = $('.keresettSzemely');
           const sablonElem = $('footer .szemely ');
           sablonElem.show();
           szuloElem.empty();
@@ -118,15 +201,19 @@ $(function () {
             let node = sablonElem.clone().appendTo('.keresettSzemely');
             const obj1 = new Szemely(node, elem);//példányosítja a személy osztályt
           });
+          /* $(".keresettSzemely .neve").prepend("Neve: ");
+          $(".keresettSzemely .neme").prepend("Neme: ");
+          $(".keresettSzemely .igazolvanySzama").prepend("Igazolvány száma: ");
+          $(".keresettSzemely .igazolvanyTipusa").prepend("Igazolvány típusa: ");
+          $(".keresettSzemely .email").prepend("E-mail címe: ");
+          $(".keresettSzemely .berlete").prepend("Bérlete : "); */
           sablonElem.hide();
           if(szemely[0].igazolvany_szam===""){
-            $(".igazolvanySzama").html('<input type="txt" placeholder="Igazolvány Száma" class="bekerIgazolvanySzam" />');
-            $(".igazolvanyTipusa").html('<input type="txt" placeholder="Igazolvány Típusa" class="bekerIgazolvanyTipus" />');
+            $(".igazolvanySzama").html('Igazolvány száma: <input type="txt" placeholder="Igazolvány Száma" class="bekerIgazolvanySzam" />');
+            $(".igazolvanyTipusa").html('Igazolvány típusa: <input type="txt" placeholder="Igazolvány Típusa" class="bekerIgazolvanyTipus" />');
             $(".felviszGomb").show();
-            $(".szemely .berlete").html(" NINCS!");
           }else {
             $(".felviszGomb").hide();
-            $(".szemely .berlete").append(" napig jó");
           }
   };
   $(window).on('felviszAdat', (event) => {//ha rányomok a felviszre felviszi az igazolványát
@@ -181,18 +268,17 @@ $(function () {
         let node = sablonElem.clone().appendTo(".keresettSzekreny");
         const obj = new Szekreny(node, elem);
         if(elem.ures_e==="Ü"){
-          obj.szekreny_feloldas.hide();
+          obj.szekreny_feloldas.parent().hide();
         }else if(elem.ures_e==="R"){
-          obj.szekreny_feloldas.hide();
+          obj.szekreny_feloldas.parent().hide();
           obj.szekreny_rosszCheckBox.attr("checked", true);
         }
       });
       sablonElem.hide();
       $(".keresettSzekreny .szama").prepend("Szekrény száma: ");
-
       $(".keresettSzekreny .neme").prepend("Tulajdonsága: ");
       $(".keresettSzekreny .uresE").prepend("Állapota: ");
-      $(".keresettSzekreny .hibasGomb").parent().prepend("Funkcio: ");
+      $(".keresettSzekreny .hibasGomb").parent().prepend("Funkció: ");
       $(".feloldasGomb").on("click", (event) => {
         let id = $(event.target).attr("data-id");
         szekrenyemben.katt(tomb[0].szekreny_id,"kattint","Ü");
@@ -211,6 +297,7 @@ $(function () {
       window.location.reload(); 
     });
 //-------------------------------------------------------------------------------------------------
+
   
 
 });
