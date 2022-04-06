@@ -73,8 +73,12 @@ Route::delete('/ugyfelEdzesek2/{id}', [UgyfeledzesFelviszController::class, 'del
 Route::get('/ugyfelEdzesek3', [UgyfelEdzesSzemellyel::class, 'osszekapcsol']);
 Route::apiResource('oltozo', UgyfeledzesFelviszController::class);
 
+//ügyfél edzés szűrés
+Route::get('ugyfelEdzes/Datum', [UgyfelEdzesController::class, 'datumTolIg']);
 //ügyfél edzés töröl módosít
 Route::apiResource('ugyfelEdzes', UgyfelEdzesController::class);
+Route::post('ugyfelEdzes/delete', [UgyfelEdzesController::class, 'delete']);
+Route::post('ugyfelEdzes/update', [UgyfelEdzesController::class, 'update']);
 
 //Recepció oldalhoz
 Route::apiResource('recepcioHoz', szekrenyListazController::class);
