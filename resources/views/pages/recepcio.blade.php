@@ -20,6 +20,12 @@
             <div class="gomb">
               <button type="submit" class="lefoglal">Lefoglal</button>
             </div>
+            <div class="letszam">
+              <p id="SzabadSzoveg">Férfi szabad hely:</p>
+              <span class="ferfiLetszam"></span>
+              <p id="SzabadSzoveg">Női szabad hely:</p>
+              <span class="noiiLetszam">100</span>
+            </div>
           </div>
               @if(Session::has('sikeres'))
                 <div class="hibaüzenet sikeresUzenet">{{Session::get('sikeres')}}</div>
@@ -28,12 +34,7 @@
                 <div class="hibaüzenet sikertelenUzenet">{{Session::get('sikertelen')}}</div>
               @endif
         </form>
-          <div class="letszam">
-            <p id="SzabadSzoveg">Férfi szabad hely:</p>
-            <span class="ferfiLetszam"></span>
-            <p id="SzabadSzoveg">Női szabad hely:</p>
-            <span class="noiiLetszam">100</span>
-          </div>
+          
       </header>
     <section>
       <div class="szekrenyValtoztat">
