@@ -10,8 +10,16 @@ $(function () {
   '<div class="alert sikeres"><h3 id="alertUzenet">Hiba</h3><a class="close">&times;</a></div>',]
 
 
-
-  
+//-----------------------------------------------------------------------------------------------------------------------
+//hibaüzenetek 2 ms után eltűnik lassan
+$(document).on("click", () => {//rákattintás az oldalon
+  $(".sikeresUzenet").fadeOut(1000);
+  $(".sikertelenUzenet").fadeOut(1000);
+});
+  setTimeout(function() {
+    $(".sikeresUzenet").fadeOut(3000);
+    $(".sikertelenUzenet").fadeOut(3000);
+  }, 2000);
 //-----------------------------------------------------------------------------------------------------------------------
 //szűrésnél db számok és a szabad helyek létszáma
   let apiVegpont = "/api/recepcioHozSzekrenyletszam";
