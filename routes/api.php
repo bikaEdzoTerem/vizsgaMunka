@@ -24,6 +24,7 @@ use App\Http\Controllers\api\UgyfeledzesFelviszController;
 use App\Http\Controllers\api\UgyfelEdzesController;
 //Recepció oldalhoz
 use App\Http\Controllers\api\szekrenyListazController;
+use App\Http\Controllers\FileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -79,10 +80,14 @@ Route::get('ugyfelEdzes/Datum', [UgyfelEdzesController::class, 'datumTolIg']);
 Route::apiResource('ugyfelEdzes', UgyfelEdzesController::class);
 Route::post('ugyfelEdzes/delete', [UgyfelEdzesController::class, 'delete']);
 Route::post('ugyfelEdzes/update', [UgyfelEdzesController::class, 'update']);
-
+//---------------------------------------------------------------------------------------------
 //Recepció oldalhoz
-Route::apiResource('recepcioHoz', szekrenyListazController::class);
+/* Route::apiResource('szekreny', SzekrenyekController::class); */
+Route::post('/szekrenyOsszesFelold', [SzekrenyekController::class, 'osszesOltozoFeloldas']);
+Route::get('/szekrenyLetszam', [SzekrenyekController::class, 'letszam']);
+//feltolt kep, igazolvany
+Route::post('feltoltes', [SzemelyController::class, 'feltoltKepIgazolvany']);
+//web ben van az öltözőfoglalás felvitel
+//---------------------------------------------------------------------------------------------
 
-Route::post('/recepcioHozOsszesSzekrenyFelold', [szekrenyListazController::class, 'osszesOltozoFeloldas']);
-//SZEKRENY LETSZAM
-Route::get('recepcioHozSzekrenyletszam', [szekrenyListazController::class, 'letszam']);
+//Edző oldalhoz
