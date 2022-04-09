@@ -5,9 +5,7 @@ header {
   background-color: #222;
   padding: 10px;
   display: flex;
-  justify-content: center;
   flex-wrap: wrap;
-  text-align: center;
   
 }
 form, .letszam{
@@ -18,7 +16,9 @@ form, .letszam{
   display: inline-block;
   vertical-align: top;
   /* position: relative; */
-  
+}
+.jobb1{
+  text-align: right;
 }
 .keresSzemely,.keresSzekrenykulcs {
   border-radius: 5px;
@@ -75,4 +75,25 @@ header p, label,span{
 }
 #kereso label{
   padding-top: 5px;
+}
+.fajlKivalaszt{
+  border-radius: 5px;
+  margin-bottom: 15px;
+  width: 113px;
+}
+.szemelyKep{
+  border-radius: 5px;
+}
+.felviszGomb{
+  border-radius: 5px;
+  width: 115px;
+  margin-top: 10px;
+}
+.felviszGomb:hover{
+  cursor: pointer;
+}
+@media screen and (max-width: 900px) {
+  header,.jobb1{
+    text-align: center;
+  }
 }
