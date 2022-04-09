@@ -19,11 +19,16 @@ class Szemely{
             this.kattintasTrigger("felviszAdat");
         });
 
+        this.fajlKivalaszt = this.node.children(".fajlKivalaszt");
+        this.fajlKivalaszt.on("change ", () => {
+            this.kattintasTrigger("kivalasztFile");
+        });
+
         this.email = this.node.children(".email");
         this.email.text("E-mail címe: "+adat.email_cim);
 
-        /* this.kep.text(adat.kep);
-        this.kep = this.node.children(".szemelyKep"); */
+        this.kep = this.node.children(".szemelyKep");/* adat.kep+".jpg" */
+        this.kep.attr("src","kepek/SzemelyKepek/"+adat.kep);/* +".png" */
 
         this.berlet = this.node.children(".berlete");
         
@@ -35,7 +40,11 @@ class Szemely{
     }
     kattintasTrigger(esemenyneve) {// A főablakhoz adom az eseményt,
         let esemeny = new CustomEvent(esemenyneve, {
-            detail: this.adat,//ezzel adatokat tudok átadni
+            detail: {
+                adat: this.adat,
+                div:this.node
+            }
+            /* detail: this.adat,//ezzel adatokat tudok átadni */
         });
         window.dispatchEvent(esemeny);
         //Az eseményt majd a script.js-ben el tudom kapni.
