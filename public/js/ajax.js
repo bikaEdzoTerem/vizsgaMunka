@@ -88,4 +88,17 @@ class MyAjax {
       //console.log(tomb);
     });
   }
+  kepfeltolt(apiVegpont,formdata){
+    $.ajax({
+      url: apiVegpont,
+      method: "post",
+      data: formdata,
+      contentType: false,
+      cache: false,
+      processData: false,
+      success: function (data) {
+        console.log(data);
+      },
+  });
+  }
 }
