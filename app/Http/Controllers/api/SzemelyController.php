@@ -12,12 +12,12 @@ use App\Models\Szemely;
 use App\Models\Ugyfel_edzes;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Hash;
+use Carbon\Carbon;
 
 
 class SzemelyController extends Controller
 {
-    public function index(Request $request) 
-    { 
+    public function index(Request $request){ 
         $sort=$request->query ('_sort');
         $order=$request->query ('_order');
         $q=$request->query('q');
@@ -70,16 +70,14 @@ class SzemelyController extends Controller
         //$szemely->kep=$kep;
         $szemely->save();
     }
-    public function update(Request $request,string $szemelyId)
-    {
+    public function update(Request $request,string $szemelyId){
         $emailCim=$request->input("email_cim");
         $nev=$request->input("nev");
         $szulDatum=$request->input("szul_datum");
         $neme=$request->input("neme");
         $igazolvanySzam=$request->input("igazolvany_szam");
         $igazolvanyTipusa=$request->input("igazolvany_tipusa");
-       // $telSzam=$request->input("tel_szam");
-       // $kep=$request->input("kep");
+        // $telSzam=$request->input("tel_szam");
         $jogosultsagId=$request->input("jogosultsag_id");
 
  
@@ -94,7 +92,6 @@ class SzemelyController extends Controller
        // $szemely->tel_szam=$telSzam;
         //$szemely->kep=$kep;
         $szemely->save();
-      
 
         return response()->json(true);
         
@@ -118,5 +115,20 @@ class SzemelyController extends Controller
         $szemelyek=Szemely::where('jogosultsag_id',2)->get();
         return response()->json($szemelyek);
     }
+    function feltoltKepIgazolvany(Request $request){
+        $szemely=Szemely::find($request->input('szemely_id'));
+        $kep=$request->file("image")->getClientOriginalName();//file(ide kell irni a kép nevét)->getClientOriginalName()megkapjuk a file nevét pl kep1.png
+        $szemely->igazolvany_szam=$request->input('igazolvany_szam');
+        $szemely->igazolvany_tipusa=$request->input('igazolvany_tipusa');
+        
+  
+        $datum=Carbon::now();
+        $datum=$datum->format('Y-m-d\TH.i.s');
+        $kepEgyedi= $datum.$kep;
+        $szemely->kep=$kepEgyedi;
+        $request->image->move(public_path('kepek/SzemelyKepek'),$kepEgyedi);//hova töltse fel milyen névvel fontos hogy egyedi legyen
+        $szemely->save();
+        return ['result'=>'Sikeres Feltöltés'];/* ->input('details')->all() */
+     }
 
 }
