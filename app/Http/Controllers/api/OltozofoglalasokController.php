@@ -4,6 +4,9 @@ namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Oltozofoglalas;
+use App\Models\Szemely;
+use App\Models\Berlet;
+use App\Models\Szekeny;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\DB;
@@ -75,6 +78,67 @@ public function letszamNaponta(){
     $oltozok=Oltozofoglalas::selectRaw("date(datum) as napok,count(1) as letszam")
         ->groupByRaw('date(datum)')->get();
         return response()->json( $oltozok);
+}
+public function OltozoFoglalas(Request $request){//recepció oldalhoz
+    $request->validate([
+        'ugyfelNev'=>'required',
+        'szekrenySzama'=>'required|integer'
+    ]);
+    $szemelyNev=$request -> ugyfelNev;
+    $szekrenySzam=$request -> szekrenySzama;
+    $szoveg="";
+    $seged=false;
+    $szemely=Szemely::selectRaw('*')
+        ->Where('nev','like','%'.$szemelyNev.'%')
+        ->first();
+    if ($szemely) {
+        $szoveg.="Talált ilyen embert";
+        $berlet=Berlet::selectRaw('*')
+        ->Where('ugyfel','=',$szemely->szemely_id)
+        ->Where('datum_tol','<=',Now())
+        ->Where('datum_ig','>=',Now())
+        ->first();
+        if($berlet){
+            $szoveg.=", van bérlete";
+            $szekreny=Szekeny::selectRaw('*')
+            ->Where('szekreny_id','=',$szekrenySzam)
+            ->Where('ures_e','=','Ü')
+            ->first();
+            if($szekreny){
+                $szoveg.=", üres volt a szekrény";
+                $seged=true;
+                //Carbon::now('Europe/Stockholm'))
+                //$jelenlegiDatum = Carbon::now()->addHour(); 
+                $ujfoglalas =new Oltozofoglalas;
+                // $nap=date('Y-m-d H:i:s'); 
+                $ujfoglalas->szekreny_id=$szekrenySzam;
+                $ujfoglalas->ugyfel=$szemely->szemely_id;
+                // $ujfoglalas->datum=DB::RAW('NOW()'); //1 órával kevesebbet ad
+                // $ujfoglalas->datum=$jelenlegiDatum; 
+                $ujfoglalas->datum=Now();//1 órával kevesebbet ad
+                $ujfoglalas->save();
+                DB::table('szekenies')
+                ->orWhere('szekreny_id', $szekrenySzam)
+                ->update(['ures_e' => 'F']);
+                
+            }else if(!$szekreny){
+                $szoveg.=",HIBA de nem  volt üres a szekrény";
+            }
+        }else if(!$berlet){
+            $szoveg.=",HIBA de nincs jelenleg bérlete";
+        }
+     }else if(!$szemely){
+        $szoveg.=" HIBA,Nem talált ilyen embert";
+     }
+    
+    
+    if($seged){//ha igaz akkor
+        return back()->with('sikeres','A foglalás sikeres volt '.$szoveg);
+    }else{//ha hamis akkor
+        return back()->with('sikertelen','A foglalás sikertelen volt '.$szoveg);
+    }
+
+
 }
 
 }

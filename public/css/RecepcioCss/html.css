@@ -1,7 +1,8 @@
 @charset "utf-8";
 html {
     font-family: sans-serif;
-    background-color: white;
+    background-color: aliceblue;
+/*     background-color: white; */
 }
 body{
     margin:0;
@@ -29,11 +30,19 @@ section{
 footer{
     grid-area:f;
 }
-html{
-    min-width: 460px;
-}
-main{
+
+/* main{
     background-color: rgb(224, 224, 224);
+} */
+/* main{
+    max-width: 100%;
+    max-height: 100%;
+    margin: auto;
 }
 
-  
+html{
+    scroll-behavior:smooth;
+    min-height: 100%;
+    position: relative;
+}
+   */

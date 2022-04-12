@@ -6,7 +6,7 @@ use App\Http\Controllers\CostumAuthController;
 use App\Http\Controllers\api\EszkozDbController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\UgyfeledzesFelviszController;
-use App\Http\Controllers\OltozoFoglalasFelviszController;
+use App\Http\Controllers\api\OltozofoglalasokController;
 use App\Http\Controllers\szekrenyListazController;
 use App\Http\Middleware\FelhasznaloJogosultsag;
 
@@ -20,6 +20,7 @@ use App\Http\Middleware\FelhasznaloJogosultsag;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/fel', function () { return view('pages.feltol'); });
 
 /*oldalak*/
 Route::get('/', [IndexController::class ,'index'  ]);
@@ -71,11 +72,15 @@ Route::get('/api/gepek/{id}', [GepekController::class, 'show']);
 Route::post('/ugyfelEdzesFoglalasFelvitel', [UgyfeledzesFelviszController::class, 'felviszUgyfelFoglalas'] )->name('ugyfelEdzesFoglalasFelvitel1');
 //Route::post('/ugyfelEdzesFoglalasTorol', [UgyfeledzesFelviszController::class, 'torolUgyfelFoglalas'] )->name('ugyfelEdzesFoglalasTorol');
 /* Route::get('/ugyfelEdzesFoglalasTorol/{id}',  [UgyfeledzesFelviszController::class, 'torolUgyfelFoglalas'] )->name('ugyfelEdzesFoglalasTorol'); */
-//recepcio Oltozo foglalas felvitele
-Route::post('/OltozoFoglalasFelvitel', [OltozoFoglalasFelviszController::class, 'OltozoFoglalas'] )->name('OltozoFoglalasFelvitel1');
-
+//---------------------------------------------------------------------------------------------
+//oltozo foglalas felvitele szemelyel ,ellenorzi üres e a szekrény,van e bérlete, létezik e a személy //üzenetet ad vissza
+Route::post('/OltozoFoglalasFelvitel', [OltozofoglalasokController::class, 'OltozoFoglalas'] )->name('OltozoFoglalasFelvitel');
+//---------------------------------------------------------------------------------------------
 
 //Szekrenyeket kilistaz
 /* Route::get('/list', [szekrenyListazController::class, 'index'] );
 Route::get('/felold/{szekreny_id}', [szekrenyListazController::class, 'felold'] );
 Route::get('/elront/{szekreny_id}', [szekrenyListazController::class, 'elront'] ); */
+
+Route::get('/feltoltOldal', function () { return view('pages.feltolt'); });
+/* Route::view('/felotltes', [PageController::class, 'uploadFile'])->name('uploadFile'); */

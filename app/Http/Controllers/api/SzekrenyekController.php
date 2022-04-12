@@ -8,13 +8,13 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Schema;
 class SzekrenyekController extends Controller
 {
-    public function index(Request $request)
-    { $sort=$request->query ('_sort');
+    public function index(Request $request){ $sort=$request->query ('_sort');
         $order=$request->query ('_order');
         $q=$request->query('q');
         $id=$request->query('id');
         $idRossz=$request->query('idRossz');
         $pontosSz=$request->query('pontosSzekreny');
+        $mireSzures = $request->query('szuro');
 
         $szekrenyek=Szekeny::selectRaw("*");
         if($sort&&$order){
@@ -45,9 +45,41 @@ class SzekrenyekController extends Controller
             }
             $oltozofoglalas->save();
         }
-        if($pontosSz){
+        if($pontosSz){//g
             $szekrenyek->where('szekreny_id','like',$pontosSz);
             
+        }
+        if ($mireSzures) {//g
+            if ($mireSzures === "osszes") {
+            } else if ($mireSzures === "osszesN") {
+                $szekrenyek->where('tipusa', '=', 'Nő');
+            } else if ($mireSzures === "osszesF") {
+                $szekrenyek->where('tipusa', '=', 'Férfi');
+            } else if ($mireSzures === "Üres") { //--
+                $szekrenyek->where('ures_e', '=', 'Ü');
+            } else if ($mireSzures === "ÜresNő") {
+                $szekrenyek->where('tipusa', '=', 'Nő');
+                $szekrenyek->where('ures_e', '=', 'Ü');
+            } else if ($mireSzures === "ÜresFérfi") {
+                $szekrenyek->where('tipusa', '=', 'Férfi');
+                $szekrenyek->where('ures_e', '=', 'Ü');
+            } else if (($mireSzures === "Foglalt")) { //--
+                $szekrenyek->where('ures_e', '=', 'F');
+            } else if (($mireSzures === "FoglaltN")) {
+                $szekrenyek->where('tipusa', '=', 'Nő');
+                $szekrenyek->where('ures_e', '=', 'F');
+            } else if (($mireSzures === "FoglaltF")) {
+                $szekrenyek->where('tipusa', '=', 'Férfi');
+                $szekrenyek->where('ures_e', '=', 'F');
+            } else if (($mireSzures === "Rossz")) { //--
+                $szekrenyek->where('ures_e', '=', 'R');
+            } else if (($mireSzures === "RrosszN")) {
+                $szekrenyek->where('ures_e', '=', 'R');
+                $szekrenyek->where('tipusa', '=', 'Nő');
+            } else if (($mireSzures === "RrosszF")) {
+                $szekrenyek->where('ures_e', '=', 'R');
+                $szekrenyek->where('tipusa', '=', 'Férfi');
+            }
         }
         //$szemelyek= ($sort&&$order) ? Szemely::orderBy($sort,$order)->get(): Szemely::all();
       
@@ -91,4 +123,18 @@ class SzekrenyekController extends Controller
         $szekreny->delete();
         return response()->json(true);
     }
+    public function letszam()
+    {
+        $szekrenyekDb2=Szekeny::selectRaw('count(*) as db, ures_e, tipusa')
+            ->groupBy('ures_e')
+            ->groupBy('tipusa')
+            ->get();
+        return response()->json($szekrenyekDb2);
+    }
+    public function osszesOltozoFeloldas()//g
+    {
+        Szekeny::where('ures_e', '=', 'F')->update(['ures_e' => 'Ü']);
+        return response()->json(true);
+    }
+    
 }
