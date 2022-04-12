@@ -1,22 +1,25 @@
 const { test } = QUnit;
 
-QUnit.module("kicsiE",  (h)=> {
+QUnit.module("rendezés",  (h)=> {
 
-   
-    test("letezik-e", (assert)=> {
-       
-          assert.ok(kicsiE, "letezik");
-       
-    });
-    test("function-e", (assert)=> {  
-       
-        assert.ok(typeof kicsiE=="function", "function");
+  h.BEFORE(() => {
+    this.rend=new AdminRend()
+
+  });
+  test("letezik-e", (assert)=> {
+     
+        assert.ok(this.rend.keresoMezo, "letezik");
      
   });
-  test('minden felkapcsolva',(assert)=> {
-    let oszlopnev=[]
-    
-    assert.equal(kicsiE(false,gepek),"9");
-  });
- 
+  test("function-e", (assert)=> {  
+     
+      assert.ok(typeof this.rend.keresoMezo==="function", "function");
+   
+});
+test('minden felkapcsolva',(assert)=> {
+  let oszlopnev=[]
+  
+  assert.equal(kicsiE(false,gepek),"9");
+});
+
 });
