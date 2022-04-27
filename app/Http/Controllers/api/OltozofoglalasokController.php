@@ -89,7 +89,7 @@ public function OltozoFoglalas(Request $request){//recepció oldalhoz
     $szoveg="";
     $seged=false;
     $szemely=User::selectRaw('*')
-        ->Where('name','like','%'.$szemelyNev.'%')
+        ->Where('email','like','%'.$szemelyNev.'%')
         ->first();
     if ($szemely) {
         $szoveg.="Talált ilyen embert";

@@ -35,7 +35,7 @@ class SzemelyController extends Controller
             };
         }
         if($nev){
-            $szemelyek->where('name','like','%'.$nev.'%');
+            $szemelyek->where('email','like','%'.$nev.'%');
         }
         //$szemelyek= ($sort&&$order) ? Szemely::orderBy($sort,$order)->get(): Szemely::all();
       
