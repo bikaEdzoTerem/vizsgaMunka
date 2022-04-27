@@ -24,13 +24,13 @@ class MunkaIdoview extends Migration
     private function munkaIdoView() :string {
         return <<<SQL
         CREATE VIEW viewMunkaIdo AS
-        SELECT szemelies.kep,
-        szemelies.nev,
+        SELECT users.kep,
+        users.name,
         munkaidos.dolgozo,
         munkaidos.mettol,
         munkaidos.meddig 
-        from munkaidos ,szemelies 
-        WHERE munkaidos.dolgozo=szemelies.szemely_id
+        from munkaidos ,users 
+        WHERE munkaidos.dolgozo=users.id
         SQL;
         
 

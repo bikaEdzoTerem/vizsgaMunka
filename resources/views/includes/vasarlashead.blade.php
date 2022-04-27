@@ -19,6 +19,7 @@
         <!-- JS Jquery libary -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <!-- Az oldlahoz tartozó css -->
+        <link rel="stylesheet" href="css/laravel_bootstrap.css">  
         <link rel="stylesheet" href="../css/vasarlas.css">
         <link rel="stylesheet" href="../css/body.css">
         <!-- Title -->

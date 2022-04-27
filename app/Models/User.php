@@ -21,6 +21,13 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'neme',
+        'szul_datum',
+        'tel_szam',
+        'jogosultsag_id',
+        'igazolvany_szam',
+        'igazolvany_tipusa',
+        'kep',
     ];
 
     /**
@@ -41,4 +48,8 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function edzesek(){
+        return $this->hasMany(Ugyfel_edzes::class,"edzo","id");
+    }
 }

@@ -18,7 +18,7 @@ use App\Http\Controllers\api\IzomcsoportController;
 use App\Http\Controllers\api\jogosultsagController;
 use App\Http\Controllers\api\BerletekController;
 
-use App\Http\Controllers\api\ugyfelEdzesSzemellyel;
+use App\Http\Controllers\api\szemelyLekerdezController;
 use App\Http\Controllers\api\UgyfeledzesFelviszController;
 //ügyfél edzés controller meghívása
 use App\Http\Controllers\api\UgyfelEdzesController;
@@ -67,19 +67,8 @@ Route::post('berletek/delete', [BerletekController::class,"delete"]);
 Route::apiResource('arvaltozas', arvaltozasController::class);
 Route::post('arvaltozas/delete', [arvaltozasController::class,"delete"]);
 
-Route::apiResource('ugyfelEdzesSzemellyel', ugyfelEdzesSzemellyel::class);
-Route::get('/ugyfelEdzesek2/{dolgozo}', [UgyfeledzesFelviszController::class, 'show']);
-Route::delete('/ugyfelEdzesek2/{id}', [UgyfeledzesFelviszController::class, 'delete']);
-//Route::put()
-Route::get('/ugyfelEdzesek3', [UgyfelEdzesSzemellyel::class, 'osszekapcsol']);
-Route::apiResource('oltozo', UgyfeledzesFelviszController::class);
 
-//ügyfél edzés szűrés
-Route::get('ugyfelEdzes/Datum', [UgyfelEdzesController::class, 'datumTolIg']);
-//ügyfél edzés töröl módosít
-Route::apiResource('ugyfelEdzes', UgyfelEdzesController::class);
-Route::post('ugyfelEdzes/delete', [UgyfelEdzesController::class, 'delete']);
-Route::post('ugyfelEdzes/update', [UgyfelEdzesController::class, 'update']);
+
 //---------------------------------------------------------------------------------------------
 //Recepció oldalhoz
 /* Route::apiResource('szekreny', SzekrenyekController::class); */
@@ -88,6 +77,13 @@ Route::get('/szekrenyLetszam', [SzekrenyekController::class, 'letszam']);
 //feltolt kep, igazolvany
 Route::post('feltoltes', [SzemelyController::class, 'feltoltKepIgazolvany']);
 //web ben van az öltözőfoglalás felvitel
+/* Route::apiResource('ugyfelEdzesSzemellyel', ugyfelEdzesSzemellyel::class); */
+Route::apiResource('szemelyLekerdezes', szemelyLekerdezController::class);
 //---------------------------------------------------------------------------------------------
-
 //Edző oldalhoz
+Route::apiResource('ugyfelEdzes', UgyfelEdzesController::class);
+Route::post('ugyfelEdzes/delete', [UgyfelEdzesController::class, 'delete']);//feloldja az adott ugyfeledzes foglalast
+Route::post('ugyfelEdzes/update', [UgyfelEdzesController::class, 'update']);//friisiti,modositja az adott ugyfeledzes foglalast
+//ügyfél edzés szűrés
+/* Route::get("szemely",[SzemelyController::class,'index']); //szemely?nev=*/
+//---------------------------------------------------------------------------------------------

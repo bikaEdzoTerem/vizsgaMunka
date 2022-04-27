@@ -7,9 +7,6 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Post;
 
 class UgyfeledzesFelviszController extends Controller{
-    public function index (Request $request){
-        return "AAA";
-    }
     public function felviszUgyfelFoglalas (Request $request){/* felviszUgyfelFoglalas */
         
         $request->validate([
@@ -20,10 +17,10 @@ class UgyfeledzesFelviszController extends Controller{
             'ora'=>'required'
         ]);
         $szemelyNev=$request -> ugyfelNev;
-        $tabla= DB::table('szemelies')
-        ->select('szemely_id')
-        ->where('nev','like','%'.$szemelyNev.'%')
-        ->pluck('szemely_id');
+        $tabla= DB::table('users')
+        ->select('id')
+        ->where('name','like','%'.$szemelyNev.'%')
+        ->pluck('id');
         $tabla = trim($tabla, '[]');
         if(strlen($tabla)>0){
             $ujfoglalas =new Ugyfel_edzes;

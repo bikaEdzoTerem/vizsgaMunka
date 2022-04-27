@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('munkaidos', function (Blueprint $table) {
             //külső kulcs
         $table->integer('dolgozo')->unsigned();	
-        $table->foreign('dolgozo')->references('szemely_id')->on('szemelies');	
+        $table->foreign('dolgozo')->references('id')->on('users');	
         $table->datetime('mettol');
         $table->datetime('meddig');
             $table->timestamps();

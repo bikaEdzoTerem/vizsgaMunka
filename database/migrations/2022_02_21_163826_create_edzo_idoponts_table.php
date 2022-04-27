@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('edzo_idoponts', function (Blueprint $table) {
             //külső kulcs
         $table->integer('ugyfel')->unsigned();		
-        $table->foreign('ugyfel')->references('szemely_id')->on('szemelies');
+        $table->foreign('ugyfel')->references('id')->on('users');
             //külső kulcs
         $table->integer('terem_id')->unsigned();		
         $table->foreign('terem_id')->references('terem_id')->on('terems');

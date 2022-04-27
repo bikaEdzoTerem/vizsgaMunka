@@ -21,7 +21,7 @@ return new class extends Migration
 	 $table->foreign('szekreny_id')->references('szekreny_id')->on('szekenies');
          //külső kulcs
 	 $table->integer('ugyfel')->unsigned();		
-	 $table->foreign('ugyfel')->references('szemely_id')->on('szemelies');
+	 $table->foreign('ugyfel')->references('id')->on('users');
 	 $table->datetime('datum');
 	 $table->timestamps();
         });

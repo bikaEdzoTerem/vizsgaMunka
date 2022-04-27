@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 namespace App\Charts;
 
-use App\Models\Szemely;
+use App\Models\User;
 use App\Models\Terem;
 use Chartisan\PHP\Chartisan;
 use ConsoleTVs\Charts\BaseChart;
@@ -31,12 +31,13 @@ class EdzotevekenysegChart extends BaseChart
         $labels=[];
         $dataset=[];
 
-        foreach(Szemely::all() as $terem){
+        foreach(User::all() as $terem){
             
-          //  $terem=$terem->jogosultsag_id->where("jogosultsag_id","=","3");
+          
           if($terem->jogosultsag_id===3){
-            $labels[]=$terem->szemely_id;
-            $dataset[]=$terem->eszkozok->count();
+             
+            $labels[]=$terem->id;
+            $dataset[]=$terem->edzesek->count();
         }}
         return ['labels'=>$labels,'dataset'=>$dataset];
     }

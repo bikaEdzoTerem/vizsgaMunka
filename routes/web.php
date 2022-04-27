@@ -20,9 +20,17 @@ use App\Http\Middleware\FelhasznaloJogosultsag;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/fel', function () { return view('pages.feltol'); });
 
-/*oldalak*/
+Route::get('/welcome', function () {
+    return view('welcome');
+});
+
+Route::get('/dashboard', function () {return view('dashboard');})->middleware(['auth'])->name('dashboard');
+
+require __DIR__.'/auth.php';
+
+
+
 Route::get('/', [IndexController::class ,'index'  ]);
 Route::get('/gepek', function () { return view('pages.gepek'); });
 Route::get('/kapcsolatok', function () { return view('pages.kapcsolatok'); });
@@ -30,57 +38,25 @@ Route::get('/vasarlas', function () { return view('pages.vasarlas'); });
 Route::get('/cikkek_etrend', function () { return view('pages.cikkek_etrend'); });
 Route::get('/bejelentkezes', function () { return view('pages.bejelentkezes'); });
 Route::get('/regisztracio', function () { return view('pages.regisztracio'); });
-//Route::get('/elfelejtettjelszo', function () { return view('pages.elfelejtettjelszo'); });
-    //Route::get('/berletVasarlas', function () { return view('pages.berletVasarlas'); });
-    Route::get('/admin', function () { return view('pages.admin'); });
-Route::get("eszkozDB",[EszkozDbController::class,"show"]);
+    Route::get('/admin', function () { return view('pages.admin'); })->middleware(['auth']);
+
 Route::get('/chart',function(){return view('pages.admin.chart');});
-Route::get('/adminTeszt',function(){return view('pages.admin.test.adminTest');});
-    Route::get('/edzo', function () { return view('pages.edzo'); });
-    Route::get('/recepcio', function () { return view('pages.recepcio'); });
-
-/*Login, regist*/
-//Route::middleware([FelhasznaloJogosultsag::class])->group(function () {
-    //Route::get('/berletVasarlas', function() { return view('pages.berletVasarlas'); });     
-    //Route::get('/admin', function() { return view('pages.admin'); }); 
-    //Route::get('/edzo', function() { return 'pages.edzo'; }); 
-    //Route::get('/recepcio', function() { return view('pages.recepcio'); }); 
-//});
-Route::middleware([FelhasznaloJogosultsag::class])->group(function () {
-    Route::get('/berletVasarlas', function () { return view('pages.berletVasarlas');});
-    //Route::get('/recepcio', function() { return view('pages.recepcio'); }); 
-    //Route::get('/edzo', function() { return 'pages.edzo'; });
-    //Route::get('/admin', function() { return view('pages.admin'); }); 
-});
-
-//Route::get('/login', function(){ return view("Login"); });
-
-Route::get('/login', [CostumAuthController::class, 'login'])/*->middleware('alreadyLoggedIn')*/;
-Route::get('/registration', [CostumAuthController::class, 'registration'])/*->middleware('alreadyLoggedIn')*/;
-Route::post('/register-user', [CostumAuthController::class, 'registerUser'])->name('register-user');
-Route::post('/login-user',[CostumAuthController::class, 'loginUser'])->name('login-user');
-//Route::get('/dashboard', [CostumAuthController::class, 'dashboard'])/*->middleware('isLoggedIn')*/;
-Route::get('/logout', [CostumAuthController::class, 'logout']);
+    Route::get('/edzo', function () { return view('pages.edzo'); })->middleware(['auth']);
+    Route::get('/recepcio', function () { return view('pages.recepcio'); })->middleware(['auth']);
+    Route::get('/berletVasarlas', function () { return view('pages.berletVasarlas');})->middleware(['auth']);
 
 
-/*Gépek keresőpontjai*/
 Route::get('/api/gepek/search', [GepekController::class, 'search']);
 Route::get('/api/gepek/sort', [GepekController::class, 'sortBy']);
 Route::get('/api/gepek/{id}', [GepekController::class, 'show']);
 
-// Ugyfel edzes foglalas felvitele 
+//---------------------------------------------------------------------------------------------
+// Ugyfel edzes foglalas felvitele ,felviszUgyfelFoglalas ,//üzenetet ad vissza(sikeres,vagy sem)
 Route::post('/ugyfelEdzesFoglalasFelvitel', [UgyfeledzesFelviszController::class, 'felviszUgyfelFoglalas'] )->name('ugyfelEdzesFoglalasFelvitel1');
-//Route::post('/ugyfelEdzesFoglalasTorol', [UgyfeledzesFelviszController::class, 'torolUgyfelFoglalas'] )->name('ugyfelEdzesFoglalasTorol');
-/* Route::get('/ugyfelEdzesFoglalasTorol/{id}',  [UgyfeledzesFelviszController::class, 'torolUgyfelFoglalas'] )->name('ugyfelEdzesFoglalasTorol'); */
 //---------------------------------------------------------------------------------------------
 //oltozo foglalas felvitele szemelyel ,ellenorzi üres e a szekrény,van e bérlete, létezik e a személy //üzenetet ad vissza
 Route::post('/OltozoFoglalasFelvitel', [OltozofoglalasokController::class, 'OltozoFoglalas'] )->name('OltozoFoglalasFelvitel');
 //---------------------------------------------------------------------------------------------
 
-//Szekrenyeket kilistaz
-/* Route::get('/list', [szekrenyListazController::class, 'index'] );
-Route::get('/felold/{szekreny_id}', [szekrenyListazController::class, 'felold'] );
-Route::get('/elront/{szekreny_id}', [szekrenyListazController::class, 'elront'] ); */
-
 Route::get('/feltoltOldal', function () { return view('pages.feltolt'); });
-/* Route::view('/felotltes', [PageController::class, 'uploadFile'])->name('uploadFile'); */
+

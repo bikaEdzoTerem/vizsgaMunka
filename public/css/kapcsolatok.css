@@ -2,7 +2,8 @@
 
 main {
     display: grid;
-    grid-template-areas: 
+    grid-template-areas:
+        "u u u u u u" 
         "n n n n n n" 
         "s s s s s s"
         "a a a a a a"

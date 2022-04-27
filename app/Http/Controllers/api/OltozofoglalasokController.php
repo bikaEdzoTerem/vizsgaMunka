@@ -4,7 +4,7 @@ namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Oltozofoglalas;
-use App\Models\Szemely;
+use App\Models\User;
 use App\Models\Berlet;
 use App\Models\Szekeny;
 use Illuminate\Http\Request;
@@ -88,13 +88,13 @@ public function OltozoFoglalas(Request $request){//recepció oldalhoz
     $szekrenySzam=$request -> szekrenySzama;
     $szoveg="";
     $seged=false;
-    $szemely=Szemely::selectRaw('*')
-        ->Where('nev','like','%'.$szemelyNev.'%')
+    $szemely=User::selectRaw('*')
+        ->Where('name','like','%'.$szemelyNev.'%')
         ->first();
     if ($szemely) {
         $szoveg.="Talált ilyen embert";
         $berlet=Berlet::selectRaw('*')
-        ->Where('ugyfel','=',$szemely->szemely_id)
+        ->Where('ugyfel','=',$szemely->id)
         ->Where('datum_tol','<=',Now())
         ->Where('datum_ig','>=',Now())
         ->first();
@@ -112,7 +112,7 @@ public function OltozoFoglalas(Request $request){//recepció oldalhoz
                 $ujfoglalas =new Oltozofoglalas;
                 // $nap=date('Y-m-d H:i:s'); 
                 $ujfoglalas->szekreny_id=$szekrenySzam;
-                $ujfoglalas->ugyfel=$szemely->szemely_id;
+                $ujfoglalas->ugyfel=$szemely->id;
                 // $ujfoglalas->datum=DB::RAW('NOW()'); //1 órával kevesebbet ad
                 // $ujfoglalas->datum=$jelenlegiDatum; 
                 $ujfoglalas->datum=Now();//1 órával kevesebbet ad

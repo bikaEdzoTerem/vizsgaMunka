@@ -35,7 +35,7 @@ $(function () {
     window.addEventListener('popstate', (event) => {
         event.preventDefault();
        clickToButtonUrlHash();
-      },{once:true});
+      });
       
     gombok();
   

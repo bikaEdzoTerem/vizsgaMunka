@@ -8,7 +8,7 @@ use App\Models\Edzotorles;
 use App\Models\Jogosultsag;
 use App\Models\Munkaido;
 use Illuminate\Http\Request;
-use App\Models\Szemely;
+use App\Models\User;
 use App\Models\Ugyfel_edzes;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Hash;
@@ -22,20 +22,20 @@ class SzemelyController extends Controller
         $order=$request->query ('_order');
         $q=$request->query('q');
         $nev=$request->query('nev');
-        $szemelyek=Szemely::selectRaw("*");
+        $szemelyek=User::selectRaw("*");
         if($sort&&$order){
             $szemelyek->orderBy($sort,$order);
         }
         if($q){
             
-            foreach ( Schema::getColumnListing("szemelies") as $column) {
+            foreach ( Schema::getColumnListing("users") as $column) {
                // dd(Schema::getColumnType("szemelies",$column));
                 $szemelyek->orWhere($column,'like','%'.$q.'%');
                 $szemelyek->orWhere($column,$q);
             };
         }
         if($nev){
-            $szemelyek->where('nev','like','%'.$nev.'%');
+            $szemelyek->where('name','like','%'.$nev.'%');
         }
         //$szemelyek= ($sort&&$order) ? Szemely::orderBy($sort,$order)->get(): Szemely::all();
       
@@ -55,11 +55,11 @@ class SzemelyController extends Controller
        // $telSzam=$request->input("tel_szam");
        // $kep=$request->input("kep");
         $jogosultsagId=$request->input("jogosultsag_id");
-        $szemely=new Szemely;
+        $szemely=new User;
         $szemely->jogosultsag_id=$jogosultsagId;
-        $szemely->email_cim=$emailCim;
+        $szemely->email=$emailCim;
         $szemely->jelszo=Hash::make($igazolvanySzam);
-        $szemely->nev=$nev;
+        $szemely->name=$nev;
         $szemely->szul_datum=$szulDatum;
         $szemely->neme=$neme;
         $szemely->igazolvany_szam=$igazolvanySzam;
@@ -81,10 +81,10 @@ class SzemelyController extends Controller
         $jogosultsagId=$request->input("jogosultsag_id");
 
  
-        $szemely=Szemely::find($szemelyId);
+        $szemely=User::find($szemelyId);
         $szemely->jogosultsag_id=$jogosultsagId;
-        $szemely->email_cim=$emailCim;
-        $szemely->nev=$nev;
+        $szemely->email=$emailCim;
+        $szemely->name=$nev;
         $szemely->szul_datum=$szulDatum;
         $szemely->neme=$neme;
         $szemely->igazolvany_szam=$igazolvanySzam;
@@ -97,26 +97,26 @@ class SzemelyController extends Controller
         
     }
     public function destroy(string $szemelyId){
-        $szemely=Szemely::find($szemelyId);
+        $szemely=User::find($szemelyId);
         $szemely->delete();
        
         
         return response()->json(true);
     }
     public function ugyfelek(){
-        $szemelyek=Szemely::where('jogosultsag_id',1)->get();
+        $szemelyek=User::where('jogosultsag_id',1)->get();
         return response()->json($szemelyek);
     }
     public function edzok(){
-        $szemelyek=Szemely::where('jogosultsag_id',3)->get();
+        $szemelyek=User::where('jogosultsag_id',3)->get();
         return response()->json($szemelyek);
     }
     public function dolgozok(){
-        $szemelyek=Szemely::where('jogosultsag_id',2)->get();
+        $szemelyek=User::where('jogosultsag_id',2)->get();
         return response()->json($szemelyek);
     }
     function feltoltKepIgazolvany(Request $request){
-        $szemely=Szemely::find($request->input('szemely_id'));
+        $szemely=User::find($request->input('szemely_id'));
         $kep=$request->file("image")->getClientOriginalName();//file(ide kell irni a kép nevét)->getClientOriginalName()megkapjuk a file nevét pl kep1.png
         $szemely->igazolvany_szam=$request->input('igazolvany_szam');
         $szemely->igazolvany_tipusa=$request->input('igazolvany_tipusa');

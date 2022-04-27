@@ -17,10 +17,10 @@ return new class extends Migration
             $table->increments('id'); 
             //külső kulcs
         $table->integer('edzo')->unsigned();		
-        $table->foreign('edzo')->references('szemely_id')->on('szemelies');
+        $table->foreign('edzo')->references('id')->on('users');
             //külső kulcs
         $table->integer('ugyfel')->unsigned();		
-        $table->foreign('ugyfel')->references('szemely_id')->on('szemelies');
+        $table->foreign('ugyfel')->references('id')->on('users');
         $table->datetime('datum');
         $table->time('ora');
         $table->timestamps();

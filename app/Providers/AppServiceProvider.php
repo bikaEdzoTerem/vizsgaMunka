@@ -1,9 +1,8 @@
 <?php
 
 namespace App\Providers;
-
 use App\Charts\ArvaltozasokChart;
-use App\Charts\BerleteEladasokChart;
+
 use App\Charts\BerleteladasokChart;
 use App\Charts\DiagramChart;
 use App\Charts\EdzotevekenysegChart;
@@ -22,7 +21,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        
+        //
     }
 
     /**
@@ -41,9 +40,7 @@ class AppServiceProvider extends ServiceProvider
            LetszamChart::class,
            NapiletszamChart::class
 
-            //charts.diagram_chart 
-            //charts.eszkozok_chart 
-            //charts.berleteeladasok_chart 
+            
         ]);
     }
 }

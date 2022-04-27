@@ -3,7 +3,7 @@ class Szemely{
         this.node = node;
         this.adat = adat;
         this.neve = this.node.children(".neve");
-        this.neve.text("Neve: "+adat.nev);
+        this.neve.text("Neve: "+adat.name);
 
         this.neme = this.node.children(".neme");
         this.neme.text("Neme: "+adat.neme);
@@ -25,12 +25,13 @@ class Szemely{
         });
 
         this.email = this.node.children(".email");
-        this.email.text("E-mail címe: "+adat.email_cim);
+        this.email.text("E-mail címe: "+adat.email);
 
         this.kep = this.node.children(".szemelyKep");/* adat.kep+".jpg" */
         this.kep.attr("src","kepek/SzemelyKepek/"+adat.kep);/* +".png" */
 
         this.berlet = this.node.children(".berlete");
+        console.log(adat);
         
         if(adat.MegMeddigJo){
             this.berlet.text("Bérlete: "+adat.MegMeddigJo+"napig jó");

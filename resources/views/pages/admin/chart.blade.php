@@ -12,7 +12,7 @@
 @section('content')
 <main>
     <header>
-        <a href="/">Kijelentkezés</a>
+        <a href="/">Főoldal</a>
     </header>
 <aside> 
     @include('includes.adminNavigation')
@@ -28,7 +28,7 @@
     <div id="chart5" ></div>
    
     <script> const urls={
-        diagram:"@chart('diagram_chart') ",
+       diagram:"@chart('diagram_chart') ",
         eszkozok:"@chart('eszkozok_chart') ",
         berleteladasok:"@chart('berleteladasok_chart') ",
         arvaltozasok:"@chart('arvaltozasok_chart') ",

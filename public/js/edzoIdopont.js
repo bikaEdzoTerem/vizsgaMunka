@@ -42,7 +42,7 @@ class Idopont{
         //---------------------------------------------------------
         //Módosítás
         this.nevModosit = this.node.children().children(".nevModosit");
-        this.nevModosit.val(adat.nev);
+        this.nevModosit.val(adat.name);
 
         this.datumModosit = this.node.children().children(".datumModosit");
         this.datumModosit.val(adat.datum.slice(0,10));
@@ -51,7 +51,7 @@ class Idopont{
         this.modositOrara.val(adat.datum.slice(11, 16));
 
         this.modositNev = this.node.children().children(".modositNev");
-        this.modositNev.val(adat.nev);
+        this.modositNev.val(adat.name);
 
         this.modositEdzesHossz = this.node.children().children(".modositEdzesHossz");
         this.modositEdzesHossz.val(adat.ora.slice(0,5));

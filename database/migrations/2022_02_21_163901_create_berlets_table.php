@@ -19,7 +19,7 @@ return new class extends Migration
         $table->foreign('berlet_tipus_id')->references('berlet_tipus_id')->on('berlet_tipuses');;	
             //külső kulcs
         $table->integer('ugyfel')->unsigned();		
-        $table->foreign('ugyfel')->references('szemely_id')->on('szemelies');	
+        $table->foreign('ugyfel')->references('id')->on('users');	
         $table->datetime('datum_tol');
         $table->datetime('datum_ig');
             $table->timestamps();

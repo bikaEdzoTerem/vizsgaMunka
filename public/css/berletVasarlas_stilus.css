@@ -28,7 +28,7 @@ header h1 {
 }
 
 #kijel a{
-    position: fixed;
+    position: absolute;
     z-index: 6000;
     left: 40px;
     top: 80px;
