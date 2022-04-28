@@ -24,7 +24,7 @@ class Idopont{
         this.ev.text(d.getFullYear());
 
         this.ugyfel_nev = this.node.children().children(".szemelyNeve");
-        this.ugyfel_nev.text(adat.nev);
+        this.ugyfel_nev.text(adat.name);
         
         this.datumtol=this.node.children().children(".datumtol");
         this.datumtol.text(adat.datum+" órától");
