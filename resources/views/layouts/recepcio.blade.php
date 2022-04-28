@@ -7,7 +7,6 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="../js/ajax.js"></script>
         <script src="../js/szekreny.js"></script>
-        <script src="../js/szekrenyek.js"></script>
         <script src="../js/recepcio.js"></script>
         <script src="../js/szemely.js"></script>
         @yield('css')

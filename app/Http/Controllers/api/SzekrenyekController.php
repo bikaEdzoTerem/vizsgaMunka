@@ -125,9 +125,9 @@ class SzekrenyekController extends Controller
     }
     public function letszam()
     {
-        $szekrenyekDb2=Szekeny::selectRaw('count(*) as db, ures_e, tipusa')
+        $szekrenyekDb2=Szekeny::selectRaw('count(*) as db,ures_e,tipusa')
             ->groupBy('ures_e')
-            ->groupBy('tipusa')
+            ->groupBy('tipusa')//->groupBy('tipusa')
             ->get();
         return response()->json($szekrenyekDb2);
     }

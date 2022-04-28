@@ -5,17 +5,16 @@
     
         <form action="{{route('ugyfelEdzesFoglalasFelvitel1')}}" method="post">
         @csrf
-        <input placeholder="edzo id" type="text" name="edzo" value="{{old('edzo')}}" required/>
         
-        <input placeholder="személy neve" type="txt"  class="szemelyKereso" name="ugyfelNev" value="{{old('ugyfelNev')}}" required/>
+        <input placeholder="személy neve" type="txt"  class="szemelyKereso" name="ugyfelNev"  required/>
 
-        <input type="date" class="datum" list="datumValasztasok" name="datum" value="{{old('datum')}}" required/>
+        <input type="date" class="datum" list="datumValasztasok" name="datum" required/>
         <datalist id="datumValasztasok"></datalist>
 
-        <input class="orara"type="text" list="oraraValasztasok" placeholder="órára" minlength="4" maxlength="10" name="orara" value="{{old('orara')}}" required/>
+        <input class="orara"type="text" list="oraraValasztasok" placeholder="órára" minlength="4" maxlength="10" name="orara" required/>
         <datalist id="oraraValasztasok"> </datalist>
 
-        <input  class="ora"type="text" list="oraValasztasok" placeholder="edzés hossza(1:00)" maxlength="4" name="ora" value="{{old('ora')}}" required/>
+        <input  class="ora"type="text" list="oraValasztasok" placeholder="edzés hossza(1:00)" maxlength="4" name="ora" required/>
         <datalist id="oraValasztasok"> </datalist>
         {{-- <div class="gomb"></div> --}}
         <button type="submit"  class=lefoglal>Lefoglal</button>
