@@ -81,7 +81,7 @@ Route::post('feltoltes', [SzemelyController::class, 'feltoltKepIgazolvany']);
 Route::apiResource('szemelyLekerdezes', szemelyLekerdezController::class);
 //---------------------------------------------------------------------------------------------
 //Edző oldalhoz
-Route::apiResource('ugyfelEdzes', UgyfelEdzesController::class);
+//Route::apiResource('ugyfelEdzes', UgyfelEdzesController::class);
 Route::post('ugyfelEdzes/delete', [UgyfelEdzesController::class, 'delete']);//feloldja az adott ugyfeledzes foglalast
 Route::post('ugyfelEdzes/update', [UgyfelEdzesController::class, 'update']);//friisiti,modositja az adott ugyfeledzes foglalast
 //ügyfél edzés szűrés

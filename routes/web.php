@@ -9,6 +9,7 @@ use App\Http\Controllers\UgyfeledzesFelviszController;
 use App\Http\Controllers\api\OltozofoglalasokController;
 use App\Http\Controllers\szekrenyListazController;
 use App\Http\Middleware\FelhasznaloJogosultsag;
+use App\Http\Controllers\api\UgyfelEdzesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -57,6 +58,8 @@ Route::post('/ugyfelEdzesFoglalasFelvitel', [UgyfeledzesFelviszController::class
 //oltozo foglalas felvitele szemelyel ,ellenorzi üres e a szekrény,van e bérlete, létezik e a személy //üzenetet ad vissza
 Route::post('/OltozoFoglalasFelvitel', [OltozofoglalasokController::class, 'OltozoFoglalas'] )->name('OltozoFoglalasFelvitel');
 //---------------------------------------------------------------------------------------------
-
+//Edző oldalhoz
+Route::get('/ugyfelEdzes', [UgyfelEdzesController::class, 'index']);//adatokat megjeleniti 
+//---------------------------------------------------------------------------------------------
 Route::get('/feltoltOldal', function () { return view('pages.feltolt'); });
 
