@@ -157,7 +157,7 @@ class AdatokMegjeleniteseAdmin  {
         });
 
         $("#javitas").append(txt);
-        $("#javitas").append(`<button type="button" id="küld" >küld</button`);
+        $("#javitas").append(`<button type="button" id="kuld" >küld</button`);
     }
      Alap(nev) {
         $(".elemek").empty();

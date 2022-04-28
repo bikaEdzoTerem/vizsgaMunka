@@ -156,7 +156,7 @@ const chart5=new Chartisan({
         });
 
         napokSelect.addEventListener('change',(event)=>{
-            console.log("szia")
+           
 
             const newDate = event.target.value
             chart6.update({

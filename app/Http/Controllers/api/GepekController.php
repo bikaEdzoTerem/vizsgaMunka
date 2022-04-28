@@ -45,6 +45,7 @@ class GepekController extends Controller
         $eszkoz->eszkoz_neve = $eszkozNeve;
         $eszkoz->suly = $suly;
         $eszkoz->leiras = $leiras;
+        $eszkoz->kep="alap";
 
         $eszkoz->save();
 

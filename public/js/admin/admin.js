@@ -5,6 +5,7 @@ let rendezes="";
 let superapivegponto = "api/proba";
 let Oszlopnev = [];
 
+
 const termek = [];
 
 let myAjax;
@@ -44,8 +45,9 @@ $(function () {
         $(".elemek").remove();
         $("main").append(
             '<section class="elemek row clicked" style="border:1px solid black;width:400px;height:550px;overflow:auto" ><div class="elem" >'
+            
         );
-
+        
        
        
         
@@ -61,8 +63,7 @@ $(function () {
                 inputs[name] = value;
             }
            
-            myAjax. adatkuldes("api/" + adat,
-            inputs);
+            myAjax. adatkuldes("api/" + adat,inputs);
             
             $("#fo").empty();
             $(".elemek").remove();
@@ -107,8 +108,9 @@ $(function () {
             adatMeg.apiOsszealitas(termek,Oszlopnev);
       
             const originalInputs=getinputs();
-
+                
              $("#kuld").click(() => {
+               
                 const newInputs=getinputs();
            
             
@@ -232,7 +234,7 @@ function vizsgal(adat,myCallback=false){
             nemModosithato=0;
             break;
         case "eszkoz":
-            keresetTabla = "eszkoz";
+            keresetTabla = "gepek";
             keresetErtek = "eszkoz_neve";
             keresetTabla2="terem"
             keresetErtek2="terem_id"
@@ -243,8 +245,8 @@ function vizsgal(adat,myCallback=false){
         case "edzesek":
             keresetTabla = "szemely/edzok";
             keresetTabla2 = "szemely/ugyfelek";
-            keresetErtek = "szemely_id";
-            keresetErtek2 = "szemely_id";
+            keresetErtek = "id";
+            keresetErtek2 = "id";
             eldont = true;
             eldont2 = true;
             nemModosithato=10;
@@ -260,7 +262,7 @@ function vizsgal(adat,myCallback=false){
             break;
         case "munkaido":
             keresetTabla="szemely/dolgozok";
-            keresetErtek = "szemely_id";
+            keresetErtek = "id";
             eldont=true;
             nemModosithato=9;
             break
@@ -268,7 +270,7 @@ function vizsgal(adat,myCallback=false){
             keresetTabla = "szekreny";
             keresetTabla2 = "szemely/ugyfelek";
             keresetErtek = "szekreny_id";
-            keresetErtek2 = "szemely_id";
+            keresetErtek2 = "id";
             eldont = true;
             eldont2 = true;
             nemModosithato=0;
@@ -283,7 +285,7 @@ function vizsgal(adat,myCallback=false){
                 keresetTabla = "berletTipus";
             keresetTabla2 = "szemely/ugyfelek";
             keresetErtek = "berlet_tipus_id";
-            keresetErtek2 = "szemely_id";
+            keresetErtek2 = "id";
             eldont = true;
             eldont2 = true;
            
