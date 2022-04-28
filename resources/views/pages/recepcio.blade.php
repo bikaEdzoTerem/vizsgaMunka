@@ -8,13 +8,13 @@
                     <div class="bal1">
                         <label id="keresoSzoveg" for="fname">Személy kereső:</label>
                         <input type="txt" id="keresoInput" placeholder="Személy kereső" class="keresSzemely"
-                            name="ugyfelNev" value="{{ old('ugyfelNev') }}" />
+                            name="ugyfelNev"  />
                         <div class="keresettSzemely"></div>
                     </div>
                     <div class="jobb1">
                         <label id="keresoSzoveg" for="fname">Szekrény kereső:</label>
                         <input type="number" id="keresoInput" placeholder="Szekrény kereső" min="0"
-                            class="keresSzekrenykulcs" name="szekrenySzama" value="{{ old('szekrenySzama') }}" />
+                            class="keresSzekrenykulcs" name="szekrenySzama" />
                         <div class="keresettSzekreny"></div>
                     </div>
                     <div class="gomb">

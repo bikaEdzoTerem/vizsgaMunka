@@ -6,7 +6,7 @@
         <form action="{{route('ugyfelEdzesFoglalasFelvitel1')}}" method="post">
         @csrf
         
-        <input placeholder="személy neve" type="txt"  class="szemelyKereso" name="ugyfelNev"  required/>
+        <input placeholder="személy email-címe" type="txt"  class="szemelyKereso" name="ugyfelNev"  required/>
 
         <input type="date" class="datum" list="datumValasztasok" name="datum" required/>
         <datalist id="datumValasztasok"></datalist>
