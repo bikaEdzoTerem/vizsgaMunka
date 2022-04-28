@@ -33,7 +33,10 @@ setTimeout(function() {
     $(".szemelyKereso").on("keyup", () => {//ha lenyomja a szememely beirasa kozben a billentyut
       if($(".szemelyKereso").val()==""){
         console.log("nincs megadva szemely");
-        /* Elrejt(".datum"); */
+        Elrejt(".datum");
+        Elrejt(".orara");
+        Elrejt(".ora");
+        Elrejt(".lefoglal");
       }else{
       apiVegpont = "/api/szemely?nev=" + $(".szemelyKereso").val();
       myAjax.adatbeolvas(apiVegpont, false, szemlyFunction);
@@ -42,10 +45,10 @@ setTimeout(function() {
     function szemlyFunction(tomb){
       if(tomb[0]===undefined ||tomb.length>1){
         console.log("nincs ilyen nev");
-        /* Elrejt(".datum");
+        Elrejt(".datum");
         Elrejt(".orara");
         Elrejt(".ora");
-        Elrejt(".lefoglal"); */
+        Elrejt(".lefoglal");
       }else if(tomb.length===1){
         console.log("van ilyen név");
         Megjelenit(".datum");
@@ -409,7 +412,7 @@ function lehetE(mit,merre){//lehet e emelni vagy csökkenteni
     datum.setDate(datum.getDate()+1);//azert kell
     datum=datum.toJSON().slice(0, 10);//azert kell
 
-    apiVegpont="/api/ugyfelEdzes?datumTolIgSzemellyel=";
+    apiVegpont="/ugyfelEdzes?datumTolIgSzemellyel=";
     apiVegpont+=$(".datumKeresTol").val()+"T"+datum+"T"+$(".SzemelySzuro").val();
     myAjax.adatbeolvas(apiVegpont, false,idopontLista);
   }
@@ -426,12 +429,13 @@ function lehetE(mit,merre){//lehet e emelni vagy csökkenteni
     let datum = new Date($(".datumKeresIg").val());//azert kell mert a controllerben ha összehasonlítjuk a 2 dátumot akkor 2022-04-10 10:00:00-percet  2022-04-11 10:00:00 nek veszi
     datum.setDate(datum.getDate()+1);//azert kell
     datum=datum.toJSON().slice(0, 10);//azert kell
-    apiVegpont="/api/ugyfelEdzes?datumTolIgSzemellyel=";
+    apiVegpont="/ugyfelEdzes?datumTolIgSzemellyel=";
     apiVegpont+=$(".datumKeresTol").val()+"T"+datum+"T"+$(".SzemelySzuro").val();
     myAjax.adatbeolvas(apiVegpont, false,idopontLista);
   });
 //-----------------------------------------------------------------------------------------------------------------------
 function idopontLista(idopontokT){//időpontokat megejeleniti az oldalon
+  console.log(idopontokT);
   const szuloElem = $('.Foglalasok');
   const sablonElem = $('footer .idopont');
   sablonElem.show();
@@ -450,6 +454,7 @@ function idopontLista(idopontokT){//időpontokat megejeleniti az oldalon
 //-----------------------------------------------------------------------------------------------------------------------
 $(window).on('felold', (event) => {//ha rányomok a feloldra torli az adatot
   apiVegpont = "api/ugyfelEdzes/delete";
+  console.log(event.detail.adat);
   myAjax.adatkuldes(apiVegpont, event.detail.adat);
   window.location.reload();
 });
@@ -463,6 +468,7 @@ $(window).on('felold', (event) => {//ha rányomok a feloldra torli az adatot
       event.detail.div.children()[0].style="display: none";
     });
     $(window).on('modositFelvitel', (event) => {//módosítás véglegesítése ha rányomok felviszi a megadott adatokat az adatbázisba
+      console.log(event);
         apiVegpont = "api/ugyfelEdzes/update";
         console.log(event.detail.adat);
         console.log(event.detail.div.children().children());
