@@ -268,11 +268,8 @@ $(function () {
           const sablonElem = $("footer .szemely ");
           sablonElem.show();
           szuloElem.empty();
-          szemely.forEach(function (elem) {
-              let node = sablonElem.clone().appendTo(".keresettSzemely");
-              const obj1 = new Szemely(node, elem); //példányosítja a személy osztályt
-          });
-          console.log(szemely);
+          let node = sablonElem.clone().appendTo(".keresettSzemely");
+          const obj1 = new Szemely(node, szemely[0]); //példányosítja a személy osztályt
           sablonElem.hide();
           if (szemely[0].igazolvany_szam === "" ||szemely[0].igazolvany_szam === "null") {
               $(".igazolvanySzama").html(
