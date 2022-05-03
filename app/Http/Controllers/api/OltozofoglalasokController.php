@@ -92,43 +92,46 @@ public function OltozoFoglalas(Request $request){//recepció oldalhoz
         ->Where('email','like','%'.$szemelyNev.'%')
         ->first();
     if ($szemely) {
-        $szoveg.="Talált ilyen embert";
+        $szoveg.="TALÁLT ilyen embert";
         $berlet=Berlet::selectRaw('*')
         ->Where('ugyfel','=',$szemely->id)
         ->Where('datum_tol','<=',Now())
         ->Where('datum_ig','>=',Now())
         ->first();
         if($berlet){
-            $szoveg.=", van bérlete";
+            $szoveg.=", VAN bérlete";
             $szekreny=Szekeny::selectRaw('*')
             ->Where('szekreny_id','=',$szekrenySzam)
             ->Where('ures_e','=','Ü')
             ->first();
             if($szekreny){
-                $szoveg.=", üres volt a szekrény";
-                $seged=true;
-                //Carbon::now('Europe/Stockholm'))
-                //$jelenlegiDatum = Carbon::now()->addHour(); 
-                $ujfoglalas =new Oltozofoglalas;
-                // $nap=date('Y-m-d H:i:s'); 
-                $ujfoglalas->szekreny_id=$szekrenySzam;
-                $ujfoglalas->ugyfel=$szemely->id;
-                // $ujfoglalas->datum=DB::RAW('NOW()'); //1 órával kevesebbet ad
-                // $ujfoglalas->datum=$jelenlegiDatum; 
-                $ujfoglalas->datum=Now();//1 órával kevesebbet ad
-                $ujfoglalas->save();
-                DB::table('szekenies')
-                ->orWhere('szekreny_id', $szekrenySzam)
-                ->update(['ures_e' => 'F']);
-                
+                $szoveg.=", ÜRES volt a szekrény";
+                if($szemely->neme===$szekreny->tipusa){
+                    $seged=true;
+                    $szoveg.=",nemek EGYEZNEK";
+                    //Carbon::now('Europe/Stockholm'))
+                    //$jelenlegiDatum = Carbon::now()->addHour(); 
+                    $ujfoglalas =new Oltozofoglalas;
+                    // $nap=date('Y-m-d H:i:s'); 
+                    $ujfoglalas->szekreny_id=$szekrenySzam;
+                    $ujfoglalas->ugyfel=$szemely->id;
+                    // $ujfoglalas->datum=DB::RAW('NOW()'); //1 órával kevesebbet ad
+                    // $ujfoglalas->datum=$jelenlegiDatum; 
+                    $ujfoglalas->datum=Now();//1 órával kevesebbet ad
+                    $ujfoglalas->save();
+                    Szekeny::where('szekreny_id','=', $szekrenySzam)
+                    ->update(['ures_e' => 'F']);
+                }else{
+                    $szoveg.=",HIBA de a nemek NEM egyeznek";
+                }
             }else if(!$szekreny){
-                $szoveg.=",HIBA de nem  volt üres a szekrény";
+                $szoveg.=",HIBA de NEM volt üres a szekrény";
             }
         }else if(!$berlet){
-            $szoveg.=",HIBA de nincs jelenleg bérlete";
+            $szoveg.=",HIBA de NINCS jelenleg bérlete";
         }
      }else if(!$szemely){
-        $szoveg.=" HIBA,Nem talált ilyen embert";
+        $szoveg.=" HIBA, NEM talált ilyen embert";
      }
     
     
