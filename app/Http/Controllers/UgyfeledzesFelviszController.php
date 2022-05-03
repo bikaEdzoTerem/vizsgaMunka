@@ -26,7 +26,7 @@ class UgyfeledzesFelviszController extends Controller{
             $seged=($request -> datum);
             $seged2=($request -> orara);
             $seged3=$seged." ".$seged2;
-            $ujfoglalas->edzo=auth()->user()->id;//vagy Auth::id()
+            $ujfoglalas->edzo=Auth::id();/*  auth()->user()->id;vagy Auth::id() *///bejelentkezett személy id ja.
             $ujfoglalas->ugyfel=$tabla;
             $ujfoglalas->datum=$seged3;
             $ujfoglalas->ora=$request -> ora;

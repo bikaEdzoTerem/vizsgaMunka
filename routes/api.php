@@ -78,10 +78,8 @@ Route::get('/szekrenyLetszam', [SzekrenyekController::class, 'letszam']);
 Route::post('feltoltes', [SzemelyController::class, 'feltoltKepIgazolvany']);
 //web ben van az öltözőfoglalás felvitel
 /* Route::apiResource('ugyfelEdzesSzemellyel', ugyfelEdzesSzemellyel::class); */
-Route::apiResource('szemelyLekerdezes', szemelyLekerdezController::class);
 //---------------------------------------------------------------------------------------------
 //Edző oldalhoz
-//Route::apiResource('ugyfelEdzes', UgyfelEdzesController::class);
 Route::post('ugyfelEdzes/delete', [UgyfelEdzesController::class, 'delete']);//feloldja az adott ugyfeledzes foglalast
 Route::post('ugyfelEdzes/update', [UgyfelEdzesController::class, 'update']);//friisiti,modositja az adott ugyfeledzes foglalast
 //ügyfél edzés szűrés

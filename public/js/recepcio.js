@@ -252,7 +252,7 @@ $(function () {
   
       function szemelyKeres() {//beolvassa az adatokat az adatbázisbol és átadja a  szemelyKeresoMegjelenit-metódusnak
           let tomb = [];
-          let apiVegpont = "/api/szemelyLekerdezes";
+          let apiVegpont = "/api/szemely";
           apiVegpont += "?name=" + $(".keresSzemely").val();
           if (!($(".keresSzemely").val() === "")) {
               // ha nincs semmise megadva az inputnak akkor ne fusson le
