@@ -5,31 +5,15 @@ class Idopont{
         this.adat = adat;
 
         this.honapNev = this.node.children().children(".honap");
-        this.honapNev.text(this.honap(adat.datum));
-
         this.napNev = this.node.children().children(".nap");
-        this.napNev.text(this.nap(adat.datum));
-
-        let d = new Date(adat.datum);
         this.datum = this.node.children().children(".datum");
-        this.datum.text(d.getDate());
-
         this.ora = this.node.children().children(".ora1");
-        this.ora.text(this.oraFormaz(d));
-
         this.oras = this.node.children().children(".oras");
-        this.oras.text(adat.ora.slice(1,5)+"-perc");
-
         this.ev = this.node.children().children(".ev");
-        this.ev.text(d.getFullYear());
-
         this.ugyfel_nev = this.node.children().children(".szemelyNeve");
-        this.ugyfel_nev.text(adat.name);
-        
         this.datumtol=this.node.children().children(".datumtol");
-        this.datumtol.text(adat.datum+" órától");
         this.ora = this.node.children().children(".ora");
-        this.ora.text("Edzés hossza: "+adat.ora.slice(1,5)+" óra");
+        this.setAdat(this.adat);
 
         this.feloldas = this.node.children().children(".feloldasGomb");
         this.feloldas.on("click ", () => {
@@ -39,24 +23,15 @@ class Idopont{
         this.modosit.on("click ", () => {
         this.kattintasTrigger("modosit");
         });
-        //---------------------------------------------------------
-        //Módosítás
+        //Módosítás------------------------------------------------
         this.nevModosit = this.node.children().children(".nevModosit");
-        this.nevModosit.val(adat.name);
-
         this.datumModosit = this.node.children().children(".datumModosit");
-        this.datumModosit.val(adat.datum.slice(0,10));
-
         this.modositOrara = this.node.children().children(".modositOrara");
-        this.modositOrara.val(adat.datum.slice(11, 16));
-
         this.modositNev = this.node.children().children(".modositNev");
-        this.modositNev.val(adat.name);
-
         this.modositEdzesHossz = this.node.children().children(".modositEdzesHossz");
-        this.modositEdzesHossz.val(adat.ora.slice(0,5));
-
         this.modositFelvisz = this.node.children().children(".modositFelvisz");
+        this.modositSetAdat(this.adat);
+        //---------------------------------------------------------
         this.modositFelvisz.on("click ", () => {
         this.kattintasTrigger("modositFelvitel");
         });
@@ -90,5 +65,25 @@ class Idopont{
             return datum.getHours()+":"+"0"+datum.getMinutes();
         }
         return datum.getHours()+":"+datum.getMinutes();
+    }
+    setAdat(adat) {
+        this.adat = adat;
+        this.honapNev.text(this.honap(adat.datum));
+        this.napNev.text(this.nap(adat.datum));
+        let d = new Date(adat.datum);
+        this.datum.text(d.getDate());
+        this.ora.text(this.oraFormaz(d));
+        this.oras.text(adat.ora.slice(1,5)+"-perc");
+        this.ev.text(d.getFullYear());
+        this.ugyfel_nev.text(adat.name);
+        this.datumtol.text(adat.datum+" órától");
+        this.ora.text("Edzés hossza: "+adat.ora.slice(1,5)+" óra");
+    }
+    modositSetAdat(adat){
+        this.nevModosit.val(adat.name);
+        this.datumModosit.val(adat.datum.slice(0,10));
+        this.modositOrara.val(adat.datum.slice(11, 16));
+        this.modositNev.val(adat.name);
+        this.modositEdzesHossz.val(adat.ora.slice(0,5));
     }
 }
