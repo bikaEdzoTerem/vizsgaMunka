@@ -13,6 +13,7 @@ use App\Models\Ugyfel_edzes;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Hash;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 
 class SzemelyController extends Controller
@@ -22,6 +23,7 @@ class SzemelyController extends Controller
         $order=$request->query ('_order');
         $q=$request->query('q');
         $nev=$request->query('nev');
+        $name=$request->query('name');
         $szemelyek=User::selectRaw("*");
         if($sort&&$order){
             $szemelyek->orderBy($sort,$order);
@@ -36,6 +38,25 @@ class SzemelyController extends Controller
         }
         if($nev){
             $szemelyek->where('email','like','%'.$nev.'%');
+        }
+        if($name){
+            $szemely=User::select('id')
+            ->where('email','like','%'.$name.'%');
+            $szemelyek = trim($szemely->pluck('id'), '[]');
+            if($szemelyek){
+                $ellenorzesVanEBerlete=User::where('email','like','%'.$name.'%')
+                    ->join('berlets','berlets.ugyfel','users.id')
+                    ->join('berlet_tipuses','berlet_tipuses.berlet_tipus_id','berlets.berlet_tipus_id')
+                    ->whereRaw("NOW() BETWEEN datum_tol AND datum_ig")
+                    ->select('*',DB::raw("DATEDIFF(  datum_ig,now()) AS MegMeddigJo"));
+                if(!$ellenorzesVanEBerlete->first()){//nincs berlete
+                    $szemelyek=User::where('email','like','%'.$name.'%');
+                }else{
+                    $szemelyek=$ellenorzesVanEBerlete;
+                }
+            }else{
+                return 'nincs ilyen szemely';
+            }
         }
         //$szemelyek= ($sort&&$order) ? Szemely::orderBy($sort,$order)->get(): Szemely::all();
       
